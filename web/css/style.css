@@ -48,6 +48,11 @@ table tr{
     height: 30px;
 }
 
+tr:hover td {
+    background-color: #9653f8;
+    color: white;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
