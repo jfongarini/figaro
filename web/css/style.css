@@ -11,15 +11,14 @@ body{
     margin-top: 12px;
     margin-right: 5px;
     margin-left: 20px;    
-    font-size: 1.3em;
-    
+    font-size: 1.3em;    
 }
 
 .input-date {
     font-family: 'Roboto', sans-serif;
     font-size: 1.3em;
     border: 0;
-    margin-top: 10px;
+    margin-top: 10px
 }
 
 .today{
@@ -27,7 +26,16 @@ body{
     background-color: #FFF;
     height: 55px;
     margin-bottom: 20px;
-    box-shadow: rgba(0,0,0,0.4) 0px 2px 5px;
+    box-shadow: rgba(0,0,0,0.4) 0px 2px 5px
+}
+
+
+.action{
+    display: none
+}
+
+.action-td{
+    background-color:  #F3F4F6
 }
 
 table, .today{
@@ -37,8 +45,9 @@ table, .today{
 }
 
 table{
-    text-align: center;
+    text-align: left;
 }
+
 
 table>tbody>tr:nth-child(odd) {
     background-color: #e0e0e0;
@@ -49,8 +58,9 @@ table tr{
 }
 
 tr:hover td {
-    background-color: #9653f8;
+    background-color: #8e43fb;
     color: white;
+    cursor: pointer;
 }
 
 ul {
@@ -58,7 +68,7 @@ ul {
     margin: 0;
     top: 0;
     margin-right: 300px;
-    background-color: #FFF;
+    background-color: #8e43fb;
     padding: 0;
     width: 200px;
     height: 100%;
@@ -69,14 +79,14 @@ ul {
 
 li a {
     display: block;
-    color: #000;
+    color: #FFF;
     padding: 8px 16px;
     text-decoration: none;
 }
 
 li a:hover {
     background-color: #9653f8;
-    color: white;
+    cursor: pointer;
 }
 
 .material-icons{
