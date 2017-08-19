@@ -3,6 +3,7 @@ package com.peluqueria.modelo;
 import java.math.BigDecimal;
 import java.util.Date;
 
+
 public abstract class Movimiento {
 
 	private Long id;

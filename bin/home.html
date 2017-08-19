@@ -9,9 +9,9 @@
 </head>
 <body>
 <ul>
-  <li><a href="home.html"><i class="material-icons">date_range</i>  TURNOS</a></li>
-  <li><a href="cliente.html"><i class="material-icons">person_outline</i>  CLIENTES</a></li>
-  <li><a href="caja.html"><i class="material-icons">account_balance_wallet</i>  CAJA</a></li>
+  <li><a href=" "><i class="material-icons">date_range</i>  TURNOS</a></li>
+  <li><a href=" "><i class="material-icons">person_outline</i>  CLIENTES</a></li>
+  <li><a href=" "><i class="material-icons">account_balance_wallet</i>  CAJA</a></li>
   <li><a href=" "><i class="material-icons">shopping_basket</i>  STOCK</a></li>
   <li><a href=" "><i class="material-icons">timeline</i>  ESTAD&Iacute;STICAS</a></li>
   <li><a href=" "><i class="material-icons">settings</i>  CONFIGURACI&Oacute;N</a></li>
@@ -32,6 +32,7 @@
         </thead>
         <tbody>
           <tr> 
+            <td class="action-td"><i class="material-icons action">delete</i></td>
             <td>09:00</td>
             <td>JAVIER IGNACIO MOLINA CANO</td>
             <td>LAVADO CORTE PEINADO</td>
@@ -178,6 +179,11 @@
     <label class=date ><i class=material-icons >account_balance_wallet</i> CAJA: $3465,00</label>
 </div>
 
+<script>
+  $('#table tr').hover(function() {
+    $().addClass('hover');
+  },
+</script>
 
 </body>
 </html>
