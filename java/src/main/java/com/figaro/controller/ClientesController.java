@@ -10,7 +10,7 @@ public class ClientesController {
 	
 	@RequestMapping("/")
 	public String welcome(Map<String, Object> model) {
-		return "cliente";
+		return "cliente.ftl";
 	}
 
 	

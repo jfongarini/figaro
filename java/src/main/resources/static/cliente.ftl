@@ -1,12 +1,12 @@
 <!Doctype html>
 <html>
 <head> 
-      <title>CLIENTES</title>
-      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
-      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
-      <link rel="stylesheet" type="text/css" href="css/style.css"></link>
+	<title>CLIENTES</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
+	<link rel="stylesheet" type="text/css" href="css/style.css"></link>      
 </head>
 <body ng-app="figaro" ng-controller="clientesController">
 <div id="content" >
@@ -17,7 +17,7 @@
     <li><a href=" "><i class="material-icons">shopping_basket</i>  STOCK</a></li>
     <li><a href=" "><i class="material-icons">timeline</i>  ESTAD&Iacute;STICAS</a></li>
     <li><a href=" "><i class="material-icons">settings</i>  CONFIGURACI&Oacute;N</a></li>
-  </ul>
+</ul>
   <div class="today">
       <label class="date" ><i class="material-icons" onclick="openModal();" >person_add</i></label>
       <label class="date" ><i class="material-icons" >more_vert</i></label>
