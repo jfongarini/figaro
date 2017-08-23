@@ -2,11 +2,11 @@
 <html>
 <head> 
 	<title>CLIENTES</title>
-  <#include "/common/head.ftl"> 
+  <#include "/common/head.html"> 
 </head>
 <body ng-app=figaro ng-controller=clientesController>
   <div id=content >
-    <#include "/common/menu.ftl">
+    <#include "/common/menu.html">
     <div class="banner">
         <label class=date ><i class=material-icons onclick="openModal()" >person_add</i></label>
         <label class=date ><i class=material-icons >more_vert</i></label>
@@ -52,7 +52,7 @@
       </form>
     </div>
   </div>
-  <#include "/common/javascript.ftl">
+  <#include "/common/javascript.html">
   <script src="js/clientesController.js" ></script>
 </body>
 </html>
