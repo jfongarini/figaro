@@ -136,13 +136,39 @@ li a:hover {
 }
 
 form label{
-    display: inline-block;
+    display: inline-block;  
     float: left;
     clear: left;
-    width: 95px;
+    width: 95px
 }
 
 form input {
-  display: inline-block;
-  float: left;
+    font-family: 'Roboto', sans-serif;
+    display: inline-block
+}
+
+form input:focus {
+    outline: none !important;
+    border-bottom: 2px solid #56338c
+}
+
+form input, form input:focus { 
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px
+}
+
+.button{
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    display: block;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border-width: 0;
+    outline: none;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    background-color: #56338c;
+    color: white
 }

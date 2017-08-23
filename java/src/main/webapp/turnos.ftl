@@ -36,6 +36,6 @@
         <label class=date ><i class=material-icons >account_balance_wallet</i> CAJA: $3465,00</label>
     </div>
 </div>
-<#include "/common/js.ftl">
+<#include "/common/javascript.ftl">
 </body>
 </html>

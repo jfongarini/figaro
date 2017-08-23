@@ -13,7 +13,6 @@ document.addEventListener('keyup', function(e) {
     }
 });
 
-
 function getToday(){
 	var today = new Date();
 	var dd = today.getDate();
