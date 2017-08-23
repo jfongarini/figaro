@@ -21,15 +21,6 @@ body{
     margin-top: 10px
 }
 
-.today{
-    margin-top: 30px;
-    background-color: #FFF;
-    height: 55px;
-    margin-bottom: 20px;
-    box-shadow: rgba(0,0,0,0.4) 0px 2px 5px
-}
-
-
 .action{
     display: none
 }
@@ -38,7 +29,15 @@ body{
     background-color:  #F3F4F6
 }
 
-table, .today{
+.banner{
+    margin-top: 30px;
+    background-color: #FFF;
+    height: 55px;
+    margin-bottom: 20px;
+    box-shadow: rgba(0,0,0,0.4) 0px 2px 5px
+}
+
+table, .banner{
     width: 75%;
     margin-left: 250px
 }

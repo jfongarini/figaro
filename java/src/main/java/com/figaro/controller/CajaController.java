@@ -5,11 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ClientesController {
+public class CajaController {
 	
-	@RequestMapping("/clientes")
+	@RequestMapping("/caja")
 	public String cliente(Model model) {
-		return "clientes";
+		return "caja";
 	}
 
 }

@@ -37,8 +37,6 @@ public class ClientesControllerREST {
     }
 	
 	
-	
-	
 	public ClientesService getService() {
 		return service;
 	}
@@ -46,8 +44,5 @@ public class ClientesControllerREST {
 		this.service = service;
 	}
 
-	
-	
-	
 	
 }
