@@ -5,7 +5,7 @@ body{
     font-family: 'Roboto', sans-serif
 }
 
-.date{
+.banner-label{
     float: left;
     text-align: right;
     margin-top: 12px;
@@ -166,6 +166,7 @@ form .buttons{
 }
 
 form .button{
+    cursor: pointer;
     font-family: 'Roboto', sans-serif;
     position: relative;
     margin-left: auto;
@@ -187,3 +188,6 @@ form .button{
     color: black
 }
 
+.add{
+    cursor: pointer;
+}
