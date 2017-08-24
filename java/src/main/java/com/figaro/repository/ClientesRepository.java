@@ -9,8 +9,12 @@ import com.figaro.model.Cliente;
 @Component
 public class ClientesRepository extends AbstractRepository{
 
-	public void saveCliente (Cliente cliente) {
-		getCurrentSession().save(cliente);
+	public Integer saveCliente (Cliente cliente) {
+		return (Integer) getCurrentSession().save(cliente); 
+	}
+
+	public void updateCliente(Cliente cliente) {
+		getCurrentSession().update(cliente);
 	}
 	
 	public Cliente getCliente(int id){

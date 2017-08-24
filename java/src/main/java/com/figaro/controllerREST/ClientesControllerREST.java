@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +29,16 @@ public class ClientesControllerREST {
     }
 	
 	@RequestMapping(value = "/alta",method=RequestMethod.POST)
-    public void newCliente(@RequestBody Cliente cliente) {
-		service.saveCliente(cliente);
+    public ResponseEntity<Cliente> newCliente(@RequestBody Cliente cliente) {
+		Integer newID = service.saveCliente(cliente);
+		cliente.setId(newID);
+		return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/actualizar/{clienteID}",method=RequestMethod.PUT)
+    public ResponseEntity<Cliente> updateCliente(@RequestBody Cliente cliente) {
+		Cliente updated = service.updateCliente(cliente);
+		return new ResponseEntity<Cliente>(updated, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/todos",method=RequestMethod.GET,produces="application/json")

@@ -13,8 +13,15 @@ public class ClientesService {
 		return repository.getCliente(clienteID);
 	}
 
-	public void saveCliente(Cliente cliente) {
-		repository.saveCliente(cliente);
+	public Integer saveCliente(Cliente cliente) {
+		return  repository.saveCliente(cliente);  
+	}
+	
+	public Cliente updateCliente(Cliente cliente) {
+		Cliente old = getCliente(cliente.getId());
+		old.actualizar(cliente);
+		repository.updateCliente(old);
+		return cliente;
 	}
 	
 	public List<Cliente> getAll() {

@@ -158,17 +158,32 @@ form input, form input:focus {
     border-left-width: 0px
 }
 
-.button{
+form .buttons{
+    width: 100%;
+    align-content: center;
+    display: flex;
+    margin-top: 40px;
+}
+
+form .button{
     font-family: 'Roboto', sans-serif;
     position: relative;
-    display: block;
-    padding: 10px;
     margin-left: auto;
     margin-right: auto;
+    padding: 10px;
     border-width: 0;
     outline: none;
     border-radius: 2px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6)
+}
+
+.accept{
     background-color: #56338c;
     color: white
 }
+
+.cancel{
+    background-color: white;
+    color: black
+}
+

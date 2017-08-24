@@ -8,7 +8,7 @@ public abstract class Persona {
 	private String apellido;
 	private String email;
 	private String sexo;
-	private Integer telefono;
+	private String telefono;
 	private String dirCiudad;
 	private String dirCalle;
 	private int dirNumeroCalle;
@@ -38,10 +38,10 @@ public abstract class Persona {
 		this.email = email;
 	}
 	
-	public Integer getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
-	public void setTelefono(Integer telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 	public String getDirCalle() {
