@@ -1,3 +1,4 @@
-/static/
+/application.properties
+/applicationContext.xml
 /com/
 /hibernate/

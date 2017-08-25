@@ -28,8 +28,8 @@ app.controller('clientesController', function ($scope, $http) {
     //CLICK ACEPTAR FORMULARIO
     $scope.sendClient = function() {
         if($scope.isNuevoCliente === true){
-            $scope.ngCliente.fechaIngreso = 
-            $scope.ngCliente.ultimaVisita = new Date().toJSON().slice(0,10);
+            $scope.ngCliente.fechaIngreso = getToday();
+            $scope.ngCliente.ultimaVisita = getToday();
             $http.post('/rest/clientes/alta', $scope.ngCliente).then(function (response) {
                 $scope.clientes.push(response.data);
             });

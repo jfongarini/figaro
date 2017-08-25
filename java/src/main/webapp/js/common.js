@@ -1,13 +1,20 @@
 function getToday(){
-	return new Date().toJSON().slice(0,10);
+	var d = new Date(),
+	month = '' + (d.getMonth() + 1),
+	day = '' + d.getDate(),
+	year = d.getFullYear();
+	if (month.length < 2) month = '0' + month;
+	if (day.length < 2) day = '0' + day;
+	return [year, month, day].join('-');
 }
 
-openModal = function(event){
+function openModal(){
 	$('#modal').addClass("modal-on");
 	$('#content').addClass("blur");
+	$('#focus').focus();
 };
 
-closeModal = function(event){
+function closeModal(){
 	$('#modal').removeClass("modal-on");
 	$('#content').removeClass("blur");
 };

@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Cliente extends Persona {
 	
+
 	private Date ultimaVisita;
 	private List <Turno> historia;
 
