@@ -43,7 +43,6 @@ public class ClientesControllerREST {
 	}
 
 	@RequestMapping(value = "/todos",method=RequestMethod.GET,produces="application/json")
-	@ResponseBody
     public List<Cliente> getAllClientes() {
         return service.getAll();
     }
