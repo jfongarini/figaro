@@ -35,9 +35,9 @@ public class ClientesService {
 	public ClientesRepository getRepository() {
 		return repository;
 	}
+	
 	public void setRepository(ClientesRepository repository) {
 		this.repository = repository;
 	}
 
-	
 }

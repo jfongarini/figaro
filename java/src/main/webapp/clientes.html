@@ -38,20 +38,20 @@
   <div id=modal class=modal>
     <div class=modal-content>
       <form ng-submit="sendClient()">
-        <div class=form-field><label>NOMBRE:</label><input id=focus tipe="text"  ng-model="ngCliente.nombre"></input></div>
-        <div class=form-field><label>APELLIDO:</label><input tipe="text" ng-model="ngCliente.apellido"></input></div>
+        <div class=form-field><label>NOMBRE:</label><input id=focus tipe="text"  ng-model="ngCliente.nombre" required></input></div>
+        <div class=form-field><label>APELLIDO:</label><input tipe="text" ng-model="ngCliente.apellido" required></input></div>
         <div class=form-field><label>SEXO:</label>
-          <input type="radio" name="gender" ng-model="ngCliente.sexo" value="hombre"> Hombre</input>
-          <input type="radio" name="gender" ng-model="ngCliente.sexo" value="mujer"> Mujer</input>
-          <input type="radio" name="gender" ng-model="ngCliente.sexo" value="otro"> Otro</input>
+          <input type="radio" ng-model="ngCliente.sexo" value="hombre" required> Hombre</input>
+          <input type="radio" ng-model="ngCliente.sexo" value="mujer"> Mujer</input>
+          <input type="radio" ng-model="ngCliente.sexo" value="otro"> Otro</input>
         </div>
-        <div class=form-field><label>TELEFONO:</label><input tipe="text"   ng-model="ngCliente.telefono" ></input></div>
-        <div class=form-field><label>EMAIL:</label><input tipe="email"     ng-model="ngCliente.email" required></input></div>
-        <div class=form-field><label>CIUDAD:</label><input tipe="text"     ng-model="ngCliente.dirCiudad"></input></div>
-        <div class=form-field><label>CALLE:</label><input tipe="text"      ng-model="ngCliente.dirCalle"></input></div>
-        <div class=form-field><label>NUMERO:</label><input tipe="number"   ng-model="ngCliente.dirNumeroCalle"></input></div>
-        <div class=form-field><label>PISO:</label><input tipe="number"     ng-model="ngCliente.dirPiso"></input></div>
-        <div class=form-field><label>DPTO:</label><input tipe="text"       ng-model="ngCliente.dirDpto"></input></div>
+        <div class=form-field><label>TELEFONO:</label><input type="text"   ng-model="ngCliente.telefono" ></input></div>
+        <div class=form-field><label>EMAIL:</label><input type="email"     ng-model="ngCliente.email" ></input></div>
+        <div class=form-field><label>CIUDAD:</label><input type="text"     ng-model="ngCliente.dirCiudad"></input></div>
+        <div class=form-field><label>CALLE:</label><input type="text"      ng-model="ngCliente.dirCalle"></input></div>
+        <div class=form-field><label>NUMERO:</label><input type="number"   ng-model="ngCliente.dirNumeroCalle"  maxlength="5"></input></div>
+        <div class=form-field><label>PISO:</label><input type="number"     ng-model="ngCliente.dirPiso"  ></input></div>
+        <div class=form-field><label>DPTO:</label><input type="text"       ng-model="ngCliente.dirDpto"></input></div>
         <div class=buttons>
           <button class="button accept" type="submit">ACEPTAR</button>
           <button class="button cancel" type="button" ng-click="discardClient()">CANCELAR</button>

@@ -66,7 +66,7 @@ ul {
     margin: 0;
     top: 0;
     margin-right: 300px;
-    background: linear-gradient(to right, #292961, #393982);
+    background-color:  #292961;
     padding: 0;
     width: 200px;
     height: 100%;
@@ -77,13 +77,14 @@ ul {
 
 li a {
     display: block;
-    color: #FFF;
+    color: #d1d1f0;
     padding: 8px 16px;
     text-decoration: none
 }
 
 li a:hover {
-    color: #fca326;
+    background-color: #6666c4;
+    color: #FFFFFF;
     cursor: pointer
 }
 
@@ -137,7 +138,6 @@ li a:hover {
 
 form label{
     display: inline-block;  
-    float: left;
     clear: left;
     width: 95px
 }
@@ -191,3 +191,4 @@ form .button{
 .add{
     cursor: pointer;
 }
+

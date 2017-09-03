@@ -2,11 +2,9 @@ package com.figaro.repository;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import com.figaro.model.Cliente;
 
-@Component
+
 public class ClientesRepository extends AbstractRepository{
 
 	public Integer saveCliente (Cliente cliente) {
