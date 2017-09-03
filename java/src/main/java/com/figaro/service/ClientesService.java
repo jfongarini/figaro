@@ -1,12 +1,11 @@
 package com.figaro.service;
 
 import java.util.List;
-
 import com.figaro.model.Cliente;
 import com.figaro.repository.ClientesRepository;
 
 public class ClientesService {
-
+	
 	private ClientesRepository repository;
 	
 	public Cliente getCliente(int clienteID) {
@@ -19,7 +18,16 @@ public class ClientesService {
 	
 	public Cliente updateCliente(Cliente cliente) {
 		Cliente old = getCliente(cliente.getId());
-		old.actualizar(cliente);
+		old.setNombre(cliente.getNombre());
+		old.setApellido(cliente.getApellido());
+		old.setEmail(cliente.getEmail());
+		old.setSexo(cliente.getSexo());
+		old.setTelefono(cliente.getTelefono());
+		old.setDirCiudad(cliente.getDirCiudad());
+		old.setDirCalle(cliente.getDirCalle());
+		old.setDirNumeroCalle(cliente.getDirNumeroCalle());
+		old.setDirPiso(cliente.getDirPiso());
+		old.setDirDpto(cliente.getDirDpto());
 		repository.updateCliente(old);
 		return cliente;
 	}

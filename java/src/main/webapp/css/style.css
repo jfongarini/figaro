@@ -123,6 +123,13 @@ li a:hover {
     animation-name: animatetop;
     animation-duration: 0.4s
 }
+
+.form-message{
+    font-size: 13px;
+    color: red;
+    margin-top: 20px;
+    width: 100%
+}
     
 .form-field{
     margin-bottom: 15px

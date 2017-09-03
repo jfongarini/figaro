@@ -30,17 +30,4 @@ public class Cliente extends Persona {
 		this.ultimaVisita = ultimaVisita;
 	}
 
-	public Cliente actualizar(Cliente cliente) {
-		setNombre(cliente.getNombre());
-		setApellido(cliente.getApellido());
-		setEmail(cliente.getEmail());
-		setSexo(cliente.getSexo());
-		setTelefono(cliente.getTelefono());
-		setDirCiudad(cliente.getDirCiudad());
-		setDirCalle(cliente.getDirCalle());
-		setDirNumeroCalle(cliente.getDirNumeroCalle());
-		setDirPiso(cliente.getDirPiso());
-		setDirDpto(cliente.getDirDpto());
-		return this;
-	}
 }
