@@ -53,4 +53,9 @@ public class ClientesService {
 		this.repository = repository;
 	}
 
+	public List<Cliente> buscar(String search) {
+		repository.buscar(search);
+		return null;
+	}
+
 }

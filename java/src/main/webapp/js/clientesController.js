@@ -50,6 +50,18 @@ app.controller('clientesController', function ($scope, $http) {
         }
     };
 
+    //BUSCAR
+    $scope.searchCliente = function() {        
+        $http.get('/rest/clientes/buscar',{params: { search: $scope.search }})
+        .then(function successCallback(response) {
+            $scope.clientes = response.data; 
+        }, function errorCallback(response) {
+            $scope.message=response.data.message;
+        });  
+    };
+    
+    
+
     //DESCARTAR FORMULARIO
     $scope.discardClient = function(event){
         $scope.ngCliente = {};
@@ -64,6 +76,7 @@ app.controller('clientesController', function ($scope, $http) {
     });
 
     //INIT
+    $scope.search = '';
     $scope.ngCliente = {};
     $scope.getAll();
 
