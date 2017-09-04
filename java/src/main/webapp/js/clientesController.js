@@ -55,8 +55,6 @@ app.controller('clientesController', function ($scope, $http) {
         $http.get('/rest/clientes/buscar',{params: { search: $scope.search }})
         .then(function successCallback(response) {
             $scope.clientes = response.data; 
-        }, function errorCallback(response) {
-            $scope.message=response.data.message;
         });  
     };
     

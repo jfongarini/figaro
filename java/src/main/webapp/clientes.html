@@ -42,9 +42,8 @@
         <div class=form-field><label>NOMBRE:</label><input id=focus tipe="text"  ng-model="ngCliente.nombre" required></input></div>
         <div class=form-field><label>APELLIDO:</label><input tipe="text" ng-model="ngCliente.apellido" required></input></div>
         <div class=form-field><label>SEXO:</label>
-          <input type="radio" ng-model="ngCliente.sexo" value="hombre" required> Hombre</input>
-          <input type="radio" ng-model="ngCliente.sexo" value="mujer"> Mujer</input>
-          <input type="radio" ng-model="ngCliente.sexo" value="otro"> Otro</input>
+          <input type="radio" name=sexo ng-model="ngCliente.sexo" value="hombre" required> Hombre</input>
+          <input type="radio" name=sexo ng-model="ngCliente.sexo" value="mujer" required> Mujer</input>
         </div>
         <div class=form-field><label>TELEFONO:</label><input type="text"   ng-model="ngCliente.telefono" ></input></div>
         <div class=form-field><label>EMAIL:</label><input type="email"     ng-model="ngCliente.email" ></input></div>
