@@ -54,8 +54,7 @@ public class ClientesService {
 	}
 
 	public List<Cliente> buscar(String search) {
-		repository.buscar(search);
-		return null;
+		return repository.buscar(search);
 	}
 
 }

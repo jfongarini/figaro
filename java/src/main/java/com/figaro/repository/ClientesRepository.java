@@ -34,12 +34,10 @@ public class ClientesRepository extends AbstractRepository{
 
 	@SuppressWarnings("unchecked")
 	public List<Cliente> buscar(String search) {
-		
-		String hql = "from Cliente where nombre like :search";
-		Query query = getCurrentSession().createQuery(hql);
-		query.setParameter("search", "%"+search + "%");
-		return query.list();
-		
+		 Query query = getCurrentSession().createQuery("FROM Cliente c WHERE c.nombre LIKE CONCAT('%',?1,'%') OR c.apellido LIKE CONCAT('%',?1,'%')");
+	     query.setParameter(1, search);
+	     return query.getResultList();
+	        	
 				
 	}
 	
