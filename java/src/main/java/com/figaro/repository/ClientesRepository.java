@@ -2,12 +2,6 @@ package com.figaro.repository;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-
-import org.hibernate.Criteria;
-
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 import com.figaro.model.Cliente;
