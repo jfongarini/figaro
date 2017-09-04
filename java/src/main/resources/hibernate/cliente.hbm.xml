@@ -6,7 +6,7 @@
 		<id name="id" type="int" column="ID_USUARIO" >
 			<generator class="increment"/>
 		</id>
-	 	<property name="nombre"  	unique="true"	column="NOMBRE"   type="string"/>
+	 	<property name="nombre"  		column="NOMBRE"   type="string"/>
 	 	<property name="apellido" 		column="APELLIDO" type="string"/>
 	 	<property name="email" 			column="EMAIL"    type="string"/>
 	 	<property name="sexo" 			column="SEXO" 	  type="string"/>
