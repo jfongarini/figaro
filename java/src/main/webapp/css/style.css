@@ -166,7 +166,7 @@ form input {
     display: inline-block
 }
 
-form input:focus {
+form input:focus, form select:focus {
     outline: none !important;
     border-bottom: 2px solid #292961
 }
@@ -195,6 +195,16 @@ form .button{
     outline: none;
     border-radius: 2px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, .6)
+}
+
+form select{
+    width: 191px;
+    background: transparent;
+    border-bottom-color: #EEE;
+    border-bottom-width: 2px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px
 }
 
 .accept{
