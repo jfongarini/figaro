@@ -61,6 +61,17 @@ public class ConfiguracionControllerREST {
 		return new ResponseEntity<Trabajo>(HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/trabajos/actualizar/{idTrabajo}",method=RequestMethod.PUT)
+    public ResponseEntity<Trabajo> updateTrabajo(@RequestBody Trabajo trabajo) {
+		Trabajo updated = service.updateTrabajo(trabajo);
+		return new ResponseEntity<Trabajo>(updated ,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/trabajos/{idTrabajo}",method=RequestMethod.GET)
+    public ResponseEntity<Trabajo> getTrabajo(@PathVariable Integer idTrabajo) {
+		Trabajo trabajo = service.getTrabajo(idTrabajo);
+		return new ResponseEntity<Trabajo>(trabajo ,HttpStatus.OK);
+	}
 	
 	@RequestMapping(value = "/peluqueros",method=RequestMethod.GET)
     public List<Peluquero> getPeluqueros() {

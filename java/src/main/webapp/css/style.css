@@ -273,8 +273,12 @@ form select{
     text-align: right;
 }
 
-tr:hover td {
+.card  tr:hover td {
     background-color: white;
     color:black;
     cursor: pointer
+}
+
+.trabajo-precio{
+    text-align: center;
 }

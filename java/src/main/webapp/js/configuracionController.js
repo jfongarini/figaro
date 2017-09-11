@@ -34,14 +34,26 @@ app.controller('configuracionController', function ($scope, $http) {
 
     //AGREGAR TRABAJO
     $scope.addTrabajo = function() {
-        $http.post('/rest/configuracion/trabajos/alta', $scope.ngTrabajo)
-            .then(function successCallback(response) {
-                $scope.trabajos.push(response.data);
-                $scope.ngTrabajo={};
-                $scope.messageTrabajo='';
-              }, function errorCallback(response) {
-                $scope.messageTrabajo=response.data.message;
-            });
+        if($scope.ngTrabajo.id  === undefined){
+            $http.post('/rest/configuracion/trabajos/alta', $scope.ngTrabajo)
+                .then(function successCallback(response) {
+                    $scope.trabajos.push(response.data);
+                    $scope.ngTrabajo={};
+                    $scope.messageTrabajo='';
+                }, function errorCallback(response) {
+                    $scope.messageTrabajo=response.data.message;
+                });
+        }else{
+            $http.put('/rest/configuracion/trabajos/actualizar/'+ $scope.ngTrabajo.id,$scope.ngTrabajo)
+                .then(function successCallback(response) {
+                    $scope.getAllTrabajos();
+                    $scope.ngTrabajo={};
+                    $scope.messageTrabajo='';
+                }, function errorCallback(response) {
+                    $scope.messageTrabajo=response.data.message;
+                });
+            
+        }
     };
 
     //OBTENER LISTA DE TRABAJOS
@@ -57,12 +69,21 @@ app.controller('configuracionController', function ($scope, $http) {
         $http.delete('/rest/configuracion/trabajos/baja/'+ $scope.trabajoID)
             .then(function successCallback(response) {
                 $scope.getAllTrabajos();
+                $scope.ngTrabajo={};
                 $scope.messageTrabajo='';
               }, function errorCallback(response) {
                 $scope.messageTrabajo=response.data.message;
             });
     };
 
+    //OBTENER TRABAJO
+    $scope.loadTrabajo = function(event) {
+        $scope.trabajoID = event.currentTarget.getAttribute("data-id");
+        $http.get('/rest/configuracion/trabajos/'+ $scope.trabajoID)
+            .then(function successCallback(response) {
+                $scope.ngTrabajo=response.data;
+            });
+    };
 
     //AGREGAR PELUQUERO
     $scope.addPeluquero = function() {
@@ -94,6 +115,8 @@ app.controller('configuracionController', function ($scope, $http) {
                 $scope.messagePeluquero=response.data.message;
             });
     };
+
+
 
     $scope.getAllCiudades();
     $scope.getAllTrabajos();

@@ -36,6 +36,18 @@ public class ConfiguracionService {
 		return repository.getTrabajos();
 	}
 
+	public Trabajo getTrabajo(Integer idTrabajo) {
+		return repository.getTrabajo(idTrabajo);
+	}
+	
+	public Trabajo updateTrabajo(Trabajo trabajo) {
+		Trabajo repoTrabajo = getTrabajo(trabajo.getId());
+		repoTrabajo.setDescripcion(trabajo.getDescripcion());
+		repoTrabajo.setPrecio(trabajo.getPrecio());
+		saveTrabajo(repoTrabajo);
+		return repoTrabajo;
+	}
+	
 	public Integer savePeluquero(Peluquero peluquero) {
 		return repository.savePeluquero(peluquero);
 	}
@@ -55,6 +67,8 @@ public class ConfiguracionService {
 	public void setRepository(ConfiguracionRepository repository) {
 		this.repository = repository;
 	}
+
+
 
 	
 }

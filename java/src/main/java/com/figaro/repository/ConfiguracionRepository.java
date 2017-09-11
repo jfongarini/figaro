@@ -35,6 +35,11 @@ public class ConfiguracionRepository extends AbstractRepository {
 	public List<Trabajo> getTrabajos() {
 		return getCurrentSession().createQuery("from Trabajo").list();
 	}
+	
+	public Trabajo getTrabajo(Integer idTrabajo) {
+		return getCurrentSession().get(Trabajo.class, idTrabajo);
+		
+	}
 
 	public Integer savePeluquero(Peluquero peluquero) {
 		return (Integer) getCurrentSession().save(peluquero);
@@ -48,5 +53,6 @@ public class ConfiguracionRepository extends AbstractRepository {
 	public List<Peluquero> getPeluqueros() {
 		return getCurrentSession().createQuery("from Peluquero").list();
 	}
+
 	
 }

@@ -28,13 +28,13 @@
       <form ng-submit="addTrabajo()">
         <i class="material-icons">content_cut</i><label class=card-title>TRABAJOS</label> <br>
         <input tipe="text" placeholder="Descripci&oacute;n" ng-model="ngTrabajo.descripcion" required>
-        <input type="number"placeholder="Precio" ng-model="ngTrabajo.precio" required>
+        <input type="number" placeholder="Precio" ng-model="ngTrabajo.precio" step="0.01" required>
         <button class="button accept" type="submit"></button>
         <table id=table>
           <tbody>
-          <tr id={{trabajo.id}} class=data-row ng-repeat="trabajo in trabajos">
-          <td>{{trabajo.descripcion}}</td>
-          <td>{{trabajo.precio | currency}}</td>
+          <tr id={{trabajo.id}}  class=data-row  ng-repeat="trabajo in trabajos">
+          <td data-id={{trabajo.id}} ng-click="loadTrabajo($event)">{{trabajo.descripcion}}</td>
+          <td data-id={{trabajo.id}} ng-click="loadTrabajo($event)" class=trabajo-precio>{{trabajo.precio | currency}}</td>
           <td class=delete ><i class="material-icons" data-id={{trabajo.id}} ng-click="removeTrabajo($event)">clear</i></td>
           </tr>
           </tbody>
