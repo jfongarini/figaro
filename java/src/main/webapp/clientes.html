@@ -5,13 +5,13 @@
   <#include "/common/head.html"> 
 </head>
 <body ng-app=figaro ng-controller=clientesController>
-  <div id=content >
-    <#include "/common/menu.html">
+  <#include "/common/menu.html">
+  <div id=content class=content>
     <div class="banner">
         <label class="banner-label add"><i class=material-icons ng-click="newClient()" >person_add</i></label>
         <label class=banner-label ><i class=material-icons >more_vert</i></label>
         <label class=banner-label ><i class=material-icons >search</i></label>
-        <input class=input-banner type="text" placeholder="Buscar..." ng-model="search" ng-keyup="searchCliente()"></input>
+        <input class=input-banner type="text" placeholder="Buscar..." ng-model="search" ng-keyup="searchCliente()">
     </div>
     <table id=table>
       <thead>
@@ -39,19 +39,23 @@
   <div id=modal class=modal>
     <div class=modal-content>
       <form ng-submit="sendClient()">
-        <div class=form-field><label>NOMBRE:</label><input id=focus tipe="text"  ng-model="ngCliente.nombre" required></input></div>
-        <div class=form-field><label>APELLIDO:</label><input tipe="text" ng-model="ngCliente.apellido" required></input></div>
+        <div class=form-field><label>NOMBRE:</label><input id=focus tipe="text"  ng-model="ngCliente.nombre" required></div>
+        <div class=form-field><label>APELLIDO:</label><input tipe="text" ng-model="ngCliente.apellido" required></div>
         <div class=form-field><label>SEXO:</label>
-          <input type="radio" name=sexo ng-model="ngCliente.sexo" value="hombre" required> Hombre</input>
-          <input type="radio" name=sexo ng-model="ngCliente.sexo" value="mujer" required> Mujer</input>
+          <input type="radio" name=sexo ng-model="ngCliente.sexo" value="hombre" required> Hombre
+          <input type="radio" name=sexo ng-model="ngCliente.sexo" value="mujer" required> Mujer
         </div>
-        <div class=form-field><label>TELEFONO:</label><input type="text"   ng-model="ngCliente.telefono" ></input></div>
-        <div class=form-field><label>EMAIL:</label><input type="email"     ng-model="ngCliente.email" ></input></div>
-        <div class=form-field><label>CIUDAD:</label><select ng-model="ngCliente.dirCiudad"><option value="La Plata">La Plata</option><option value="Berisso">Berisso</option></select> </div>
-        <div class=form-field><label>CALLE:</label><input type="text"      ng-model="ngCliente.dirCalle"></input></div>
-        <div class=form-field><label>NUMERO:</label><input type="number"   ng-model="ngCliente.dirNumeroCalle"  maxlength="5"></input></div>
-        <div class=form-field><label>PISO:</label><input type="number"     ng-model="ngCliente.dirPiso"  ></input></div>
-        <div class=form-field><label>DPTO:</label><input type="text"       ng-model="ngCliente.dirDpto"></input></div>
+        <div class=form-field><label>TELEFONO:</label><input type="text"   ng-model="ngCliente.telefono" ></div>
+        <div class=form-field><label>EMAIL:</label><input type="email"     ng-model="ngCliente.email" ></div>
+        <div class=form-field><label>CIUDAD:</label>
+          <select ng-model="ngCliente.dirCiudad">
+            <option value="{{ciudad.nombre}}" ng-repeat="ciudad in ciudades">{{ciudad.nombre}}</option>
+          </select>
+        </div>
+        <div class=form-field><label>CALLE:</label><input type="text"      ng-model="ngCliente.dirCalle"></div>
+        <div class=form-field><label>NUMERO:</label><input type="number"   ng-model="ngCliente.dirNumeroCalle"  maxlength="5"></div>
+        <div class=form-field><label>PISO:</label><input type="number"     ng-model="ngCliente.dirPiso"  ></div>
+        <div class=form-field><label>DPTO:</label><input type="text"       ng-model="ngCliente.dirDpto"></div>
         <div class=buttons>
           <button class="button accept" type="submit">ACEPTAR</button>
           <button class="button cancel" type="button" ng-click="discardClient()">CANCELAR</button>

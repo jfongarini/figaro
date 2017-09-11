@@ -22,9 +22,6 @@
 				<property name="ultimaVisita" 	column="ULT_VISITA" type="date"/>
 		</union-subclass>
 	     	
-	    <union-subclass name="com.figaro.model.Peluquero" table="PELUQUERO">
-			
-		</union-subclass>
       	
 	</class>
 </hibernate-mapping>

@@ -57,13 +57,18 @@ app.controller('clientesController', function ($scope, $http) {
             $scope.clientes = response.data; 
         });  
     };
-    
-    
 
     //DESCARTAR FORMULARIO
     $scope.discardClient = function(event){
         $scope.ngCliente = {};
         closeModal();
+    };
+
+    //OBTENER LISTA DE CIUDADES
+    $scope.getAllCiudades = function() {
+        $http.get("/rest/configuracion/ciudades").then(function (response) {
+            $scope.ciudades = response.data;
+        });
     };
     
     //APRETAR ESCAPE
@@ -76,6 +81,7 @@ app.controller('clientesController', function ($scope, $http) {
     //INIT
     $scope.search = '';
     $scope.ngCliente = {};
+    $scope.getAllCiudades();
     $scope.getAll();
 
 });

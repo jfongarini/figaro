@@ -4,6 +4,13 @@ body{
     margin-top: 0px;
     font-family: 'Roboto', sans-serif
 }
+.logo{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.content {
+    margin-left: 250px
+}
 
 .banner-label{
     float: left;
@@ -32,7 +39,6 @@ body{
     border-left-width: 0px
 }
 
-
 .action{
     display: none
 }
@@ -41,17 +47,20 @@ body{
     background-color:  #F3F4F6
 }
 
-.banner{
+
+.card, .banner{
     margin-top: 30px;
     background-color: #FFF;
-    height: 55px;
-    margin-bottom: 20px;
     box-shadow: rgba(0,0,0,0.4) 0px 2px 5px
 }
 
+.banner{
+    height: 55px;
+    margin-bottom: 20px
+}
+
 table, .banner{
-    width: 75%;
-    margin-left: 250px
+    width: 95%
 }
 
 table{
@@ -101,6 +110,7 @@ li a:hover {
 }
 
 .material-icons{
+    margin-right: 8px;
     vertical-align: sub
 }
 
@@ -181,7 +191,7 @@ form .buttons{
     width: 100%;
     align-content: center;
     display: flex;
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 form .button{
@@ -218,6 +228,53 @@ form select{
 }
 
 .add{
-    cursor: pointer;
+    cursor: pointer
 }
 
+
+.card{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 50px
+}
+
+.card-title{
+    margin-bottom: 20px
+}
+
+.ciudades, .peluqueros{
+    width: 250px;
+    padding: 20px
+}
+
+.trabajos{
+    width: 450px;
+    padding: 20px
+}
+
+.card label{
+    width: auto;
+}
+
+.card input {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.card button{
+    display: none;
+}
+
+.card table>tbody>tr:nth-child(odd) {
+    background-color: white;
+}
+
+.delete{
+    text-align: right;
+}
+
+tr:hover td {
+    background-color: white;
+    color:black;
+    cursor: pointer
+}
