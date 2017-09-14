@@ -12,11 +12,12 @@ public class ClientesService {
 	private ClientesRepository repository;
 	
 	public Cliente getCliente(int clienteID) {
-		LOGGER.info("Obteniendo el cliente con ID: " + clienteID);
+		LOGGER.debug("Obteniendo el cliente con ID: " + clienteID);
 		return repository.getCliente(clienteID);
 	}
 
 	public Integer saveCliente(Cliente cliente) {
+		LOGGER.info("Guardando el cliente con ID: " + cliente.getId()+" con:"+ cliente.toString());
 		return  repository.saveCliente(cliente);  
 	}
 	
@@ -37,11 +38,8 @@ public class ClientesService {
 		return cliente;
 	}
 	
-	public List<Cliente> getAll() {
-		return repository.getAll();
-	}
-
 	public List<Cliente> getAllClientes(){
+		LOGGER.debug("Obteniendo todos los clientes");
 		return repository.getAll();
 	}
 	

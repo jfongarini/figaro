@@ -44,7 +44,7 @@ public class ClientesControllerREST {
 
 	@RequestMapping(value = "/todos",method=RequestMethod.GET,produces="application/json")
     public List<Cliente> getAllClientes() {
-        return service.getAll();
+        return service.getAllClientes();
     }
 	
 	@RequestMapping(value = "/buscar",method=RequestMethod.GET,produces="application/json")
