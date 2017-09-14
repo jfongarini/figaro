@@ -1,16 +1,16 @@
 <!Doctype html>
 <html>
-<head> 
+<head>
   <title>CONFIGURACION</title>
-  <#include "/common/head.html">    
+  <#include "/common/head.html">
 </head>
-<body ng-app=figaro ng-controller=configuracionController>
+<body ng-app=figaro ng-controller=configuracionController ng-cloak>
 <#include "/common/menu.html">
 <div id=content class=content>
 
     <div class="card ciudades">
       <form ng-submit="addCiudad()">
-        <i class="material-icons">place </i><label class=card-title> CIUDADES</label> 
+        <i class="material-icons">place </i><label class=card-title> CIUDADES</label>
         <input tipe="text" placeholder="Ciudad" ng-model="ngCiudad.nombre" required>
         <table id=table>
           <tbody>
@@ -23,7 +23,7 @@
         <label class=form-message>{{messageCiudad}}</label>
       </form>
     </div>
-   
+
     <div class="card trabajos">
       <form ng-submit="addTrabajo()">
         <i class="material-icons">content_cut</i><label class=card-title>TRABAJOS</label> <br>
@@ -45,7 +45,7 @@
 
      <div class="card peluqueros">
       <form ng-submit="addPeluquero()">
-        <i class="material-icons">supervisor_account</i><label class=card-title>PELUQUEROS</label> 
+        <i class="material-icons">supervisor_account</i><label class=card-title>PELUQUEROS</label>
         <input tipe="text" placeholder="Nombre" ng-model="ngPeluquero.nombre" required>
         <table id=table>
           <tbody>
