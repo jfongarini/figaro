@@ -12,11 +12,13 @@ app.controller('clientesController', function ($scope, $http) {
     $scope.newClient = function() {
         $scope.isNuevoCliente = true
     	openModal();
-        $scope.ngCliente={}; 
+        $scope.ngCliente={};
+        $scope.message='';
     };
 
     //CLICK FILA CLIENTE
     $scope.detailClient = function(event){
+        $scope.message='';
         $scope.isNuevoCliente = false
         $scope.clienteID = event.currentTarget.getAttribute("data-id");
         $http.get('/rest/clientes/'+$scope.clienteID).then(function (response) {
@@ -30,22 +32,43 @@ app.controller('clientesController', function ($scope, $http) {
         if($scope.isNuevoCliente === true){
             $scope.ngCliente.fechaIngreso = getToday();
             $scope.ngCliente.ultimaVisita = getToday();
-            $http.post('/rest/clientes/alta', $scope.ngCliente).then(function (response) {
+            $http.post('/rest/clientes/alta', $scope.ngCliente)
+            .then(function successCallback(response) {
                 $scope.clientes.push(response.data);
+                closeModal();
+              }, function errorCallback(response) {
+                $scope.message=response.data.message;
             });
-            $scope.ngCliente={};
         }else{
-            $http.put('/rest/clientes/actualizar/'+ $scope.clienteID, $scope.ngCliente).then(function (response) {
-                $scope.getAll();
+            $http.put('/rest/clientes/actualizar/'+ $scope.clienteID, $scope.ngCliente).then(
+                function successCallback(response) {
+                    $scope.getAll();
+                    closeModal();
+              }, function errorCallback(response) {
+                $scope.message=response.data.message;
             });
         }
-        closeModal();
+    };
+
+    //BUSCAR
+    $scope.searchCliente = function() {        
+        $http.get('/rest/clientes/buscar',{params: { search: $scope.search }})
+        .then(function successCallback(response) {
+            $scope.clientes = response.data; 
+        });  
     };
 
     //DESCARTAR FORMULARIO
     $scope.discardClient = function(event){
         $scope.ngCliente = {};
         closeModal();
+    };
+
+    //OBTENER LISTA DE CIUDADES
+    $scope.getAllCiudades = function() {
+        $http.get("/rest/configuracion/ciudades").then(function (response) {
+            $scope.ciudades = response.data;
+        });
     };
     
     //APRETAR ESCAPE
@@ -56,7 +79,9 @@ app.controller('clientesController', function ($scope, $http) {
     });
 
     //INIT
+    $scope.search = '';
     $scope.ngCliente = {};
+    $scope.getAllCiudades();
     $scope.getAll();
 
 });

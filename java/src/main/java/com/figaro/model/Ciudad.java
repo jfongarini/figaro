@@ -1,6 +1,6 @@
 package com.figaro.model;
 
-public class Peluquero  {
+public class Ciudad {
 
 	private Integer id;
 	private String nombre;

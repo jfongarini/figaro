@@ -11,10 +11,12 @@ function getToday(){
 function openModal(){
 	$('#modal').addClass("modal-on");
 	$('#content').addClass("blur");
+	$('#menu').addClass("blur");
 	$('#focus').focus();
 };
 
 function closeModal(){
 	$('#modal').removeClass("modal-on");
 	$('#content').removeClass("blur");
+	$('#menu').removeClass("blur");
 };

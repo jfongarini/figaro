@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.figaro.model.Cliente;
@@ -44,16 +44,20 @@ public class ClientesControllerREST {
 
 	@RequestMapping(value = "/todos",method=RequestMethod.GET,produces="application/json")
     public List<Cliente> getAllClientes() {
-        return service.getAll();
+        return service.getAllClientes();
     }
 	
+	@RequestMapping(value = "/buscar",method=RequestMethod.GET,produces="application/json")
+    public List<Cliente> getAllClientes(@RequestParam String search) {
+        return service.buscar(search);
+    }
 	
 	public ClientesService getService() {
 		return service;
 	}
+	
 	public void setService(ClientesService service) {
 		this.service = service;
 	}
-
 	
 }

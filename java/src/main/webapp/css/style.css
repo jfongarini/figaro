@@ -4,6 +4,13 @@ body{
     margin-top: 0px;
     font-family: 'Roboto', sans-serif
 }
+.logo{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.content {
+    margin-left: 250px
+}
 
 .banner-label{
     float: left;
@@ -14,11 +21,22 @@ body{
     font-size: 1.3em    
 }
 
-.input-date {
+.input-banner {
     font-family: 'Roboto', sans-serif;
     font-size: 1.3em;
     border: 0;
     margin-top: 10px
+}
+
+.input-banner:focus {
+    outline: none !important;
+    border-bottom: 2px solid #292961
+}
+
+.input-banner, .input-banner:focus { 
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px
 }
 
 .action{
@@ -29,17 +47,20 @@ body{
     background-color:  #F3F4F6
 }
 
-.banner{
+
+.card, .banner{
     margin-top: 30px;
     background-color: #FFF;
-    height: 55px;
-    margin-bottom: 20px;
     box-shadow: rgba(0,0,0,0.4) 0px 2px 5px
 }
 
+.banner{
+    height: 55px;
+    margin-bottom: 20px
+}
+
 table, .banner{
-    width: 75%;
-    margin-left: 250px
+    width: 95%
 }
 
 table{
@@ -66,7 +87,7 @@ ul {
     margin: 0;
     top: 0;
     margin-right: 300px;
-    background: linear-gradient(to right, #292961, #393982);
+    background-color:  #292961;
     padding: 0;
     width: 200px;
     height: 100%;
@@ -77,17 +98,19 @@ ul {
 
 li a {
     display: block;
-    color: #FFF;
+    color: #d1d1f0;
     padding: 8px 16px;
     text-decoration: none
 }
 
 li a:hover {
-    color: #fca326;
+    background-color: #6666c4;
+    color: #FFFFFF;
     cursor: pointer
 }
 
 .material-icons{
+    margin-right: 8px;
     vertical-align: sub
 }
 
@@ -122,6 +145,13 @@ li a:hover {
     animation-name: animatetop;
     animation-duration: 0.4s
 }
+
+.form-message{
+    font-size: 13px;
+    color: red;
+    margin-top: 20px;
+    width: 100%
+}
     
 .form-field{
     margin-bottom: 15px
@@ -137,7 +167,6 @@ li a:hover {
 
 form label{
     display: inline-block;  
-    float: left;
     clear: left;
     width: 95px
 }
@@ -147,7 +176,7 @@ form input {
     display: inline-block
 }
 
-form input:focus {
+form input:focus, form select:focus {
     outline: none !important;
     border-bottom: 2px solid #292961
 }
@@ -162,7 +191,7 @@ form .buttons{
     width: 100%;
     align-content: center;
     display: flex;
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 form .button{
@@ -178,6 +207,16 @@ form .button{
     box-shadow: 0 1px 4px rgba(0, 0, 0, .6)
 }
 
+form select{
+    width: 191px;
+    background: transparent;
+    border-bottom-color: #EEE;
+    border-bottom-width: 2px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px
+}
+
 .accept{
     background-color: #292961;
     color: white
@@ -189,5 +228,57 @@ form .button{
 }
 
 .add{
-    cursor: pointer;
+    cursor: pointer
+}
+
+
+.card{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 50px
+}
+
+.card-title{
+    margin-bottom: 20px
+}
+
+.ciudades, .peluqueros{
+    width: 250px;
+    padding: 20px
+}
+
+.trabajos{
+    width: 450px;
+    padding: 20px
+}
+
+.card label{
+    width: auto;
+}
+
+.card input {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.card button{
+    display: none;
+}
+
+.card table>tbody>tr:nth-child(odd) {
+    background-color: white;
+}
+
+.delete{
+    text-align: right;
+}
+
+.card  tr:hover td {
+    background-color: white;
+    color:black;
+    cursor: pointer
+}
+
+.trabajo-precio{
+    text-align: center;
 }

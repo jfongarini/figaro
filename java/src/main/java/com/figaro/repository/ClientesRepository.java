@@ -2,11 +2,11 @@ package com.figaro.repository;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.hibernate.query.Query;
 
 import com.figaro.model.Cliente;
 
-@Component
+
 public class ClientesRepository extends AbstractRepository{
 
 	public Integer saveCliente (Cliente cliente) {
@@ -23,7 +23,14 @@ public class ClientesRepository extends AbstractRepository{
 
 	@SuppressWarnings("unchecked")
 	public List<Cliente> getAll() {
-		return getCurrentSession().createQuery("from Cliente ").list();		
+		return getCurrentSession().createQuery("from Cliente").list();		
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Cliente> buscar(String search) {
+		Query<Cliente> query = getCurrentSession().createQuery("FROM Cliente c WHERE c.nombre LIKE CONCAT('%',?1,'%') OR c.apellido LIKE CONCAT('%',?1,'%')");
+	    query.setParameter(1, search);
+	    return query.getResultList();
 	}
 	
 }

@@ -32,12 +32,15 @@
 		<property name="mappingResources">
 			<list>
   				<value>hibernate/cliente.hbm.xml</value>
+  				<value>hibernate/ciudad.hbm.xml</value>
+  				<value>hibernate/trabajo.hbm.xml</value>
+  				<value>hibernate/peluquero.hbm.xml</value>
  			</list>
 		</property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">${hibernate.showsql}</prop>
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.c3p0.idle_test_period">28680</prop>
 				<prop key="hibernate.hbm2ddl.auto">${hibernate.auto}</prop>
@@ -73,6 +76,35 @@
 	</bean>
 
 	<bean id="ClientesRepository"	class="com.figaro.repository.ClientesRepository">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+	
+		<!-- CONFIGURACION !-->
+	<bean id="ConfiguracionServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="ConfiguracionService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="ConfiguracionService" class="com.figaro.service.ConfiguracionService">
+		<property name="repository">
+			<ref bean="ConfiguracionRepository" />
+		</property>
+	</bean>
+
+	<bean id="ConfiguracionRepository"	class="com.figaro.repository.ConfiguracionRepository">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
