@@ -31,9 +31,7 @@ public class ClientesControllerREST {
 	
 	@RequestMapping(value = "/alta",method=RequestMethod.POST)
     public ResponseEntity<Cliente> newCliente(@RequestBody Cliente cliente) {
-		Integer newID = service.saveCliente(cliente);
-		cliente.setId(newID);
-		return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
+		return new ResponseEntity<Cliente>(service.saveCliente(cliente), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value = "/actualizar/{clienteID}",method=RequestMethod.PUT)

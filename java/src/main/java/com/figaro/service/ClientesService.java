@@ -1,7 +1,9 @@
 package com.figaro.service;
 
 import java.util.List;
+
 import org.apache.log4j.Logger;
+
 import com.figaro.model.Cliente;
 import com.figaro.repository.ClientesRepository;
 
@@ -16,24 +18,17 @@ public class ClientesService {
 		return repository.getCliente(clienteID);
 	}
 
-	public Integer saveCliente(Cliente cliente) {
+	public Cliente saveCliente(Cliente cliente) {
 		LOGGER.info("Guardando el cliente con ID: " + cliente.getId()+" con:"+ cliente.toString());
-		return  repository.saveCliente(cliente);  
+		int newID = repository.saveCliente(cliente);
+		cliente.setId(newID);
+		return cliente ;  
 	}
 	
 	public Cliente updateCliente(Cliente cliente) {
 		Cliente old = getCliente(cliente.getId());
 		LOGGER.info("Actualizando el cliente con ID: " + old.getId()+" con:"+ cliente.toString());
-		old.setNombre(cliente.getNombre());
-		old.setApellido(cliente.getApellido());
-		old.setEmail(cliente.getEmail());
-		old.setSexo(cliente.getSexo());
-		old.setTelefono(cliente.getTelefono());
-		old.setDirCiudad(cliente.getDirCiudad());
-		old.setDirCalle(cliente.getDirCalle());
-		old.setDirNumeroCalle(cliente.getDirNumeroCalle());
-		old.setDirPiso(cliente.getDirPiso());
-		old.setDirDpto(cliente.getDirDpto());
+		old.update(cliente);
 		repository.updateCliente(old);
 		return cliente;
 	}
