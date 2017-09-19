@@ -34,6 +34,7 @@
   				<value>hibernate/cliente.hbm.xml</value>
   				<value>hibernate/ciudad.hbm.xml</value>
   				<value>hibernate/trabajo.hbm.xml</value>
+  				<value>hibernate/producto.hbm.xml</value>
   				<value>hibernate/peluquero.hbm.xml</value>
  			</list>
 		</property>
@@ -83,7 +84,7 @@
 	
 	
 	
-		<!-- CONFIGURACION !-->
+	<!-- CONFIGURACION !-->
 	<bean id="ConfiguracionServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager">
 			<ref bean="transactionManager" />

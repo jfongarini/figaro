@@ -6,7 +6,6 @@ import org.hibernate.query.Query;
 
 import com.figaro.model.Cliente;
 
-
 public class ClientesRepository extends AbstractRepository{
 
 	public Integer saveCliente (Cliente cliente) {
