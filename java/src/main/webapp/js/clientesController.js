@@ -3,7 +3,7 @@ app.controller('clientesController', function ($scope, $http) {
     
     //OBTENER LISTA DE CLIENTES
     $scope.getAll = function() {
-        $http.get("/rest/clientes/todos").then(function (response) {
+        $http.get("/rest/clientes").then(function (response) {
             $scope.clientes = response.data;
         });
     };
