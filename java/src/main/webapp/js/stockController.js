@@ -1,41 +1,39 @@
 var app = angular.module('figaro', []);
 app.controller('stockController', function ($scope, $http) {
     
-    //OBTENER LISTA DE CLIENTES
+    //OBTENER LISTA DE PRODUCTOS
     $scope.getAll = function() {
-        $http.get("/rest/clientes/todos").then(function (response) {
-            $scope.clientes = response.data;
+        $http.get("/rest/stock/todos").then(function (response) {
+            $scope.productos = response.data;
         });
     };
 
-    //CLICK NUEVO CLIENTE
-    $scope.newClient = function() {
-        $scope.isNuevoCliente = true
+    //CLICK NUEVO PRODUCTO
+    $scope.newProducto = function() {
+        $scope.isNuevoProducto = true
     	openModal();
-        $scope.ngCliente={}; 
+        $scope.ngProducto={}; 
     };
 
-    //CLICK FILA CLIENTE
-    $scope.detailClient = function(event){
-        $scope.isNuevoCliente = false
-        $scope.clienteID = event.currentTarget.getAttribute("data-id");
-        $http.get('/rest/clientes/'+$scope.clienteID).then(function (response) {
-            $scope.ngCliente = response.data;
+    //CLICK FILA PRODUCTO
+    $scope.detailProducto = function(event){
+        $scope.isNuevoProducto = false
+        $scope.productoID = event.currentTarget.getAttribute("data-id");
+        $http.get('/rest/stock/'+$scope.productoID).then(function (response) {
+            $scope.ngProducto = response.data;
             openModal();
 	    });
     };
 
     //CLICK ACEPTAR FORMULARIO
-    $scope.sendClient = function() {
-        if($scope.isNuevoCliente === true){
-            $scope.ngCliente.fechaIngreso = getToday();
-            $scope.ngCliente.ultimaVisita = getToday();
-            $http.post('/rest/clientes/alta', $scope.ngCliente).then(function (response) {
-                $scope.clientes.push(response.data);
+    $scope.sendProducto = function() {
+        if($scope.isNuevoProducto === true){
+            $http.post('/rest/stock/alta', $scope.ngProducto).then(function (response) {
+                $scope.productos.push(response.data);
             });
-            $scope.ngCliente={};
+            $scope.ngProducto={};
         }else{
-            $http.put('/rest/clientes/actualizar/'+ $scope.clienteID, $scope.ngCliente).then(function (response) {
+            $http.put('/rest/stock/actualizar/'+ $scope.productoID, $scope.ngProducto).then(function (response) {
                 $scope.getAll();
             });
         }
@@ -43,20 +41,21 @@ app.controller('stockController', function ($scope, $http) {
     };
 
     //DESCARTAR FORMULARIO
-    $scope.discardClient = function(event){
-        $scope.ngCliente = {};
+    $scope.discardProducto = function(event){
+        $scope.ngProducto = {};
         closeModal();
     };
     
     //APRETAR ESCAPE
     document.addEventListener('keyup', function(e) {
         if (e.keyCode == 27) {
-            $scope.discardClient();
+            $scope.discardProducto();
         }
     });
 
     //INIT
-    $scope.ngCliente = {};
+    $scope.search = '';
+    $scope.ngProducto = {};
     $scope.getAll();
 
 });

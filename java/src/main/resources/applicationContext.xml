@@ -82,9 +82,35 @@
 		</property>
 	</bean>
 	
+	<!-- STOCK !-->
+	<bean id="ProductosServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="ProductosService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="ProductosService" class="com.figaro.service.ProductosService">
+		<property name="repository">
+			<ref bean="ProductosRepository" />
+		</property>
+	</bean>
+
+	<bean id="ProductosRepository"	class="com.figaro.repository.ProductosRepository">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 	
 	
-		<!-- CONFIGURACION !-->
+	<!-- CONFIGURACION !-->
 	<bean id="ConfiguracionServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager">
 			<ref bean="transactionManager" />
@@ -110,8 +136,5 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	
-</beans>
-   
 
-	
+</beans>	
