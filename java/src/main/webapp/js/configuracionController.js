@@ -116,8 +116,6 @@ app.controller('configuracionController', function ($scope, $http) {
             });
     };
 
-
-
     $scope.getAllCiudades();
     $scope.getAllTrabajos();
     $scope.getAllPeluqueros();
