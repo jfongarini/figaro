@@ -164,31 +164,5 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	
-		<!-- CATEGORIA !-->
-	<bean id="CategoriasServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-		<property name="transactionManager">
-			<ref bean="transactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="CategoriasService" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
 
-	<bean id="CategoriasService" class="com.figaro.service.CategoriasService">
-		<property name="repository">
-			<ref bean="CategoriasRepository" />
-		</property>
-	</bean>
-
-	<bean id="CategoriasRepository"	class="com.figaro.repository.CategoriasRepository">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
-	</bean>	
 </beans>

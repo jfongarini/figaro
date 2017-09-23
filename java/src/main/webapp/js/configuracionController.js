@@ -116,10 +116,44 @@ app.controller('configuracionController', function ($scope, $http) {
             });
     };
 
+    //AGREGAR CATEGORIA
+    $scope.addCategoria = function() {
+        $http.post('/rest/configuracion/categorias/alta', $scope.ngCategoria)
+            .then(function successCallback(response) {
+                $scope.categorias.push(response.data);
+                $scope.ngCategoria={};
+                $scope.messageCategoria='';
+              }, function errorCallback(response) {
+                $scope.messageCategoria=response.data.message;
+            });
+    };
+
+
+    //OBTENER LISTA DE CATEGORIAS
+    $scope.getAllCategorias = function() {
+        $http.get("/rest/configuracion/categorias").then(function (response) {
+            $scope.categorias = response.data;
+        });
+    };
+
+    //ELIMINAR CATEGORIA
+    $scope.removeCategoria = function(event) {
+        $scope.categoriaID = event.currentTarget.getAttribute("data-id");
+        $http.delete('/rest/configuracion/categorias/baja/'+ $scope.categoriaID)
+            .then(function successCallback(response) {
+                $scope.getAllCategorias();
+                $scope.messageCategoria='';
+              }, function errorCallback(response) {
+                $scope.messageCategoria=response.data.message;
+            });
+    };
+
     $scope.getAllCiudades();
     $scope.getAllTrabajos();
     $scope.getAllPeluqueros();
+    $scope.getAllCategorias();
     $scope.ngCiudad={};
     $scope.ngTrabajo={};
     $scope.ngPeluquero={};
+    $scope.ngCategoria={};
 });

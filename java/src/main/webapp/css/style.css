@@ -242,7 +242,7 @@ form select{
     margin-bottom: 20px
 }
 
-.ciudades, .peluqueros{
+.ciudades, .peluqueros, .categorias{
     width: 250px;
     padding: 20px
 }

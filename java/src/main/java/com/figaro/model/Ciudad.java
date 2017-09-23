@@ -18,4 +18,9 @@ public class Ciudad {
 		this.id = id;
 	}
 	
+	@Override
+	public String toString() {
+		return "Ciudad [nombre=" + nombre + "]";
+	}
+	
 }

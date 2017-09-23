@@ -43,7 +43,7 @@
       </form>
     </div>
 
-     <div class="card peluqueros">
+    <div class="card peluqueros">
       <form ng-submit="addPeluquero()">
         <i class="material-icons">supervisor_account</i><label class=card-title>PELUQUEROS</label>
         <input tipe="text" placeholder="Nombre" ng-model="ngPeluquero.nombre" required>
@@ -56,6 +56,22 @@
           </tbody>
         </table>
         <label class=form-message>{{messagePeluquero}}</label>
+      </form>
+    </div>
+
+    <div class="card categorias">
+      <form ng-submit="addCategoria()">
+        <i class="material-icons">label</i><label class=card-title>CATEGOR&Iacute;AS</label>
+        <input tipe="text" placeholder="Nombre" ng-model="ngCategoria.nombre" required>
+        <table id=table>
+          <tbody>
+          <tr id={{categoria.id}} class=data-row ng-repeat="categoria in categorias">
+          <td>{{categoria.nombre}}</td>
+          <td class=delete ><i class="material-icons" data-id={{categoria.id}} ng-click="removeCategoria($event)">clear</i></td>
+          </tr>
+          </tbody>
+        </table>
+        <label class=form-message>{{messageCategoria}}</label>
       </form>
     </div>
 
