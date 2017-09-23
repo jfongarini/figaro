@@ -6,7 +6,7 @@
 		<id name="id" type="int" column="ID_CATEGORIA" >
 			<generator class="increment"/>
 		</id>
-	 	<property name="nombre"  		column="NOMBRE"   	type="string"/>
+	 	<property name="nombre" unique="true" column="NOMBRE" type="string"/>
      	
 	</class>
 </hibernate-mapping>
