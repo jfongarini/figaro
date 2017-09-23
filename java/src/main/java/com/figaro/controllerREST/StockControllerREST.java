@@ -31,7 +31,6 @@ public class StockControllerREST {
 	
 	@RequestMapping(value = "/alta",method=RequestMethod.POST)
     public ResponseEntity<Producto> newProducto(@RequestBody Producto producto) {
-		
 		return new ResponseEntity<Producto>(service.saveProducto(producto), HttpStatus.CREATED);
 	}
 	

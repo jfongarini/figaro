@@ -45,7 +45,15 @@ app.controller('stockController', function ($scope, $http) {
         $scope.ngProducto = {};
         closeModal();
     };
-    
+
+    //BUSCAR
+    $scope.searchProducto = function() {        
+        $http.get('/rest/stock/buscar',{params: { search: $scope.search }})
+        .then(function successCallback(response) {
+            $scope.productos = response.data; 
+        })
+    };
+
     //APRETAR ESCAPE
     document.addEventListener('keyup', function(e) {
         if (e.keyCode == 27) {

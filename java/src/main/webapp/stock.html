@@ -8,7 +8,7 @@
   <#include "/common/menu.html">
   <div id=content class=content>
     <div class="banner">
-        <label class="banner-label add"><i class=material-icons ng-click="newProducto()" >shopping_basket_add</i></label>
+        <label class="banner-label add"><i class=material-icons ng-click="newProducto()" >playlist_add</i></label>
         <label class=banner-label ><i class=material-icons >more_vert</i></label>
         <label class=banner-label ><i class=material-icons >search</i></label>
         <input class=input-banner type="text" placeholder="Buscar producto" ng-model="search" ng-keyup="searchProducto()">
@@ -17,15 +17,17 @@
       <thead>
         <tr>
             <th>NOMBRE</th>
+            <th>DESCRIPCION</th>
             <th>DISPONIBLES</th>
             <th>MINIMO</th>
         </tr>
       </thead>
       <tbody>
-        <tr id={{producto.id}} data-id={{producto.id}} class=data-row ng-repeat="producto in producto" data-ng-click="detailProducto($event)">
+        <tr id={{producto.id}} data-id={{producto.id}} class=data-row ng-repeat="producto in productos" data-ng-click="detailProducto($event)">
           <td>{{producto.nombre}}</td>
-          <td>{{cliente.cantidad}}</td>
-          <td>{{cliente.cantidadMin}}</td>
+          <td>{{producto.descripcion}}</td>
+          <td>{{producto.cantidad}}</td>
+          <td>{{producto.cantidadMinima}}</td>
         </tr>
       </tbody>
     </table>
@@ -33,9 +35,10 @@
   <div id=modal class=modal>
     <div class=modal-content>
       <form ng-submit="sendProducto()">
-        <div class=form-field><label>NOMBRE:</label><input id=focus tipe="text"   ng-model="ngProducto.nombre"></input></div>
-        <div class=form-field><label>CANTIDAD:</label><input tipe="number"        ng-model="ngProducto.cantidad"></input></div>
-        <div class=form-field><label>CANTIDAD MINIMA:</label><input tipe="number" ng-model="ngProducto.cantidadMin"></input></div>
+        <div class=form-field><label>NOMBRE:</label>      <input id=focus type="text"   ng-model="ngProducto.nombre"></input></div>
+        <div class=form-field><label>DESCRIPCION:</label> <input type="text"            ng-model="ngProducto.descripcion"></input></div>
+        <div class=form-field><label>CANTIDAD:</label>    <input type="number"          ng-model="ngProducto.cantidad"></input></div>
+        <div class=form-field><label>MINIMA:</label>      <input type="number"          ng-model="ngProducto.cantidadMinima"></input></div>
         <div class=buttons>
           <button class="button accept" type="submit">ACEPTAR</button>
           <button class="button cancel" type="button" ng-click="discardProducto()">CANCELAR</button>

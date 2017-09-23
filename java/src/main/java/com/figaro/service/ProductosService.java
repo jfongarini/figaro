@@ -24,8 +24,9 @@ public class ProductosService {
 	public Producto updateProducto(Producto producto) {
 		Producto old = getProducto(producto.getId());
 		old.setNombre(producto.getNombre());
+		old.setDescripcion(producto.getDescripcion());
 		old.setCantidad(producto.getCantidad());
-		old.setCantidad(producto.getCantidadMin());
+		old.setCantidadMinima(producto.getCantidadMinima());
 		repository.updateProducto(old);
 		return producto;
 	}
