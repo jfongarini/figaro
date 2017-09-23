@@ -1,11 +1,10 @@
 package com.figaro.repository;
 
 import java.util.List;
-
+import com.figaro.model.Categoria;
 import com.figaro.model.Ciudad;
 import com.figaro.model.Peluquero;
 import com.figaro.model.Trabajo;
-
 
 @SuppressWarnings("unchecked")
 public class ConfiguracionRepository extends AbstractRepository {
@@ -38,7 +37,6 @@ public class ConfiguracionRepository extends AbstractRepository {
 	
 	public Trabajo getTrabajo(Integer idTrabajo) {
 		return getCurrentSession().get(Trabajo.class, idTrabajo);
-		
 	}
 
 	public Integer savePeluquero(Peluquero peluquero) {
@@ -54,5 +52,16 @@ public class ConfiguracionRepository extends AbstractRepository {
 		return getCurrentSession().createQuery("from Peluquero").list();
 	}
 
-	
+	public List<Categoria> getCategorias() {
+		return getCurrentSession().createQuery("from Categoria").list();
+	}
+
+	public Integer saveCategoria(Categoria categoria) {
+		return (Integer) getCurrentSession().save(categoria);
+	}
+
+	public void deleteCategoria(Integer idCategoria) {
+		Categoria toDelte = getCurrentSession().load(Categoria.class, idCategoria);
+		getCurrentSession().delete(toDelte);
+	}
 }

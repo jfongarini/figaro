@@ -12,6 +12,7 @@ public abstract class Movimiento {
 	private BigDecimal precio;
 	private Date fecha;
 	private String detalle;
+	private Boolean isGasto;	
 	
 	public Long getId() {
 		return id;
@@ -48,6 +49,21 @@ public abstract class Movimiento {
 	}
 	public void setDetalle(String detalle) {
 		this.detalle = detalle;
+	}
+	public Boolean getIsGasto() {
+		return isGasto;
 	}	
+	public void setIsGasto(Boolean isGasto) {
+		this.isGasto = isGasto;
+	}	
+	public void update(Movimiento movimiento) {
+		this.setId(getId());
+		this.setCategoria(getCategoria());
+		this.setDetalle(getDetalle());
+		this.setFecha(getFecha());
+		this.setIsGasto(getIsGasto());
+		this.setPrecio(getPrecio());
+		this.setSalon(getSalon());		
+	}
 	
 }

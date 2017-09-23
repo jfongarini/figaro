@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.figaro.model.Categoria;
 import com.figaro.model.Ciudad;
 import com.figaro.model.Peluquero;
 import com.figaro.model.Trabajo;
@@ -49,7 +50,7 @@ public class ConfiguracionControllerREST {
 	}
 	
 	@RequestMapping(value = "/trabajos/alta",method=RequestMethod.POST)
-    public ResponseEntity<Trabajo> newTrabajo(@RequestBody Trabajo trabajo) {
+    public ResponseEntity<Trabajo> addTrabajo(@RequestBody Trabajo trabajo) {
 		Integer newID = service.saveTrabajo(trabajo);
 		trabajo.setId(newID);
 		return new ResponseEntity<Trabajo>(trabajo, HttpStatus.CREATED);
@@ -79,7 +80,7 @@ public class ConfiguracionControllerREST {
 	}
 	
 	@RequestMapping(value = "/peluqueros/alta",method=RequestMethod.POST)
-    public ResponseEntity<Peluquero> newPeluquero(@RequestBody Peluquero peluquero) {
+    public ResponseEntity<Peluquero> addPeluquero(@RequestBody Peluquero peluquero) {
 		Integer newID = service.savePeluquero(peluquero);
 		peluquero.setId(newID);
 		return new ResponseEntity<Peluquero>(peluquero, HttpStatus.CREATED);
@@ -91,6 +92,22 @@ public class ConfiguracionControllerREST {
 		return new ResponseEntity<Peluquero>(HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/categorias",method=RequestMethod.GET)
+    public List<Categoria> getCategorias() {
+		return service.getCategorias();
+	}
 	
+	@RequestMapping(value = "/categorias/alta",method=RequestMethod.POST)
+    public ResponseEntity<Categoria> addCategoria(@RequestBody Categoria categoria) {
+		Integer newID = service.save(categoria);
+		categoria.setId(newID);
+		return new ResponseEntity<Categoria>(categoria, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/categorias/baja/{idCategoria}",method=RequestMethod.DELETE)
+    public ResponseEntity<Categoria> deleteCategoria(@PathVariable Integer idCategoria) {
+		service.deleteCategoria(idCategoria);
+		return new ResponseEntity<Categoria>(HttpStatus.OK);
+	}
 	
 }

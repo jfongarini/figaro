@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.figaro.model.Categoria;
 import com.figaro.model.Ciudad;
 import com.figaro.model.Peluquero;
 import com.figaro.model.Trabajo;
@@ -75,6 +76,21 @@ public class ConfiguracionService {
 		return repository.getPeluqueros();
 	}
 	
+	public List<Categoria> getCategorias() {
+		LOGGER.debug("Obteniendo todas las categorias");
+		return repository.getCategorias();
+	}
+
+	public Integer save(Categoria categoria) {
+		LOGGER.info("Guardando la categoria: "+ categoria.toString());
+		return repository.saveCategoria(categoria);
+	}
+
+	public void deleteCategoria(Integer idCategoria) {
+		LOGGER.info("Eliminando la categoria con ID: " + idCategoria);
+		repository.deleteCategoria(idCategoria);
+	}
+	
 	public ConfiguracionRepository getRepository() {
 		return repository;
 	}
@@ -82,5 +98,6 @@ public class ConfiguracionService {
 	public void setRepository(ConfiguracionRepository repository) {
 		this.repository = repository;
 	}
-	
+
+
 }

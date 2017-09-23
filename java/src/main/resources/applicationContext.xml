@@ -22,7 +22,6 @@
 		<property name="idleConnectionTestPeriod"><value>3600</value></property>
 	</bean>
     
-    
    	<!-- SESSION FACTORY  HIBERNATE -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource">
@@ -36,6 +35,8 @@
   				<value>hibernate/trabajo.hbm.xml</value>
   				<value>hibernate/producto.hbm.xml</value>
   				<value>hibernate/peluquero.hbm.xml</value>
+  				<value>hibernate/movimiento.hbm.xml</value>
+  				<value>hibernate/categoria.hbm.xml</value>
  			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -137,13 +138,13 @@
 		</property>
 	</bean>
 
-	<!-- CAJA !-->
-	<bean id="CajaServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+	<!-- MOVIMIENTO !-->
+	<bean id="MovimientosServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager">
 			<ref bean="transactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="CajaService" />
+			<ref bean="MovimientosService" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -152,16 +153,42 @@
 		</property>
 	</bean>
 
-	<bean id="CajaService" class="com.figaro.service.CajaService">
+	<bean id="MovimientosService" class="com.figaro.service.MovimientosService">
 		<property name="repository">
-			<ref bean="CajaRepository" />
+			<ref bean="MovimientosRepository" />
 		</property>
 	</bean>
 
-	<bean id="CajaRepository"	class="com.figaro.repository.CajaRepository">
+	<bean id="MovimientosRepository"	class="com.figaro.repository.MovimientosRepository">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
 	
+		<!-- CATEGORIA !-->
+	<bean id="CategoriasServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="CategoriasService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="CategoriasService" class="com.figaro.service.CategoriasService">
+		<property name="repository">
+			<ref bean="CategoriasRepository" />
+		</property>
+	</bean>
+
+	<bean id="CategoriasRepository"	class="com.figaro.repository.CategoriasRepository">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
 </beans>
