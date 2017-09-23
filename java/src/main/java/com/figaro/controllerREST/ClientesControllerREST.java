@@ -17,36 +17,34 @@ import com.figaro.model.Cliente;
 import com.figaro.service.ClientesService;
 
 @RestController
-@RequestMapping(value = "/rest/clientes")
+@RequestMapping(value = "/rest/")
 public class ClientesControllerREST {
 	
 	@Autowired
 	@Qualifier("ClientesServiceTransactional")
 	private ClientesService service;
 	
-	@RequestMapping(value = "/{clienteID}",method=RequestMethod.GET,produces="application/json")
+	@RequestMapping(value = "clientes",method=RequestMethod.GET,produces="application/json")
+    public List<Cliente> getAllClientes() {
+        return service.getAllClientes();
+    }
+	
+	@RequestMapping(value = "clientes/{clienteID}",method=RequestMethod.GET,produces="application/json")
     public Cliente getCliente( @PathVariable int clienteID) {
         return service.getCliente(clienteID);
     }
 	
-	@RequestMapping(value = "/alta",method=RequestMethod.POST)
+	@RequestMapping(value = "clientes/alta",method=RequestMethod.POST)
     public ResponseEntity<Cliente> newCliente(@RequestBody Cliente cliente) {
-		Integer newID = service.saveCliente(cliente);
-		cliente.setId(newID);
-		return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
+		return new ResponseEntity<Cliente>(service.saveCliente(cliente), HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value = "/actualizar/{clienteID}",method=RequestMethod.PUT)
+	@RequestMapping(value = "clientes/actualizar/{clienteID}",method=RequestMethod.PUT)
     public ResponseEntity<Cliente> updateCliente(@RequestBody Cliente cliente) {
 		Cliente updated = service.updateCliente(cliente);
 		return new ResponseEntity<Cliente>(updated, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/todos",method=RequestMethod.GET,produces="application/json")
-    public List<Cliente> getAllClientes() {
-        return service.getAllClientes();
-    }
-	
 	@RequestMapping(value = "/buscar",method=RequestMethod.GET,produces="application/json")
     public List<Cliente> getAllClientes(@RequestParam String search) {
         return service.buscar(search);

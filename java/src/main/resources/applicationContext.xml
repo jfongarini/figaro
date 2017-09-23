@@ -137,4 +137,31 @@
 		</property>
 	</bean>
 
-</beans>	
+	<!-- CAJA !-->
+	<bean id="CajaServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="CajaService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="CajaService" class="com.figaro.service.CajaService">
+		<property name="repository">
+			<ref bean="CajaRepository" />
+		</property>
+	</bean>
+
+	<bean id="CajaRepository"	class="com.figaro.repository.CajaRepository">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+</beans>

@@ -47,6 +47,12 @@ public class Caja {
 	public void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
 	}
-	
+
+	public void update(Caja caja) {
+		this.setId(caja.getId());
+		this.setMovimiento(getMovimiento());
+		this.setSaldo(getSaldo());
+		this.setSalon(getSalon());		
+	}
 	
 }
