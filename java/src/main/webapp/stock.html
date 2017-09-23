@@ -4,57 +4,41 @@
 	<title>Stock</title>
   <#include "/common/head.html"> 
 </head>
-<body ng-app=figaro ng-controller=StockController>
-  <div id=content >
-    <#include "/common/menu.html">
+<body ng-app=figaro ng-controller=stockController ng-cloak >
+  <#include "/common/menu.html">
+  <div id=content class=content>
     <div class="banner">
-        <label class="banner-label add"><i class=material-icons ng-click="newClient()" >person_add</i></label>
+        <label class="banner-label add"><i class=material-icons ng-click="newProducto()" >shopping_basket_add</i></label>
         <label class=banner-label ><i class=material-icons >more_vert</i></label>
-        <label class=banner-label ><i class=material-icons >search</i></label><input class=input-date type="text" placeholder="Buscar..."></input>
+        <label class=banner-label ><i class=material-icons >search</i></label>
+        <input class=input-banner type="text" placeholder="Buscar producto" ng-model="search" ng-keyup="searchProducto()">
     </div>
     <table id=table>
       <thead>
         <tr>
             <th>NOMBRE</th>
-            <th>APELLIDO</th>
-            <th>EMAIL</th>
-            <th>TELEFONO</th>
-            <th>FECHA ALTA</th>
-            <th>ULTIMA VISITA</th>
+            <th>DISPONIBLES</th>
+            <th>MINIMO</th>
         </tr>
       </thead>
       <tbody>
-        <tr id={{cliente.id}} data-id={{cliente.id}} class=data-row ng-repeat="cliente in clientes" data-ng-click="detailClient($event)">
-          <td>{{cliente.nombre}}</td>
-          <td>{{cliente.apellido}}</td>
-          <td>{{cliente.email}}</td>
-          <td>{{cliente.telefono}}</td>
-          <td>{{cliente.fechaIngreso}}</td>
-          <td>{{cliente.ultimaVisita}}</td>
+        <tr id={{producto.id}} data-id={{producto.id}} class=data-row ng-repeat="producto in producto" data-ng-click="detailProducto($event)">
+          <td>{{producto.nombre}}</td>
+          <td>{{cliente.cantidad}}</td>
+          <td>{{cliente.cantidadMin}}</td>
         </tr>
       </tbody>
     </table>
   </div>
   <div id=modal class=modal>
     <div class=modal-content>
-      <form ng-submit="sendClient()">
-        <div class=form-field><label>NOMBRE:</label><input id=focus tipe="text"  ng-model="ngCliente.nombre"></input></div>
-        <div class=form-field><label>APELLIDO:</label><input tipe="text" ng-model="ngCliente.apellido"></input></div>
-        <div class=form-field><label>SEXO:</label>
-          <input type="radio" name="gender" ng-model="ngCliente.sexo" value="hombre"> Hombre</input>
-          <input type="radio" name="gender" ng-model="ngCliente.sexo" value="mujer"> Mujer</input>
-          <input type="radio" name="gender" ng-model="ngCliente.sexo" value="otro"> Otro</input>
-        </div>
-        <div class=form-field><label>TELEFONO:</label><input tipe="text"   ng-model="ngCliente.telefono" ></input></div>
-        <div class=form-field><label>EMAIL:</label><input tipe="email"     ng-model="ngCliente.email" required></input></div>
-        <div class=form-field><label>CIUDAD:</label><input tipe="text"     ng-model="ngCliente.dirCiudad"></input></div>
-        <div class=form-field><label>CALLE:</label><input tipe="text"      ng-model="ngCliente.dirCalle"></input></div>
-        <div class=form-field><label>NUMERO:</label><input tipe="number"   ng-model="ngCliente.dirNumeroCalle"></input></div>
-        <div class=form-field><label>PISO:</label><input tipe="number"     ng-model="ngCliente.dirPiso"></input></div>
-        <div class=form-field><label>DPTO:</label><input tipe="text"       ng-model="ngCliente.dirDpto"></input></div>
+      <form ng-submit="sendProducto()">
+        <div class=form-field><label>NOMBRE:</label><input id=focus tipe="text"   ng-model="ngProducto.nombre"></input></div>
+        <div class=form-field><label>CANTIDAD:</label><input tipe="number"        ng-model="ngProducto.cantidad"></input></div>
+        <div class=form-field><label>CANTIDAD MINIMA:</label><input tipe="number" ng-model="ngProducto.cantidadMin"></input></div>
         <div class=buttons>
           <button class="button accept" type="submit">ACEPTAR</button>
-          <button class="button cancel" type="button" ng-click="discardClient()">CANCELAR</button>
+          <button class="button cancel" type="button" ng-click="discardProducto()">CANCELAR</button>
         </div>
       </form>
     </div>
