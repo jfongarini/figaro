@@ -4,12 +4,12 @@
   <title>CAJA</title>
   <#include "/common/head.html">    
 </head>
-<body>
+<body ng-app=figaro ng-controller=movimientosController ng-cloak>
 <#include "/common/menu.html">
 <div id=content class=content>
   <div class=banner>
-      <label class=banner-label ><i class="material-icons">add_circle_outline</i></label>
-  	  <label class=banner-label ><i class=material-icons >more_vert</i></label>
+      <label class="banner-label add"><i class="material-icons" ng-click="newMovimiento()">add_circle_outline</i></label>
+      <label class=banner-label ><i class=material-icons >more_vert</i></label>
       <label class=banner-label ><i class=material-icons >account_balance</i> DIA </label>
       <label class=banner-label ><i class=material-icons >more_vert</i></label>
       <label class=banner-label ><i class=material-icons >account_balance</i> SEMANA </label>
@@ -27,36 +27,45 @@
       </tr>
     </thead>
     <tbody>
-      <tr> 
-        <td>17/08/17</td>
-        <td>PROVEEDORES</td>
-        <td><font color="red">$400,00</font></td>
-        <td>CREMA PARA EL PELO</td>            
-      </tr>
-      <tr> 
-        <td>17/08/17</td>
-        <td>TURNOS</td>
-        <td><font color="green">$200,00</font></td>
-        <td>CORTE</td>            
-      </tr>
-      <tr> 
-        <td>18/08/17</td>
-        <td>VENTA DE PRODUCTO</td>
-        <td><font color="green">$400,00</font></td>
-        <td>CERA PARA CABELLO</td>            
-      </tr>
-      <tr> 
-        <td>19/08/17</td>
-        <td>SERVICIOS</td>
-        <td><font color="red">$167,00</font></td>
-        <td>LUZ</td>            
-      </tr>
+      <tr id={{movimiento.id}} data-it={{movimiento.id}} class=data-row ng-repeat="movimiento in movimientos" data-ng-click="detailMovimiento($event)"> 
+        <td>{{movimento.fecha}}</td>
+        <td>{{movimento.categoria}}</td>
+        <td><font>{{movimento.precio}}</font></td>
+        <td>{{movimento.detalle}}</td>            
+      </tr>      
     </tbody>
   </table>
   <div class=banner>
       <label class=banner-label ><i class=material-icons >account_balance_wallet</i> CAJA: $3465,00</label>
   </div>
 </div>
+<div id=modal class=modal>
+    <div class=modal-content>
+      <form ng-submit="sendMovimiento()">    
+       	<div class=form-field><label>CATEGOR&Iacute;A:</label>     
+          <select ng-model="ngMovimiento.catogoria">
+            <option value="{{catogoria.nombre}}" ng-repeat="catogoria in categorias">{{categoria.nombre}}</option>
+          </select>
+        </div> 
+          
+        <div class=form-field><label>MONTO:</label> <input type="number" ng-model="ngMovimiento.precio"></input></div>
+        
+        <div class=form-field><label>FECHA:</label>    <input type="date"          ng-model="ngMovimiento.fecha"></input></div>
+        <div class=form-field><label>TIPO:</label>
+          <input type="radio" name=isGasto ng-model="ngMovimiento.isGasto" value="true" required> Gasto
+          <input type="radio" name=isGasto ng-model="ngMovimiento.isGasto" value="false" required> Ingreso
+        </div>
+        <div class=form-field><label>DETALLE:</label>      <input type="text"          ng-model="ngMovimiento.detalle"></input></div>
+ 
+ 		<div class=buttons>
+          <button class="button accept" type="submit">ACEPTAR</button>
+          <button class="button cancel" type="button" ng-click="discardMovimiento()">CANCELAR</button>
+        </div>
+  
+      </form>
+    </div>
+</div>
 <#include "/common/javascript.html">
+<script src="js/movimientosController.js" ></script>
 </body>
 </html>

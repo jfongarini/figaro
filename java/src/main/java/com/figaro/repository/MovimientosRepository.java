@@ -15,8 +15,8 @@ public class MovimientosRepository extends AbstractRepository{
 		getCurrentSession().update(movimiento);
 	}
 	
-	public Movimiento getMovimiento(Long idMovimiento){
-		return (Movimiento) getCurrentSession().get(Movimiento.class, idMovimiento);
+	public Movimiento getMovimiento(int id){
+		return (Movimiento) getCurrentSession().get(Movimiento.class, id);
 	}
 
 	@SuppressWarnings("unchecked")

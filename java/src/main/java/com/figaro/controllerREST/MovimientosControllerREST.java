@@ -28,8 +28,8 @@ public class MovimientosControllerREST {
         return service.getAllMovimiento();
     }
 	
-	@RequestMapping(value = "movimientos/{movimientosID}",method=RequestMethod.GET,produces="application/json")
-    public Movimiento getMovimiento( @PathVariable Long movimientoID) {
+	@RequestMapping(value = "movimientos/{movimientoID}",method=RequestMethod.GET,produces="application/json")
+    public Movimiento getMovimiento( @PathVariable int movimientoID) {
         return service.getMovimiento(movimientoID);
     }
 	

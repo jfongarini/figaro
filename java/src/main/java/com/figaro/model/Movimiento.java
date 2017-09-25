@@ -6,7 +6,7 @@ import java.util.Date;
 
 public abstract class Movimiento {
 
-	private Long id;
+	private int id;
 	private Salon salon;
 	private Categoria categoria;
 	private BigDecimal precio;
@@ -14,10 +14,10 @@ public abstract class Movimiento {
 	private String detalle;
 	private Boolean isGasto;	
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public Salon getSalon() {
@@ -56,8 +56,7 @@ public abstract class Movimiento {
 	public void setIsGasto(Boolean isGasto) {
 		this.isGasto = isGasto;
 	}	
-	public void update(Movimiento movimiento) {
-		this.setId(getId());
+	public void update(Movimiento movimiento) {		
 		this.setCategoria(getCategoria());
 		this.setDetalle(getDetalle());
 		this.setFecha(getFecha());
