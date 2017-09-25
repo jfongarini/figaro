@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 
-public abstract class Movimiento {
+public class Movimiento {
 
 	private int id;
 	private Salon salon;

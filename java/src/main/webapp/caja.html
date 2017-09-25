@@ -43,11 +43,10 @@
     <div class=modal-content>
       <form ng-submit="sendMovimiento()">    
        	<div class=form-field><label>CATEGOR&Iacute;A:</label>     
-          <select ng-model="ngMovimiento.catogoria">
-            <option value="{{catogoria.nombre}}" ng-repeat="catogoria in categorias">{{categoria.nombre}}</option>
+          <select ng-model="ngMovimiento.categoria">
+            <option value="{{categoria.nombre}}" ng-repeat="categoria in categorias">{{categoria.nombre}}</option>
           </select>
         </div> 
-          
         <div class=form-field><label>MONTO:</label> <input type="number" ng-model="ngMovimiento.precio"></input></div>
         
         <div class=form-field><label>FECHA:</label>    <input type="date"          ng-model="ngMovimiento.fecha"></input></div>
