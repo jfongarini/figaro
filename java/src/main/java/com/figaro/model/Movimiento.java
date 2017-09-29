@@ -7,8 +7,7 @@ import java.util.Date;
 public class Movimiento {
 
 	private int id;
-	private Salon salon;
-	private Categoria categoria;
+	private String categoria;
 	private BigDecimal precio;
 	private Date fecha;
 	private String detalle;
@@ -19,18 +18,6 @@ public class Movimiento {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public Salon getSalon() {
-		return salon;
-	}
-	public void setSalon(Salon salon) {
-		this.salon = salon;
-	}
-	public Categoria getCategoria() {
-		return categoria;
-	}
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
 	}
 	public BigDecimal getPrecio() {
 		return precio;
@@ -57,12 +44,17 @@ public class Movimiento {
 		this.isGasto = isGasto;
 	}	
 	public void update(Movimiento movimiento) {		
-		this.setCategoria(getCategoria());
-		this.setDetalle(getDetalle());
-		this.setFecha(getFecha());
-		this.setIsGasto(getIsGasto());
-		this.setPrecio(getPrecio());
-		this.setSalon(getSalon());		
+		this.setCategoria(movimiento.getCategoria());
+		this.setDetalle(movimiento.getDetalle());
+		this.setFecha(movimiento.getFecha());
+		this.setIsGasto(movimiento.getIsGasto());
+		this.setPrecio(movimiento.getPrecio());
+	}
+	public String getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 	
 }

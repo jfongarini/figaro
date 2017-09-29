@@ -27,11 +27,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr id={{movimiento.id}} data-it={{movimiento.id}} class=data-row ng-repeat="movimiento in movimientos" data-ng-click="detailMovimiento($event)"> 
-        <td>{{movimento.fecha}}</td>
-        <td>{{movimento.categoria}}</td>
-        <td><font>{{movimento.precio}}</font></td>
-        <td>{{movimento.detalle}}</td>            
+      <tr id={{movimiento.id}} data-id={{movimiento.id}} class=data-row ng-repeat="movimiento in movimientos" data-ng-click="detailMovimiento($event)"> 
+        <td>{{movimiento.fecha}}</td>
+        <td>{{movimiento.categoria}}</td>
+        <td><font>{{movimiento.precio}}</font></td>
+        <td>{{movimiento.detalle}}</td>            
       </tr>      
     </tbody>
   </table>

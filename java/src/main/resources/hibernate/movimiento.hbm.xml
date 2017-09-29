@@ -8,10 +8,9 @@
 		</id>
 	 	<property name="precio"  		column="PRECIO"   	type="big_decimal"/>
 	 	<property name="fecha"		 	column="FECHA"    	type="date"/>
-	 	<property name="detalle" 		column="DETALLE"  	type="string"/>	 	
-	 	<property name="isGasto" 		column="ISGASTO"  	type="boolean"/>
-	         
-        <many-to-one name="categoria" class="com.figaro.model.Categoria" column="ID_CATEGORIA" cascade="all" not-null="true" />
+	 	<property name="detalle" 		column="DETALLE"  	type="string"/>
+	 	<property name="categoria" 		column="CATEGORIA"  	type="string"/>	 	
+	 	<property name="isGasto" 		column="ISGASTO"  	type="Boolean"/>
      	
 	</class>
 </hibernate-mapping>
