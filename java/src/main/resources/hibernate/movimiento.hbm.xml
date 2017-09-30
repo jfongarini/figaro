@@ -10,7 +10,7 @@
 	 	<property name="fecha"		 	column="FECHA"    	type="date"/>
 	 	<property name="detalle" 		column="DETALLE"  	type="string"/>
 	 	<property name="categoria" 		column="CATEGORIA"  	type="string"/>	 	
-	 	<property name="isGasto" 		column="ISGASTO"  	type="Boolean"/>
+	 	<property name="isGasto" 		column="ISGASTO"  	type="boolean"/>
      	
 	</class>
 </hibernate-mapping>

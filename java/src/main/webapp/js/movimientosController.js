@@ -31,7 +31,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	    $scope.sendMovimiento = function() {
 	        if($scope.isNuevoMovimiento === true){
 	            $http.post('/rest/movimientos/alta', $scope.ngMovimiento).then(function (response) {
-	                $scope.productos.push(response.data);
+	                $scope.movimientos.push(response.data);
 	            });
 	            $scope.ngMovimiento={};
 	        }else{
