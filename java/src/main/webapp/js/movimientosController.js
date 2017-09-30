@@ -13,6 +13,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	        $scope.isNuevoMovimiento = true
 	    	openModal();
 	        $scope.ngMovimiento={};
+	        $scope.ngMovimiento.fecha = new Date(getToday()); 
 	        $scope.message='';
 	    };
 
@@ -23,6 +24,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	        $scope.movimientoID = event.currentTarget.getAttribute("data-id");
 	        $http.get('/rest/movimientos/'+$scope.movimientoID).then(function (response) {
 	            $scope.ngMovimiento = response.data;
+	            $scope.ngMovimiento.fecha = new Date($scope.ngMovimiento.fecha); 
 	            openModal();
 		    });
 	    };
