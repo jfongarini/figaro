@@ -15,7 +15,9 @@
       <label class=banner-label ><i class=material-icons >account_balance</i> SEMANA </label>
       <label class=banner-label ><i class=material-icons >more_vert</i></label>
       <label class=banner-label ><i class=material-icons >account_balance</i> MES </label>
+      <label class=banner-label ><i class=material-icons >more_vert</i></label>
       <label class=banner-label > SEMANA DEL 17/08/17 AL 24/08/17</label>
+      
   </div>
   <table id=table>
     <thead>
@@ -27,16 +29,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr id={{movimiento.id}} data-id={{movimiento.id}} class=data-row ng-repeat="movimiento in movimientos" data-ng-click="detailMovimiento($event)"> 
+      <tr id={{movimiento.id}} data-id={{movimiento.id}} class=data-row ng-repeat="movimiento in movimientos | orderBy : sortFecha : false" data-ng-click="detailMovimiento($event)"> 
         <td>{{movimiento.fecha | date }}</td>
         <td>{{movimiento.categoria}}</td>
-        <td><font>{{movimiento.precio | currency }}</font></td>
+	    <td> <font ng-class='{green : !movimiento.isGasto, red: movimiento.isGasto}'>{{movimiento.precio | currency }}</font></td>
         <td>{{movimiento.detalle}}</td>            
       </tr>      
     </tbody>
   </table>
   <div class=banner>
-      <label class=banner-label ><i class=material-icons >account_balance_wallet</i> CAJA: $3465,00</label>
+      <label class=banner-label ><i class=material-icons >account_balance_wallet</i> Total: <font ng-class='{green : calculaTotal() >= 0, red: calculaTotal() < 0}'>{{ calculaTotal() | currency }}</font></label>
   </div>
 </div>
 <div id=modal class=modal>
@@ -49,7 +51,7 @@
         </div> 
         <div class=form-field><label>MONTO:</label> <input type="number" ng-model="ngMovimiento.precio"></input></div>
         
-        <div class=form-field><label>FECHA:</label>    <input type="date" ng-model="ngMovimiento.fecha"></input></div>
+        <div class=form-field><label>FECHA:</label> <input type="date" ng-model="ngMovimiento.fecha" ng-model-options="{timezone:'UTC'}"></input></div>
         <div class=form-field><label>TIPO:</label>
           <input type="radio" name=isGasto ng-model="ngMovimiento.isGasto" ng-value="true" value="true" required> Gasto
           <input type="radio" name=isGasto ng-model="ngMovimiento.isGasto" ng-value="false" value="false" required> Ingreso
