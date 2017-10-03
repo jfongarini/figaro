@@ -64,6 +64,33 @@ app.controller('movimientosController', function ($scope, $http) {
 	            $scope.discardMovimiento();
 	        }
 	    });
+	    
+	    //CALCULAR EL TOTAL DE CAJA
+	    $scope.calculaTotal = function(){
+	        var total = 0;
+	        angular.forEach($scope.movimientos, function(ngMovimiento){	          
+	          if (ngMovimiento.isGasto == true){
+	        	  total = total - ngMovimiento.precio
+	          } else {
+	        	  total = total + ngMovimiento.precio
+	          }	          
+	        })
+	        return total;
+	    }
+	    
+	    //ORDENAR POR FECHA	    
+	    $scope.sortFecha = function(ngMovimiento) {
+	        var date = new Date(ngMovimiento.fecha);
+	        return date;
+	    };
+	    
+	    //FILTRO
+	    $scope.searchMovimiento = function() {        
+	        $http.get('/rest/movimientos/buscar/',{params: { search: $scope.search }})
+	        .then(function successCallback(response) {
+	            $scope.movimientos = response.data; 
+	        })
+	    };
 
 	    //INIT	   
 	    $scope.ngMovimiento = {};

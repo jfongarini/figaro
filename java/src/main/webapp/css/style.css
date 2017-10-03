@@ -291,3 +291,11 @@ form select{
 .trabajo-precio{
     text-align: center;
 }
+
+.red {
+    color: red; 
+}
+
+.green {
+    color: green;
+}

@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.figaro.model.Cliente;
 import com.figaro.model.Movimiento;
 import com.figaro.service.MovimientosService;
 
@@ -43,6 +45,11 @@ public class MovimientosControllerREST {
 		Movimiento updated = service.updateMovimiento(movimiento);
 		return new ResponseEntity<Movimiento>(updated, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "movimientos/buscar",method=RequestMethod.GET,produces="application/json")
+    public List<Movimiento> getAllMovimiento(@RequestParam String search) {
+        return service.buscar(search);
+    }
 	
 	public MovimientosService getService() {
 		return service;

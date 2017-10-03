@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.figaro.model.Cliente;
 import com.figaro.model.Movimiento;
 import com.figaro.repository.MovimientosRepository;
 
@@ -43,6 +44,10 @@ public class MovimientosService {
 	public List<Movimiento> getAllMovimiento() {
 		LOGGER.debug("Obteniendo todos los movimientos");
 		return repository.getAll();
+	}
+	
+	public List<Movimiento> buscar(String search) {
+		return repository.buscar(search);
 	}
 	
 }
