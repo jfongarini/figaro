@@ -23,13 +23,13 @@
           </tr>
         </thead>
         <tbody>
-        <tr id={{turno.id}} data-id={{turno.id}} class=data-row ng-repeat="turno in turnos  track by turno.id" data-ng-click="detailTurno($event)" >
-          <td>{{turno.desde.split(' ')[1]}} - {{turno.hasta.split(' ')[1]}}</td>
-          <td>{{turno.cliente.nombre}} {{turno.cliente.apellido}}</td>
-          <td><span ng-repeat="trabajo in turno.trabajos"> {{trabajo.descripcion}} </span></td>
-          <td>{{getTotalTurno(turno.trabajos) | currency}}</td>
-          <td>{{turno.peluquero}}</td>
-          <td><input type="checkbox"></td>
+        <tr  class=data-row ng-repeat="turno in turnos  track by turno.id"  >
+          <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{turno.desde.split(' ')[1]}} - {{turno.hasta.split(' ')[1]}}</td>
+          <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{turno.cliente.nombre}} {{turno.cliente.apellido}}</td>
+          <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)"><span ng-repeat="trabajo in turno.trabajos"> {{trabajo.descripcion}} </span></td>
+          <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{getTotalTurno(turno.trabajos) | currency}}</td>
+          <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{turno.peluquero}}</td>
+          <td><input ng-checked="turno.cobrado" ng-click="setCobrado(turno.id)" type="checkbox"></td>
         </tr>
         </tbody>
       </table>
@@ -82,9 +82,9 @@
         <div class="form-field remove" ng-click="removeTrabajo(trabajo)"  ng-repeat="trabajo in trabajosSeleccionados" >
           <i class="material-icons "  ng-value=trabajo >clear</i>{{trabajo.descripcion}} {{trabajo.precio | currency}}
         </div>
-        <span>TOTAL: {{totalTrabajosSeleccionados | currency}}</span>
+        <span>TOTAL: {{totalTrabajosSeleccionados | currency}} {{ngTurno.cliente.nombre}} {{ngTurno.cliente.apellido}}</span>
 
-        <div class="form-field">{{ngTurno.cliente.nombre}} {{ngTurno.cliente.apellido}}</div>
+        <div class="form-field"></div>
 
         <div class=buttons>
           <button class="button accept" type="submit">ACEPTAR</button>

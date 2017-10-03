@@ -41,6 +41,11 @@ public class TurnosControllerREST {
 		return new ResponseEntity<Turno>(updated, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "turnos/{turnoId}/cobrado",method=RequestMethod.PATCH)
+    public ResponseEntity<Turno> setCobrado( @PathVariable int turnoId) {
+		return new ResponseEntity<Turno>(service.setCobrado(turnoId), HttpStatus.OK);
+	}
+	
 	
 	@RequestMapping(value = "turnos",method=RequestMethod.GET)
     public ResponseEntity<List<Turno>> getTurnosDelDia(@RequestParam String fecha) {

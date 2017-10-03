@@ -143,6 +143,15 @@ app.controller('turnosController', function ($scope, $http) {
 
     }
 
+    $scope.setCobrado = function (turnoId) {
+       $http.patch('rest/turnos/'+turnoId+'/cobrado')
+        .then(function successCallback(response) {
+            
+        });
+
+    }
+
+
     //BUSCAR CLIENTE
     $scope.searchCliente = function() {
         if ($scope.queryCliente == "") 

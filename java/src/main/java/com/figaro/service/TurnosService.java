@@ -30,6 +30,14 @@ public class TurnosService {
 		return repository.getTurno(turnoId);
 	}
 	
+	public Turno setCobrado(int turnoId) {
+		Turno turno = getTurno(turnoId);
+		turno.setCobrado(!turno.getCobrado());
+		repository.updateTurno(turno);
+		return turno;
+	}
+
+	
 	public Turno updateTurno(Turno turno) {
 		validateTurno(turno);
 		Turno old = getTurno(turno.getId());
@@ -71,6 +79,7 @@ public class TurnosService {
 		this.repository = repository;
 	}
 
+	
 	
 	
 
