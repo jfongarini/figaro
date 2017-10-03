@@ -56,7 +56,8 @@ public class TurnosService {
 		List<Turno> turnosFranjaHoraria = new ArrayList<Turno>();
 		for(Turno t : turnosDelDia) 
 			if((t.getDesde().after(turno.getDesde()) && t.getDesde().before(turno.getHasta())) || 
-			   (t.getHasta().after(turno.getDesde()) && t.getHasta().before(turno.getHasta()))) 
+			   (t.getHasta().after(turno.getDesde()) && t.getHasta().before(turno.getHasta())) ||
+			   (t.getDesde().compareTo(turno.getDesde()) == 0) && (t.getHasta().compareTo(turno.getHasta()) == 0)) 
 				turnosFranjaHoraria.add(t);
 		turnosFranjaHoraria.remove(turno);
 		Optional<Turno> turnoDePeluquero = turnosFranjaHoraria.stream().filter(t -> t.getPeluquero().equals(turno.getPeluquero())).findFirst();
