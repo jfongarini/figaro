@@ -30,7 +30,6 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.turnoId = event.currentTarget.getAttribute("data-id");
         $http.get('/rest/turnos/'+$scope.turnoId).then(function (response) {
             $scope.ngTurno = response.data;
-            $scope.clientes = [$scope.ngTurno.cliente];
             $scope.startHour = $scope.ngTurno.desde.split(' ')[1].split(':')[0];
             $scope.startMinutes = $scope.ngTurno.desde.split(' ')[1].split(':')[1];
             $scope.endHour = $scope.ngTurno.hasta.split(' ')[1].split(':')[0];
@@ -138,11 +137,13 @@ app.controller('turnosController', function ($scope, $http) {
         }
     };
 
+    // SET CLIENTE
     $scope.setCliente = function (cliente) {
         $scope.ngTurno.cliente = cliente;
 
     }
 
+    // TOGGLE COBRADO
     $scope.setCobrado = function (turnoId) {
        $http.patch('rest/turnos/'+turnoId+'/cobrado')
         .then(function successCallback(response) {

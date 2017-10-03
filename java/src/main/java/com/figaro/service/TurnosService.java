@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import org.apache.log4j.Logger;
 
+import com.figaro.exception.HorarioInvalidoException;
 import com.figaro.exception.TurnoOcupadoException;
 import com.figaro.model.Turno;
 import com.figaro.repository.TurnosRepository;
@@ -50,7 +51,7 @@ public class TurnosService {
 
 	private void validateTurno(Turno turno) {
 		if ( turno.getDesde().compareTo(turno.getHasta()) >= 0 )
-			throw new RuntimeException();
+			throw new HorarioInvalidoException();
 		List<Turno> turnosDelDia = searchTurno(turno.getDesde());
 		List<Turno> turnosFranjaHoraria = new ArrayList<Turno>();
 		for(Turno t : turnosDelDia) 

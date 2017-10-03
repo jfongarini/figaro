@@ -22,7 +22,7 @@ public class ClientesService {
 		LOGGER.info("Guardando el cliente con ID: " + cliente.getId()+" con:"+ cliente.toString());
 		int newID = repository.saveCliente(cliente);
 		cliente.setId(newID);
-		return cliente ;  
+		return cliente;
 	}
 	
 	public Cliente updateCliente(Cliente cliente) {

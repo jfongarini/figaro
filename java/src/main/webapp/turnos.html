@@ -82,9 +82,9 @@
         <div class="form-field remove" ng-click="removeTrabajo(trabajo)"  ng-repeat="trabajo in trabajosSeleccionados" >
           <i class="material-icons "  ng-value=trabajo >clear</i>{{trabajo.descripcion}} {{trabajo.precio | currency}}
         </div>
-        <span>TOTAL: {{totalTrabajosSeleccionados | currency}} {{ngTurno.cliente.nombre}} {{ngTurno.cliente.apellido}}</span>
-
-        <div class="form-field"></div>
+        
+        <div class="form-field">TOTAL: {{totalTrabajosSeleccionados | currency}}</div>
+        <div class="form-field">CLIENTE: {{ngTurno.cliente.nombre}} {{ngTurno.cliente.apellido}}</div>
 
         <div class=buttons>
           <button class="button accept" type="submit">ACEPTAR</button>

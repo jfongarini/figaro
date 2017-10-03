@@ -2,7 +2,8 @@ body{
     background-color:  #F3F4F6;
     margin-left: 0px;
     margin-top: 0px;
-    font-family: 'Roboto', sans-serif
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px
 }
 .logo{
     margin-top: 20px;
@@ -18,12 +19,12 @@ body{
     margin-top: 12px;
     margin-right: 5px;
     margin-left: 20px;    
-    font-size: 1.3em    
+    font-size: 13px;
 }
 
 .input-banner {
     font-family: 'Roboto', sans-serif;
-    font-size: 1.3em;
+    font-size: 13px;
     border: 0;
     margin-top: 10px
 }
@@ -55,7 +56,7 @@ body{
 }
 
 .banner{
-    height: 55px;
+    height: 45px;
     margin-bottom: 20px
 }
 
@@ -111,6 +112,7 @@ li a:hover {
 
 .material-icons{
     margin-right: 8px;
+    font-size: 18px;
     vertical-align: sub
 }
 
@@ -154,6 +156,7 @@ li a:hover {
 }
     
 .form-field{
+    font-size: 13px;
     margin-bottom: 15px
 }
 
@@ -266,7 +269,7 @@ form select{
 }
 
 .card input {
-    font-size: 14px;
+    font-size: 13px;
     margin-bottom: 20px;
 }
 
