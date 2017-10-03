@@ -23,6 +23,10 @@ public class TurnosService {
 		turno.setId(newID);
 		return turno ;  
 	}
+	
+	public Turno getTurno(int turnoId) {
+		return repository.getTurno(turnoId);
+	}
 
 	private void validateTurno(Turno turno) {
 		if ( turno.getDesde().compareTo(turno.getHasta()) >= 0 )
@@ -53,6 +57,8 @@ public class TurnosService {
 	public void setRepository(TurnosRepository repository) {
 		this.repository = repository;
 	}
+
+	
 
 	
 	

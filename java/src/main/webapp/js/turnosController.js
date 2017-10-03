@@ -1,8 +1,8 @@
 var app = angular.module('figaro', []);
 app.controller('turnosController', function ($scope, $http) {
     
-    $scope.horarios = [{"hora":"08"},{"hora":"09"},{"hora":"10"},{"hora":"11"},{"hora": "12"},{"hora": "13"},{"hora": "14"},{"hora": "15"},{"hora": "16"},{"hora": "17"},{"hora": "18"},{"hora": "19"},{"hora": "20"}];
-    $scope.minutos  = [{"minuto":"00"},{"minuto":"15"},{"minuto":"30"},{"minuto": "45"}];
+    $scope.horarios = ["08","09","10","11","12","13","14","15","16","17","18","19","20"];
+    $scope.minutos  = ["00","15","30","45"];
 
 
     //OBTENER LISTA DE TURNOS
@@ -22,10 +22,33 @@ app.controller('turnosController', function ($scope, $http) {
     };
 
 
+    //CLICK FILA TURNO
+    $scope.detailTurno = function(event){
+        $scope.discardTurno
+        $scope.isNuevoTurno = false;
+        $scope.getAllPeluqueros();
+
+        $scope.turnoId = event.currentTarget.getAttribute("data-id");
+        $http.get('/rest/turnos/'+$scope.turnoId).then(function (response) {
+            $scope.ngTurno = response.data;
+            $scope.clientes = [$scope.ngTurno.cliente];
+            $scope.startHour = $scope.ngTurno.desde.split(' ')[1].split(':')[0];
+            $scope.startMinutes = $scope.ngTurno.desde.split(' ')[1].split(':')[1];
+            $scope.endHour = $scope.ngTurno.hasta.split(' ')[1].split(':')[0];
+            $scope.endMinutes = $scope.ngTurno.hasta.split(' ')[1].split(':')[1];
+            $scope.peluquero = $scope.ngTurno.peluquero;
+            $scope.trabajosSeleccionados = $scope.ngTurno.trabajos;
+            $scope.totalTrabajosSeleccionados=$scope.getTotalTurno($scope.trabajosSeleccionados);
+            $scope.update=true;
+            openModal();
+        });
+    };
+
+
     //CLICK ACEPTAR FORMULARIO
     $scope.sendTurno = function() {
-        $scope.ngTurno.desde = getStringDate($scope.ngDateTurno)+" "+$scope.startHour.hora + ":" + $scope.startMinutes.minuto;
-        $scope.ngTurno.hasta = getStringDate($scope.ngDateTurno)+" "+$scope.endHour.hora + ":" + $scope.endMinutes.minuto;
+        $scope.ngTurno.desde = getStringDate($scope.ngDateTurno)+" "+$scope.startHour + ":" + $scope.startMinutes;
+        $scope.ngTurno.hasta = getStringDate($scope.ngDateTurno)+" "+$scope.endHour + ":" + $scope.endMinutes;
         $scope.ngTurno.peluquero = $scope.peluquero.nombre;
         $scope.ngTurno.trabajos = $scope.trabajosSeleccionados;
         if($scope.isNuevoTurno === true && $scope.validateTurno() === true){
@@ -145,7 +168,8 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.totalTrabajosSeleccionados=0;
         $scope.queryCliente ='';
         $scope.queryTrabajo ='';
-        $scope.message='';    
+        $scope.message='';
+        $scope.update=false;
         closeModal();
     };
 

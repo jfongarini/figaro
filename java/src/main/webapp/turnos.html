@@ -23,7 +23,7 @@
           </tr>
         </thead>
         <tbody>
-        <tr id={{turno.id}} data-id={{turno.id}} class=data-row ng-repeat="turno in turnos  track by turno.id" >
+        <tr id={{turno.id}} data-id={{turno.id}} class=data-row ng-repeat="turno in turnos  track by turno.id" data-ng-click="detailTurno($event)" >
           <td>{{turno.desde.split(' ')[1]}} - {{turno.hasta.split(' ')[1]}}</td>
           <td>{{turno.cliente.nombre}} {{turno.cliente.apellido}}</td>
           <td><span ng-repeat="trabajo in turno.trabajos"> {{trabajo.descripcion}} </span></td>
@@ -44,29 +44,29 @@
           <input id=focus tipe="text" placeholder="Buscar..." ng-model="queryCliente" ng-keyup="searchCliente()">
         </div>
         <div class=form-field ng-repeat="cliente in clientes" >
-          <input type="radio" name="cliente" ng-model="ngTurno.cliente"  ng-value={{cliente}} required> {{cliente.nombre}} {{cliente.apellido}}
+          <input type="radio" name="cliente" ng-model="ngTurno.cliente" ng-checked="update" required> {{cliente.nombre}} {{cliente.apellido}}
         </div>
         <div class=form-field><label>FECHA: </label><input type="date" ng-model="ngDateTurno" required></input></div>
         <div class=form-field><label>DESDE:</label>
-          <select  class=time-input ng-model="startHour" ng-options="item.hora for item in horarios" required>
+          <select  class=time-input ng-model="startHour" ng-options="item for item in horarios" required>
             <option value=""></option>
           </select>
           :
-          <select class=time-input ng-model="startMinutes"  ng-options="item.minuto for item in minutos" required>
+          <select class=time-input ng-model="startMinutes"  ng-options="item for item in minutos" required>
             <option value=""></option>
           </select>
         </div>
         <div class=form-field><label>HASTA:</label>
-          <select class=time-input ng-model="endHour" ng-options="item.hora for item in horarios" required>
+          <select class=time-input ng-model="endHour" ng-options="item for item in horarios" required>
             <option value=""></option>
           </select>
           :
-          <select class=time-input ng-model="endMinutes"  ng-options="item.minuto for item in minutos" required>
+          <select class=time-input ng-model="endMinutes"  ng-options="item for item in minutos" required>
             <option value=""></option>
           </select>
         </div> 
         <div class=form-field><label>PELUQUERO:</label>
-          <select name=peluquero  ng-model="peluquero" ng-options="peluquero.nombre for peluquero in peluqueros" required>
+          <select name=peluquero  ng-model="peluquero" ng-options="peluquero.nombre as peluquero.nombre for peluquero in peluqueros" required>
             <option value=""></option>
           </select>
         </div>
