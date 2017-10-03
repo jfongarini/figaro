@@ -27,7 +27,6 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.discardTurno
         $scope.isNuevoTurno = false;
         $scope.getAllPeluqueros();
-
         $scope.turnoId = event.currentTarget.getAttribute("data-id");
         $http.get('/rest/turnos/'+$scope.turnoId).then(function (response) {
             $scope.ngTurno = response.data;
@@ -49,17 +48,29 @@ app.controller('turnosController', function ($scope, $http) {
     $scope.sendTurno = function() {
         $scope.ngTurno.desde = getStringDate($scope.ngDateTurno)+" "+$scope.startHour + ":" + $scope.startMinutes;
         $scope.ngTurno.hasta = getStringDate($scope.ngDateTurno)+" "+$scope.endHour + ":" + $scope.endMinutes;
-        $scope.ngTurno.peluquero = $scope.peluquero.nombre;
+        $scope.ngTurno.peluquero = $scope.peluquero;
         $scope.ngTurno.trabajos = $scope.trabajosSeleccionados;
-        if($scope.isNuevoTurno === true && $scope.validateTurno() === true){
-            $http.post('/rest/turnos/alta', $scope.ngTurno)
-            .then(function successCallback(response) {
-                $scope.discardTurno();
-                $scope.getTurnos();
-                closeModal();
-              }, function errorCallback(response) {
-                $scope.message=response.data.message;
-            });
+        if($scope.validateTurno() === true){
+            if($scope.isNuevoTurno === true){
+                $http.post('/rest/turnos/alta', $scope.ngTurno)
+                .then(function successCallback(response) {
+                    $scope.discardTurno();
+                    $scope.getTurnos();
+                    closeModal();
+                  }, function errorCallback(response) {
+                    $scope.message=response.data.message;
+                });
+            }else{
+                $http.put('/rest/turnos/actualizar/'+ $scope.turnoId, $scope.ngTurno).then(
+                    function successCallback(response) {
+                        $scope.getTurnos();
+                        $scope.discardTurno();
+                        closeModal();
+                  }, function errorCallback(response) {
+                    $scope.message=response.data.message;
+                });
+            
+            }
         }
     };
 
@@ -126,6 +137,11 @@ app.controller('turnosController', function ($scope, $http) {
             $scope.trabajosSeleccionados.splice(idx, 1);
         }
     };
+
+    $scope.setCliente = function (cliente) {
+        $scope.ngTurno.cliente = cliente;
+
+    }
 
     //BUSCAR CLIENTE
     $scope.searchCliente = function() {

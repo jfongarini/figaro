@@ -43,8 +43,8 @@
         <div class=form-field><label>CLIENTE:</label>
           <input id=focus tipe="text" placeholder="Buscar..." ng-model="queryCliente" ng-keyup="searchCliente()">
         </div>
-        <div class=form-field ng-repeat="cliente in clientes" >
-          <input type="radio" name="cliente" ng-model="ngTurno.cliente" ng-checked="update" required> {{cliente.nombre}} {{cliente.apellido}}
+        <div class="form-field add" ng-click="setCliente(cliente)" ng-repeat="cliente in clientes" >
+          <i class="material-icons add"  ng-value=cliente >add</i>{{cliente.nombre}} {{cliente.apellido}}
         </div>
         <div class=form-field><label>FECHA: </label><input type="date" ng-model="ngDateTurno" required></input></div>
         <div class=form-field><label>DESDE:</label>
@@ -82,8 +82,10 @@
         <div class="form-field remove" ng-click="removeTrabajo(trabajo)"  ng-repeat="trabajo in trabajosSeleccionados" >
           <i class="material-icons "  ng-value=trabajo >clear</i>{{trabajo.descripcion}} {{trabajo.precio | currency}}
         </div>
-
         <span>TOTAL: {{totalTrabajosSeleccionados | currency}}</span>
+
+        <div class="form-field">{{ngTurno.cliente.nombre}} {{ngTurno.cliente.apellido}}</div>
+
         <div class=buttons>
           <button class="button accept" type="submit">ACEPTAR</button>
           <button class="button cancel" type="button" ng-click="discardTurno()">CANCELAR</button>

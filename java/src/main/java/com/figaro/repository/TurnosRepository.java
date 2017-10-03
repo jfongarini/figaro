@@ -20,6 +20,12 @@ public class TurnosRepository extends AbstractRepository{
 		return (Turno) getCurrentSession().get(Turno.class, turnoId);
 	}
 	
+	
+	public void updateTurno(Turno turno) {
+		getCurrentSession().update(turno);
+	}
+
+	
 	public List<Turno> searchTurno (Date desdeParam) {
 		LocalDate localDate = desdeParam.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		Calendar calendar = Calendar.getInstance();
@@ -33,4 +39,5 @@ public class TurnosRepository extends AbstractRepository{
 		.list();
 	}
 
+	
 }

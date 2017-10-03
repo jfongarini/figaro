@@ -1,15 +1,17 @@
 package com.figaro.service;
 
+import static com.figaro.util.Utils.stringToDate;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.apache.log4j.Logger;
+
 import com.figaro.exception.TurnoOcupadoException;
 import com.figaro.model.Turno;
 import com.figaro.repository.TurnosRepository;
-import static com.figaro.util.Utils.*;
 
 public class TurnosService {
 	
@@ -27,6 +29,16 @@ public class TurnosService {
 	public Turno getTurno(int turnoId) {
 		return repository.getTurno(turnoId);
 	}
+	
+	public Turno updateTurno(Turno turno) {
+		validateTurno(turno);
+		Turno old = getTurno(turno.getId());
+		LOGGER.info("Actualizando el Turno con ID: " + old.getId()+" con:"+ turno.toString());
+		old.update(turno);
+		repository.updateTurno(old);
+		return turno;
+	}
+
 
 	private void validateTurno(Turno turno) {
 		if ( turno.getDesde().compareTo(turno.getHasta()) >= 0 )
@@ -37,6 +49,7 @@ public class TurnosService {
 			if((t.getDesde().after(turno.getDesde()) && t.getDesde().before(turno.getHasta())) || 
 			   (t.getHasta().after(turno.getDesde()) && t.getHasta().before(turno.getHasta()))) 
 				turnosFranjaHoraria.add(t);
+		turnosFranjaHoraria.remove(turno);
 		Optional<Turno> turnoDePeluquero = turnosFranjaHoraria.stream().filter(t -> t.getPeluquero().equals(turno.getPeluquero())).findFirst();
 		if (turnosFranjaHoraria.size() > 0 && turnoDePeluquero.isPresent()) 
 			throw new TurnoOcupadoException();
@@ -58,6 +71,7 @@ public class TurnosService {
 		this.repository = repository;
 	}
 
+	
 	
 
 	

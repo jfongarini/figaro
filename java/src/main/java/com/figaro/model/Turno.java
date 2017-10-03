@@ -1,5 +1,6 @@
 package com.figaro.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -58,6 +59,18 @@ public class Turno {
 	}
 	public void setDesde(Date desde) {
 		this.desde = desde;
+	}
+	public void update(Turno turno) {
+		this.cliente = turno.getCliente();
+		this.peluquero = turno.getPeluquero();
+		this.desde = turno.getDesde();
+		this.hasta = turno.getHasta();
+		this.cobrado = turno.getCobrado();
+		this.trabajos.removeAll(new ArrayList<Trabajo>(this.trabajos));
+		for(Trabajo t : turno.getTrabajos())
+			t.setId(null);
+		this.trabajos.addAll(turno.getTrabajos());
+		
 	}
 	
 }

@@ -3,9 +3,9 @@
 <hibernate-mapping>
 	
 	<class name="com.figaro.model.Trabajo" table="TRABAJO" entity-name="Trabajo">
-		<id name="id" type="int" column="ID_TRABAJO" >
-			<generator class="increment"/>
-		</id>
+		<id name="id" column="ID_TRABAJO" type="integer" >
+            <generator class="native" />
+        </id>
 	 	<property name="descripcion" column="DESCRIPCION" type="string"/>
 	 	<property name="precio" column="PRECIO" type="big_decimal"/>
 	</class>

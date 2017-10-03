@@ -35,6 +35,12 @@ public class TurnosControllerREST {
         return service.getTurno(turnoId);
     }
 	
+	@RequestMapping(value = "turnos/actualizar/{turnoId}",method=RequestMethod.PUT)
+    public ResponseEntity<Turno> updateTurno(@RequestBody Turno turno) {
+		Turno updated = service.updateTurno(turno);
+		return new ResponseEntity<Turno>(updated, HttpStatus.OK);
+	}
+	
 	
 	@RequestMapping(value = "turnos",method=RequestMethod.GET)
     public ResponseEntity<List<Turno>> getTurnosDelDia(@RequestParam String fecha) {

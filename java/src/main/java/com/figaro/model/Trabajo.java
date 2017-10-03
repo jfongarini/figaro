@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class Trabajo {
 	
-	private int id;
+	private Integer id;
 	private String descripcion;
 	private BigDecimal precio;
 	
@@ -20,10 +20,10 @@ public class Trabajo {
 	public void setPrecio(BigDecimal precio) {
 		this.precio = precio;
 	}
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	

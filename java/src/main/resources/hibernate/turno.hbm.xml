@@ -12,7 +12,7 @@
      	<property name="desde"	column="DESDE"	type="java.sql.Timestamp"/>
      	<property name="hasta"	column="HASTA"	type="java.sql.Timestamp"/>
      	<property name="cobrado"	column="COBRADO"	type="boolean"/>
-     	<bag name="trabajos" cascade="all"  lazy="false" fetch="select" >
+     	<bag name="trabajos" cascade="all-delete-orphan"  lazy="false" fetch="select" >
           <key column="ID_TURNO" />
           <one-to-many  entity-name="TrabajoTurno"/>
       	</bag>
