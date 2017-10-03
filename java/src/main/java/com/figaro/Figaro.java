@@ -9,10 +9,10 @@ import org.springframework.context.annotation.ImportResource;
 @SpringBootApplication
 @ImportResource("applicationContext.xml")
 @EnableAutoConfiguration(exclude={HibernateJpaAutoConfiguration.class})
-public class SpringBootWebApplication {
+public class Figaro {
 	
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(SpringBootWebApplication.class, args);
+		SpringApplication.run(Figaro.class, args);
 	}
 
 	

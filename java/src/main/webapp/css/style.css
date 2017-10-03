@@ -217,6 +217,15 @@ form select{
     border-left-width: 0px
 }
 
+.time-input{
+    width: 45px;
+}
+
+.resume{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .accept{
     background-color: #292961;
     color: white
@@ -227,7 +236,7 @@ form select{
     color: black
 }
 
-.add{
+.add, .remove{
     cursor: pointer
 }
 

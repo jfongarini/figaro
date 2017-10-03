@@ -1,6 +1,9 @@
 package com.figaro.repository;
 
 import java.util.List;
+
+import org.hibernate.query.Query;
+
 import com.figaro.model.Categoria;
 import com.figaro.model.Ciudad;
 import com.figaro.model.Peluquero;
@@ -23,11 +26,11 @@ public class ConfiguracionRepository extends AbstractRepository {
 	}
 	
 	public Integer saveTrabajo(Trabajo trabajo) {
-		return (Integer) getCurrentSession().save(trabajo);
+		return (Integer) getCurrentSession().save("Trabajo",trabajo);
 	}
 
 	public void deleteTrabajo(Integer idTrabajo) {
-		Trabajo toDelte = getCurrentSession().load(Trabajo.class, idTrabajo);
+		Trabajo toDelte = (Trabajo) getCurrentSession().get("Trabajo", idTrabajo);
 		getCurrentSession().delete(toDelte);
 	}
 	
@@ -36,7 +39,13 @@ public class ConfiguracionRepository extends AbstractRepository {
 	}
 	
 	public Trabajo getTrabajo(Integer idTrabajo) {
-		return getCurrentSession().get(Trabajo.class, idTrabajo);
+		return (Trabajo) getCurrentSession().get("Trabajo", idTrabajo);
+	}
+	
+	public List<Trabajo> buscar(String search) {
+		Query<Trabajo> query = getCurrentSession().createQuery("FROM Trabajo t WHERE t.descripcion LIKE CONCAT('%',:search,'%')");
+		query.setParameter("search", search);
+	    return query.getResultList();
 	}
 
 	public Integer savePeluquero(Peluquero peluquero) {
@@ -64,4 +73,6 @@ public class ConfiguracionRepository extends AbstractRepository {
 		Categoria toDelte = getCurrentSession().load(Categoria.class, idCategoria);
 		getCurrentSession().delete(toDelte);
 	}
+
+
 }

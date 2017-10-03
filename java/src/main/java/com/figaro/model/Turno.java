@@ -1,59 +1,63 @@
 package com.figaro.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Turno {
 
-	private Long id;
+	private int id;
 	private Cliente cliente;
-	private Peluquero peluquero;
-	private Date fecha;
-	private String trabajo;
-	private BigDecimal precio;
-	private Salon salon;
+	private String peluquero;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm")
+	private Date desde;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm")
+	private Date hasta;
+	private Boolean cobrado;
+	private List<Trabajo> trabajos;
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public Cliente getCliente() {
 		return cliente;
 	}
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	public Peluquero getPeluquero() {
+	public String getPeluquero() {
 		return peluquero;
 	}
-	public void setPeluquero(Peluquero peluquero) {
+	public void setPeluquero(String peluquero) {
 		this.peluquero = peluquero;
 	}
-	public Date getFecha() {
-		return fecha;
+	public int getId() {
+		return id;
 	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getTrabajo() {
-		return trabajo;
+	public Boolean getCobrado() {
+		return cobrado;
 	}
-	public void setTrabajo(String trabajo) {
-		this.trabajo = trabajo;
+	public void setCobrado(Boolean cobrado) {
+		this.cobrado = cobrado;
 	}
-	public BigDecimal getPrecio() {
-		return precio;
+	public List<Trabajo> getTrabajos() {
+		return trabajos;
 	}
-	public void setPrecio(BigDecimal precio) {
-		this.precio = precio;
+	public void setTrabajos(List<Trabajo> trabajos) {
+		this.trabajos = trabajos;
 	}
-	public Salon getSalon() {
-		return salon;
+	public Date getHasta() {
+		return hasta;
 	}
-	public void setSalon(Salon salon) {
-		this.salon = salon;
+	public void setHasta(Date hasta) {
+		this.hasta = hasta;
+	}
+	public Date getDesde() {
+		return desde;
+	}
+	public void setDesde(Date desde) {
+		this.desde = desde;
 	}
 	
 }

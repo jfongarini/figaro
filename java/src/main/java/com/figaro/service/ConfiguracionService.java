@@ -61,6 +61,10 @@ public class ConfiguracionService {
 		return repoTrabajo;
 	}
 	
+	public List<Trabajo> buscar(String search) {
+		return repository.buscar(search);
+	}
+	
 	public Integer savePeluquero(Peluquero peluquero) {
 		LOGGER.info("Guardando el peluquero: "+ peluquero.toString());
 		return repository.savePeluquero(peluquero);
@@ -98,6 +102,8 @@ public class ConfiguracionService {
 	public void setRepository(ConfiguracionRepository repository) {
 		this.repository = repository;
 	}
+
+
 
 
 }

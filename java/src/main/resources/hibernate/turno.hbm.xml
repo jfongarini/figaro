@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.figaro.model.Turno" table="TURNOS">
+		<id name="id" type="int" column="ID_TURNO" >
+			<generator class="increment"/>
+		</id>
+	 	<many-to-one name="cliente" class="com.figaro.model.Cliente" lazy="false" fetch="select">
+            <column name="CLIENTE_ID" not-null="true" />
+        </many-to-one>
+     	<property name="peluquero"	column="PELUQUERO"	type="string"/>
+     	<property name="desde"	column="DESDE"	type="java.sql.Timestamp"/>
+     	<property name="hasta"	column="HASTA"	type="java.sql.Timestamp"/>
+     	<property name="cobrado"	column="COBRADO"	type="boolean"/>
+     	<bag name="trabajos" cascade="all"  lazy="false" fetch="select" >
+          <key column="ID_TURNO" />
+          <one-to-many  entity-name="TrabajoTurno"/>
+      	</bag>
+	</class>
+</hibernate-mapping>

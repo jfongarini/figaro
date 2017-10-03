@@ -12,12 +12,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class GlobalExceptionHandler {  
   
     private static final String MSG_DUPLICADO = "Ya existe un elemento con estos datos";
+    private static final String MSG_TURNO_DUPLICADO = "Ya existe un turno en esa franja horaria para ese peluquero";
 
 	@ExceptionHandler(value = ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)  
     public ApiError handleException(Exception e){
     	return new ApiError(HttpStatus.BAD_REQUEST, MSG_DUPLICADO);
     }  
+	
+	@ExceptionHandler(value = TurnoOcupadoException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)  
+    public ApiError turnoOcupado(Exception e){
+    	return new ApiError(HttpStatus.BAD_REQUEST, MSG_TURNO_DUPLICADO);
+    }
+	
+	
   
   
 }  

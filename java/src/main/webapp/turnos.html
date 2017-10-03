@@ -4,77 +4,96 @@
   <title>TURNOS</title>
   <#include "/common/head.html">
 </head>
-<body>
-<#include "/common/menu.html">
-<div id=content class=content>
-  <div class=banner>
-      <label class=banner-label ><i class=material-icons >today</i> TURNOS DEL D&Iacute;A:</label>
-      <input class=input-banner type=date value=1945-10-17 name=datePicked>
-  </div>
-  <table id=table>
-      <thead>
-        <tr>
-            <th></th>
-            <th>HORA</th>
-            <th>CLIENTE</th>
-            <th>TRABAJO</th>
-            <th>PRECIO</th>
-            <th>PELUQUERO</th>
-            <th><i class="material-icons">attach_money</i></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="data-row"> 
-          <td>09:00</td>
-          <td>JAVIER IGNACIO MOLINA CANO</td>
-          <td>LAVADO CORTE PEINADO</td>
-          <td>$250,00</td>
-          <td>GUSTAVO</td>
-          <td></td>
-          <td><i class="material-icons">done</i></td>
-        </tr>
-       <tr class="data-row"> 
-          <td>10:00</td>
-          <td>JAVIER IGNACIO MOLINA CANO</td>
-          <td>LAVADO CORTE PEINADO</td>
-          <td>$250,00</td>
-          <td>GUSTAVO</td>
-          <td></td>
-          <td><i class="material-icons">clear</i></td>
-        </tr> 
-        <tr class="data-row"> 
-          <td>10:30</td>
-          <td>JAVIER IGNACIO MOLINA CANO</td>
-          <td>LAVADO CORTE PEINADO</td>
-          <td>$250,00</td>
-          <td>GUSTAVO</td>
-          <td></td>
-          <td><i class="material-icons">done</i></td>
-        </tr>
-        <tr class="data-row"> 
-          <td>11:00</td>
-          <td>JAVIER IGNACIO MOLINA CANO</td>
-          <td>LAVADO CORTE PEINADO</td>
-          <td>$250,00</td>
-          <td>GUSTAVO</td>
-          <td></td>
-          <td><i class="material-icons"></i></td>
-        </tr>
-        <tr class="data-row"> 
-          <td>12:00</td>
-          <td>JAVIER IGNACIO MOLINA CANO</td>
-          <td>LAVADO CORTE PEINADO</td>
-          <td>$250,00</td>
-          <td>GUSTAVO</td>
-          <td></td>
-          <td><i class="material-icons"></i></td>
-        </tr> 
-      </tbody>
-    </table>
+<body ng-app=figaro ng-controller=turnosController ng-cloak>
+  <#include "/common/menu.html">
+  <div id=content class=content>
     <div class=banner>
-        <label class=banner-label ><i class=material-icons >account_balance_wallet</i> CAJA: $3465,00</label>
+        <label class="banner-label add" ><i class=material-icons ng-click="newTurno()" >addtoday</i></label>
+        <input class=input-banner type=date ng-model=ngDateTurno ng-change="getTurnos()">
     </div>
-</div>
-<#include "/common/javascript.html">
+    <table id=table>
+        <thead>
+          <tr>
+              <th>HORARIO</th>
+              <th>CLIENTE</th>
+              <th>TRABAJOS</th>
+              <th>PRECIO</th>
+              <th>PELUQUERO</th>
+              <th>REALIZADO</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr id={{turno.id}} data-id={{turno.id}} class=data-row ng-repeat="turno in turnos  track by turno.id" >
+          <td>{{turno.desde.split(' ')[1]}} - {{turno.hasta.split(' ')[1]}}</td>
+          <td>{{turno.cliente.nombre}} {{turno.cliente.apellido}}</td>
+          <td><span ng-repeat="trabajo in turno.trabajos"> {{trabajo.descripcion}} </span></td>
+          <td>{{getTotalTurno(turno.trabajos) | currency}}</td>
+          <td>{{turno.peluquero}}</td>
+          <td><input type="checkbox"></td>
+        </tr>
+        </tbody>
+      </table>
+      <div class=banner>
+          <label class=banner-label >{{getTotalDiario(turnos) | currency}}</label>
+      </div>
+  </div>
+  <div id=modal class=modal>
+    <div class=modal-content>
+      <form ng-submit="sendTurno()">      
+        <div class=form-field><label>CLIENTE:</label>
+          <input id=focus tipe="text" placeholder="Buscar..." ng-model="queryCliente" ng-keyup="searchCliente()">
+        </div>
+        <div class=form-field ng-repeat="cliente in clientes" >
+          <input type="radio" name="cliente" ng-model="ngTurno.cliente"  ng-value={{cliente}} required> {{cliente.nombre}} {{cliente.apellido}}
+        </div>
+        <div class=form-field><label>FECHA: </label><input type="date" ng-model="ngDateTurno" required></input></div>
+        <div class=form-field><label>DESDE:</label>
+          <select  class=time-input ng-model="startHour" ng-options="item.hora for item in horarios" required>
+            <option value=""></option>
+          </select>
+          :
+          <select class=time-input ng-model="startMinutes"  ng-options="item.minuto for item in minutos" required>
+            <option value=""></option>
+          </select>
+        </div>
+        <div class=form-field><label>HASTA:</label>
+          <select class=time-input ng-model="endHour" ng-options="item.hora for item in horarios" required>
+            <option value=""></option>
+          </select>
+          :
+          <select class=time-input ng-model="endMinutes"  ng-options="item.minuto for item in minutos" required>
+            <option value=""></option>
+          </select>
+        </div> 
+        <div class=form-field><label>PELUQUERO:</label>
+          <select name=peluquero  ng-model="peluquero" ng-options="peluquero.nombre for peluquero in peluqueros" required>
+            <option value=""></option>
+          </select>
+        </div>
+        <div class=form-field><label>TRABAJOS</label>
+          <input id=focus tipe="text" placeholder="Buscar..." ng-model="queryTrabajo" ng-keyup="searchTrabajo()">
+        </div>
+        <div class="form-field add" ng-click="addTrabajo(trabajo)" ng-repeat="trabajo in trabajos" >
+          <i class="material-icons add"  ng-value=trabajo >add</i>{{trabajo.descripcion}} {{trabajo.precio | currency}}
+        </div>
+        
+
+        <hr class=resume>
+        <div class="form-field remove" ng-click="removeTrabajo(trabajo)"  ng-repeat="trabajo in trabajosSeleccionados" >
+          <i class="material-icons "  ng-value=trabajo >clear</i>{{trabajo.descripcion}} {{trabajo.precio | currency}}
+        </div>
+
+        <span>TOTAL: {{totalTrabajosSeleccionados | currency}}</span>
+        <div class=buttons>
+          <button class="button accept" type="submit">ACEPTAR</button>
+          <button class="button cancel" type="button" ng-click="discardTurno()">CANCELAR</button>
+        </div>
+        <label class=form-message>{{message}}</label>
+      </form>
+    </div>
+  </div>
+  <#include "/common/javascript.html">
+  <script src="js/turnosController.js" ></script>
 </body>
 </html>
+

@@ -37,6 +37,7 @@
   				<value>hibernate/peluquero.hbm.xml</value>
   				<value>hibernate/movimiento.hbm.xml</value>
   				<value>hibernate/categoria.hbm.xml</value>
+  				<value>hibernate/turno.hbm.xml</value>
  			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -160,6 +161,35 @@
 	</bean>
 
 	<bean id="MovimientosRepository"	class="com.figaro.repository.MovimientosRepository">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+	
+	<!-- TURNOS !-->
+	<bean id="TurnosServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="TurnosService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="TurnosService" class="com.figaro.service.TurnosService">
+		<property name="repository">
+			<ref bean="TurnosRepository" />
+		</property>
+	</bean>
+
+	<bean id="TurnosRepository"	class="com.figaro.repository.TurnosRepository">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

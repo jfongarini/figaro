@@ -45,8 +45,8 @@ public class ClientesControllerREST {
 		return new ResponseEntity<Cliente>(updated, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/buscar",method=RequestMethod.GET,produces="application/json")
-    public List<Cliente> getAllClientes(@RequestParam String search) {
+	@RequestMapping(value = "clientes/buscar",method=RequestMethod.GET,produces="application/json")
+    public List<Cliente> searchClientes(@RequestParam String search) {
         return service.buscar(search);
     }
 	

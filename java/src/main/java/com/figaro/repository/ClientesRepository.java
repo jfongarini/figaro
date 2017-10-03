@@ -27,8 +27,8 @@ public class ClientesRepository extends AbstractRepository{
 
 	@SuppressWarnings("unchecked")
 	public List<Cliente> buscar(String search) {
-		Query<Cliente> query = getCurrentSession().createQuery("FROM Cliente c WHERE c.nombre LIKE CONCAT('%',?1,'%') OR c.apellido LIKE CONCAT('%',?1,'%')");
-	    query.setParameter(1, search);
+	    Query<Cliente> query = getCurrentSession().createQuery("FROM Cliente c WHERE CONCAT(c.nombre, ' ', c.apellido) LIKE CONCAT('%',:search,'%')");
+		query.setParameter("search", search);
 	    return query.getResultList();
 	}
 	
