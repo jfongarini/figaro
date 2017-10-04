@@ -1,9 +1,7 @@
 var app = angular.module('figaro', []);
 app.controller('turnosController', function ($scope, $http) {
     
-    $scope.horarios = ["08","09","10","11","12","13","14","15","16","17","18","19","20"];
-    $scope.minutos  = ["00","15","30","45"];
-
+    $scope.horarios = ["08:00","08:15","08:30","08:45","09:00","09:15","09:30","09:45","10:00","10:15","10:30","10:45","11:00","11:15","11:30","11:45","12:00"     ,"12:15","12:30","12:45","13:00","13:15","13:30","13:45","14:00","14:15","14:30","14:45","15:00","15:15","15:30","15:45","16:00","16:15","16:30","16:45","17:00","17:15","17:30","17:45","18:00","18:15","18:30","18:45","19:00","19:15","19:30","19:45","20:00","20:15","20:30","20:45"];
 
     //OBTENER LISTA DE TURNOS
     $scope.getAll = function() {
@@ -30,10 +28,8 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.turnoId = event.currentTarget.getAttribute("data-id");
         $http.get('/rest/turnos/'+$scope.turnoId).then(function (response) {
             $scope.ngTurno = response.data;
-            $scope.startHour = $scope.ngTurno.desde.split(' ')[1].split(':')[0];
-            $scope.startMinutes = $scope.ngTurno.desde.split(' ')[1].split(':')[1];
-            $scope.endHour = $scope.ngTurno.hasta.split(' ')[1].split(':')[0];
-            $scope.endMinutes = $scope.ngTurno.hasta.split(' ')[1].split(':')[1];
+            $scope.startHour = $scope.ngTurno.desde.split(' ')[1];
+            $scope.endHour = $scope.ngTurno.hasta.split(' ')[1];
             $scope.peluquero = $scope.ngTurno.peluquero;
             $scope.trabajosSeleccionados = $scope.ngTurno.trabajos;
             $scope.totalTrabajosSeleccionados=$scope.getTotalTurno($scope.trabajosSeleccionados);
@@ -45,8 +41,8 @@ app.controller('turnosController', function ($scope, $http) {
 
     //CLICK ACEPTAR FORMULARIO
     $scope.sendTurno = function() {
-        $scope.ngTurno.desde = getStringDate($scope.ngDateTurno)+" "+$scope.startHour + ":" + $scope.startMinutes;
-        $scope.ngTurno.hasta = getStringDate($scope.ngDateTurno)+" "+$scope.endHour + ":" + $scope.endMinutes;
+        $scope.ngTurno.desde = getStringDate($scope.ngDateTurno)+" "+$scope.startHour;
+        $scope.ngTurno.hasta = getStringDate($scope.ngDateTurno)+" "+$scope.endHour;
         $scope.ngTurno.peluquero = $scope.peluquero;
         $scope.ngTurno.trabajos = $scope.trabajosSeleccionados;
         if($scope.validateTurno() === true){

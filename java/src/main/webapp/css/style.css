@@ -83,6 +83,10 @@ tr:hover td {
     cursor: pointer
 }
 
+th {
+    letter-spacing: 1px;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -125,7 +129,7 @@ li a:hover {
 .modal-on {
     display: block;
     position: fixed;
-    padding-top: 100px;
+    padding-top: 40px;
     left: 0;
     top: 0;
     width: 100%;
@@ -221,7 +225,7 @@ form select{
 }
 
 .time-input{
-    width: 45px;
+    width: 80px;
 }
 
 .resume{
