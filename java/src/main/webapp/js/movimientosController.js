@@ -85,13 +85,20 @@ app.controller('movimientosController', function ($scope, $http) {
 	    };
 	    
 	    //FILTRO DIA
-	    $scope.searchMovimientoDia = function() {		    	
-	    	$scope.search = getDateFormatToString($scope.search);	    	
-	        $http.get('/rest/movimientos/buscar',{params: { q: $scope.search }})		        
+	    $scope.searchMovimientoDia = function() {	    	   	
+	        $http.get('/rest/movimientos/buscar',{params: { q: getStringDate($scope.search) }})		        
 	        .then(function successCallback(response) {	  	        	
 	            $scope.movimientos = response.data;	            
 	        })
-	    }  
+	    }
+	    
+	  //FILTRO MES
+	    $scope.searchMovimientoMes = function() {	    	   	
+	        $http.get('/rest/movimientos/buscar',{params: { q: getStringMonth($scope.search) }})		        
+	        .then(function successCallback(response) {	  	        	
+	            $scope.movimientos = response.data;	            
+	        })
+	    }
 	    	    	    
 	    //MOSTRAR O NO MOSTRAR DIV DE BUSQUEDA
 	    $scope.IsHiddenDia = true;

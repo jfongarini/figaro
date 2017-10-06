@@ -8,16 +8,13 @@ function getToday(){
 	return [year, month, day].join('-');
 }
 
-function getDateFormatToString(date){
-	var input = new String(date);	    	
-	var year = input.substr(11,4),
-	    month = ['Jan','Feb','Mar','Apr','May','Jun',
-	             'Jul','Aug','Sep','Oct','Nov','Dec'].indexOf(input.substr(4,3))+1,
-	    day = input.substr(8,2);
-	
-	var d = year + '-' + (month<10?'0':'') + month + '-' + day;
-	
-	return d;
+function getStringMonth(date){
+	month = '' + (date.getMonth() + 1),
+	day = ''
+	year = date.getFullYear();
+	if (month.length < 2) month = '0' + month;	
+	return [year, month, day].join('-');
+
 }
 
 function getStringDate(date){

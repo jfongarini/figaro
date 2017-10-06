@@ -25,7 +25,7 @@
    		<label class=banner-label> B&Uacute;SQUEDA POR D&Iacute;A: </label>
    	</div>
    	<div>
-      <input class=input-banner type="date" ng-model="search" ng-keyup="searchMovimientoDia()"></input>
+      <input class=input-banner type="date" ng-model="search" ng-change="searchMovimientoDia()"></input>
     </div> 
     <div class=buttons>          
           <button class="bb" type="button" ng-click="ShowHideDia()">CANCELAR</button>
@@ -37,13 +37,13 @@
    		<label class=banner-label> B&Uacute;SQUEDA ENTRE:</label>
    	</div>
    	<div>
-      <input class=input-banner type="date" ng-model="search" ng-keyup="searchMovimiento()"></input>
+      <input class=input-banner type="date" ng-model="search" ng-change="searchMovimiento()"></input>
     </div>
     <div>   		
    		<label class=banner-label> Y:</label>
    	</div>
    	<div>   		
-   		<input class=input-banner type="date" ng-model="search" ng-keyup="searchMovimiento()"></input>
+   		<input class=input-banner type="date" ng-model="search" ng-change="searchMovimiento()"></input>
    	</div> 
     <div class=buttons>          
           <button class="bb" type="button" ng-click="ShowHideEntreDia()">CANCELAR</button>
@@ -55,7 +55,7 @@
    		<label class=banner-label> B&Uacute;SQUEDA POR MES: </label>
    	</div>
    	<div>
-      <input class=input-banner type="date" ng-model="search" ng-keyup="searchMovimiento()"></input>
+      <input class=input-banner type="date" ng-model="search" ng-change="searchMovimientoMes()"></input>
     </div> 
     <div class=buttons>          
           <button class="bb" type="button" ng-click="ShowHideMes()">CANCELAR</button>
