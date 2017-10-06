@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	
+	<class name="com.figaro.model.Trabajo" table="TRABAJO" entity-name="Trabajo">
+		<id name="id" column="ID_TRABAJO" type="integer" >
+            <generator class="native" />
+        </id>
+	 	<property name="descripcion" column="DESCRIPCION" type="string"/>
+	 	<property name="precio" column="PRECIO" type="big_decimal"/>
+	</class>
+	
+	 <class name="com.figaro.model.Trabajo" table="TRABAJO_TURNO" entity-name="TrabajoTurno">
+         <id name="id" type="int" column="ID_TRABAJO" >
+			<generator class="increment"/>
+		</id>
+	 	<property name="descripcion" column="DESCRIPCION" type="string"/>
+	 	<property name="precio" column="PRECIO" type="big_decimal"/>
+	 	
+	</class>
+	
+</hibernate-mapping>
