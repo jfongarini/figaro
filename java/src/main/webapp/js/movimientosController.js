@@ -85,13 +85,45 @@ app.controller('movimientosController', function ($scope, $http) {
 	    };
 	    
 	    //FILTRO DIA
-	    $scope.searchMovimiento = function() {		    	
+	    $scope.searchMovimientoDia = function() {		    	
 	    	$scope.search = getDateFormatToString($scope.search);	    	
 	        $http.get('/rest/movimientos/buscar',{params: { q: $scope.search }})		        
 	        .then(function successCallback(response) {	  	        	
 	            $scope.movimientos = response.data;	            
 	        })
 	    }  
+	    	    	    
+	    //MOSTRAR O NO MOSTRAR DIV DE BUSQUEDA
+	    $scope.IsHiddenDia = true;
+	    $scope.IsHiddenEntreDia = true;
+	    $scope.IsHiddenMes = true;
+	    
+        $scope.ShowHideDia = function () {
+        	$scope.IsHiddenEntreDia = true;
+        	$scope.IsHiddenMes = true;
+            $scope.IsHiddenDia = $scope.IsHiddenDia ? false : true;        	
+            if($scope.IsHiddenDia === true){
+            	$scope.getAll();	                    	
+	        }
+        }        
+        
+        $scope.ShowHideEntreDia = function () {         
+        	$scope.IsHiddenDia = true;
+        	$scope.IsHiddenMes = true;
+            $scope.IsHiddenEntreDia = $scope.IsHiddenEntreDia ? false : true;        	
+            if($scope.IsHiddenEntreDia === true){
+            	$scope.getAll();
+	        }
+        }        
+        
+        $scope.ShowHideMes = function () {  
+        	$scope.IsHiddenDia = true;
+        	$scope.IsHiddenEntreDia = true;
+            $scope.IsHiddenMes = $scope.IsHiddenMes ? false : true;        	
+            if($scope.IsHiddenMes === true){
+            	$scope.getAll();
+	        }
+        }
 	    
 	    //INIT
 	    $scope.search = '';
