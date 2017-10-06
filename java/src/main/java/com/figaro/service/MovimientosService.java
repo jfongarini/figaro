@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.figaro.model.Cliente;
 import com.figaro.model.Movimiento;
 import com.figaro.repository.MovimientosRepository;
 
