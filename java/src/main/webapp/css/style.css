@@ -69,13 +69,15 @@ table, .banner{
     width: 95%
 }
 
-table{
-    text-align: left
+.main-table{
+    text-align: left;
+    background-color: white;
+    box-shadow: rgba(0,0,0,0.4) 0px 2px 5px
 }
 
 
 table>tbody>tr:nth-child(odd) {
-    background-color: #e0e0e0
+    background-color: #F7F7F7
 }
 
 table tr{
@@ -86,6 +88,10 @@ tr:hover td {
     background-color: #292961;
     color: white;
     cursor: pointer
+}
+
+td,th{
+    padding-left: 8px
 }
 
 th {

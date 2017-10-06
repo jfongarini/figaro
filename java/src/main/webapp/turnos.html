@@ -11,7 +11,7 @@
         <label class="banner-label add" ><i class=material-icons ng-click="newTurno()" >addtoday</i></label>
         <input class=input-banner type=date ng-model=ngDateTurno ng-change="getTurnos()">
     </div>
-    <table id=table>
+    <table id=table class=main-table>
         <thead>
           <tr>
               <th>HORARIO</th>
@@ -69,11 +69,11 @@
           <i class="material-icons add"  ng-value=trabajo >add</i>{{trabajo.descripcion}} {{trabajo.precio | currency}}
         </div>
         <hr class=resume>
-        <div class="form-field"><span>CLIENTE: </span>{{ngTurno.cliente.nombre}} {{ngTurno.cliente.apellido}}</div>
         <div class="form-field remove" ng-click="removeTrabajo(trabajo)"  ng-repeat="trabajo in trabajosSeleccionados" >
           <i class="material-icons "  ng-value=trabajo >clear</i>{{trabajo.descripcion}} {{trabajo.precio | currency}}
         </div>
         <div class="form-field">TOTAL: {{totalTrabajosSeleccionados | currency}}</div>
+        <div class="form-field"><span>CLIENTE: </span>{{ngTurno.cliente.nombre}} {{ngTurno.cliente.apellido}}</div>
         <div class=buttons>
           <button class="button accept" type="submit">ACEPTAR</button>
           <button class="button cancel" type="button" ng-click="discardTurno()">CANCELAR</button>
