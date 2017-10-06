@@ -2,21 +2,28 @@
 <html>
 <head> 
   <title>CAJA</title>
-  <#include "/common/head.html">    
+  <#include "/common/head.html">   
 </head>
 <body ng-app=figaro ng-controller=movimientosController ng-cloak>
 <#include "/common/menu.html">
 <div id=content class=content>
   <div class=banner>
-      <label class="banner-label add"><i class="material-icons" ng-click="newMovimiento()">add_circle_outline</i></label>
+      <label class="banner-label add"><i class="material-icons" ng-click="newMovimiento()">add_circle_outline</i></label>   
+      <label class=banner-label ><i class=material-icons>more_vert</i></label>      
+      <label class=banner-label ng-click="toggleDIAS=!toggleDIAS"><i class=material-icons>account_balance</i> D&Iacute;A </label>    
       <label class=banner-label ><i class=material-icons >more_vert</i></label>
-      <label class=banner-label ><i class=material-icons >account_balance</i> DIA </label>
+      <label class=banner-label ng-click="toggleEDIAS=!toggleEDIAS"><i class=material-icons >account_balance</i> D&Iacute;AS ENTRE </label>
       <label class=banner-label ><i class=material-icons >more_vert</i></label>
-      <label class=banner-label ><i class=material-icons >account_balance</i> SEMANA </label>
+      <label class=banner-label ng-click="toggleMES=!toggleMES"><i class=material-icons >account_balance</i> MES </label>
       <label class=banner-label ><i class=material-icons >more_vert</i></label>
-      <label class=banner-label ><i class=material-icons >account_balance</i> MES </label>
-      <label class=banner-label ><i class=material-icons >more_vert</i></label>
-      <label class=banner-label > SEMANA DEL 17/08/17 AL 24/08/17</label>
+      
+      <label class=banner-label ng-show="toggleDIAS" > B&Uacute;SQUEDA POR D&Iacute;A: </label>
+      <input class=input-banner type="date" ng-model="search" ng-keyup="searchMovimiento()" ng-show="toggleDIAS"></input>
+      <label class=banner-label ng-show="toggleEDIAS" > B&Uacute;SQUEDA ENTRE: Y: </label>
+	  <input class=input-banner type="date" ng-model="search" ng-keyup="searchMovimiento()" ng-show="toggleEDIAS"></input>
+	  <input class=input-banner type="date" ng-model="search" ng-keyup="searchMovimiento()" ng-show="toggleEDIAS"></input>
+	  <label class=banner-label ng-show="toggleMES" > B&Uacute;SQUEDA POR MES: </label>
+	  <input class=input-banner type="date" ng-model="search" ng-keyup="searchMovimiento()" ng-show="toggleMES"></input>
       
   </div>
   <table id=table class=main-table>
@@ -66,6 +73,7 @@
       </form>
     </div>
 </div>
+
 <#include "/common/javascript.html">
 <script src="js/movimientosController.js" ></script>
 </body>

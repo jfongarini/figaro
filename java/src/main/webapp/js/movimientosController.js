@@ -1,6 +1,6 @@
 var app = angular.module('figaro', []);
 app.controller('movimientosController', function ($scope, $http) {
- 	    
+ 	 
 	//OBTENER LISTA DE MOVIMIENTOS
 	    $scope.getAll = function() {
 	        $http.get("/rest/movimientos").then(function (response) {
@@ -84,15 +84,17 @@ app.controller('movimientosController', function ($scope, $http) {
 	        return date;
 	    };
 	    
-	    //FILTRO
-	    $scope.searchMovimiento = function() {        
-	        $http.get('/rest/movimientos/buscar/',{params: { search: $scope.search }})
-	        .then(function successCallback(response) {
-	            $scope.movimientos = response.data; 
+	    //FILTRO DIA
+	    $scope.searchMovimiento = function() {		    	
+	    	$scope.search = getDateFormatToString($scope.search);	    	
+	        $http.get('/rest/movimientos/buscar',{params: { q: $scope.search }})		        
+	        .then(function successCallback(response) {	  	        	
+	            $scope.movimientos = response.data;	            
 	        })
-	    };
-
-	    //INIT	   
+	    }  
+	    
+	    //INIT
+	    $scope.search = '';
 	    $scope.ngMovimiento = {};
 	    $scope.getAllCategorias();
 	    $scope.getAll();

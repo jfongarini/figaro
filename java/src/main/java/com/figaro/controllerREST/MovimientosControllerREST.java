@@ -46,9 +46,9 @@ public class MovimientosControllerREST {
 	}
 	
 	@RequestMapping(value = "movimientos/buscar",method=RequestMethod.GET,produces="application/json")
-    public List<Movimiento> getAllMovimiento(@RequestParam String search) {
-        return service.buscar(search);
-    }
+    public List<Movimiento> getAllMovimiento(@RequestParam String q) {
+        return service.buscar(q);
+    }	
 	
 	public MovimientosService getService() {
 		return service;
