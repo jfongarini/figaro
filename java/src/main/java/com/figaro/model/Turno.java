@@ -21,6 +21,7 @@ public class Turno {
 	public Cliente getCliente() {
 		return cliente;
 	}
+	
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
@@ -70,7 +71,25 @@ public class Turno {
 		for(Trabajo t : turno.getTrabajos())
 			t.setId(null);
 		this.trabajos.addAll(turno.getTrabajos());
-		
 	}
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Turno other = (Turno) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
 }

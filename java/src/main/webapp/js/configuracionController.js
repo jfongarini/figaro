@@ -52,7 +52,6 @@ app.controller('configuracionController', function ($scope, $http) {
                 }, function errorCallback(response) {
                     $scope.messageTrabajo=response.data.message;
                 });
-            
         }
     };
 
