@@ -105,9 +105,8 @@ app.controller('turnosController', function ($scope, $http) {
     }
 
     //AGREGAR TRABAJOS
-    $scope.addTrabajo = function toggleSelection(trabajo) {
-        var idx = $scope.trabajosSeleccionados.indexOf(trabajo);
-        if (idx == -1) {
+    $scope.addTrabajo = function (trabajo) {
+        if($scope.isSeleccionado(trabajo) === false) {
           trabajo.id = null;
           $scope.totalTrabajosSeleccionados += trabajo.precio;
           $scope.trabajosSeleccionados.push(trabajo);
@@ -115,12 +114,18 @@ app.controller('turnosController', function ($scope, $http) {
     };
 
     //QUITAR TRABAJOS
-    $scope.removeTrabajo = function toggleSelection(trabajo) {
-        var idx = $scope.trabajosSeleccionados.indexOf(trabajo);
-        if (idx > -1) {
-            $scope.totalTrabajosSeleccionados -= trabajo.precio;
-            $scope.trabajosSeleccionados.splice(idx, 1);
-        }
+    $scope.removeTrabajo = function (trabajo) {
+        $scope.trabajosSeleccionados.splice($scope.isSeleccionado(trabajo), 1);
+        $scope.totalTrabajosSeleccionados -= trabajo.precio;
+
+    };
+
+    //TRABAJO ESTA SELECCIONADO
+    $scope.isSeleccionado = function (trabajo) {
+        for(var i = 0; i < $scope.trabajosSeleccionados.length; i++)
+        if ($scope.trabajosSeleccionados[i].descripcion === trabajo.descripcion)
+            return i;
+        return false;
     };
 
     //SET CLIENTE

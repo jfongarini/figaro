@@ -16,7 +16,7 @@
           <tbody>
           <tr id={{ciudad.id}} class=data-row ng-repeat="ciudad in ciudades">
           <td>{{ciudad.nombre}}</td>
-          <td class=delete ><i class="material-icons" data-id={{ciudad.id}} ng-click="removeCiudad($event)">clear</i></td>
+          <td class=delete ><i class="material-icons" data-id={{ciudad.id}} ng-click="removeCiudad($event)">remove</i></td>
           </tr>
           </tbody>
         </table>
@@ -35,7 +35,7 @@
           <tr id={{trabajo.id}}  class=data-row  ng-repeat="trabajo in trabajos">
           <td data-id={{trabajo.id}} ng-click="loadTrabajo($event)">{{trabajo.descripcion}}</td>
           <td data-id={{trabajo.id}} ng-click="loadTrabajo($event)" class=trabajo-precio>{{trabajo.precio | currency}}</td>
-          <td class=delete ><i class="material-icons" data-id={{trabajo.id}} ng-click="removeTrabajo($event)">clear</i></td>
+          <td class=delete ><i class="material-icons" data-id={{trabajo.id}} ng-click="removeTrabajo($event)">remove</i></td>
           </tr>
           </tbody>
         </table>
@@ -51,7 +51,7 @@
           <tbody>
           <tr id={{peluquero.id}} class=data-row ng-repeat="peluquero in peluqueros">
           <td>{{peluquero.nombre}}</td>
-          <td class=delete ><i class="material-icons" data-id={{peluquero.id}} ng-click="removePeluquero($event)">clear</i></td>
+          <td class=delete ><i class="material-icons" data-id={{peluquero.id}} ng-click="removePeluquero($event)">remove</i></td>
           </tr>
           </tbody>
         </table>
@@ -67,7 +67,7 @@
           <tbody>
           <tr id={{categoria.id}} class=data-row ng-repeat="categoria in categorias">
           <td>{{categoria.nombre}}</td>
-          <td class=delete ><i class="material-icons" data-id={{categoria.id}} ng-click="removeCategoria($event)">clear</i></td>
+          <td class=delete ><i class="material-icons" data-id={{categoria.id}} ng-click="removeCategoria($event)">remove</i></td>
           </tr>
           </tbody>
         </table>
