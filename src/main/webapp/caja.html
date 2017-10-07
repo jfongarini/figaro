@@ -34,19 +34,12 @@
 
 <div class=bannerBusqueda ng-hide = "IsHiddenEntreDia">
   	<div>   		
-   		<label class=banner-label> B&Uacute;SQUEDA ENTRE:</label>
-   	</div>
-   	<div>
-      <input class=input-banner type="date" ng-model="search" ng-change="searchMovimiento()"></input>
-    </div>
-    <div>   		
-   		<label class=banner-label> Y:</label>
-   	</div>
-   	<div>   		
-   		<input class=input-banner type="date" ng-model="search" ng-change="searchMovimiento()"></input>
-   	</div> 
-    <div class=buttons>          
-          <button class="bb" type="button" ng-click="ShowHideEntreDia()">CANCELAR</button>
+  		<label ng-click="ShowHideEntreDia()"><i class=material-icons >clear</i></label>
+   		<label> B&Uacute;SQUEDA ENTRE:</label>   	
+      	<input type="date" ng-model="search" ng-change="searchMovimiento()"></input>
+      	<label> Y:</label>   		
+   		<input type="date" ng-model="search" ng-change="searchMovimiento()"></input>           
+        
     </div>
 </div>
 
@@ -55,7 +48,7 @@
    		<label class=banner-label> B&Uacute;SQUEDA POR MES: </label>
    	</div>
    	<div>
-      <input class=input-banner type="date" ng-model="search" ng-change="searchMovimientoMes()"></input>
+      <input class=input-banner type="month" ng-model="search" ng-change="searchMovimientoMes()"></input>
     </div> 
     <div class=buttons>          
           <button class="bb" type="button" ng-click="ShowHideMes()">CANCELAR</button>
@@ -66,18 +59,22 @@
 
     <thead>
       <tr>
+      	  
           <th>FECHA</th>
           <th>CATEGORIA</th>
           <th>MONTO</th>
-          <th>DETALLE</th>              
+          <th>DETALLE</th>   
+          <th></th>           
       </tr>
     </thead>
     <tbody>
-      <tr id={{movimiento.id}} data-id={{movimiento.id}} class=data-row ng-repeat="movimiento in movimientos | orderBy : sortFecha : false" data-ng-click="detailMovimiento($event)"> 
-        <td>{{movimiento.fecha | date }}</td>
-        <td>{{movimiento.categoria}}</td>
-	    <td> <font ng-class='{green : !movimiento.isGasto, red: movimiento.isGasto}'>{{movimiento.precio | currency }}</font></td>
-        <td>{{movimiento.detalle}}</td>            
+      <tr id={{movimiento.id}} data-id={{movimiento.id}} class=data-row ng-repeat="movimiento in movimientos | orderBy : sortFecha : true"> 
+         
+        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)">{{movimiento.fecha | date }}</td>
+        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)">{{movimiento.categoria}}</td>
+	    <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)"> <font ng-class='{green : !movimiento.isGasto, red: movimiento.isGasto}'>{{movimiento.precio | currency }}</font></td>
+        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)">{{movimiento.detalle}}</td>   
+        <td class="tachotd"><label><i class="material-icons tachoi" >clear</i></label></td>                
       </tr>      
     </tbody>
   </table>

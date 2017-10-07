@@ -336,3 +336,15 @@ div .bb {
     margin-top: 20px;
 
 }
+
+.tachoi {
+    visibility: hidden;
+}
+
+.tachotd {    
+    width: 5px;   
+}
+
+tr:hover i{
+    visibility: visible;
+}
