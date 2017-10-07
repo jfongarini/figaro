@@ -172,7 +172,7 @@ li a:hover {
     
 .form-field{
     font-size: 13px;
-    margin-bottom: 15px
+    margin-bottom: 17px
 }
 
 .blur {
@@ -219,6 +219,7 @@ form .button{
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
+    width: 90px;
     border-width: 0;
     outline: none;
     border-radius: 2px;

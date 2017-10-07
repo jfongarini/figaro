@@ -75,8 +75,8 @@
         <div class="form-field">TOTAL: {{totalTrabajosSeleccionados | currency}}</div>
         <div class="form-field"><span>CLIENTE: </span>{{ngTurno.cliente.nombre}} {{ngTurno.cliente.apellido}}</div>
         <div class=buttons>
-          <button class="button accept" type="submit">ACEPTAR</button>
           <button class="button cancel" type="button" ng-click="discardTurno()">CANCELAR</button>
+          <button class="button accept" type="submit">ACEPTAR</button>
         </div>
         <label class=form-message>{{message}}</label>
       </form>
