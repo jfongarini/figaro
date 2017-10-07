@@ -63,15 +63,12 @@ public class TurnosService {
 		if ( turno.getDesde().compareTo(turno.getHasta()) >= 0 )
 			throw new HorarioInvalidoException();
 		List<Turno> turnosDelDia = searchTurno(turno.getDesde());
-		List<Turno> turnosFranjaHoraria = new ArrayList<Turno>();
+		turnosDelDia.remove(turno);
 		for(Turno t : turnosDelDia) 
-			if((t.getDesde().after(turno.getDesde()) && t.getDesde().before(turno.getHasta())) || 
-			   (t.getHasta().after(turno.getDesde()) && t.getHasta().before(turno.getHasta())) ||
-			   (t.getDesde().compareTo(turno.getDesde()) == 0) && (t.getHasta().compareTo(turno.getHasta()) == 0)) 
-				turnosFranjaHoraria.add(t);
-		turnosFranjaHoraria.remove(turno);
-		Optional<Turno> turnoDePeluquero = turnosFranjaHoraria.stream().filter(t -> t.getPeluquero().equals(turno.getPeluquero())).findFirst();
-		if (turnosFranjaHoraria.size() > 0 && turnoDePeluquero.isPresent()) 
+			if(((t.getDesde().after(turno.getDesde()) && t.getDesde().before(turno.getHasta())) || 
+			    (t.getHasta().after(turno.getDesde()) && t.getHasta().before(turno.getHasta())) ||
+			    (t.getDesde().compareTo(turno.getDesde()) == 0) && (t.getHasta().compareTo(turno.getHasta()) == 0)) &&
+				t.getPeluquero().equals(turno.getPeluquero())) 
 			throw new TurnoOcupadoException();
 	}
 	
