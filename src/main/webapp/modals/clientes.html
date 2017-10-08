@@ -1,7 +1,7 @@
 <div id=modal-clientes class=modal>
   <div class=modal-content>
     <form ng-submit="sendClient()">
-      <div class=form-field><label>NOMBRE:</label><input id=focus tipe="text"  ng-model="ngCliente.nombre" required></div>
+      <div class=form-field><label>NOMBRE:</label><input id=modal-clientes-focus tipe="text"  ng-model="ngCliente.nombre" required></div>
       <div class=form-field><label>APELLIDO:</label><input tipe="text" ng-model="ngCliente.apellido" required></div>
       <div class=form-field><label>SEXO:</label>
         <input type="radio" name=sexo ng-model="ngCliente.sexo" value="hombre" required> Hombre

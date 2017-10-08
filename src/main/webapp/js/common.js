@@ -45,13 +45,14 @@ function closeModal(){
 };
 
 
+
+
 function openModal(modal){
 	$('#'+modal).addClass("modal-on");
 	$('#content').addClass("blur");
 	$('#menu').addClass("blur");
-	$('#focus').focus();
+	$('#'+modal+'-focus').focus();
 };
-
 
 function closeModal(modal){
 	$('#'+modal).removeClass("modal-on");
