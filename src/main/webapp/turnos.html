@@ -31,11 +31,7 @@
           <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{getTotalTurno(turno.trabajos) | currency}}</td>
           <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{turno.peluquero}}</td>
           <td><input ng-checked="turno.cobrado" ng-click="setCobrado(turno.id)" type="checkbox"></td>
-        
-          <td id={{turno.id}} data-id={{turno.id}} data-ng-click="deleteTurno($event)" class="table-remove" >
-            <i class=material-icons ng-click="newClient()" >remove</i>
-          </td>
-        
+          <td id={{turno.id}} data-id={{turno.id}} data-ng-click="deleteTurno($event)" class="table-remove" ><i class=material-icons ng-click="newClient()" >remove</i></td>
         </tr>
         </tbody>
       </table>
@@ -52,4 +48,3 @@
   <script src="js/clientesController.js" ></script>
 </body>
 </html>
-

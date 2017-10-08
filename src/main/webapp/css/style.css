@@ -245,8 +245,9 @@ form select{
 }
 
 .resume{
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border-color: #EFEFEF
 }
 
 .accept{
