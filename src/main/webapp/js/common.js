@@ -43,3 +43,21 @@ function closeModal(){
 	$('#content').removeClass("blur");
 	$('#menu').removeClass("blur");
 };
+
+
+function openModal(modal){
+	$('#'+modal).addClass("modal-on");
+	$('#content').addClass("blur");
+	$('#menu').addClass("blur");
+	$('#focus').focus();
+};
+
+
+function closeModal(modal){
+	$('#'+modal).removeClass("modal-on");
+	$('#content').removeClass("blur");
+	$('#menu').removeClass("blur");
+};
+
+
+var app = angular.module('figaro', []);

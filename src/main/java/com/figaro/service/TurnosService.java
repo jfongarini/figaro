@@ -56,6 +56,12 @@ public class TurnosService {
 		return turno;
 	}
 
+	public Turno deleteTurno(int turnoId) {
+		Turno turno = getTurno(turnoId);
+		repository.deleteTurno(turno);
+		return turno;
+	}
+	
 
 	private void validateTurno(Turno turno) {
 		if ( turno.getDesde().compareTo(turno.getHasta()) >= 0 )
@@ -92,6 +98,8 @@ public class TurnosService {
 	public void setClienteService(ClientesService clienteService) {
 		ClienteService = clienteService;
 	}
+
+
 
 	
 	

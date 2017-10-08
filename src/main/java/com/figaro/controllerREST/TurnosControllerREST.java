@@ -52,6 +52,12 @@ public class TurnosControllerREST {
 		return new ResponseEntity<List<Turno>>(service.getTurnosDelDia(fecha), HttpStatus.CREATED);
 	}
 	
+	
+	@RequestMapping(value = "turnos/eliminar/{turnoId}",method=RequestMethod.DELETE)
+    public ResponseEntity<Turno> getTurnosDelDia(@PathVariable int turnoId) {
+		return new ResponseEntity<>(service.deleteTurno(turnoId), HttpStatus.OK);
+	}
+	
 	public TurnosService getService() {
 		return service;
 	}
