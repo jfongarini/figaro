@@ -1,4 +1,3 @@
-var app = angular.module('figaro', []);
 app.controller('turnosController', function ($scope, $http) {
     
     $scope.horarios = ["08:00","08:15","08:30","08:45","09:00","09:15","09:30","09:45","10:00","10:15","10:30","10:45","11:00","11:15","11:30","11:45","12:00"     ,"12:15","12:30","12:45","13:00","13:15","13:30","13:45","14:00","14:15","14:30","14:45","15:00","15:15","15:30","15:45","16:00","16:15","16:30","16:45","17:00","17:15","17:30","17:45","18:00","18:15","18:30","18:45","19:00","19:15","19:30","19:45","20:00","20:15","20:30","20:45"];
@@ -17,12 +16,12 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.ngTurno.cobrado = false;
         $scope.isNuevoTurno = true;
         $scope.getAllPeluqueros();
-        openModal();
+        openModal("modal-turnos");
     };
 
     //CLICK FILA TURNO
     $scope.detailTurno = function(event){
-        $scope.discardTurno
+        $scope.discardTurno();
         $scope.isNuevoTurno = false;
         $scope.getAllPeluqueros();
         $scope.turnoId = event.currentTarget.getAttribute("data-id");
@@ -34,7 +33,7 @@ app.controller('turnosController', function ($scope, $http) {
             $scope.trabajosSeleccionados = $scope.ngTurno.trabajos;
             $scope.totalTrabajosSeleccionados=$scope.getTotalTurno($scope.trabajosSeleccionados);
             $scope.update=true;
-            openModal();
+            openModal("modal-turnos");
         });
     };
 
@@ -49,7 +48,7 @@ app.controller('turnosController', function ($scope, $http) {
             .then(function successCallback(response) {
                 $scope.discardTurno();
                 $scope.getTurnos();
-                closeModal();
+                closeModal("modal-turnos");
               }, function errorCallback(response) {
                 $scope.message=response.data.message;
             });
@@ -58,7 +57,7 @@ app.controller('turnosController', function ($scope, $http) {
                 function successCallback(response) {
                     $scope.getTurnos();
                     $scope.discardTurno();
-                    closeModal();
+                    closeModal("modal-turnos");
               }, function errorCallback(response) {
                 $scope.message=response.data.message;
             });
@@ -104,10 +103,17 @@ app.controller('turnosController', function ($scope, $http) {
         return true
     }
 
+    //ELIMINTAR TURNO
+    $scope.deleteTurno = function() {
+        $scope.turnoId = event.currentTarget.getAttribute("data-id");
+        $http.delete('/rest/turnos/eliminar/'+$scope.turnoId).then(function (response) {
+            $scope.getTurnos();
+        });
+    };
+
     //AGREGAR TRABAJOS
-    $scope.addTrabajo = function toggleSelection(trabajo) {
-        var idx = $scope.trabajosSeleccionados.indexOf(trabajo);
-        if (idx == -1) {
+    $scope.addTrabajo = function (trabajo) {
+        if($scope.isSeleccionado(trabajo) === false) {
           trabajo.id = null;
           $scope.totalTrabajosSeleccionados += trabajo.precio;
           $scope.trabajosSeleccionados.push(trabajo);
@@ -115,12 +121,18 @@ app.controller('turnosController', function ($scope, $http) {
     };
 
     //QUITAR TRABAJOS
-    $scope.removeTrabajo = function toggleSelection(trabajo) {
-        var idx = $scope.trabajosSeleccionados.indexOf(trabajo);
-        if (idx > -1) {
-            $scope.totalTrabajosSeleccionados -= trabajo.precio;
-            $scope.trabajosSeleccionados.splice(idx, 1);
-        }
+    $scope.removeTrabajo = function (trabajo) {
+        $scope.trabajosSeleccionados.splice($scope.isSeleccionado(trabajo), 1);
+        $scope.totalTrabajosSeleccionados -= trabajo.precio;
+
+    };
+
+    //TRABAJO ESTA SELECCIONADO
+    $scope.isSeleccionado = function (trabajo) {
+        for(var i = 0; i < $scope.trabajosSeleccionados.length; i++)
+        if ($scope.trabajosSeleccionados[i].descripcion === trabajo.descripcion)
+            return i;
+        return false;
     };
 
     //SET CLIENTE
@@ -172,7 +184,7 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.queryTrabajo ='';
         $scope.message='';
         $scope.update=false;
-        closeModal();
+        closeModal("modal-turnos");
     };
 
     //APRETAR ESCAPE

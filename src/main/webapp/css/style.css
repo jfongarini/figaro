@@ -125,6 +125,10 @@ li a:hover {
     cursor: pointer
 }
 
+.table-remove{
+    width: 5px;
+}
+
 .material-icons{
     margin-right: 8px;
     font-size: 18px;
@@ -172,7 +176,7 @@ li a:hover {
     
 .form-field{
     font-size: 13px;
-    margin-bottom: 15px
+    margin-bottom: 17px
 }
 
 .blur {
@@ -219,6 +223,7 @@ form .button{
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
+    width: 90px;
     border-width: 0;
     outline: none;
     border-radius: 2px;
@@ -240,8 +245,9 @@ form select{
 }
 
 .resume{
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border-color: #EFEFEF
 }
 
 .accept{

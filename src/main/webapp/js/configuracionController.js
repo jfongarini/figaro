@@ -147,10 +147,6 @@ app.controller('configuracionController', function ($scope, $http) {
             });
     };
 
-    $scope.getAllCiudades();
-    $scope.getAllTrabajos();
-    $scope.getAllPeluqueros();
-    $scope.getAllCategorias();
     $scope.ngCiudad={};
     $scope.ngTrabajo={};
     $scope.ngPeluquero={};

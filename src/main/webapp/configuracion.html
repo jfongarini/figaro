@@ -8,23 +8,7 @@
 <#include "/common/menu.html">
 <div id=content class=content>
 
-    <div class="card ciudades">
-      <form ng-submit="addCiudad()">
-        <i class="material-icons">place </i><label class=card-title> CIUDADES</label> <br>
-        <input tipe="text" placeholder="Ciudad" ng-model="ngCiudad.nombre" required>
-        <table id=table>
-          <tbody>
-          <tr id={{ciudad.id}} class=data-row ng-repeat="ciudad in ciudades">
-          <td>{{ciudad.nombre}}</td>
-          <td class=delete ><i class="material-icons" data-id={{ciudad.id}} ng-click="removeCiudad($event)">clear</i></td>
-          </tr>
-          </tbody>
-        </table>
-        <label class=form-message>{{messageCiudad}}</label>
-      </form>
-    </div>
-
-    <div class="card trabajos">
+    <div class="card trabajos" ng-click="getAllTrabajos()">
       <form ng-submit="addTrabajo()">
         <i class="material-icons">content_cut</i><label class=card-title>TRABAJOS</label> <br>
         <input tipe="text" placeholder="Descripci&oacute;n" ng-model="ngTrabajo.descripcion" required>
@@ -35,7 +19,7 @@
           <tr id={{trabajo.id}}  class=data-row  ng-repeat="trabajo in trabajos">
           <td data-id={{trabajo.id}} ng-click="loadTrabajo($event)">{{trabajo.descripcion}}</td>
           <td data-id={{trabajo.id}} ng-click="loadTrabajo($event)" class=trabajo-precio>{{trabajo.precio | currency}}</td>
-          <td class=delete ><i class="material-icons" data-id={{trabajo.id}} ng-click="removeTrabajo($event)">clear</i></td>
+          <td class=delete ><i class="material-icons" data-id={{trabajo.id}} ng-click="removeTrabajo($event)">remove</i></td>
           </tr>
           </tbody>
         </table>
@@ -43,7 +27,23 @@
       </form>
     </div>
 
-    <div class="card peluqueros">
+    <div class="card ciudades" ng-click="getAllCiudades()"> 
+      <form ng-submit="addCiudad()">
+        <i class="material-icons">place </i><label class=card-title> CIUDADES</label> <br>
+        <input tipe="text" placeholder="Ciudad" ng-model="ngCiudad.nombre" required>
+        <table id=table>
+          <tbody>
+          <tr id={{ciudad.id}} class=data-row ng-repeat="ciudad in ciudades">
+          <td>{{ciudad.nombre}}</td>
+          <td class=delete ><i class="material-icons" data-id={{ciudad.id}} ng-click="removeCiudad($event)">remove</i></td>
+          </tr>
+          </tbody>
+        </table>
+        <label class=form-message>{{messageCiudad}}</label>
+      </form>
+    </div>
+
+    <div class="card peluqueros" ng-click="getAllPeluqueros()">
       <form ng-submit="addPeluquero()">
         <i class="material-icons">supervisor_account</i><label class=card-title>PELUQUEROS</label>
         <input tipe="text" placeholder="Nombre" ng-model="ngPeluquero.nombre" required>
@@ -59,7 +59,7 @@
       </form>
     </div>
 
-    <div class="card categorias">
+    <div class="card categorias"  ng-click="getAllCategorias()">
       <form ng-submit="addCategoria()">
         <i class="material-icons">label</i><label class=card-title>CATEGOR&Iacute;AS</label>
         <input tipe="text" placeholder="Nombre" ng-model="ngCategoria.nombre" required>
@@ -67,7 +67,7 @@
           <tbody>
           <tr id={{categoria.id}} class=data-row ng-repeat="categoria in categorias">
           <td>{{categoria.nombre}}</td>
-          <td class=delete ><i class="material-icons" data-id={{categoria.id}} ng-click="removeCategoria($event)">clear</i></td>
+          <td class=delete ><i class="material-icons" data-id={{categoria.id}} ng-click="removeCategoria($event)">remove</i></td>
           </tr>
           </tbody>
         </table>

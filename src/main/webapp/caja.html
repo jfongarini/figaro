@@ -82,36 +82,7 @@
       <label class=banner-label ><i class=material-icons >account_balance_wallet</i> Total: <font ng-class='{green : calculaTotal() >= 0, red: calculaTotal() < 0}'>{{ calculaTotal() | currency }}</font></label>
   </div>
 </div>
-
-<div id=modal class=modal>
-    <div class=modal-content>
-      <form ng-submit="sendMovimiento()">    
-       	<div class=form-field><label>CATEGOR&Iacute;A:</label>     
-          <select ng-model="ngMovimiento.categoria">
-            <option value="{{categoria.nombre}}" ng-repeat="categoria in categorias">{{categoria.nombre}}</option>
-          </select>
-        </div> 
-        <div class=form-field><label>MONTO:</label> <input type="number" ng-model="ngMovimiento.precio"></input></div>
-        
-        <div class=form-field><label>FECHA:</label> <input type="date" ng-model="ngMovimiento.fecha" ng-model-options="{timezone:'UTC'}"></input></div>
-        <div class=form-field><label>TIPO:</label>
-          <input type="radio" name=isGasto ng-model="ngMovimiento.isGasto" ng-value="true" value="true" required> Gasto
-          <input type="radio" name=isGasto ng-model="ngMovimiento.isGasto" ng-value="false" value="false" required> Ingreso
-        </div>
-        <div class=form-field><label>DETALLE:</label>      <input type="text"          ng-model="ngMovimiento.detalle"></input></div>
- 
- 		<div class=buttons>
-          <button class="button accept" type="submit">ACEPTAR</button>
-          <button class="button cancel" type="button" ng-click="discardMovimiento()">CANCELAR</button>
-        </div>
-  
-      </form>
-    </div>
-</div>
-
-
-
-
+<#include "/modals/caja.html">
 <#include "/common/javascript.html">
 <script src="js/movimientosController.js" ></script>
 </body>

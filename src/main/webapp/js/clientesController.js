@@ -1,4 +1,3 @@
-var app = angular.module('figaro', []);
 app.controller('clientesController', function ($scope, $http) {
     
     //OBTENER LISTA DE CLIENTES
@@ -10,8 +9,7 @@ app.controller('clientesController', function ($scope, $http) {
 
     //CLICK NUEVO CLIENTE
     $scope.newClient = function() {
-        $scope.isNuevoCliente = true
-    	openModal();
+    	openModal("modal-clientes");
         $scope.ngCliente={};
         $scope.message='';
     };
@@ -19,23 +17,23 @@ app.controller('clientesController', function ($scope, $http) {
     //CLICK FILA CLIENTE
     $scope.detailClient = function(event){
         $scope.message='';
-        $scope.isNuevoCliente = false
+        $scope.update = true;
         $scope.clienteID = event.currentTarget.getAttribute("data-id");
         $http.get('/rest/clientes/'+$scope.clienteID).then(function (response) {
             $scope.ngCliente = response.data;
-            openModal();
+            openModal("modal-clientes");
 	    });
     };
 
     //CLICK ACEPTAR FORMULARIO
     $scope.sendClient = function() {
-        if($scope.isNuevoCliente === true){
+        if($scope.update == null){
             $scope.ngCliente.fechaIngreso = getToday();
             $scope.ngCliente.ultimaVisita = getToday();
             $http.post('/rest/clientes/alta', $scope.ngCliente)
             .then(function successCallback(response) {
                 $scope.clientes.push(response.data);
-                closeModal();
+                closeModal("modal-clientes");
               }, function errorCallback(response) {
                 $scope.message=response.data.message;
             });
@@ -43,7 +41,7 @@ app.controller('clientesController', function ($scope, $http) {
             $http.put('/rest/clientes/actualizar/'+ $scope.clienteID, $scope.ngCliente).then(
                 function successCallback(response) {
                     $scope.getAll();
-                    closeModal();
+                    closeModal("modal-clientes");
               }, function errorCallback(response) {
                 $scope.message=response.data.message;
             });
@@ -61,7 +59,7 @@ app.controller('clientesController', function ($scope, $http) {
     //DESCARTAR FORMULARIO
     $scope.discardClient = function(event){
         $scope.ngCliente = {};
-        closeModal();
+        closeModal("modal-clientes");
     };
 
     //OBTENER LISTA DE CIUDADES
@@ -74,7 +72,7 @@ app.controller('clientesController', function ($scope, $http) {
     //APRETAR ESCAPE
     document.addEventListener('keyup', function(e) {
         if (e.keyCode == 27) {
-            $scope.discardClient();
+            $scope.discardClient("modal-clientes");
         }
     });
 

@@ -1,4 +1,3 @@
-var app = angular.module('figaro', []);
 app.controller('movimientosController', function ($scope, $http) {
  	 
 	//OBTENER LISTA DE MOVIMIENTOS
@@ -11,7 +10,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	    //CLICK NUEVO MOVIMIENTO
 	    $scope.newMovimiento = function() {
 	        $scope.isNuevoMovimiento = true
-	    	openModal();
+	    	openModal("modal-caja");
 	        $scope.ngMovimiento={};
 	        $scope.ngMovimiento.fecha = new Date(getToday()); 
 	        $scope.message='';
@@ -25,7 +24,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	        $http.get('/rest/movimientos/'+$scope.movimientoID).then(function (response) {
 	            $scope.ngMovimiento = response.data;
 	            $scope.ngMovimiento.fecha = new Date($scope.ngMovimiento.fecha); 
-	            openModal();
+	            openModal("modal-caja");
 		    });
 	    };
 
@@ -41,13 +40,13 @@ app.controller('movimientosController', function ($scope, $http) {
 	                $scope.getAll();
 	            });
 	        }
-	        closeModal();
+	        closeModal("modal-caja");
 	    };
 
 	    //DESCARTAR FORMULARIO
 	    $scope.discardMovimiento = function(event){
 	        $scope.ngMovimiento = {};
-	        closeModal();
+	        closeModal("modal-caja");
 	    };
 
     

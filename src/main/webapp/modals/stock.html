@@ -1,0 +1,14 @@
+ <div id=modal-stock class=modal>
+    <div class=modal-content>
+      <form ng-submit="sendProducto()">
+        <div class=form-field><label>NOMBRE:</label>      <input id=modal-stock-focus type="text"   ng-model="ngProducto.nombre"></input></div>
+        <div class=form-field><label>DESCRIPCION:</label> <input type="text"            ng-model="ngProducto.descripcion"></input></div>
+        <div class=form-field><label>CANTIDAD:</label>    <input type="number"          ng-model="ngProducto.cantidad"></input></div>
+        <div class=form-field><label>MINIMA:</label>      <input type="number"          ng-model="ngProducto.cantidadMinima"></input></div>
+        <div class=buttons>
+          <button class="button accept" type="submit">ACEPTAR</button>
+          <button class="button cancel" type="button" ng-click="discardProducto()">CANCELAR</button>
+        </div>
+      </form>
+    </div>
+  </div>
