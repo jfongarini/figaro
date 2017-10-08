@@ -11,7 +11,7 @@ app.controller('stockController', function ($scope, $http) {
     //CLICK NUEVO PRODUCTO
     $scope.newProducto = function() {
         $scope.isNuevoProducto = true
-    	openModal();
+    	openModal("modal-stock");
         $scope.ngProducto={}; 
     };
 
@@ -21,7 +21,7 @@ app.controller('stockController', function ($scope, $http) {
         $scope.productoID = event.currentTarget.getAttribute("data-id");
         $http.get('/rest/stock/'+$scope.productoID).then(function (response) {
             $scope.ngProducto = response.data;
-            openModal();
+            openModal("modal-stock");
 	    });
     };
 
@@ -37,13 +37,13 @@ app.controller('stockController', function ($scope, $http) {
                 $scope.getAll();
             });
         }
-        closeModal();
+        closeModal("modal-stock");
     };
 
     //DESCARTAR FORMULARIO
     $scope.discardProducto = function(event){
         $scope.ngProducto = {};
-        closeModal();
+        closeModal("modal-stock");
     };
 
     //BUSCAR

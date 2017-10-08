@@ -10,18 +10,18 @@ app.controller('cajaController', function ($scope, $http) {
 
     //CLICK NUEVO Caja
     $scope.newCaja = function() {
-        $scope.isNuevoCaja = true
-    	openModal();
+        $scope.isNuevoCaja = true;
+    	openModal("modal-caja");
         $scope.ngCaja={}; 
     };
 
     //CLICK FILA Caja
     $scope.detailCaja = function(event){
-        $scope.isNuevoCaja = false
+        $scope.isNuevoCaja = false;
         $scope.cajaID = event.currentTarget.getAttribute("data-id");
         $http.get('/rest/caja/'+$scope.cajaID).then(function (response) {
             $scope.ngCaja = response.data;
-            openModal();
+            openModal("modal-caja");
 	    });
     };
 
