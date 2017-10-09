@@ -1,5 +1,6 @@
 package com.figaro.controllerREST;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class MovimientosControllerREST {
 	@RequestMapping(value = "movimientos",method=RequestMethod.GET,produces="application/json")
     public List<Movimiento> getAllMovimiento() {
         return service.getAllMovimiento();
-    }
-	
+    }	
+
 	@RequestMapping(value = "movimientos/{movimientoID}",method=RequestMethod.GET,produces="application/json")
     public Movimiento getMovimiento( @PathVariable int movimientoID) {
         return service.getMovimiento(movimientoID);
@@ -49,6 +50,17 @@ public class MovimientosControllerREST {
     public ResponseEntity<List<Movimiento>> getAllMovimiento(@RequestParam String q) {
         return new ResponseEntity<List<Movimiento>> (service.buscar(q), HttpStatus.CREATED);
     }
+
+	@RequestMapping(value = "movimientos/buscarEntre",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<List<Movimiento>> getAllMovimiento(@RequestParam String q1, @RequestParam String q2 ) {
+        return new ResponseEntity<List<Movimiento>> (service.buscarE(q1,q2),HttpStatus.CREATED);
+        
+    }
+	
+	@RequestMapping(value = "movimientos/eliminar/{movimientoID}",method=RequestMethod.DELETE)	
+    public ResponseEntity<Movimiento> getAllMovimiento(@PathVariable int movimientoID) {
+		return new ResponseEntity<>(service.deleteMovimiento(movimientoID), HttpStatus.OK);
+	}
 	
 	public MovimientosService getService() {
 		return service;

@@ -61,11 +61,21 @@ body{
 }
 
 .bannerBusqueda{
-    width: 95%;
-    margin-bottom: 20px
+	height: 45px;    
+    margin-bottom: 20px;   
+    margin-top: 12px;           
+    font-size: 13px;
 }
 
-table, .banner{
+.banner-labelBusqueda{    
+    text-align: right;
+    margin-top: 12px;
+    margin-right: 5px;
+    margin-left: 20px;    
+    font-size: 13px;
+}
+
+table, .banner .bannerBusqueda{
     width: 95%
 }
 

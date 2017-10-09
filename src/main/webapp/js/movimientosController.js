@@ -64,6 +64,14 @@ app.controller('movimientosController', function ($scope, $http) {
 	        }
 	    });
 	    
+	  //ELIMINTAR MOVIMIENTO
+	    $scope.deleteMovimiento = function(event) {	       
+	        $scope.movimientoID = event.currentTarget.getAttribute("data-id");
+	        $http.delete('/rest/movimientos/eliminar/'+$scope.movimientoID).then(function (response) {	           
+	            $scope.getAll();
+	        });
+	    };
+	    
 	    //CALCULAR EL TOTAL DE CAJA
 	    $scope.calculaTotal = function(){
 	        var total = 0;
@@ -91,7 +99,22 @@ app.controller('movimientosController', function ($scope, $http) {
 	        })
 	    }
 	    
-	  //FILTRO MES
+	    //FILTRO SEMANA
+	    $scope.searchMovimientoEntreDias = function() {	    	
+	    	var dStart = new Date($scope.search);
+	    	var dEnd = new Date($scope.search);
+	    	dStart.setDate(dStart.getDate() - 3);
+	    	dEnd.setDate(dEnd.getDate() + 3);
+	    	var q1 = getStringDate(dStart); 
+	    	var q2 = getStringDate(dEnd);	    
+	    	
+	        $http.get('/rest/movimientos/buscarEntre',{params: { q1, q2 }})		        
+	        .then(function successCallback(response) {	  	        	
+	            $scope.movimientos = response.data;	            
+	        })
+	    }
+	    
+	    //FILTRO MES
 	    $scope.searchMovimientoMes = function() {	    	   	
 	        $http.get('/rest/movimientos/buscar',{params: { q: getStringMonth($scope.search) }})		        
 	        .then(function successCallback(response) {	  	        	

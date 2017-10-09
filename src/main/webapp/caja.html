@@ -12,7 +12,7 @@
       <label class=banner-label ><i class=material-icons>more_vert</i></label>      
       <label class=banner-label ng-click="ShowHideDia()"><i class=material-icons>search</i> D&Iacute;A </label>    
       <label class=banner-label ><i class=material-icons >more_vert</i></label>
-      <label class=banner-label ng-click="ShowHideEntreDia()"><i class=material-icons >search</i> D&Iacute;AS ENTRE </label>
+      <label class=banner-label ng-click="ShowHideEntreDia()"><i class=material-icons >search</i> SEMANA </label>
       <label class=banner-label ><i class=material-icons >more_vert</i></label>
       <label class=banner-label ng-click="ShowHideMes()"><i class=material-icons >search</i> MES </label>
       <label class=banner-label ><i class=material-icons >more_vert</i></label>
@@ -21,45 +21,33 @@
 
   
 <div class=bannerBusqueda ng-hide = "IsHiddenDia">
-  	<div>
-   		<label class=banner-label> B&Uacute;SQUEDA POR D&Iacute;A: </label>
-   	</div>
-   	<div>
-      <input class=input-banner type="date" ng-model="search" ng-change="searchMovimientoDia()"></input>
-    </div> 
-    <div class=buttons>          
-          <button class="bb" type="button" ng-click="ShowHideDia()">CANCELAR</button>
+  	<div class=banner>   		
+  		<label class=banner-labelBusqueda ng-click="ShowHideDia()"><i class=material-icons >clear</i></label>
+   		<label class=banner-labelBusqueda> B&Uacute;SQUEDA POR D&Iacute;A: </label>   	
+      	<input class=banner-labelBusqueda type="date" ng-model="search" ng-change="searchMovimientoDia()"></input> 
     </div>
 </div>
 
 <div class=bannerBusqueda ng-hide = "IsHiddenEntreDia">
-  	<div>   		
-  		<label ng-click="ShowHideEntreDia()"><i class=material-icons >clear</i></label>
-   		<label> B&Uacute;SQUEDA ENTRE:</label>   	
-      	<input type="date" ng-model="search" ng-change="searchMovimiento()"></input>
-      	<label> Y:</label>   		
-   		<input type="date" ng-model="search" ng-change="searchMovimiento()"></input>           
-        
+  	<div class=banner>   		
+  		<label class=banner-labelBusqueda ng-click="ShowHideEntreDia()"><i class=material-icons >clear</i></label>
+   		<label class=banner-labelBusqueda> BUSCAR SEMANA:</label>   	
+      	<input class=banner-labelBusqueda type="week" ng-model="search" ng-change="searchMovimientoEntreDias()"></input>
     </div>
 </div>
 
 <div class=bannerBusqueda ng-hide = "IsHiddenMes">
-  	<div>
-   		<label class=banner-label> B&Uacute;SQUEDA POR MES: </label>
-   	</div>
-   	<div>
-      <input class=input-banner type="month" ng-model="search" ng-change="searchMovimientoMes()"></input>
-    </div> 
-    <div class=buttons>          
-          <button class="bb" type="button" ng-click="ShowHideMes()">CANCELAR</button>
-    </div>
+	<div class=banner>   		
+  		<label class=banner-labelBusqueda ng-click="ShowHideMes()"><i class=material-icons >clear</i></label>
+   		<label class=banner-labelBusqueda> B&Uacute;SQUEDA POR MES: </label>   	
+      	<input class=banner-labelBusqueda type="month" ng-model="search" ng-change="searchMovimientoMes()"></input>
+    </div>  
 </div>
   
   <table id=table class=main-table>
 
     <thead>
-      <tr>
-      	  
+      <tr>      	  
           <th>FECHA</th>
           <th>CATEGORIA</th>
           <th>MONTO</th>
@@ -74,7 +62,7 @@
         <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)">{{movimiento.categoria}}</td>
 	    <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)"> <font ng-class='{green : !movimiento.isGasto, red: movimiento.isGasto}'>{{movimiento.precio | currency }}</font></td>
         <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)">{{movimiento.detalle}}</td>   
-        <td class="tachotd"><label><i class="material-icons tachoi" >clear</i></label></td>                
+        <td class="tachotd" id={{movimiento.id}} data-id={{movimiento.id}} data-ng-click="deleteMovimiento($event)"><label><i class="material-icons tachoi" >clear</i></label></td>                
       </tr>      
     </tbody>
   </table>
