@@ -22,6 +22,17 @@ body{
     font-size: 13px;
 }
 
+
+.banner-title{
+    float: left;
+    text-align: right;
+    margin-top: 12px;
+    margin-right: 5px;
+    margin-left: 20px;    
+    font-size: 16px;
+}
+
+
 .input-banner {
     font-family: 'Roboto', sans-serif;
     font-size: 13px;
@@ -69,6 +80,11 @@ table, .banner{
     width: 95%
 }
 
+
+table {
+    border-collapse: collapse;
+}
+
 .main-table{
     text-align: left;
     background-color: white;
@@ -83,6 +99,8 @@ table>tbody>tr:nth-child(odd) {
 table tr{
     height: 30px
 }
+
+
 
 tr:hover td {
     background-color: #292961;
