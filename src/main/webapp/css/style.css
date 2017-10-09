@@ -90,6 +90,11 @@ tr:hover td {
     cursor: pointer
 }
 
+tr:hover a {
+    color: white;
+    cursor: pointer
+}
+
 td,th{
     padding-left: 8px
 }
@@ -123,10 +128,6 @@ li a:hover {
     background-color: #6666c4;
     color: #FFFFFF;
     cursor: pointer
-}
-
-.table-remove{
-    width: 5px;
 }
 
 .material-icons{
@@ -241,16 +242,12 @@ form select{
     border-left-width: 0px
 }
 
-form a:link {
+.cliente-link {
     color: #292961;
     font-weight: 800;
     text-decoration: none;
 }
 
-form a:visited {
-    color: #292961;
-    text-decoration: none;
-}
 
 
 .time-input{
