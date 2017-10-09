@@ -31,8 +31,14 @@ public class TurnosControllerREST {
 	}
 	
 	@RequestMapping(value = "turnos/{turnoId}",method=RequestMethod.GET,produces="application/json")
-    public Turno getTurno( @PathVariable int turnoId) {
-        return service.getTurno(turnoId);
+    public ResponseEntity<Turno> getTurno( @PathVariable int turnoId) {
+		return new ResponseEntity<Turno>(service.getTurno(turnoId), HttpStatus.OK);
+        
+    }
+	
+	@RequestMapping(value = "turnos/cliente/{clienteId}",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<List<Turno>> getTurnosCliente( @PathVariable int clienteId) {
+		return new ResponseEntity<List<Turno>>(service.getTurnosCliente(clienteId), HttpStatus.OK);
     }
 	
 	@RequestMapping(value = "turnos/actualizar/{turnoId}",method=RequestMethod.PUT)

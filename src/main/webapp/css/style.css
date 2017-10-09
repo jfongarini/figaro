@@ -218,6 +218,7 @@ form .buttons{
 
 form .button{
     cursor: pointer;
+    font-weight: 800;
     font-family: 'Roboto', sans-serif;
     position: relative;
     margin-left: auto;
@@ -239,6 +240,18 @@ form select{
     border-right-width: 0px;
     border-left-width: 0px
 }
+
+form a:link {
+    color: #292961;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+form a:visited {
+    color: #292961;
+    text-decoration: none;
+}
+
 
 .time-input{
     width: 80px;

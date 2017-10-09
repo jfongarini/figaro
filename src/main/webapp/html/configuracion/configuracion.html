@@ -8,7 +8,7 @@
 <#include "/common/menu.html">
 <div id=content class=content>
 
-    <div class="card trabajos" ng-click="getAllTrabajos()">
+    <div class="card trabajos">
       <form ng-submit="addTrabajo()">
         <i class="material-icons">content_cut</i><label class=card-title>TRABAJOS</label> <br>
         <input tipe="text" placeholder="Descripci&oacute;n" ng-model="ngTrabajo.descripcion" required>
@@ -27,7 +27,7 @@
       </form>
     </div>
 
-    <div class="card ciudades" ng-click="getAllCiudades()"> 
+    <div class="card ciudades"> 
       <form ng-submit="addCiudad()">
         <i class="material-icons">place </i><label class=card-title> CIUDADES</label> <br>
         <input tipe="text" placeholder="Ciudad" ng-model="ngCiudad.nombre" required>
@@ -43,7 +43,7 @@
       </form>
     </div>
 
-    <div class="card peluqueros" ng-click="getAllPeluqueros()">
+    <div class="card peluqueros">
       <form ng-submit="addPeluquero()">
         <i class="material-icons">supervisor_account</i><label class=card-title>PELUQUEROS</label>
         <input tipe="text" placeholder="Nombre" ng-model="ngPeluquero.nombre" required>
@@ -59,7 +59,7 @@
       </form>
     </div>
 
-    <div class="card categorias"  ng-click="getAllCategorias()">
+    <div class="card categorias">
       <form ng-submit="addCategoria()">
         <i class="material-icons">label</i><label class=card-title>CATEGOR&Iacute;AS</label>
         <input tipe="text" placeholder="Nombre" ng-model="ngCategoria.nombre" required>

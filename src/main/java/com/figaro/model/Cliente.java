@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class Cliente extends Persona {
 	
-
 	private Date ultimaVisita;
 
 	public Date getUltimaVisita() {

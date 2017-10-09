@@ -58,6 +58,7 @@ app.controller('clientesController', function ($scope, $http) {
 
     //DESCARTAR FORMULARIO
     $scope.discardClient = function(event){
+        $scope.update = null;
         $scope.ngCliente = {};
         closeModal("modal-clientes");
     };

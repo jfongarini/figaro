@@ -26,44 +26,58 @@ public class TurnosService {
 	private TurnosRepository repository;
 	
 	public Turno saveTurno(Turno turno) {
+		LOGGER.info("Guardando un nuevo turno para: " + turno.getDesde() +" - "+turno.getHasta() +" " + turno.getPeluquero());
 		validateTurno(turno);
 		int newID = getRepository().saveTurno(turno);
 		turno.setId(newID);
+		LOGGER.info("Se guardo el nuevo turno con ID: " + turno.getId());
 		return turno ;  
 	}
 	
 	public Turno getTurno(int turnoId) {
+		LOGGER.debug("Obteniendo el turno con ID: " +  turnoId);
 		return repository.getTurno(turnoId);
 	}
 	
+	public List<Turno> getTurnosCliente(int clienteId) {
+		LOGGER.debug("Obteniendo lost turnos para el cliente con ID: " +  clienteId);
+		return repository.getTurnosCliente(clienteId);
+	}
+
+	
 	public Turno setCobrado(int turnoId) {
+		LOGGER.info("Cobrando el Turno con ID: " + turnoId);
 		Turno turno = getTurno(turnoId);
 		turno.setCobrado(!turno.getCobrado());
 		Cliente cliente = turno.getCliente();
 		cliente.setUltimaVisita(turno.getDesde());
 		ClienteService.updateCliente(cliente);
 		repository.updateTurno(turno);
+		LOGGER.info("El turno se cobró correctamente");
 		return turno;
 	}
 
-	
 	public Turno updateTurno(Turno turno) {
+		LOGGER.info("Actualizando el Turno con ID: " + turno.getId());
 		validateTurno(turno);
 		Turno old = getTurno(turno.getId());
-		LOGGER.info("Actualizando el Turno con ID: " + old.getId()+" con:"+ turno.toString());
 		old.update(turno);
 		repository.updateTurno(old);
+		LOGGER.info("El turno se actualizó correctamente");
 		return turno;
 	}
 
 	public Turno deleteTurno(int turnoId) {
 		Turno turno = getTurno(turnoId);
+		LOGGER.info("Eliminando turno para: " + turno.getDesde() +" - "+turno.getHasta() +" " + turno.getPeluquero());
 		repository.deleteTurno(turno);
+		LOGGER.info("El turno se eliminó correctamente");
 		return turno;
 	}
 	
 
 	private void validateTurno(Turno turno) {
+		LOGGER.debug("Validando el Turno: " + turno.getDesde() +" - "+turno.getHasta() +" " + turno.getPeluquero() );
 		if ( turno.getDesde().compareTo(turno.getHasta()) >= 0 )
 			throw new HorarioInvalidoException();
 		List<Turno> turnosDelDia = searchTurno(turno.getDesde());
@@ -98,6 +112,7 @@ public class TurnosService {
 	public void setClienteService(ClientesService clienteService) {
 		ClienteService = clienteService;
 	}
+
 
 
 

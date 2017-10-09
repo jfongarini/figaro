@@ -2,12 +2,24 @@ app.controller('turnosController', function ($scope, $http) {
     
     $scope.horarios = ["08:00","08:15","08:30","08:45","09:00","09:15","09:30","09:45","10:00","10:15","10:30","10:45","11:00","11:15","11:30","11:45","12:00"     ,"12:15","12:30","12:45","13:00","13:15","13:30","13:45","14:00","14:15","14:30","14:45","15:00","15:15","15:30","15:45","16:00","16:15","16:30","16:45","17:00","17:15","17:30","17:45","18:00","18:15","18:30","18:45","19:00","19:15","19:30","19:45","20:00","20:15","20:30","20:45"];
 
-    //OBTENER LISTA DE TURNOS
-    $scope.getAll = function() {
-        $http.get("/rest/turnos").then(function (response) {
-            $scope.clientes = response.data;
+    //INIT TURNOS
+    $scope.init = function(){
+        $scope.ngDateTurno = stringToDate(getToday());
+        $scope.getTurnos();
+    }
+
+
+    //INIT TURNOS DE CLIENTE
+    $scope.getTurnosDeCliente = function(){
+        var clienteId = window.location.href.split("/").pop();
+        $http.get('/rest/turnos/cliente/'+clienteId)
+        .then(function successCallback(response) {
+            $scope.turnos = response.data;
+            $scope.cliente = ( $scope.turnos.length > 0) ? ($scope.turnos[0].cliente.nombre +' '+ $scope.turnos[0].cliente.apellido) : "Todavía no existen turnos para este cliente.";
+            $scope.getTotalDiario($scope.turnos);
         });
-    };
+    }
+
 
     //CLICK NUEVO TURNO
     $scope.newTurno = function() {
@@ -66,7 +78,7 @@ app.controller('turnosController', function ($scope, $http) {
 
     //OBTENER TURNOS
     $scope.getTurnos = function() {
-        $http.get('rest/turnos',{params:{fecha: getStringDate($scope.ngDateTurno)}})
+        $http.get('/rest/turnos',{params:{fecha: getStringDate($scope.ngDateTurno)}})
         .then(function successCallback(response) {
             $scope.turnos = response.data;
             $scope.getTotalDiario($scope.turnos);
@@ -142,7 +154,7 @@ app.controller('turnosController', function ($scope, $http) {
     
     //TOGGLE COBRADO
     $scope.setCobrado = function (turnoId) {
-       $http.patch('rest/turnos/'+turnoId+'/cobrado');
+       $http.patch('/rest/turnos/'+turnoId+'/cobrado');
     }
 
     //BUSCAR CLIENTE
@@ -159,7 +171,7 @@ app.controller('turnosController', function ($scope, $http) {
     $scope.searchTrabajo = function() {
         if ($scope.queryTrabajo == "") 
             return $scope.trabajos=[];       
-        $http.get('rest/configuracion/trabajos/buscar',{params: { search: $scope.queryTrabajo }})
+        $http.get('/rest/configuracion/trabajos/buscar',{params: { search: $scope.queryTrabajo }})
         .then(function successCallback(response) {
             $scope.trabajos = response.data;
         });  
@@ -198,7 +210,8 @@ app.controller('turnosController', function ($scope, $http) {
     $scope.totalDiario=0;
     $scope.turnos={};
     $scope.ngTurno={};
-    $scope.ngDateTurno = stringToDate(getToday());
-    $scope.getTurnos();
     
+
+    
+   
 });

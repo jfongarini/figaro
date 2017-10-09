@@ -1,4 +1,3 @@
-var app = angular.module('figaro', []);
 app.controller('configuracionController', function ($scope, $http) {
   
     //AGREGAR CIUDAD
@@ -147,6 +146,10 @@ app.controller('configuracionController', function ($scope, $http) {
             });
     };
 
+    $scope.getAllTrabajos();
+    $scope.getAllPeluqueros();
+    $scope.getAllCiudades();
+    $scope.getAllCategorias();
     $scope.ngCiudad={};
     $scope.ngTrabajo={};
     $scope.ngPeluquero={};
