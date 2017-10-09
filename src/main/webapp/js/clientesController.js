@@ -60,7 +60,9 @@ app.controller('clientesController', function ($scope, $http) {
     $scope.discardClient = function(event){
         $scope.update = null;
         $scope.ngCliente = {};
-        closeModal("modal-clientes");
+        
+        
+        ($scope.clientesScreen == null) ? $('#modal-clientes').removeClass("modal-on-top") : closeModal("modal-clientes");
     };
 
     //OBTENER LISTA DE CIUDADES
