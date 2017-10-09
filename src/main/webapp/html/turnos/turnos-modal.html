@@ -3,7 +3,7 @@
       <form ng-submit="sendTurno()">      
         <div class=form-field><label>CLIENTE:</label>
           <input id=modal-turnos-focus tipe="text" placeholder="Buscar..." ng-model="queryCliente" ng-keyup="searchCliente()">
-          <i class="material-icons add" ng-controller=clientesController ng-click="newClient()" >person_add</i>
+          <i class="material-icons add" ng-controller=clientesController ng-init="modalOpen=true" ng-click="newClient()" >person_add</i>
         </div>
         <div class="form-field add" ng-click="setCliente(cliente)" ng-repeat="cliente in clientes" >
           <i class="material-icons add"  ng-value=cliente >add</i>{{cliente.nombre}} {{cliente.apellido}}

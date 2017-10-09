@@ -9,10 +9,10 @@ app.controller('clientesController', function ($scope, $http) {
 
     //CLICK NUEVO CLIENTE
     $scope.newClient = function() {
-    	openModal("modal-clientes");
         $scope.ngCliente={};
         $scope.message='';
-    };
+        ($scope.modalOpen == true) ? $('#modal-clientes').addClass("modal-on-top") :  openModal("modal-clientes");
+    }
 
     //CLICK FILA CLIENTE
     $scope.detailClient = function(event){
