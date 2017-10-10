@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,7 +53,7 @@ public class MovimientosControllerREST {
     }
 
 	@RequestMapping(value = "movimientos/buscarEntre",method=RequestMethod.GET,produces="application/json")
-    public ResponseEntity<List<Movimiento>> getAllMovimiento(@RequestParam String q1, @RequestParam String q2 ) {
+    public ResponseEntity<List<Movimiento>> getAllMovimiento(@RequestParam  @DateTimeFormat(pattern="yyyy-MM-dd") Date q1, @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date q2 ) {
         return new ResponseEntity<List<Movimiento>> (service.buscarE(q1,q2),HttpStatus.CREATED);
         
     }

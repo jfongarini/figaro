@@ -50,9 +50,9 @@ public class MovimientosRepository extends AbstractRepository{
 	}
 	
 	@SuppressWarnings({ "unchecked" })
-	public List<Movimiento> buscarE(String search1, String search2) {
+	public List<Movimiento> buscarE(Date search1, Date search2) {
 				
-		Query<Movimiento> query = getCurrentSession().createQuery( "FROM Movimiento m WHERE m.fecha BETWEEN CONCAT(?1) AND CONCAT(?2)");
+		Query<Movimiento> query = getCurrentSession().createQuery( "FROM Movimiento m WHERE m.fecha BETWEEN ?1 AND ?2");
 	    query.setParameter(1, search1);
 	    query.setParameter(2, search2);
 	    return query.getResultList();

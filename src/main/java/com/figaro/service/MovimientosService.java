@@ -58,7 +58,7 @@ public class MovimientosService {
 		return repository.buscar(search);
 	}
 	
-	public List<Movimiento> buscarE(String search1, String search2) {		
+	public List<Movimiento> buscarE(Date search1, Date search2) {		
 		return repository.buscarE(search1,search2);
 	}
 	
