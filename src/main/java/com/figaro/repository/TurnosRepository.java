@@ -30,7 +30,7 @@ public class TurnosRepository extends AbstractRepository{
 	}
 	
 	public List<Turno> getTurnosCliente(int clienteId) {
-		return getCurrentSession().createQuery( "FROM Turno AS t WHERE t.cliente.id = :clienteId ORDER by t.desde DESC")
+		return getCurrentSession().createQuery( "FROM Turno AS t WHERE t.cliente.id = :clienteId ORDER BY t.desde DESC")
 				.setParameter("clienteId", clienteId)
 				.list();
 	}

@@ -10,7 +10,7 @@
     <div class=banner>
         <label class="banner-title" >{{cliente}}</label>
     </div>
-    <table id=table class="main-table banner">
+    <table ng-if="turnos.length > 0"  id=table class="main-table banner">
         <thead>
           <tr>
               <th>FECHA</th>
@@ -30,7 +30,7 @@
         </tr>
         </tbody>
       </table>
-      <div class=banner>
+      <div ng-if="turnos.length > 0" class=banner>
           <label class=banner-label >{{getTotalDiario(turnos) | currency}}</label>
       </div>
   </div>
