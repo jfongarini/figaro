@@ -25,13 +25,13 @@ public class ClientesControllerREST {
 	private ClientesService service;
 	
 	@RequestMapping(value = "clientes",method=RequestMethod.GET,produces="application/json")
-    public List<Cliente> getAllClientes() {
-        return service.getAllClientes();
+    public ResponseEntity<List<Cliente>> getAllClientes() {
+        return new ResponseEntity<List<Cliente>>(service.getAllClientes(), HttpStatus.OK);
     }
 	
 	@RequestMapping(value = "clientes/{clienteID}",method=RequestMethod.GET,produces="application/json")
-    public Cliente getCliente( @PathVariable int clienteID) {
-        return service.getCliente(clienteID);
+    public ResponseEntity<Cliente> getCliente( @PathVariable int clienteID) {
+		return new ResponseEntity<Cliente>(service.getCliente(clienteID), HttpStatus.OK);
     }
 	
 	@RequestMapping(value = "clientes/alta",method=RequestMethod.POST)
@@ -46,8 +46,8 @@ public class ClientesControllerREST {
 	}
 
 	@RequestMapping(value = "clientes/buscar",method=RequestMethod.GET,produces="application/json")
-    public List<Cliente> searchClientes(@RequestParam String search) {
-        return service.buscar(search);
+    public ResponseEntity<List<Cliente>> searchClientes(@RequestParam String search) {
+		return new ResponseEntity<List<Cliente>>(service.buscar(search), HttpStatus.OK);
     }
 	
 	public ClientesService getService() {

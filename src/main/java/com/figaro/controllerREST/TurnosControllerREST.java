@@ -1,9 +1,13 @@
 package com.figaro.controllerREST;
 
+import java.util.Date;
+
 import java.util.List;
 
+import static com.figaro.util.Constant.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,7 +58,7 @@ public class TurnosControllerREST {
 	
 	
 	@RequestMapping(value = "turnos",method=RequestMethod.GET)
-    public ResponseEntity<List<Turno>> getTurnosDelDia(@RequestParam String fecha) {
+    public ResponseEntity<List<Turno>> getTurnosDelDia(@RequestParam @DateTimeFormat(pattern=DATE_FORMAT) Date fecha) {
 		return new ResponseEntity<List<Turno>>(service.getTurnosDelDia(fecha), HttpStatus.CREATED);
 	}
 	

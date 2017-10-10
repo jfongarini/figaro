@@ -1,7 +1,5 @@
 package com.figaro.service;
 
-import static com.figaro.util.Utils.stringToDate;
-
 import java.util.Date;
 import java.util.List;
 
@@ -90,8 +88,9 @@ public class TurnosService {
 			throw new TurnoOcupadoException();
 	}
 	
-	public List<Turno> getTurnosDelDia(String fecha) {
-		return searchTurno(stringToDate(fecha));
+	public List<Turno> getTurnosDelDia(Date fecha) {
+		LOGGER.info("Obteniendo turnos del dia: " + fecha );
+		return searchTurno(fecha);
 	}
 
 	public List<Turno> searchTurno(Date desde) {
