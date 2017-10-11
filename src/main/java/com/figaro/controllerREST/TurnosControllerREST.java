@@ -1,10 +1,10 @@
 package com.figaro.controllerREST;
 
-import java.util.Date;
+import static com.figaro.util.Constants.*;
 
+import java.util.Date;
 import java.util.List;
 
-import static com.figaro.util.Constant.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;

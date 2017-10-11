@@ -21,6 +21,10 @@ public class MovimientosRepository extends AbstractRepository{
 		return (Movimiento) getCurrentSession().get(Movimiento.class, id);
 	}
 
+	public void deleteMovimiento(Movimiento movimiento){
+		getCurrentSession().delete(movimiento);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Movimiento> getAll() {
 		return getCurrentSession().createQuery("from Movimiento").list();

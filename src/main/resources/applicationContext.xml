@@ -187,6 +187,11 @@
 		<property name="repository">
 			<ref bean="TurnosRepository" />
 		</property>
+		
+		<property name="movimientosRepository">
+			<ref bean="MovimientosRepository" />
+		</property>
+		
 	</bean>
 
 	<bean id="TurnosRepository"	class="com.figaro.repository.TurnosRepository">

@@ -3,7 +3,7 @@ package com.figaro.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import static com.figaro.util.Constants.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Turno {
@@ -11,11 +11,12 @@ public class Turno {
 	private int id;
 	private Cliente cliente;
 	private String peluquero;
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm")
+	@JsonFormat(pattern=DATE_TIME_FORMAT)
 	private Date desde;
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm")
+	@JsonFormat(pattern=DATE_TIME_FORMAT)
 	private Date hasta;
 	private Boolean cobrado;
+	private Movimiento movimiento;
 	private List<Trabajo> trabajos;
 	
 	public Cliente getCliente() {
@@ -67,6 +68,7 @@ public class Turno {
 		this.desde = turno.getDesde();
 		this.hasta = turno.getHasta();
 		this.cobrado = turno.getCobrado();
+		this.movimiento = turno.getMovimiento();
 		this.trabajos.removeAll(new ArrayList<Trabajo>(this.trabajos));
 		for(Trabajo t : turno.getTrabajos())
 			t.setId(null);
@@ -91,5 +93,13 @@ public class Turno {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public Movimiento getMovimiento() {
+		return movimiento;
+	}
+
+	public void setMovimiento(Movimiento movimiento) {
+		this.movimiento = movimiento;
 	}
 }

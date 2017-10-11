@@ -1,5 +1,6 @@
 package com.figaro.service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import com.figaro.exception.HorarioInvalidoException;
 import com.figaro.exception.TurnoOcupadoException;
 import com.figaro.model.Cliente;
+import com.figaro.model.Movimiento;
+import com.figaro.model.Trabajo;
 import com.figaro.model.Turno;
+import com.figaro.repository.MovimientosRepository;
 import com.figaro.repository.TurnosRepository;
 
 public class TurnosService {
@@ -22,6 +26,8 @@ public class TurnosService {
 	private ClientesService ClienteService;
 	
 	private TurnosRepository repository;
+	
+	private MovimientosRepository movimientosRepository;
 	
 	public Turno saveTurno(Turno turno) {
 		LOGGER.info("Guardando un nuevo turno para: " + turno.getDesde() +" - "+turno.getHasta() +" " + turno.getPeluquero());
@@ -44,14 +50,14 @@ public class TurnosService {
 
 	
 	public Turno setCobrado(int turnoId) {
-		LOGGER.info("Cobrando el Turno con ID: " + turnoId);
+		LOGGER.info("Modificando cobro del Turno con ID: " + turnoId);
 		Turno turno = getTurno(turnoId);
 		turno.setCobrado(!turno.getCobrado());
+		turno.setMovimiento(generateMovimiento(turno));
+		repository.updateTurno(turno);
 		Cliente cliente = turno.getCliente();
 		cliente.setUltimaVisita(turno.getDesde());
 		ClienteService.updateCliente(cliente);
-		repository.updateTurno(turno);
-		LOGGER.info("El turno se cobró correctamente");
 		return turno;
 	}
 
@@ -60,11 +66,32 @@ public class TurnosService {
 		validateTurno(turno);
 		Turno old = getTurno(turno.getId());
 		old.update(turno);
+		turno.setMovimiento(generateMovimiento(turno));
 		repository.updateTurno(old);
 		LOGGER.info("El turno se actualizó correctamente");
 		return turno;
 	}
 
+	private Movimiento generateMovimiento(Turno turno) {
+		if (null != turno.getMovimiento()) {
+			//movimientosRepository.deleteMovimiento(turno.getMovimiento());
+		}
+		if (!turno.getCobrado())
+			return null;
+		Movimiento movimiento = new Movimiento();
+		movimiento.setCategoria("Turnos");
+		movimiento.setDetalle(turno.getCliente().getNombre()+" "+turno.getCliente().getNombre()) ;
+		movimiento.setIsGasto(false);
+		movimiento.setFecha(turno.getHasta());
+		BigDecimal precio = new BigDecimal(0);
+		for (Trabajo t : turno.getTrabajos())
+			precio = precio.add(t.getPrecio());
+		movimiento.setPrecio(precio);
+		getMovimientosRepository().saveMovimiento(movimiento);
+		LOGGER.info("El turno se cobró correctamente");
+		return movimiento;
+	}
+	
 	public Turno deleteTurno(int turnoId) {
 		Turno turno = getTurno(turnoId);
 		LOGGER.info("Eliminando turno para: " + turno.getDesde() +" - "+turno.getHasta() +" " + turno.getPeluquero());
@@ -110,6 +137,14 @@ public class TurnosService {
 	}
 	public void setClienteService(ClientesService clienteService) {
 		ClienteService = clienteService;
+	}
+
+	public MovimientosRepository getMovimientosRepository() {
+		return movimientosRepository;
+	}
+
+	public void setMovimientosRepository(MovimientosRepository movimientosRepository) {
+		this.movimientosRepository = movimientosRepository;
 	}
 
 
