@@ -64,31 +64,26 @@ public class TurnosService {
 	public Turno updateTurno(Turno turno) {
 		LOGGER.info("Actualizando el Turno con ID: " + turno.getId());
 		validateTurno(turno);
+		turno.setMovimiento(generateMovimiento(turno));
 		Turno old = getTurno(turno.getId());
 		old.update(turno);
-		turno.setMovimiento(generateMovimiento(turno));
 		repository.updateTurno(old);
 		LOGGER.info("El turno se actualizó correctamente");
 		return turno;
 	}
 
 	private Movimiento generateMovimiento(Turno turno) {
-		if (null != turno.getMovimiento()) {
-			//movimientosRepository.deleteMovimiento(turno.getMovimiento());
-		}
 		if (!turno.getCobrado())
 			return null;
 		Movimiento movimiento = new Movimiento();
 		movimiento.setCategoria("Turnos");
-		movimiento.setDetalle(turno.getCliente().getNombre()+" "+turno.getCliente().getNombre()) ;
+		movimiento.setDetalle(turno.getCliente().getNombre()+" "+turno.getCliente().getApellido()) ;
 		movimiento.setIsGasto(false);
 		movimiento.setFecha(turno.getHasta());
 		BigDecimal precio = new BigDecimal(0);
 		for (Trabajo t : turno.getTrabajos())
 			precio = precio.add(t.getPrecio());
 		movimiento.setPrecio(precio);
-		getMovimientosRepository().saveMovimiento(movimiento);
-		LOGGER.info("El turno se cobró correctamente");
 		return movimiento;
 	}
 	

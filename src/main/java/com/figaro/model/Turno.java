@@ -73,6 +73,9 @@ public class Turno {
 		for(Trabajo t : turno.getTrabajos())
 			t.setId(null);
 		this.trabajos.addAll(turno.getTrabajos());
+		this.movimiento = turno.getMovimiento();
+		if(this.movimiento != null) this.movimiento.setId(null);
+		
 	}
 	@Override
 	public int hashCode() {

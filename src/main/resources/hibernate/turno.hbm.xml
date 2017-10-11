@@ -12,7 +12,7 @@
      	<property name="desde"	column="DESDE"	type="java.sql.Timestamp"/>
      	<property name="hasta"	column="HASTA"	type="java.sql.Timestamp"/>
      	<property name="cobrado"	column="COBRADO"	type="boolean"/>
-     	<many-to-one name="movimiento" class="com.figaro.model.Movimiento" lazy="false" fetch="select">
+     	<many-to-one name="movimiento" unique="true"  cascade="all-delete-orphan" class="com.figaro.model.Movimiento" lazy="false"  fetch="select">
             <column name="ID_MOVIMIENTO" />
         </many-to-one>
      	<bag name="trabajos" cascade="all-delete-orphan"  lazy="false" fetch="select" >

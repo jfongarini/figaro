@@ -1,4 +1,16 @@
 app.controller('configuracionController', function ($scope, $http) {
+
+     //INIT CONFIGURACION
+    $scope.init = function(){
+        $scope.getAllTrabajos();
+        $scope.getAllPeluqueros();
+        $scope.getAllCiudades();
+        $scope.getAllCategorias();
+        $scope.ngCiudad={};
+        $scope.ngTrabajo={};
+        $scope.ngPeluquero={};
+        $scope.ngCategoria={};
+    }
   
     //AGREGAR CIUDAD
     $scope.addCiudad = function() {
@@ -146,12 +158,7 @@ app.controller('configuracionController', function ($scope, $http) {
             });
     };
 
-    $scope.getAllTrabajos();
-    $scope.getAllPeluqueros();
-    $scope.getAllCiudades();
-    $scope.getAllCategorias();
-    $scope.ngCiudad={};
-    $scope.ngTrabajo={};
-    $scope.ngPeluquero={};
-    $scope.ngCategoria={};
+   
+
+    
 });
