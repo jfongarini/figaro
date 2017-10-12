@@ -1,3 +1,4 @@
+
 body{
     background-color:  #F3F4F6;
     margin-left: 0px;
@@ -394,4 +395,8 @@ div .bb {
 
 tr:hover i{
     visibility: visible;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
 }
