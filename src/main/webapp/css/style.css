@@ -4,8 +4,10 @@ body{
     margin-left: 0px;
     margin-top: 0px;
     font-family: 'Roboto', sans-serif;
-    font-size: 14px
+    font-size: 14px;
+    letter-spacing: 0.5px
 }
+
 .logo{
     margin-top: 20px;
     margin-bottom: 20px;
