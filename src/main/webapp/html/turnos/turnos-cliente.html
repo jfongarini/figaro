@@ -6,11 +6,11 @@
 </head>
 <body ng-app=figaro ng-controller=turnosController  data-ng-init="getTurnosDeCliente()" ng-cloak>
   <#include "/common/menu.html">
-  <div id=content class=content>
+  <div ng-if="turnos.length > 0" id=content class=content>
     <div class=banner>
         <label class="banner-title" >{{cliente}}</label>
     </div>
-    <table ng-if="turnos.length > 0"  id=table class="main-table banner">
+    <table  id=table class="main-table banner">
         <thead>
           <tr>
               <th>FECHA</th>
@@ -30,12 +30,15 @@
         </tr>
         </tbody>
       </table>
-      <div ng-if="turnos.length > 0" class=banner>
+      <div class=banner>
           <label class=banner-label >{{getTotalDiario(turnos) | currency}}</label>
       </div>
   </div>
 
-  
+  <div ng-if="turnos.length < 1" class="message">
+    <div class="message-content">No existen turnos para este cliente.</div>
+  </div>
+
   <div ng-controller=clientesController >
   <#include "/html/clientes/clientes-modal.html">
   </div>

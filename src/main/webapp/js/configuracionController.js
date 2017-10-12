@@ -1,6 +1,6 @@
 app.controller('configuracionController', function ($scope, $http) {
 
-     //INIT CONFIGURACION
+    //INIT CONFIGURACION
     $scope.init = function(){
         $scope.getAllTrabajos();
         $scope.getAllPeluqueros();

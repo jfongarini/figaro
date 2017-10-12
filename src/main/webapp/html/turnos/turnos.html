@@ -41,6 +41,10 @@
   </div>
   <#include "/html/turnos/turnos-modal.html">
   
+  <div ng-if="turnos.length < 1" class="message">
+    <div class="message-content">No existen turnos para este d&iacute;a.</div>
+  </div>
+
   <div ng-controller=clientesController >
   <#include "/html/clientes/clientes-modal.html">
   </div>

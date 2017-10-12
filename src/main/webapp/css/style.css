@@ -177,6 +177,19 @@ li a:hover {
 }
 
 
+.message {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    margin-left: 200px;
+}
+.message-content {
+    padding: 50px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
 .modal-content {
     position: relative;
     margin: auto;

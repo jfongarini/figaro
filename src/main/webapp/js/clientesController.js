@@ -1,6 +1,6 @@
 app.controller('clientesController', function ($scope, $http) {
     
-     //INIT CLIENTES
+    //INIT CLIENTES
     $scope.init = function(){
         $scope.search = '';
         $scope.ngCliente = {};

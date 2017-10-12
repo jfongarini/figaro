@@ -6,6 +6,7 @@ app.controller('turnosController', function ($scope, $http) {
     $scope.init = function(){
         $scope.ngDateTurno = stringToDate(getToday());
         $scope.getTurnos();
+        $scope.queryCliente ='';
         $scope.trabajosSeleccionados=[];
         $scope.totalDiario=0;
         $scope.turnos={};
@@ -19,8 +20,10 @@ app.controller('turnosController', function ($scope, $http) {
         $http.get('/rest/turnos/cliente/'+clienteId)
         .then(function successCallback(response) {
             $scope.turnos = response.data;
-            $scope.cliente = ( $scope.turnos.length > 0) ? ($scope.turnos[0].cliente.nombre +' '+ $scope.turnos[0].cliente.apellido) : "Todavía no existen turnos para este cliente.";
-            $scope.getTotalDiario($scope.turnos);
+            if ( $scope.turnos.length > 0){
+                $scope.cliente = ($scope.turnos[0].cliente.nombre +' '+ $scope.turnos[0].cliente.apellido) 
+                $scope.getTotalDiario($scope.turnos);
+            }
         });
     }
 
@@ -163,7 +166,7 @@ app.controller('turnosController', function ($scope, $http) {
 
     //BUSCAR CLIENTE
     $scope.searchCliente = function() {
-        if ($scope.queryCliente == "") 
+        if ($scope.queryCliente.length < 2) 
             return $scope.clientes=[];       
         $http.get('/rest/clientes/buscar',{params: { search: $scope.queryCliente }})
         .then(function successCallback(response) {
