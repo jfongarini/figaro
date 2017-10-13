@@ -9,7 +9,7 @@
   <div id=content class=content>
     <div class=banner>
         <label class="banner-label add" ><i class=material-icons ng-click="newTurno()" >addtoday</i></label>
-        <input class=input-banner type=date ng-model=ngDateTurno ng-change="getTurnos()">
+        <input class=input-banner type=date ng-model=ngDateTurno ng-model-options="{debounce:1000}" ng-change="getTurnos()">
     </div>
   <table ng-if="turnos.length > 0" id=table class=main-table>
     <thead>

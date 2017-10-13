@@ -11,7 +11,7 @@
         <label class="banner-label add"><i class=material-icons ng-click="newClient()" >person_add</i></label>
         <label class=banner-label ><i class=material-icons >more_vert</i></label>
         <label class=banner-label ><i class=material-icons >search</i></label>
-        <input class=input-banner type="text" placeholder="Buscar..." ng-model="search" ng-keyup="searchCliente()">
+        <input class=input-banner type="text" placeholder="Buscar..." ng-model="search" ng-model-options="{debounce:1000}" ng-keyup="searchCliente()">
     </div>
     <table id=table class=main-table>
       <thead>
