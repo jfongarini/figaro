@@ -4,6 +4,7 @@ app.controller('turnosController', function ($scope, $http) {
 
     //INIT TURNOS
     $scope.init = function(){
+        $scope.activeTurnos = true;
         $scope.ngDateTurno = stringToDate(getToday());
         $scope.getTurnos();
         $scope.queryCliente ='';

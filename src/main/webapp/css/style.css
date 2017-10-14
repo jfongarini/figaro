@@ -150,6 +150,19 @@ li a:hover {
     cursor: pointer
 }
 
+.active a{
+    margin-left: -3px;
+    color:white;
+}
+
+
+.active {
+    border-left-width: 3px;
+    border-left-style: solid;
+    border-left-color:  #6666c4;
+}
+
+
 .material-icons{
     margin-right: 8px;
     font-size: 18px;

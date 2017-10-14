@@ -62,6 +62,7 @@ app.controller('stockController', function ($scope, $http) {
     });
 
     //INIT
+    $scope.activeStock = true;
     $scope.search = '';
     $scope.ngProducto = {};
     $scope.getAll();

@@ -2,11 +2,12 @@ app.controller('clientesController', function ($scope, $http) {
     
     //INIT CLIENTES
     $scope.init = function(){
+        $scope.activeClientes = true;
+        $scope.clientesScreen=true;
         $scope.search = '';
         $scope.ngCliente = {};
         $scope.getAllCiudades();
         $scope.getAll();
-        $scope.clientesScreen=true;
     }
 
     //OBTENER LISTA DE CLIENTES
