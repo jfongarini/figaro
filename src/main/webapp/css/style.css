@@ -411,6 +411,19 @@ tr:hover i{
     visibility: visible;
 }
 
+
+
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
+}
+
+
+
+@media (max-width: 700px){
+    body{font-size: 11px; }
+    .menu{width: 60px;}
+    .logo{display: none}
+    .link-label{display: none}
+    .content{margin-left: 80px;}
 }
