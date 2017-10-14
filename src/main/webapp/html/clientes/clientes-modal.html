@@ -1,20 +1,20 @@
 <div id=modal-clientes class=modal>
   <div class=modal-content>
     <form ng-submit="sendClient()">
-      <div class=form-field><label>NOMBRE:</label><input id=modal-clientes-focus tipe="text"  ng-model="ngCliente.nombre" required></div>
-      <div class=form-field><label>APELLIDO:</label><input tipe="text" ng-model="ngCliente.apellido" required></div>
+      <div class=form-field><label>NOMBRE:</label><input id=modal-clientes-focus type="text"  ng-model="ngCliente.nombre" maxlength="25" pattern="[a-z A-Z]+" ng-pattern-restrict required></div>
+      <div class=form-field><label>APELLIDO:</label><input type="text" ng-model="ngCliente.apellido" maxlength="25" pattern="[a-z A-Z]+" ng-pattern-restrict required></div>
       <div class=form-field><label>SEXO:</label>
         <input type="radio" name=sexo ng-model="ngCliente.sexo" value="hombre" required> Hombre
         <input type="radio" name=sexo ng-model="ngCliente.sexo" value="mujer" required> Mujer
       </div>
-      <div class=form-field><label>TELEFONO:</label><input type="text"   ng-model="ngCliente.telefono" ></div>
-      <div class=form-field><label>EMAIL:</label><input type="email"     ng-model="ngCliente.email" ></div>
+      <div class=form-field><label>TELEFONO:</label><input type="text"  maxlength="25" ng-model="ngCliente.telefono" ></div>
+      <div class=form-field><label>EMAIL:</label><input type="email"    maxlength="35" ng-model="ngCliente.email" ></div>
       <div class=form-field><label>CIUDAD:</label>
         <select ng-model="ngCliente.dirCiudad">
           <option value="{{ciudad.nombre}}" ng-repeat="ciudad in ciudades">{{ciudad.nombre}}</option>
         </select>
       </div>
-      <div class=form-field><label>CALLE:</label><input type="text"      ng-model="ngCliente.dirCalle"></div>
+      <div class=form-field><label>CALLE:</label><input type="text"     maxlength="25" ng-model="ngCliente.dirCalle"></div>
       <div class=form-field><label>NUMERO:</label><input type="number"   ng-model="ngCliente.dirNumeroCalle"  maxlength="5"></div>
       <div class=form-field><label>PISO:</label><input type="number"     ng-model="ngCliente.dirPiso"  ></div>
       <div class=form-field><label>DPTO:</label><input type="text"       ng-model="ngCliente.dirDpto"></div>

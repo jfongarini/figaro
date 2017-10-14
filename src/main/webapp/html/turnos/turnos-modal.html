@@ -32,7 +32,7 @@
         </div>
         <hr class=resume noshade>
         <div class="form-field remove" ng-click="removeTrabajo(trabajo)"  ng-repeat="trabajo in trabajosSeleccionados" >
-          <i class="material-icons "  ng-value=trabajo >remove</i>{{trabajo.descripcion}} {{trabajo.precio | currency}}
+          <i class="material-icons "  ng-value=trabajo >clear</i>{{trabajo.descripcion}} {{trabajo.precio | currency}}
         </div>
         <div class="form-field">TOTAL: {{totalTrabajosSeleccionados | currency}}</div>
         <div class="form-field"><span>CLIENTE: </span>{{ngTurno.cliente.nombre}} {{ngTurno.cliente.apellido}}</div>

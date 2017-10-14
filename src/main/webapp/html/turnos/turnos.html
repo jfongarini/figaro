@@ -31,7 +31,7 @@
       <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{getTotalTurno(turno.trabajos) | currency}}</td>
       <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{turno.peluquero}}</td>
       <td><input ng-checked="turno.cobrado" ng-click="setCobrado(turno.id)" type="checkbox"></td>
-      <td id={{turno.id}} data-id={{turno.id}} data-ng-click="deleteTurno($event)" class="tachotd" ><i class="material-icons tachoi">remove</i></td>
+      <td id={{turno.id}} data-id={{turno.id}} data-ng-click="deleteTurno($event)" class="tachotd" ><i class="material-icons tachoi">clear</i></td>
     </tr>
     </tbody>
   </table>

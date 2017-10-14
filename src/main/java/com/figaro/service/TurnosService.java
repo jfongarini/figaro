@@ -3,6 +3,7 @@ package com.figaro.service;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,13 +78,14 @@ public class TurnosService {
 			return null;
 		Movimiento movimiento = new Movimiento();
 		movimiento.setCategoria("Turnos");
-		movimiento.setDetalle(turno.getCliente().getNombre()+" "+turno.getCliente().getApellido()) ;
 		movimiento.setIsGasto(false);
 		movimiento.setFecha(turno.getHasta());
 		BigDecimal precio = new BigDecimal(0);
 		for (Trabajo t : turno.getTrabajos())
 			precio = precio.add(t.getPrecio());
 		movimiento.setPrecio(precio);
+		List<String> descripionesTrabjo = turno.getTrabajos().stream().map(Trabajo::getDescripcion).collect(Collectors.toList());
+		movimiento.setDetalle(String.join(" ", descripionesTrabjo)) ;
 		return movimiento;
 	}
 	
@@ -141,17 +143,5 @@ public class TurnosService {
 	public void setMovimientosRepository(MovimientosRepository movimientosRepository) {
 		this.movimientosRepository = movimientosRepository;
 	}
-
-
-
-
-	
-	
-	
-
-	
-	
-	
-	
 
 }
