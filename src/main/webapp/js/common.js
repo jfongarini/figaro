@@ -45,4 +45,10 @@ function closeModal(modal){
 	$('#menu').removeClass("blur");
 };
 
+function logout(){
+	$('#logout').addEventListener("click", function () {
+		$('#logout').submit();
+	});
+};
+
 var app = angular.module('figaro', []);

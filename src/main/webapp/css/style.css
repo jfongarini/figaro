@@ -7,6 +7,50 @@ body{
     font-size: 14px
 }
 
+.login-body{
+    background-color: #292961;
+}
+
+.login-form {
+    text-align: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.login-form input{
+    font-family: 'Roboto', sans-serif;
+    outline: none !important;
+    background-color: white;
+    border: 0px;
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: : 15px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+}
+
+.login-form label{
+    font-weight: 800;
+    color: white;
+    font-size: 15px;
+    display: inline-block;  
+    clear: left;
+    width: 23px
+}
+
+.ingresar {
+    cursor: pointer;
+    font-weight: 800;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    font-size: 14px;
+    padding: 6px;
+    width: 90px;
+    border-width: 0;
+    outline: none;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6)
+}
+
 .logo{
     margin-top: 20px;
     margin-bottom: 20px;
@@ -241,36 +285,36 @@ li a:hover {
     filter: blur(5px)
 }
 
-form label{
+.content form label{
     display: inline-block;  
     clear: left;
     width: 95px
 }
 
-form input {
+.content form input {
     font-family: 'Roboto', sans-serif;
     display: inline-block
 }
 
-form input:focus, form select:focus {
+.content form input:focus, form select:focus {
     outline: none !important;
     border-bottom: 2px solid #292961
 }
 
-form input, form input:focus { 
+.content form input, form input:focus { 
     border-top-width: 0px;
     border-right-width: 0px;
     border-left-width: 0px
 }
 
-form .buttons{
+.content form .buttons{
     width: 100%;
     align-content: center;
     display: flex;
     margin-top: 30px;
 }
 
-form .button{
+.content form .button{
     cursor: pointer;
     font-weight: 800;
     font-family: 'Roboto', sans-serif;
@@ -285,7 +329,7 @@ form .button{
     box-shadow: 0 1px 4px rgba(0, 0, 0, .6)
 }
 
-form select{
+.content form select{
     width: 191px;
     background: transparent;
     border-bottom-color: #EEE;
