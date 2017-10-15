@@ -71,14 +71,6 @@
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.c3p0.idle_test_period">28680</prop>
 				<prop key="hibernate.hbm2ddl.auto">${hibernate.auto}</prop>
-				
-				<!--		
-				<prop key="hibernate.c3p0.min_size">3</prop>
-				<prop key="hibernate.c3p0.max_size">9</prop>
-			  	<prop key="hibernate.c3p0.timeout">300</prop>
-			  	<prop key="hibernate.c3p0.max_statements">50</prop>
-			  	<prop key="hibernate.c3p0.idle_test_period">3000</prop>
-			  	-->
 			</props>
 		</property>
 	</bean>
