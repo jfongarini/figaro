@@ -251,7 +251,7 @@ li a:hover {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-.modal-content, {
+.modal-content {
     position: relative;
     margin: auto;
     background-color: #fefefe;
@@ -285,36 +285,37 @@ li a:hover {
     filter: blur(5px)
 }
 
-.modal-content,.card label{
+
+.modal-content form label{
     display: inline-block;  
     clear: left;
     width: 95px
 }
 
-.modal-content,.card input {
+.modal-content form input {
     font-family: 'Roboto', sans-serif;
     display: inline-block
 }
 
-.modal-content,.card input:focus, form select:focus {
+.modal-content form input:focus, form select:focus {
     outline: none !important;
     border-bottom: 2px solid #292961
 }
 
-.modal-content,.card input, form input:focus { 
+.modal-content form input, form input:focus { 
     border-top-width: 0px;
     border-right-width: 0px;
     border-left-width: 0px
 }
 
-.modal-content,.card .buttons{
+.modal-content form .buttons{
     width: 100%;
     align-content: center;
     display: flex;
     margin-top: 30px;
 }
 
-.modal-content,.card .button{
+.modal-content form .button{
     cursor: pointer;
     font-weight: 800;
     font-family: 'Roboto', sans-serif;
@@ -329,7 +330,7 @@ li a:hover {
     box-shadow: 0 1px 4px rgba(0, 0, 0, .6)
 }
 
-.modal-content,.card select{
+.modal-content form select{
     width: 191px;
     background: transparent;
     border-bottom-color: #EEE;
@@ -346,6 +347,21 @@ li a:hover {
 }
 
 
+.card input {
+    font-family: 'Roboto', sans-serif;
+    display: inline-block
+}
+
+.card input:focus, select:focus {
+    outline: none !important;
+    border-bottom: 2px solid #292961
+}
+
+.card input, input:focus { 
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px
+}
 
 .time-input{
     width: 80px;

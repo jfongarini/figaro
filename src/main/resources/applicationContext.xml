@@ -26,7 +26,7 @@
 
 		<property name="checkoutTimeout" value="30000" />
 		<property name="idleConnectionTestPeriod" value="30"/>
-		<property name="initialPoolSize" value="10" />
+		<property name="initialPoolSize" value="3" />
 		<property name="maxIdleTime" value="30" />
 		<property name="maxPoolSize" value="9" />
 		<property name="minPoolSize" value="3" />

@@ -4,7 +4,7 @@
   <title>F&Iacute;GARO | CONFIGURACI&Oacute;N</title>
   <#include "/common/head.html">
 </head>
-<body ng-app=figaro ng-controller=configuracionController data-ng-init="init()" ng-cloak>
+<body ng-app=figaro ng-controller=configuracionController data-ng-init="init()">
 <#include "/common/menu.html">
 <div id=content class=content>
 
@@ -14,16 +14,16 @@
         <input tipe="text" placeholder="Descripci&oacute;n" ng-model="ngTrabajo.descripcion" maxlength="25" pattern="^[^\s].*([A-zÀ-ž\s]){2,25}" ng-pattern-restrict required>
         <input type="number" placeholder="Precio" ng-model="ngTrabajo.precio" step="0.01" required>
         <button class="button accept" type="submit"></button>
-        <table id=table>
+        <table id=table ng-cloak>
           <tbody>
-          <tr id={{trabajo.id}}  class=data-row  ng-repeat="trabajo in trabajos">
-          <td data-id={{trabajo.id}} ng-click="loadTrabajo($event)">{{trabajo.descripcion}}</td>
-          <td data-id={{trabajo.id}} ng-click="loadTrabajo($event)" class=trabajo-precio>{{trabajo.precio | currency}}</td>
+          <tr id={{trabajo.id}}  class=data-row  ng-repeat="trabajo in trabajos" >
+          <td  ng-cloak data-id={{trabajo.id}} ng-click="loadTrabajo($event)">{{trabajo.descripcion}}</td>
+          <td   ng-cloak data-id={{trabajo.id}} ng-click="loadTrabajo($event)" class=trabajo-precio>{{trabajo.precio | currency}}</td>
           <td class=delete ><i class="material-icons" data-id={{trabajo.id}} ng-click="removeTrabajo($event)">clear</i></td>
           </tr>
           </tbody>
         </table>
-        <label class=form-message>{{messageTrabajo}}</label>
+        <label  ng-cloak class=form-message>{{messageTrabajo}}</label>
       </form>
     </div>
 
@@ -31,15 +31,15 @@
       <form ng-submit="addCategoria()">
         <i class="material-icons">label</i><label class=card-title>CATEGOR&Iacute;AS</label>
         <input type="text" placeholder="Nombre" ng-model="ngCategoria.nombre" maxlength="25" pattern="^[^\s].*([A-zÀ-ž\s]){2,25}" ng-pattern-restrict required>
-        <table id=table>
+        <table id=table ng-cloak>
           <tbody>
-          <tr id={{categoria.id}} class=data-row ng-repeat="categoria in categorias">
-          <td>{{categoria.nombre}}</td>
+          <tr id={{categoria.id}} class=data-row ng-repeat="categoria in categorias" >
+          <td ng-cloak>{{categoria.nombre}}</td>
           <td class=delete ><i class="material-icons" data-id={{categoria.id}} ng-click="removeCategoria($event)">clear</i></td>
           </tr>
           </tbody>
         </table>
-        <label class=form-message>{{messageCategoria}}</label>
+        <label  ng-cloak class=form-message>{{messageCategoria}}</label>
       </form>
     </div>
 
@@ -50,12 +50,12 @@
         <table id=table>
           <tbody>
           <tr id={{peluquero.id}} class=data-row ng-repeat="peluquero in peluqueros">
-          <td>{{peluquero.nombre}}</td>
+          <td ng-cloak>{{peluquero.nombre}}</td>
           <td class=delete ><i class="material-icons" data-id={{peluquero.id}} ng-click="removePeluquero($event)">clear</i></td>
           </tr>
           </tbody>
         </table>
-        <label class=form-message>{{messagePeluquero}}</label>
+        <label  ng-cloak class=form-message>{{messagePeluquero}}</label>
       </form>
     </div>
 
@@ -63,15 +63,15 @@
       <form ng-submit="addCiudad()">
         <i class="material-icons">place </i><label class=card-title> CIUDADES</label> <br>
         <input type="text" placeholder="Ciudad" ng-model="ngCiudad.nombre"  maxlength="25" pattern="^[^\s].*([A-zÀ-ž\s]){2,25}" ng-pattern-restrict required>
-        <table id=table>
+        <table id=table >
           <tbody>
-          <tr id={{ciudad.id}} class=data-row ng-repeat="ciudad in ciudades">
-          <td>{{ciudad.nombre}}</td>
+          <tr id={{ciudad.id}} class=data-row ng-repeat="ciudad in ciudades" >
+          <td  ng-cloak>{{ciudad.nombre}}</td>
           <td class=delete ><i class="material-icons" data-id={{ciudad.id}} ng-click="removeCiudad($event)">clear</i></td>
           </tr>
           </tbody>
         </table>
-        <label class=form-message>{{messageCiudad}}</label>
+        <label  ng-cloak class=form-message>{{messageCiudad}}</label>
       </form>
     </div>
 
