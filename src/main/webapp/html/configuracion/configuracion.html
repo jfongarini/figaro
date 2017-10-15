@@ -14,11 +14,11 @@
         <input tipe="text" placeholder="Descripci&oacute;n" ng-model="ngTrabajo.descripcion" maxlength="25" pattern="^[^\s].*([A-zÀ-ž\s]){2,25}" ng-pattern-restrict required>
         <input type="number" placeholder="Precio" ng-model="ngTrabajo.precio" step="0.01" required>
         <button class="button accept" type="submit"></button>
-        <table id=table ng-cloak>
+        <table id=table>
           <tbody>
-          <tr id={{trabajo.id}}  class=data-row  ng-repeat="trabajo in trabajos" >
-          <td  ng-cloak data-id={{trabajo.id}} ng-click="loadTrabajo($event)">{{trabajo.descripcion}}</td>
-          <td   ng-cloak data-id={{trabajo.id}} ng-click="loadTrabajo($event)" class=trabajo-precio>{{trabajo.precio | currency}}</td>
+          <tr ng-cloak id={{trabajo.id}}  class=data-row  ng-repeat="trabajo in trabajos" >
+          <td data-id={{trabajo.id}} ng-click="loadTrabajo($event)">{{trabajo.descripcion}}</td>
+          <td data-id={{trabajo.id}} ng-click="loadTrabajo($event)" class=trabajo-precio>{{trabajo.precio | currency}}</td>
           <td class=delete ><i class="material-icons" data-id={{trabajo.id}} ng-click="removeTrabajo($event)">clear</i></td>
           </tr>
           </tbody>
@@ -31,10 +31,10 @@
       <form ng-submit="addCategoria()">
         <i class="material-icons">label</i><label class=card-title>CATEGOR&Iacute;AS</label>
         <input type="text" placeholder="Nombre" ng-model="ngCategoria.nombre" maxlength="25" pattern="^[^\s].*([A-zÀ-ž\s]){2,25}" ng-pattern-restrict required>
-        <table id=table ng-cloak>
+        <table id=table>
           <tbody>
-          <tr id={{categoria.id}} class=data-row ng-repeat="categoria in categorias" >
-          <td ng-cloak>{{categoria.nombre}}</td>
+          <tr ng-cloak id={{categoria.id}} class=data-row ng-repeat="categoria in categorias" >
+          <td>{{categoria.nombre}}</td>
           <td class=delete ><i class="material-icons" data-id={{categoria.id}} ng-click="removeCategoria($event)">clear</i></td>
           </tr>
           </tbody>
@@ -49,8 +49,8 @@
         <input type="text" placeholder="Nombre" ng-model="ngPeluquero.nombre" maxlength="25" pattern="^[^\s].*([A-zÀ-ž\s]){2,25}" ng-pattern-restrict required>
         <table id=table>
           <tbody>
-          <tr id={{peluquero.id}} class=data-row ng-repeat="peluquero in peluqueros">
-          <td ng-cloak>{{peluquero.nombre}}</td>
+          <tr ng-cloak id={{peluquero.id}} class=data-row ng-repeat="peluquero in peluqueros">
+          <td>{{peluquero.nombre}}</td>
           <td class=delete ><i class="material-icons" data-id={{peluquero.id}} ng-click="removePeluquero($event)">clear</i></td>
           </tr>
           </tbody>
@@ -65,8 +65,8 @@
         <input type="text" placeholder="Ciudad" ng-model="ngCiudad.nombre"  maxlength="25" pattern="^[^\s].*([A-zÀ-ž\s]){2,25}" ng-pattern-restrict required>
         <table id=table >
           <tbody>
-          <tr id={{ciudad.id}} class=data-row ng-repeat="ciudad in ciudades" >
-          <td  ng-cloak>{{ciudad.nombre}}</td>
+          <tr ng-cloak id={{ciudad.id}} class=data-row ng-repeat="ciudad in ciudades" >
+          <td >{{ciudad.nombre}}</td>
           <td class=delete ><i class="material-icons" data-id={{ciudad.id}} ng-click="removeCiudad($event)">clear</i></td>
           </tr>
           </tbody>
