@@ -285,36 +285,36 @@ li a:hover {
     filter: blur(5px)
 }
 
-.content form label{
+.modal-content label{
     display: inline-block;  
     clear: left;
     width: 95px
 }
 
-.content form input {
+.modal-content input {
     font-family: 'Roboto', sans-serif;
     display: inline-block
 }
 
-.content form input:focus, form select:focus {
+.modal-content input:focus, form select:focus {
     outline: none !important;
     border-bottom: 2px solid #292961
 }
 
-.content form input, form input:focus { 
+.modal-content input, form input:focus { 
     border-top-width: 0px;
     border-right-width: 0px;
     border-left-width: 0px
 }
 
-.content form .buttons{
+.modal-content .buttons{
     width: 100%;
     align-content: center;
     display: flex;
     margin-top: 30px;
 }
 
-.content form .button{
+.modal-content .button{
     cursor: pointer;
     font-weight: 800;
     font-family: 'Roboto', sans-serif;
@@ -329,7 +329,7 @@ li a:hover {
     box-shadow: 0 1px 4px rgba(0, 0, 0, .6)
 }
 
-.content form select{
+.modal-content select{
     width: 191px;
     background: transparent;
     border-bottom-color: #EEE;
