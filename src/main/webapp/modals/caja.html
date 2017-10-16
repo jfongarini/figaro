@@ -6,7 +6,7 @@
             <option value="{{categoria.nombre}}" ng-repeat="categoria in categorias">{{categoria.nombre}}</option>
           </select>
         </div> 
-        <div class=form-field><label>MONTO:</label> <input type="number" ng-model="ngMovimiento.precio"></input></div>
+        <div class=form-field><label>MONTO:</label> <input type="number" ng-model="ngMovimiento.precio" min="0"></input></div>
         
         <div class=form-field><label>FECHA:</label> <input type="date" ng-model="ngMovimiento.fecha" ng-model-options="{timezone:'UTC'}"></input></div>
         <div class=form-field><label>TIPO:</label>

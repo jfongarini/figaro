@@ -65,11 +65,25 @@ app.controller('movimientosController', function ($scope, $http) {
 	    });
 	    
 	  //ELIMINTAR MOVIMIENTO
-	    $scope.deleteMovimiento = function(event) {	       
-	        $scope.movimientoID = event.currentTarget.getAttribute("data-id");
-	        $http.delete('/rest/movimientos/eliminar/'+$scope.movimientoID).then(function (response) {	           
-	            $scope.getAll();
+	    $scope.deleteTarget = function(id) {	       
+	        //$scope.movimientoID = event.currentTarget.getAttribute("data-id");
+	        $http.delete('/rest/movimientos/eliminar/'+ id).then(function (response) {	           
+	        	closeModal("modal-confirmarDelete");
+	        	$scope.getAll();	            
 	        });
+	    };
+	    
+	  //CONFIRMA ELIMINTAR MOVIMIENTO
+	    $scope.confirmDelete = function(id) {
+	    	$scope.idTarget = id;
+	    	openModal("modal-confirmarDelete");
+	        
+	    };
+	    
+	  //DESCARTAR FORMULARIO
+	    $scope.discardConfirm = function(event){
+	        $scope.ngMovimiento = {};
+	        closeModal("modal-confirmarDelete");
 	    };
 	    
 	    //CALCULAR EL TOTAL DE CAJA
@@ -117,6 +131,14 @@ app.controller('movimientosController', function ($scope, $http) {
 	    //FILTRO MES
 	    $scope.searchMovimientoMes = function() {	    	   	
 	        $http.get('/rest/movimientos/buscar',{params: { q: getStringMonth($scope.search) }})		        
+	        .then(function successCallback(response) {	  	        	
+	            $scope.movimientos = response.data;	            
+	        })
+	    }
+	    
+	  //FILTRO CATEGORIA
+	    $scope.searchCategoria = function() {	    	   	
+	        $http.get('/rest/movimientos/buscarCategoria',{params: { q: $scope.searchC }})		        
 	        .then(function successCallback(response) {	  	        	
 	            $scope.movimientos = response.data;	            
 	        })

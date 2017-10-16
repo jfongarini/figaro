@@ -1,11 +1,5 @@
 package com.figaro.repository;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -55,6 +49,13 @@ public class MovimientosRepository extends AbstractRepository{
 		Query<Movimiento> query = getCurrentSession().createQuery( "FROM Movimiento m WHERE m.fecha BETWEEN ?1 AND ?2");
 	    query.setParameter(1, search1);
 	    query.setParameter(2, search2);
+	    return query.getResultList();
+	}	
+	
+	@SuppressWarnings("unchecked")
+	public List<Movimiento> buscarCategoria(String search) {
+		Query<Movimiento> query = getCurrentSession().createQuery("FROM Movimiento m WHERE m.categoria = ?1");
+	    query.setParameter(1, search);
 	    return query.getResultList();
 	}
 

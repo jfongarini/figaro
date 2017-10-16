@@ -58,6 +58,11 @@ public class MovimientosControllerREST {
         
     }
 	
+	@RequestMapping(value = "movimientos/buscarCategoria",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<List<Movimiento>> getAllMovimientoCategoria(@RequestParam String q) {
+        return new ResponseEntity<List<Movimiento>> (service.buscarCategoria(q), HttpStatus.CREATED);
+    }
+	
 	@RequestMapping(value = "movimientos/eliminar/{movimientoID}",method=RequestMethod.DELETE)	
     public ResponseEntity<Movimiento> getAllMovimiento(@PathVariable int movimientoID) {
 		return new ResponseEntity<>(service.deleteMovimiento(movimientoID), HttpStatus.OK);

@@ -62,4 +62,8 @@ public class MovimientosService {
 		return repository.buscarE(search1,search2);
 	}
 	
+	public List<Movimiento> buscarCategoria(String search) {
+		return repository.buscarCategoria(search);
+	}		
+	
 }
