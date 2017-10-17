@@ -354,3 +354,22 @@ div .bb {
 tr:hover i{
     visibility: visible;
 }
+/*STOCK - campo disponible editable */
+.disponibletr{
+border-width: 0px;
+background: transparent;
+width: 50px;
+}
+
+/*STOCK - campo numericos */
+.numericotr{
+    width: 120px;
+    text-align: center;
+    
+}
+
+tr:hover .disponibletr{
+    background-color: #292961;
+    color: white;
+    cursor: pointer
+}

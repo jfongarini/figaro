@@ -8,8 +8,7 @@
   <#include "/common/menu.html">
   <div id=content class=content>
     <div class="banner">
-        <label class="banner-label add"><i class=material-icons ng-click="newProducto()" >playlist_add</i></label>
-        <label class=banner-label ><i class=material-icons >more_vert</i></label>
+        <label class="banner-label add"><i class=material-icons ng-click="newProducto()">playlist_add</i></label>
         <label class=banner-label ><i class=material-icons >search</i></label>
         <input class=input-banner type="text" placeholder="Buscar producto" ng-model="search" ng-keyup="searchProducto()">
     </div>
@@ -20,14 +19,18 @@
             <th>DESCRIPCION</th>
             <th>DISPONIBLES</th>
             <th>MINIMO</th>
+            <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr id={{producto.id}} data-id={{producto.id}} class=data-row ng-repeat="producto in productos" data-ng-click="detailProducto($event)">
-          <td>{{producto.nombre}}</td>
-          <td>{{producto.descripcion}}</td>
-          <td>{{producto.cantidad}}</td>
-          <td>{{producto.cantidadMinima}}</td>
+        <tr class=data-row ng-repeat="producto in productos">
+          <td id={{producto.id}} data-id={{producto.id}} data-ng-dblclick="detailProducto($event)">{{producto.nombre}}</td>
+          <td id={{producto.id}} data-id={{producto.id}} data-ng-dblclick="detailProducto($event)">{{producto.descripcion}}</td>
+          <td class=numericotr id={{producto.id}} data-id={{producto.id}}>
+              <input  class="disponibletr" type="number" ng-model="ngProducto.cantidad" ng-value="producto.cantidad"
+                      ng-change="upgradeProducto(producto.id, ngProducto.cantidad)"></td>
+          <td class=numericotr id={{producto.id}} data-id={{producto.id}} data-ng-click="detailProducto($event)">{{producto.cantidadMinima}}</td>
+          <td id={{producto.id}} data-id={{producto.id}} data-ng-click="deleteProducto($event)" class="tachotd"><lavel><i class="material-icons tachoi">delete</i></lavel></td>
         </tr>
       </tbody>
     </table>

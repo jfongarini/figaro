@@ -40,7 +40,7 @@ public class Producto {
 		this.descripcion = descripcion;
 	}
 	
-	public Producto actualizar(Producto producto) {
+	public Producto update(Producto producto) {
 		setNombre(producto.getNombre());
 		setDescripcion(producto.getDescripcion());
 		setCantidad(producto.getCantidad());
