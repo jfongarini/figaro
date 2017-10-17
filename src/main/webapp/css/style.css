@@ -49,8 +49,8 @@ body{
     font-family: 'Roboto', sans-serif;
     position: relative;
     font-size: 13px;
-    padding: 6px;
-    width: 90px;
+    padding: 9px;
+    width: 100px;
     border-width: 0;
     outline: none;
     border-radius: 2px;
@@ -391,8 +391,6 @@ li a:hover {
 .add, .remove{
     cursor: pointer
 }
-
-
 
 .card-title{
     margin-bottom: 20px
