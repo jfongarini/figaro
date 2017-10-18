@@ -9,8 +9,6 @@ import org.hibernate.query.Query;
 import com.figaro.model.Movimiento;
 import com.figaro.service.MovimientosService;
 
-
-
 public class MovimientosRepository extends AbstractRepository{
 	
 	final static Logger LOGGER = Logger.getLogger(MovimientosService.class);
@@ -31,10 +29,6 @@ public class MovimientosRepository extends AbstractRepository{
 		getCurrentSession().delete(movimiento);
 	}
 
-	public void deleteMovimiento(Movimiento movimiento){
-		getCurrentSession().delete(movimiento);
-	}
-	
 	@SuppressWarnings("unchecked")
 	public List<Movimiento> getAll() {
 		return getCurrentSession().createQuery("from Movimiento").list();
