@@ -103,7 +103,7 @@ body{
 }
 
 
-.card, .banner, .bannerBusqueda{
+.card, .banner, .banner-busqueda{
     margin-top: 30px;
     background-color: #FFF;
     box-shadow: rgba(0,0,0,0.4) 0px 2px 5px
@@ -114,7 +114,7 @@ body{
     margin-bottom: 20px
 }
 
-.bannerBusqueda{
+.banner-busqueda{
 	height: 45px;    
     margin-bottom: 20px;   
     margin-top: 12px;           
@@ -123,7 +123,7 @@ body{
     margin-bottom: 20px
 }
 
-.banner-labelBusqueda{    
+.banner-label-busqueda{    
     text-align: right;
     margin-top: 12px;
     margin-right: 5px;
@@ -135,7 +135,7 @@ table, .banner{
     width: 95%
 }
 
-table, .banner .bannerBusqueda{
+table, .banner .banner-busqueda{
     width: 95%
 }
 
@@ -383,6 +383,20 @@ li a:hover {
     border-left-width: 0px
 }
 
+.search-categoria {
+    float: left;
+    width: 80px;
+    margin-top: 12px;
+    margin-left: 5px;   
+    background: transparent;
+    border-bottom-color: #EEE;
+    border-bottom-width: 2px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px
+
+}
+
 .time-input{
     width: 80px;
 }
@@ -492,19 +506,7 @@ tr:hover i{
     visibility: visible;
 }
 
-.searchCate {
-	float: left;
-	width: 80px;
-	margin-top: 12px;
-	margin-left: 5px;	
-    background: transparent;
-    border-bottom-color: #EEE;
-    border-bottom-width: 2px;
-    border-top-width: 0px;
-    border-right-width: 0px;
-    border-left-width: 0px
 
-}
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
