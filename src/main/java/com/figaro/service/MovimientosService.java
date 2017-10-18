@@ -1,5 +1,8 @@
 package com.figaro.service;
 
+
+
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -33,6 +36,12 @@ public class MovimientosService {
 		return movimiento;
 	}
 	
+	public Movimiento deleteMovimiento(int movimientoID) {
+		Movimiento movimiento = getMovimiento(movimientoID);
+		repository.deleteMovimiento(movimiento);
+		return movimiento;
+	}
+	
 	public MovimientosRepository getRepository() {
 		return repository;
 	}
@@ -48,5 +57,13 @@ public class MovimientosService {
 	public List<Movimiento> buscar(String search) {
 		return repository.buscar(search);
 	}
+	
+	public List<Movimiento> buscarE(Date search1, Date search2) {		
+		return repository.buscarE(search1,search2);
+	}
+	
+	public List<Movimiento> buscarCategoria(String search) {
+		return repository.buscarCategoria(search);
+	}		
 	
 }

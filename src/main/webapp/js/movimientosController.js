@@ -64,6 +64,28 @@ app.controller('movimientosController', function ($scope, $http) {
 	        }
 	    });
 	    
+	  //ELIMINTAR MOVIMIENTO
+	    $scope.deleteTarget = function(id) {	       
+	        //$scope.movimientoID = event.currentTarget.getAttribute("data-id");
+	        $http.delete('/rest/movimientos/eliminar/'+ id).then(function (response) {	           
+	        	closeModal("modal-confirmarDelete");
+	        	$scope.getAll();	            
+	        });
+	    };
+	    
+	  //CONFIRMA ELIMINTAR MOVIMIENTO
+	    $scope.confirmDelete = function(id) {
+	    	$scope.idTarget = id;
+	    	openModal("modal-confirmarDelete");
+	        
+	    };
+	    
+	  //DESCARTAR FORMULARIO
+	    $scope.discardConfirm = function(event){
+	        $scope.ngMovimiento = {};
+	        closeModal("modal-confirmarDelete");
+	    };
+	    
 	    //CALCULAR EL TOTAL DE CAJA
 	    $scope.calculaTotal = function(){
 	        var total = 0;
@@ -91,9 +113,32 @@ app.controller('movimientosController', function ($scope, $http) {
 	        })
 	    }
 	    
-	  //FILTRO MES
+	    //FILTRO SEMANA
+	    $scope.searchMovimientoEntreDias = function() {	    	
+	    	var dStart = new Date($scope.search);
+	    	var dEnd = new Date($scope.search);
+	    	dStart.setDate(dStart.getDate() - 3);
+	    	dEnd.setDate(dEnd.getDate() + 3);
+	    	var q1 = getStringDate(dStart); 
+	    	var q2 = getStringDate(dEnd);	    
+	    	
+	        $http.get('/rest/movimientos/buscarEntre',{params: { q1, q2 }})		        
+	        .then(function successCallback(response) {	  	        	
+	            $scope.movimientos = response.data;	            
+	        })
+	    }
+	    
+	    //FILTRO MES
 	    $scope.searchMovimientoMes = function() {	    	   	
 	        $http.get('/rest/movimientos/buscar',{params: { q: getStringMonth($scope.search) }})		        
+	        .then(function successCallback(response) {	  	        	
+	            $scope.movimientos = response.data;	            
+	        })
+	    }
+	    
+	  //FILTRO CATEGORIA
+	    $scope.searchCategoria = function() {	    	   	
+	        $http.get('/rest/movimientos/buscarCategoria',{params: { q: $scope.searchC }})		        
 	        .then(function successCallback(response) {	  	        	
 	            $scope.movimientos = response.data;	            
 	        })
