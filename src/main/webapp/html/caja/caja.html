@@ -16,15 +16,15 @@
       <label class=banner-label ><i class=material-icons >more_vert</i></label>
       <label class=banner-label ng-click="ShowHideMes()"><i class=material-icons >search</i> MES </label>
       <label class=banner-label ><i class=material-icons >more_vert</i></label>
- 	  <label class=banner-label ><i class=material-icons >search</i>CATEGOR&Iacute;A</label>
-      <select class=search-categoria ng-model="searchC" ng-change="searchCategoria()">
+ 	    <label class=banner-label ><i class=material-icons >search</i>CATEGOR&Iacute;A</label>
+      <select  class=search-categoria ng-model="searchC" ng-change="searchCategoria()" ng-cloak>
             <option value="{{categoria.nombre}}" ng-repeat="categoria in categorias">{{categoria.nombre}}</option>
       </select>
       <label class=banner-label ng-click="getAll()"><i class=material-icons >clear</i></label>
   </div>
 
   
-<div class=banner-busqueda ng-hide = "IsHiddenDia">
+<div class=banner-busqueda ng-hide = "IsHiddenDia" ng-cloak>
   	<div class=banner>   		
   		<label class=banner-label-busqueda ng-click="ShowHideDia()"><i class=material-icons >clear</i></label>
    		<label class=banner-label-busqueda> B&Uacute;SQUEDA POR D&Iacute;A: </label>   	
@@ -32,7 +32,7 @@
     </div>
 </div>
 
-<div class=banner-busqueda ng-hide = "IsHiddenEntreDia">
+<div class=banner-busqueda ng-hide = "IsHiddenEntreDia" ng-cloak>
   	<div class=banner>   		
   		<label class=banner-label-busqueda ng-click="ShowHideEntreDia()"><i class=material-icons >clear</i></label>
    		<label class=banner-label-busqueda> BUSCAR SEMANA:</label>   	
@@ -40,7 +40,7 @@
     </div>
 </div>
 
-<div class=banner-busqueda ng-hide = "IsHiddenMes">
+<div class=banner-busqueda ng-hide = "IsHiddenMes" ng-cloak>
 	<div class=banner>   		
   		<label class=banner-label-busqueda ng-click="ShowHideMes()"><i class=material-icons >clear</i></label>
    		<label class=banner-label-busqueda> B&Uacute;SQUEDA POR MES: </label>   	
@@ -71,7 +71,7 @@
     </tbody>
   </table>
   <div class=banner>
-      <label class=banner-label ><i class=material-icons >account_balance_wallet</i> Total: <font ng-class='{green : calculaTotal() >= 0, red: calculaTotal() < 0}'>{{ calculaTotal() | currency }}</font></label>
+      <label class=banner-label ><i class=material-icons >account_balance_wallet</i> Total: <font ng-cloak ng-class='{green : calculaTotal() >= 0, red: calculaTotal() < 0}'>{{ calculaTotal() | currency }}</font></label>
   </div>
 </div>
 <#include "/html/caja/caja-modal.html">
