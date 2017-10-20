@@ -28,8 +28,8 @@ public class ConfiguracionControllerREST {
 	private ConfiguracionService service;
 	
 	@RequestMapping(value = "/ciudades",method=RequestMethod.GET)
-    public List<Ciudad> getCiudades() {
-		return service.getCiudades();
+    public ResponseEntity<List<Ciudad>> getCiudades() {
+		return new ResponseEntity<List<Ciudad>>(service.getCiudades(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/ciudades/alta",method=RequestMethod.POST)
@@ -46,8 +46,8 @@ public class ConfiguracionControllerREST {
 	}
 	
 	@RequestMapping(value = "/trabajos",method=RequestMethod.GET)
-    public List<Trabajo> getTrabajos() {
-		return service.getTrabajos();
+    public ResponseEntity<List<Trabajo>> getTrabajos() {
+		return new ResponseEntity<List<Trabajo>>(service.getTrabajos(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/trabajos/alta",method=RequestMethod.POST)
@@ -76,13 +76,13 @@ public class ConfiguracionControllerREST {
 	}
 	
 	@RequestMapping(value = "/trabajos/buscar",method=RequestMethod.GET,produces="application/json")
-    public List<Trabajo> searchTrabajo(@RequestParam String search) {
-        return service.buscar(search);
+    public ResponseEntity<List<Trabajo>> searchTrabajo(@RequestParam String search) {
+        return new ResponseEntity<List<Trabajo>>(service.buscar(search), HttpStatus.OK);
     }
 	
 	@RequestMapping(value = "/peluqueros",method=RequestMethod.GET)
-    public List<Peluquero> getPeluqueros() {
-		return service.getPeluqueros();
+    public ResponseEntity<List<Peluquero>> getPeluqueros() {
+		return new ResponseEntity<List<Peluquero>>(service.getPeluqueros(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/peluqueros/alta",method=RequestMethod.POST)
@@ -99,8 +99,8 @@ public class ConfiguracionControllerREST {
 	}
 	
 	@RequestMapping(value = "/categorias",method=RequestMethod.GET)
-    public List<Categoria> getCategorias() {
-		return service.getCategorias();
+    public ResponseEntity<List<Categoria>> getCategorias() {
+		return new ResponseEntity<List<Categoria>>(service.getCategorias(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/categorias/alta",method=RequestMethod.POST)

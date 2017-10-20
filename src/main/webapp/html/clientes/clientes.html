@@ -1,10 +1,10 @@
 <!Doctype html>
 <html>
 <head>
-	<title>CLIENTES</title>
+	<title>F&Iacute;GARO | CLIENTES</title>
   <#include "/html/common/head.html">
 </head>
-<body ng-app=figaro ng-controller=clientesController ng-cloak>
+<body ng-app=figaro ng-controller=clientesController data-ng-init="init()" >
   <#include "/html/common/menu.html">
   <div id=content class=content>
     <div class="banner">
@@ -19,24 +19,24 @@
             <th>NOMBRE</th>
             <th>APELLIDO</th>
             <th>EMAIL</th>
-            <th>TELEFONO</th>
-            <th>FECHA ALTA</th>
-            <th>ULTIMA VISITA</th>
+            <th>TEL&Eacute;FONO</th>
+            <th>&Uacute;LTIMA VISITA</th>
+            <th>REGISTRADO</th>
         </tr>
       </thead>
       <tbody>
-        <tr id={{cliente.id}} data-id={{cliente.id}} class=data-row ng-repeat="cliente in clientes" data-ng-click="detailClient($event)">
+        <tr id={{cliente.id}} data-id={{cliente.id}} class=data-row ng-repeat="cliente in clientes" data-ng-click="detailClient($event)" ng-cloak>
           <td>{{cliente.nombre}}</td>
           <td>{{cliente.apellido}}</td>
           <td>{{cliente.email}}</td>
           <td>{{cliente.telefono}}</td>
-          <td>{{cliente.fechaIngreso | date}}</td>
           <td>{{cliente.ultimaVisita | date}}</td>
+          <td>{{cliente.fechaIngreso | date}}</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <#include "/modals/clientes.html">
+  <#include "/html/clientes/clientes-modal.html">
   <#include "/html/common/javascript.html">
   <script src="js/clientesController.js" ></script>
 </body>

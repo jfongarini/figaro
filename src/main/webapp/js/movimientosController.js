@@ -177,6 +177,7 @@ app.controller('movimientosController', function ($scope, $http) {
         }
 	    
 	    //INIT
+	    $scope.activeCaja = true;
 	    $scope.search = '';
 	    $scope.ngMovimiento = {};
 	    $scope.getAllCategorias();

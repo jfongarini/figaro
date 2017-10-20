@@ -9,8 +9,6 @@ import org.hibernate.query.Query;
 import com.figaro.model.Movimiento;
 import com.figaro.service.MovimientosService;
 
-
-
 public class MovimientosRepository extends AbstractRepository{
 	
 	final static Logger LOGGER = Logger.getLogger(MovimientosService.class);
