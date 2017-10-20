@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.figaro.exception.HorarioInvalidoException;
 import com.figaro.exception.TurnoOcupadoException;
@@ -22,12 +20,8 @@ public class TurnosService {
 	
 	final static Logger LOGGER = Logger.getLogger(TurnosService.class);
 	
-	@Autowired
-	@Qualifier("ClientesServiceTransactional")
-	private ClientesService ClienteService;
-	
+	private ClientesService clientesService;
 	private TurnosRepository repository;
-	
 	private MovimientosRepository movimientosRepository;
 	
 	public Turno saveTurno(Turno turno) {
@@ -58,7 +52,7 @@ public class TurnosService {
 		repository.updateTurno(turno);
 		Cliente cliente = turno.getCliente();
 		cliente.setUltimaVisita(turno.getDesde());
-		ClienteService.updateCliente(cliente);
+		clientesService.updateCliente(cliente);
 		return turno;
 	}
 
@@ -129,12 +123,6 @@ public class TurnosService {
 		this.repository = repository;
 	}
 
-	public ClientesService getClienteService() {
-		return ClienteService;
-	}
-	public void setClienteService(ClientesService clienteService) {
-		ClienteService = clienteService;
-	}
 
 	public MovimientosRepository getMovimientosRepository() {
 		return movimientosRepository;
@@ -142,6 +130,14 @@ public class TurnosService {
 
 	public void setMovimientosRepository(MovimientosRepository movimientosRepository) {
 		this.movimientosRepository = movimientosRepository;
+	}
+
+	public ClientesService getClientesService() {
+		return clientesService;
+	}
+
+	public void setClientesService(ClientesService clientesService) {
+		this.clientesService = clientesService;
 	}
 
 }
