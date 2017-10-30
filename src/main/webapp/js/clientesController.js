@@ -21,7 +21,8 @@ app.controller('clientesController', function ($scope, $http) {
     $scope.newClient = function() {
         $scope.ngCliente={};
         $scope.message='';
-        ($scope.modalOpen == true) ? $('#modal-clientes').addClass("modal-on-top") :  openModal("modal-clientes");
+        ($scope.isModalOpen == true) ? $('#modal-clientes').addClass("modal-on-top") : openModal("modal-clientes");
+        $('#modal-clientes-focus').focus();
     }
 
     //CLICK FILA CLIENTE
