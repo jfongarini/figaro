@@ -1,5 +1,17 @@
-var app = angular.module('figaro', []);
 app.controller('configuracionController', function ($scope, $http) {
+
+    //INIT CONFIGURACION
+    $scope.init = function(){
+        $scope.activeConfiguracion = true;
+        $scope.getAllTrabajos();
+        $scope.getAllPeluqueros();
+        $scope.getAllCiudades();
+        $scope.getAllCategorias();
+        $scope.ngCiudad={};
+        $scope.ngTrabajo={};
+        $scope.ngPeluquero={};
+        $scope.ngCategoria={};
+    }
   
     //AGREGAR CIUDAD
     $scope.addCiudad = function() {
@@ -15,8 +27,13 @@ app.controller('configuracionController', function ($scope, $http) {
 
     //ELIMINAR CIUDAD
     $scope.removeCiudad = function(event) {
-        $scope.ciudadID = event.currentTarget.getAttribute("data-id");
-        $http.delete('/rest/configuracion/ciudades/baja/'+ $scope.ciudadID)
+        var id = event.currentTarget.getAttribute("data-id");
+        var ciudad = $scope.ciudades.filter(function( obj ) {
+            return obj.id == id;
+        });
+        var index = $scope.ciudades.indexOf(ciudad);
+        $scope.ciudades.splice(index, 1);  
+        $http.delete('/rest/configuracion/ciudades/baja/'+ id)
             .then(function successCallback(response) {
                 $scope.getAllCiudades();
                 $scope.messageCiudad='';
@@ -64,8 +81,13 @@ app.controller('configuracionController', function ($scope, $http) {
 
     //ELIMINAR TRABAJO
     $scope.removeTrabajo = function(event) {
-        $scope.trabajoID = event.currentTarget.getAttribute("data-id");
-        $http.delete('/rest/configuracion/trabajos/baja/'+ $scope.trabajoID)
+        var id = event.currentTarget.getAttribute("data-id");
+        var trabajo = $scope.trabajos.filter(function( obj ) {
+            return obj.id == id;
+        });
+        var index = $scope.trabajos.indexOf(trabajo);
+        $scope.trabajos.splice(index, 1);  
+        $http.delete('/rest/configuracion/trabajos/baja/'+ id)
             .then(function successCallback(response) {
                 $scope.getAllTrabajos();
                 $scope.ngTrabajo={};
@@ -105,8 +127,13 @@ app.controller('configuracionController', function ($scope, $http) {
 
     //ELIMINAR PELUQUERO
     $scope.removePeluquero = function(event) {
-        $scope.peluqueroID = event.currentTarget.getAttribute("data-id");
-        $http.delete('/rest/configuracion/peluqueros/baja/'+ $scope.peluqueroID)
+        var id = event.currentTarget.getAttribute("data-id");
+        var peluquero = $scope.peluqueros.filter(function( obj ) {
+            return obj.id == id;
+        });
+        var index = $scope.peluqueros.indexOf(peluquero);
+        $scope.peluqueros.splice(index, 1);  
+        $http.delete('/rest/configuracion/peluqueros/baja/'+ id)
             .then(function successCallback(response) {
                 $scope.getAllPeluqueros();
                 $scope.messagePeluquero='';
@@ -137,8 +164,13 @@ app.controller('configuracionController', function ($scope, $http) {
 
     //ELIMINAR CATEGORIA
     $scope.removeCategoria = function(event) {
-        $scope.categoriaID = event.currentTarget.getAttribute("data-id");
-        $http.delete('/rest/configuracion/categorias/baja/'+ $scope.categoriaID)
+        var id = event.currentTarget.getAttribute("data-id");
+        var categoria = $scope.categorias.filter(function( obj ) {
+            return obj.id == id;
+        });
+        var index = $scope.categorias.indexOf(categoria);
+        $scope.categorias.splice(index, 1);
+        $http.delete('/rest/configuracion/categorias/baja/'+ id)
             .then(function successCallback(response) {
                 $scope.getAllCategorias();
                 $scope.messageCategoria='';
@@ -146,9 +178,5 @@ app.controller('configuracionController', function ($scope, $http) {
                 $scope.messageCategoria=response.data.message;
             });
     };
-
-    $scope.ngCiudad={};
-    $scope.ngTrabajo={};
-    $scope.ngPeluquero={};
-    $scope.ngCategoria={};
+    
 });

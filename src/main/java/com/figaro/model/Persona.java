@@ -14,7 +14,6 @@ public abstract class Persona {
 	private int dirNumeroCalle;
 	private int dirPiso;
 	private String dirDpto;
-	private Salon salon;
 	private Date fechaIngreso;
 	
 	
@@ -55,12 +54,6 @@ public abstract class Persona {
 	}
 	public void setDirCiudad(String dirCiudad) {
 		this.dirCiudad = dirCiudad;
-	}
-	public Salon getSalon() {
-		return salon;
-	}
-	public void setSalon(Salon salon) {
-		this.salon = salon;
 	}
 	public String getSexo() {
 		return sexo;

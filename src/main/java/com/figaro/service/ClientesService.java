@@ -19,17 +19,19 @@ public class ClientesService {
 	}
 
 	public Cliente saveCliente(Cliente cliente) {
-		LOGGER.info("Guardando el cliente con ID: " + cliente.getId()+" con:"+ cliente.toString());
+		LOGGER.info("Guardando el nuevo cliente: " + cliente.getNombre() + cliente.getApellido());
 		int newID = repository.saveCliente(cliente);
 		cliente.setId(newID);
+		LOGGER.info("Se guardo el nuevo cliente con ID: " + cliente.getId());
 		return cliente;
 	}
 	
 	public Cliente updateCliente(Cliente cliente) {
+		LOGGER.info("Actualizando el cliente con ID: " + cliente.getId());
 		Cliente old = getCliente(cliente.getId());
-		LOGGER.info("Actualizando el cliente con ID: " + old.getId()+" con:"+ cliente.toString());
 		old.update(cliente);
 		repository.updateCliente(old);
+		LOGGER.info("El cliente se actualizó correctamente");
 		return cliente;
 	}
 	

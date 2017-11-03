@@ -40,8 +40,15 @@ function openModal(modal){
 
 function closeModal(modal){
 	$('#'+modal).removeClass("modal-on");
+	$('#'+modal).removeClass("modal-on-top");
 	$('#content').removeClass("blur");
 	$('#menu').removeClass("blur");
+};
+
+function logout(){
+	$('#logout').addEventListener("click", function () {
+		$('#logout').submit();
+	});
 };
 
 var app = angular.module('figaro', []);

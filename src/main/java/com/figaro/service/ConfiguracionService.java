@@ -18,7 +18,7 @@ public class ConfiguracionService {
 	private ConfiguracionRepository repository;
 	
 	public Integer saveCiudad(Ciudad ciudad) {
-		LOGGER.info("Guardando la ciudad: "+ ciudad.toString());
+		LOGGER.info("Guardando la ciudad: "+ ciudad.getNombre());
 		return repository.saveCiudad(ciudad);
 	}	
 	
@@ -28,7 +28,7 @@ public class ConfiguracionService {
 	}
 	
 	public Integer saveTrabajo(Trabajo trabajo) {
-		LOGGER.info("Guardando el trabajo: "+ trabajo.toString());
+		LOGGER.info("Guardando el trabajo: "+ trabajo.getDescripcion() +" "+ trabajo.getPrecio());
 		return repository.saveTrabajo(trabajo);
 	}
 	
@@ -53,20 +53,22 @@ public class ConfiguracionService {
 	}
 	
 	public Trabajo updateTrabajo(Trabajo trabajo) {
-		LOGGER.info("Actualizando el trabajo con ID: " + trabajo.getId()+" con:"+ trabajo.toString());
+		LOGGER.info("Actualizando el trabajo con ID: " + trabajo.getId());
 		Trabajo repoTrabajo = getTrabajo(trabajo.getId());
 		repoTrabajo.setDescripcion(trabajo.getDescripcion());
 		repoTrabajo.setPrecio(trabajo.getPrecio());
 		saveTrabajo(repoTrabajo);
+		LOGGER.info("El trabajo se actualizó correctamente");
 		return repoTrabajo;
 	}
 	
 	public List<Trabajo> buscar(String search) {
+		LOGGER.debug("Bsucando trabajos: "+ search);
 		return repository.buscar(search);
 	}
 	
 	public Integer savePeluquero(Peluquero peluquero) {
-		LOGGER.info("Guardando el peluquero: "+ peluquero.toString());
+		LOGGER.info("Guardando el nuevo peluquero: "+ peluquero.getNombre());
 		return repository.savePeluquero(peluquero);
 	}
 

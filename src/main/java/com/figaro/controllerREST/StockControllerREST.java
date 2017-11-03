@@ -46,7 +46,7 @@ public class StockControllerREST {
 	
 	@RequestMapping(value = "/editar/{productoId}",method=RequestMethod.PATCH)
     public ResponseEntity<Producto> editProducto(@PathVariable int productoId, @RequestParam int cantidad) {
-		Producto updated = service.editProducto(productoId, cantidad);
+		Producto updated = service.updateCantidad(productoId, cantidad);
 		return new ResponseEntity<Producto>(updated, HttpStatus.OK);
 	}
 	

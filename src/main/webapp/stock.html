@@ -2,10 +2,10 @@
 <html>
 <head> 
 	<title>Stock</title>
-  <#include "/common/head.html"> 
+  <#include "/html/common/head.html"> 
 </head>
 <body ng-app=figaro ng-controller=stockController ng-cloak >
-  <#include "/common/menu.html">
+  <#include "/html/common/menu.html">
   <div id=content class=content>
     <div class="banner">
         <label class="banner-label add"><i class=material-icons ng-click="newProducto()">playlist_add</i></label>
@@ -54,7 +54,7 @@
   </div>
 
   <#include "/modals/stock.html">
-  <#include "/common/javascript.html">
+  <#include "/html/common/javascript.html">
   <script src="js/stockController.js" ></script>
 </body>
 </html>

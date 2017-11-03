@@ -1,9 +1,13 @@
 package com.figaro.controllerREST;
 
+import static com.figaro.util.Constants.*;
+
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,8 +35,14 @@ public class TurnosControllerREST {
 	}
 	
 	@RequestMapping(value = "turnos/{turnoId}",method=RequestMethod.GET,produces="application/json")
-    public Turno getTurno( @PathVariable int turnoId) {
-        return service.getTurno(turnoId);
+    public ResponseEntity<Turno> getTurno( @PathVariable int turnoId) {
+		return new ResponseEntity<Turno>(service.getTurno(turnoId), HttpStatus.OK);
+        
+    }
+	
+	@RequestMapping(value = "turnos/cliente/{clienteId}",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<List<Turno>> getTurnosCliente( @PathVariable int clienteId) {
+		return new ResponseEntity<List<Turno>>(service.getTurnosCliente(clienteId), HttpStatus.OK);
     }
 	
 	@RequestMapping(value = "turnos/actualizar/{turnoId}",method=RequestMethod.PUT)
@@ -48,7 +58,7 @@ public class TurnosControllerREST {
 	
 	
 	@RequestMapping(value = "turnos",method=RequestMethod.GET)
-    public ResponseEntity<List<Turno>> getTurnosDelDia(@RequestParam String fecha) {
+    public ResponseEntity<List<Turno>> getTurnosDelDia(@RequestParam @DateTimeFormat(pattern=DATE_FORMAT) Date fecha) {
 		return new ResponseEntity<List<Turno>>(service.getTurnosDelDia(fecha), HttpStatus.CREATED);
 	}
 	

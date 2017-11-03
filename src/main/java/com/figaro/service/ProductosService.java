@@ -32,9 +32,9 @@ public class ProductosService {
 		return old;
 	}
 	
-	public Producto editProducto(int productoId, int cantidad) {
+	public Producto updateCantidad(int productoId, int cantidad) {
 		Producto old = getProducto(productoId);
-		LOGGER.info("Editando el Producto con ID: " + old.getId()+" con:"+ old.toString());
+		LOGGER.info("Actualizando la cantidad de productos disponibles para el producto: " + old.getId()+" con:"+ old.toString());
 		old.setCantidad(cantidad);
 		repository.updateProducto(old);
 		return old;

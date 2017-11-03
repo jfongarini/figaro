@@ -1,0 +1,82 @@
+<!Doctype html>
+<html>
+<head> 
+  <title>F&Iacute;GARO | CAJA</title>
+  <#include "/html/common/head.html">   
+</head>
+<body ng-app=figaro ng-controller=movimientosController>
+<#include "/html/common/menu.html">
+<div id=content class=content>
+  <div class=banner>
+      <label class="banner-label add"><i class="material-icons" ng-click="newMovimiento()">add_circle_outline</i></label>   
+      <label class=banner-label ><i class=material-icons>more_vert</i></label>      
+      <label class=banner-label ng-click="ShowHideDia()"><i class=material-icons>search</i> D&Iacute;A </label>    
+      <label class=banner-label ><i class=material-icons >more_vert</i></label>
+      <label class=banner-label ng-click="ShowHideEntreDia()"><i class=material-icons >search</i> SEMANA </label>
+      <label class=banner-label ><i class=material-icons >more_vert</i></label>
+      <label class=banner-label ng-click="ShowHideMes()"><i class=material-icons >search</i> MES </label>
+      <label class=banner-label ><i class=material-icons >more_vert</i></label>
+ 	    <label class=banner-label ><i class=material-icons >search</i>CATEGOR&Iacute;A</label>
+      <select  class=search-categoria ng-model="searchC" ng-change="searchCategoria()" ng-cloak>
+            <option value="{{categoria.nombre}}" ng-repeat="categoria in categorias">{{categoria.nombre}}</option>
+      </select>
+      <label class=banner-label ng-click="getAll()"><i class=material-icons >clear</i></label>
+  </div>
+
+  
+<div class=banner-busqueda ng-hide = "IsHiddenDia" ng-cloak>
+  	<div class=banner>   		
+  		<label class=banner-label-busqueda ng-click="ShowHideDia()"><i class=material-icons >clear</i></label>
+   		<label class=banner-label-busqueda> B&Uacute;SQUEDA POR D&Iacute;A: </label>   	
+      	<input class=banner-label-busqueda type="date" ng-model="search" ng-change="searchMovimientoDia()"></input> 
+    </div>
+</div>
+
+<div class=banner-busqueda ng-hide = "IsHiddenEntreDia" ng-cloak>
+  	<div class=banner>   		
+  		<label class=banner-label-busqueda ng-click="ShowHideEntreDia()"><i class=material-icons >clear</i></label>
+   		<label class=banner-label-busqueda> BUSCAR SEMANA:</label>   	
+      	<input class=banner-label-busqueda type="week" ng-model="search" ng-change="searchMovimientoEntreDias()"></input>
+    </div>
+</div>
+
+<div class=banner-busqueda ng-hide = "IsHiddenMes" ng-cloak>
+	<div class=banner>   		
+  		<label class=banner-label-busqueda ng-click="ShowHideMes()"><i class=material-icons >clear</i></label>
+   		<label class=banner-label-busqueda> B&Uacute;SQUEDA POR MES: </label>   	
+      	<input class=banner-label-busqueda type="month" ng-model="search" ng-change="searchMovimientoMes()"></input>
+    </div>  
+</div>
+  
+  <table id=table class=main-table>
+
+    <thead>
+      <tr>      	  
+          <th>FECHA</th>
+          <th>CATEGORIA</th>
+          <th>MONTO</th>
+          <th>DETALLE</th>   
+          <th></th>           
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-cloak id={{movimiento.id}} data-id={{movimiento.id}} class=data-row ng-repeat="movimiento in movimientos | orderBy : sortFecha : true"> 
+         
+        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)">{{movimiento.fecha | date }}</td>
+        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)">{{movimiento.categoria}}</td>
+	      <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)"> <font ng-class='{green : !movimiento.isGasto, red: movimiento.isGasto}'>{{movimiento.precio | currency }}</font></td>
+        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)">{{movimiento.detalle}}</td>   
+        <td class="tachotd" id={{movimiento.id}} data-id={{movimiento.id}} data-ng-click="confirmDelete(movimiento.id)"><label><i class="material-icons tachoi" >clear</i></label></td>                
+      </tr>      
+    </tbody>
+  </table>
+  <div class=banner>
+      <label class=banner-label ><i class=material-icons >account_balance_wallet</i> Total: <font ng-cloak ng-class='{green : calculaTotal() >= 0, red: calculaTotal() < 0}'>{{ calculaTotal() | currency }}</font></label>
+  </div>
+</div>
+<#include "/html/caja/caja-modal.html">
+<#include "/html/common/javascript.html">
+<#include "/html/common/confirm.html">
+<script src="js/movimientosController.js" ></script>
+</body>
+</html>
