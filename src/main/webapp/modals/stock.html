@@ -2,9 +2,15 @@
     <div class=modal-content>
       <form ng-submit="sendProducto()">
         <div class=form-field><label>NOMBRE:</label>      <input id=modal-stock-focus type="text"   ng-model="ngProducto.nombre"></input></div>
-        <div class=form-field><label>DESCRIPCION:</label> <input type="text"            ng-model="ngProducto.descripcion"></input></div>
-        <div class=form-field><label>CANTIDAD:</label>    <input type="number"          ng-model="ngProducto.cantidad"></input></div>
-        <div class=form-field><label>MINIMA:</label>      <input type="number"          ng-model="ngProducto.cantidadMinima"></input></div>
+        <div class=form-field><label>DESCRIPCION:</label> <input type="text"   ng-model="ngProducto.descripcion"></input></div>
+        <div class=form-field><label>CANTIDAD:</label>    <input type="number" ng-model="ngProducto.cantidad"></input></div>
+        <div class=form-field><label>MINIMA:</label>      <input type="number" ng-model="ngProducto.cantidadMinima"></input></div>
+        <div class=form-field><label>PRECIO:</label>      <input type="number" ng-model="ngProducto.precio" step="0.01"></input></div>
+        <div class=form-field><label>PARA VENTA:</label>
+          <input type="radio" name=productoVenta ng-model="ngProducto.productoVenta" ng-value="true" value="true" required> SI
+          <input type="radio" name=productoVenta ng-model="ngProducto.productoVenta" ng-value="false" value="false" required> NO
+        </div>
+        
         <div class=buttons>
           <button class="button cancel" type="button" ng-click="discardProducto()">CANCELAR</button>
           <button class="button accept" type="submit">ACEPTAR</button>

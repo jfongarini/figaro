@@ -12,6 +12,7 @@
         <label class=banner-label ><i class=material-icons >search</i></label>
         <input class=input-banner type="text" placeholder="Buscar producto" ng-model="search" ng-keyup="searchProducto()">
     </div>
+    
     <table id=table class=main-table>
       <thead>
         <tr>
@@ -33,7 +34,25 @@
         </tr>
       </tbody>
     </table>
+    <br>
+    <table id=table class=main-table>
+      <thead>
+        <tr>
+              <th>NOMBRE</th>
+              <th>DESCRIPCION</th>
+              <th>PRECIO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class=data-row ng-repeat="producto in productos | filter: {productoVenta: true}">
+          <td id={{producto.id}} data-id={{producto.id}}>{{producto.nombre}}</td>
+          <td id={{producto.id}} data-id={{producto.id}}>{{producto.descripcion}}</td>
+          <td id={{producto.id}} data-id={{producto.id}}>{{producto.precio | currency}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
   <#include "/modals/stock.html">
   <#include "/common/javascript.html">
   <script src="js/stockController.js" ></script>

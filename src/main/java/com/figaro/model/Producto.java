@@ -1,11 +1,15 @@
 package com.figaro.model;
 
+import java.math.BigDecimal;
+
 public class Producto {
 	private int id;
 	private String nombre;
 	private String descripcion;
 	private int cantidad;
 	private int cantidadMinima;
+	private BigDecimal precio;
+	private Boolean productoVenta; 
 	
 	public String getNombre() {
 		return nombre;
@@ -40,12 +44,31 @@ public class Producto {
 		this.descripcion = descripcion;
 	}
 	
+	public BigDecimal getPrecio() {
+		return precio;
+	}
+	
+	public void setPrecio(BigDecimal precio) {
+		this.precio = precio;
+	}
+	
+	public Boolean getProductoVenta() {
+		return productoVenta;
+	}
+	
+	public void setProductoVenta(Boolean venta) {
+		this.productoVenta = venta;
+	}
+	
 	public Producto update(Producto producto) {
 		setNombre(producto.getNombre());
 		setDescripcion(producto.getDescripcion());
 		setCantidad(producto.getCantidad());
 		setCantidadMinima(producto.getCantidadMinima());
+		setPrecio(producto.getPrecio());
+		setProductoVenta(producto.getProductoVenta());
 		return this;
 	}
+	
 	
 }

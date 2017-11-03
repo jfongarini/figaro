@@ -48,9 +48,10 @@ app.controller('stockController', function ($scope, $http) {
             });
             $scope.ngProducto={};
         }
-        else{
-            $http.put('/rest/stock/actualizar/'+ $scope.productoId, $scope.ngProducto).then(function (response) {
-                $scope.getAll();
+        else{ 
+            $http.put('/rest/stock/actualizar/'+ $scope.productoId, $scope.ngProducto).then(
+                function (response) {
+                    $scope.getAll();
             });
         }
         closeModal("modal-stock");
