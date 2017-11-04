@@ -11,27 +11,44 @@ public class ProductosService {
 	
 	private ProductosRepository repository;
 
+	
+	public Producto getProducto(int productoID) {
+		LOGGER.debug("Obteniendo el Producto con ID: " + productoID);
+		return repository.getProducto(productoID);
+	}
+	
 	public Producto saveProducto (Producto producto) {
+		LOGGER.info("Guardando el Producto con ID: " + producto.getId()+" con:"+ producto.toString());
 		int id = repository.saveProducto(producto);
 		producto.setId(id);
 		return producto;
-	}
-	
-	public Producto getProducto(int idProducto) {
-		return repository.getProducto(idProducto);
-	}
-	
+	}	
+		
 	public Producto updateProducto(Producto producto) {
 		Producto old = getProducto(producto.getId());
-		old.setNombre(producto.getNombre());
-		old.setDescripcion(producto.getDescripcion());
-		old.setCantidad(producto.getCantidad());
-		old.setCantidadMinima(producto.getCantidadMinima());
+		LOGGER.info("Actualizando el Producto con ID: " + old.getId()+" con:"+ producto.toString());
+		old.update(producto);
 		repository.updateProducto(old);
+		return old;
+	}
+	
+	public Producto updateCantidad(int productoId, int cantidad) {
+		Producto old = getProducto(productoId);
+		LOGGER.info("Actualizando la cantidad de productos disponibles para el producto: " + old.getId()+" con:"+ old.toString());
+		old.setCantidad(cantidad);
+		repository.updateProducto(old);
+		return old;
+	}	
+	
+	public Producto deleteProducto(int productoId) {
+		Producto producto = getProducto(productoId);
+		LOGGER.info("Borrando el Producto con ID: " + productoId +" con:"+ producto.toString());
+		repository.deleteProducto(producto);
 		return producto;
 	}
 	
 	public List<Producto> getAllProductos(){
+		LOGGER.debug("Obteniendo todos los productos");
 		return repository.getAll();
 	}
 	

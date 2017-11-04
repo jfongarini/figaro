@@ -207,7 +207,13 @@
 		</property>
 	</bean>
 
+
 	<bean id="TurnosService" class="com.figaro.service.TurnosService">
+		
+		<property name="ClientesService">
+			<ref bean="ClientesServiceTransactional" />
+		</property>
+		
 		<property name="repository">
 			<ref bean="TurnosRepository" />
 		</property>

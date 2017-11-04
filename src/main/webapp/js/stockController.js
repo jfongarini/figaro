@@ -15,11 +15,26 @@ app.controller('stockController', function ($scope, $http) {
         $scope.ngProducto={}; 
     };
 
+    //ELIMINTAR PRODUCTO
+    $scope.deleteProducto = function(event) {
+        $scope.productoId = event.currentTarget.getAttribute("data-id");
+        $http.delete('/rest/stock/eliminar/'+ $scope.productoId).then(function (response) {
+            $scope.getAll();
+        });
+    };
+
+    //ACTUALIZAR UN CAMPO PRODUCTO
+    $scope.upgradeProducto = function(id, cantidad){
+        $http.patch('/rest/stock/editar/'+id,{} ,{params: { cantidad: cantidad }}).then(function (response) {
+            $scope.getAll();
+        });
+    };
+
     //CLICK FILA PRODUCTO
     $scope.detailProducto = function(event){
         $scope.isNuevoProducto = false
-        $scope.productoID = event.currentTarget.getAttribute("data-id");
-        $http.get('/rest/stock/'+$scope.productoID).then(function (response) {
+        $scope.productoId = event.currentTarget.getAttribute("data-id");
+        $http.get('/rest/stock/'+$scope.productoId).then(function (response) {
             $scope.ngProducto = response.data;
             openModal("modal-stock");
 	    });
@@ -32,9 +47,11 @@ app.controller('stockController', function ($scope, $http) {
                 $scope.productos.push(response.data);
             });
             $scope.ngProducto={};
-        }else{
-            $http.put('/rest/stock/actualizar/'+ $scope.productoID, $scope.ngProducto).then(function (response) {
-                $scope.getAll();
+        }
+        else{ 
+            $http.put('/rest/stock/actualizar/'+ $scope.productoId, $scope.ngProducto).then(
+                function (response) {
+                    $scope.getAll();
             });
         }
         closeModal("modal-stock");
@@ -45,7 +62,7 @@ app.controller('stockController', function ($scope, $http) {
         $scope.ngProducto = {};
         closeModal("modal-stock");
     };
-
+    
     //BUSCAR
     $scope.searchProducto = function() {        
         $http.get('/rest/stock/buscar',{params: { search: $scope.search }})

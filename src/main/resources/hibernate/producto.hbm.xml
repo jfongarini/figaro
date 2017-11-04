@@ -6,9 +6,11 @@
 		<id name="id" type="int" column="ID_PRODUCTO" >
 			<generator class="increment"/>
 		</id>		
-	 	<property name="nombre" 			column="NOMBRE" 			type="string"/>
-	 	<property name="descripcion"		column="DESCRIPCION"		type= "string"/>
-	 	<property name="cantidad" 			column="CANTIDAD" 			type="int"/> 	
-	    <property name="cantidadMinima" 	column="CANTIDAD_MINIMA" 	type="int"/> 	
+	 	<property name="nombre" 		column="NOMBRE" 		 type="string"/>
+	 	<property name="descripcion"	column="DESCRIPCION"	 type= "string"/>
+	 	<property name="cantidad" 		column="CANTIDAD" 		 type="int"/> 	
+	    <property name="cantidadMinima" column="CANTIDAD_MINIMA" type="int"/> 
+		<property name="precio"  		column="PRECIO"   		 type="big_decimal"/>
+		<property name="productoVenta"	column="PRODUCTO_VENTA"	 type="boolean"/>	
 	</class>
 </hibernate-mapping>

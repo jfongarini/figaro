@@ -12,6 +12,7 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.totalDiario=0;
         $scope.turnos={};
         $scope.ngTurno={};
+        $scope.clientes=[];
     }
 
 
@@ -158,6 +159,7 @@ app.controller('turnosController', function ($scope, $http) {
     //SET CLIENTE
     $scope.setCliente = function (cliente) {
         $scope.ngTurno.cliente = cliente;
+        $scope.clientes=[];
     }
     
     //TOGGLE COBRADO

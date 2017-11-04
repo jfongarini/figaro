@@ -16,11 +16,6 @@ public class TurnosController {
 		return "html/turnos/turnos-cliente";
 	}
 
-	@RequestMapping("/login")
-	public String login() {
-		return "html/login/login";
-	}
-	
 	
 	
 }

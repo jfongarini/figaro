@@ -17,6 +17,10 @@ public class ProductosRepository extends AbstractRepository {
 	public Producto getProducto (int idProducto) {
 		return (Producto) getCurrentSession().get(Producto.class, idProducto);
 	}
+
+	public void deleteProducto(Producto producto) {
+		getCurrentSession().delete(producto);
+	}	
 	
 	@SuppressWarnings("unchecked")
 	public List<Producto> getAll() {
