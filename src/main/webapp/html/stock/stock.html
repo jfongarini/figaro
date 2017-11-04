@@ -30,7 +30,7 @@
           <td class=numericotr id={{producto.id}} data-id={{producto.id}}>
           <input  class="disponibletr" type="number" ng-model="producto.cantidad" ng-value="producto.cantidad"  ng-change="upgradeProducto(producto.id, producto.cantidad)"></td>
           <td class=numericotr id={{producto.id}} data-id={{producto.id}} data-ng-click="detailProducto($event)">{{producto.cantidadMinima}}</td>
-          <td id={{producto.id}} data-id={{producto.id}} data-ng-click="deleteProducto($event)" class="tachotd"><lavel><i class="material-icons tachoi">delete</i></lavel></td>
+          <td id={{producto.id}} data-id={{producto.id}} data-ng-click="deleteProducto($event)" class="tachotd"><lavel><i class="material-icons tachoi">clear</i></lavel></td>
         </tr>
       </tbody>
     </table>
@@ -53,7 +53,7 @@
     </table>
   </div>
 
-  <#include "/modals/stock.html">
+  <#include "stock-modal.html">
   <#include "/html/common/javascript.html">
   <script src="js/stockController.js" ></script>
 </body>
