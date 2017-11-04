@@ -60,14 +60,24 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-cloak id={{movimiento.id}} data-id={{movimiento.id}} class=data-row ng-repeat="movimiento in movimientos | orderBy : sortFecha : true"> 
-         
-        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)">{{movimiento.fecha | date }}</td>
-        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)">{{movimiento.categoria}}</td>
-	      <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)"> <font ng-class='{green : !movimiento.isGasto, red: movimiento.isGasto}'>{{movimiento.precio | currency }}</font></td>
-        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)">{{movimiento.detalle}}</td>   
-        <td class="tachotd" id={{movimiento.id}} data-id={{movimiento.id}} data-ng-click="confirmDelete(movimiento.id)"><label><i class="material-icons tachoi" >clear</i></label></td>                
-      </tr>      
+    
+ 	  <tr ng-cloak id={{movimiento.id}} data-id={{movimiento.id}} class=data-row ng-repeat="movimiento in movimientos | orderBy : sortFecha : true"">
+ 	  
+        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos'">{{movimiento.fecha | date }}</td>
+        <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos'">{{movimiento.fecha | date }}</td>
+        
+        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos'">{{movimiento.categoria}}</td>
+        <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos'">{{movimiento.categoria}}</td>
+        
+	    <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos'"> <font ng-class='{green : !movimiento.isGasto, red: movimiento.isGasto}'>{{movimiento.precio | currency }}</font></td>
+	    <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos'"> <font ng-class='{green : !movimiento.isGasto, red: movimiento.isGasto}'>{{movimiento.precio | currency}}</font></td>
+	    
+        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos'">{{movimiento.detalle}}</td>
+        <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos'">{{movimiento.detalle}}</td>
+          
+        <td class="tachotd" id={{movimiento.id}} data-id={{movimiento.id}} data-ng-click="confirmDelete(movimiento.id)" ng-if="movimiento.categoria != 'Turnos'"><label><i class="material-icons tachoi" >clear</i></label></td>
+        <td class="tachotd" ng-if="movimiento.categoria == 'Turnos'"></td>
+      </tr>
     </tbody>
   </table>
   <div class=banner>
@@ -78,5 +88,6 @@
 <#include "/html/common/javascript.html">
 <#include "/html/common/confirm.html">
 <script src="js/movimientosController.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.js"></script>
 </body>
 </html>

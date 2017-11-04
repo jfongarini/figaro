@@ -2,9 +2,14 @@ app.controller('movimientosController', function ($scope, $http) {
  	 
 	//OBTENER LISTA DE MOVIMIENTOS
 	    $scope.getAll = function() {
-	        $http.get("/rest/movimientos").then(function (response) {
-	            $scope.movimientos = response.data;
-	        });
+	        //$http.get("/rest/movimientos").then(function (response) {
+	        //    $scope.movimientos = response.data;
+	        //});
+	    	$scope.search = stringToDate(getToday());
+	        $http.get('/rest/movimientos/buscar',{params: { q: getStringDate($scope.search) }})		        
+	        .then(function successCallback(response) {	  	        	
+	            $scope.movimientos = response.data;	            
+	        })
 	    };
 
 	    //CLICK NUEVO MOVIMIENTO
