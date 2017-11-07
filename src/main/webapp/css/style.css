@@ -105,7 +105,7 @@ body{
 .card, .banner, .banner-busqueda{
     margin-top: 30px;
     background-color: #FFF;
-    box-shadow: rgba(0,0,0,0.4) 0px 2px 5px
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
 }
 
 .banner{
@@ -145,7 +145,7 @@ table {
 .main-table{
     text-align: left;
     background-color: white;
-    box-shadow: rgba(0,0,0,0.4) 0px 2px 5px
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12)
 }
 
 
@@ -176,6 +176,7 @@ td,th{
 
 th {
     letter-spacing: 1px;
+    font-weight: 400;
 }
 
 ul {
@@ -267,7 +268,7 @@ li a:hover {
 .message-content {
     padding: 50px;
     background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
 }
 
 .modal-content {
