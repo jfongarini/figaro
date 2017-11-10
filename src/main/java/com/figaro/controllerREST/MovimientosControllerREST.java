@@ -56,11 +56,17 @@ public class MovimientosControllerREST {
     public ResponseEntity<List<Movimiento>> getAllMovimiento(@RequestParam  @DateTimeFormat(pattern="yyyy-MM-dd") Date q1, @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date q2 ) {
         return new ResponseEntity<List<Movimiento>> (service.buscarE(q1,q2),HttpStatus.CREATED);
         
-    }
+    }	
 	
 	@RequestMapping(value = "movimientos/buscarCategoria",method=RequestMethod.GET,produces="application/json")
     public ResponseEntity<List<Movimiento>> getAllMovimientoCategoria(@RequestParam String q) {
         return new ResponseEntity<List<Movimiento>> (service.buscarCategoria(q), HttpStatus.CREATED);
+    }
+	
+	@RequestMapping(value = "movimientos/buscarEntreC",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<List<Movimiento>> getAllMovimiento(@RequestParam  @DateTimeFormat(pattern="yyyy-MM-dd") Date q1, @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date q2, String q3 ) {
+        return new ResponseEntity<List<Movimiento>> (service.buscarEC(q1,q2,q3),HttpStatus.CREATED);
+        
     }
 	
 	@RequestMapping(value = "movimientos/eliminar/{movimientoID}",method=RequestMethod.DELETE)	

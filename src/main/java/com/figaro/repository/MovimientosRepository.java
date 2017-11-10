@@ -56,5 +56,15 @@ public class MovimientosRepository extends AbstractRepository{
 	    query.setParameter(1, search);
 	    return query.getResultList();
 	}
+	
+	@SuppressWarnings({ "unchecked" })
+	public List<Movimiento> buscarEC(Date search1, Date search2, String searchC) {
+				
+		Query<Movimiento> query = getCurrentSession().createQuery( "FROM Movimiento m WHERE (m.fecha BETWEEN ?1 AND ?2) AND (m.categoria = ?3)");
+	    query.setParameter(1, search1);
+	    query.setParameter(2, search2);
+	    query.setParameter(3, searchC);
+	    return query.getResultList();
+	}	
 
 }	

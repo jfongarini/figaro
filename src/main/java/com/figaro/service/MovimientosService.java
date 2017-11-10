@@ -64,6 +64,10 @@ public class MovimientosService {
 	
 	public List<Movimiento> buscarCategoria(String search) {
 		return repository.buscarCategoria(search);
-	}		
+	}	
+	
+	public List<Movimiento> buscarEC(Date search1, Date search2, String searchC) {		
+		return repository.buscarEC(search1,search2,searchC);
+	}
 	
 }

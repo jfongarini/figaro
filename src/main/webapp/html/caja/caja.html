@@ -28,7 +28,7 @@
   	<div class=banner>   		
   		<label class=banner-label-busqueda ng-click="ShowHideDia()"><i class=material-icons >clear</i></label>
    		<label class=banner-label-busqueda> B&Uacute;SQUEDA POR D&Iacute;A: </label>   	
-      	<input class=banner-label-busqueda type="date" ng-model="search" ng-change="searchMovimientoDia()"></input> 
+      	<input class=banner-label-busqueda type="date" data-id="day" ng-model="search" ng-change="searchMovimiento()"></input> 
     </div>
 </div>
 
@@ -36,7 +36,7 @@
   	<div class=banner>   		
   		<label class=banner-label-busqueda ng-click="ShowHideEntreDia()"><i class=material-icons >clear</i></label>
    		<label class=banner-label-busqueda> BUSCAR SEMANA:</label>   	
-      	<input class=banner-label-busqueda type="week" ng-model="search" ng-change="searchMovimientoEntreDias()"></input>
+      	<input class=banner-label-busqueda type="week" data-id="week" ng-model="search" ng-change="searchMovimiento()"></input>
     </div>
 </div>
 
@@ -44,7 +44,7 @@
 	<div class=banner>   		
   		<label class=banner-label-busqueda ng-click="ShowHideMes()"><i class=material-icons >clear</i></label>
    		<label class=banner-label-busqueda> B&Uacute;SQUEDA POR MES: </label>   	
-      	<input class=banner-label-busqueda type="month" ng-model="search" ng-change="searchMovimientoMes()"></input>
+      	<input class=banner-label-busqueda type="month" data-id="month" ng-model="search" ng-change="searchMovimiento()"></input>
     </div>  
 </div>
   
@@ -61,7 +61,7 @@
     </thead>
     <tbody>
     
- 	  <tr ng-cloak id={{movimiento.id}} data-id={{movimiento.id}} class=data-row ng-repeat="movimiento in movimientos | orderBy : sortFecha : true"">
+ 	  <tr ng-cloak id={{movimiento.id}} data-id={{movimiento.id}} class=data-row ng-repeat="movimiento in movimientos | orderBy : sortFecha : true">
  	  
         <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos'">{{movimiento.fecha | date }}</td>
         <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos'">{{movimiento.fecha | date }}</td>
