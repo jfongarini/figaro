@@ -25,11 +25,6 @@ public class MovimientosControllerREST {
 	@Autowired
 	@Qualifier("MovimientosServiceTransactional")
 	private MovimientosService service;
-	
-	@RequestMapping(value = "movimientos",method=RequestMethod.GET,produces="application/json")
-    public List<Movimiento> getAllMovimiento() {
-        return service.getAllMovimiento();
-    }	
 
 	@RequestMapping(value = "movimientos/{movimientoID}",method=RequestMethod.GET,produces="application/json")
     public Movimiento getMovimiento( @PathVariable int movimientoID) {
@@ -48,19 +43,8 @@ public class MovimientosControllerREST {
 	}
 	
 	@RequestMapping(value = "movimientos/buscar",method=RequestMethod.GET,produces="application/json")
-    public ResponseEntity<List<Movimiento>> getAllMovimiento(@RequestParam String q) {
-        return new ResponseEntity<List<Movimiento>> (service.buscar(q), HttpStatus.CREATED);
-    }
-
-	@RequestMapping(value = "movimientos/buscarEntre",method=RequestMethod.GET,produces="application/json")
-    public ResponseEntity<List<Movimiento>> getAllMovimiento(@RequestParam  @DateTimeFormat(pattern="yyyy-MM-dd") Date q1, @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date q2 ) {
-        return new ResponseEntity<List<Movimiento>> (service.buscarE(q1,q2),HttpStatus.CREATED);
-        
-    }
-	
-	@RequestMapping(value = "movimientos/buscarCategoria",method=RequestMethod.GET,produces="application/json")
-    public ResponseEntity<List<Movimiento>> getAllMovimientoCategoria(@RequestParam String q) {
-        return new ResponseEntity<List<Movimiento>> (service.buscarCategoria(q), HttpStatus.CREATED);
+    public ResponseEntity<List<Movimiento>> getAllMovimiento(@RequestParam  @DateTimeFormat(pattern="yyyy-MM-dd") Date q1, @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date q2, @RequestParam String q3 ) {
+        return new ResponseEntity<List<Movimiento>> (service.buscar(q1,q2,q3),HttpStatus.CREATED);
     }
 	
 	@RequestMapping(value = "movimientos/eliminar/{movimientoID}",method=RequestMethod.DELETE)	

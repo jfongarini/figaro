@@ -31,6 +31,32 @@ function stringToDate(date){
 	return new Date(date + " 00:00:00");
 }
 
+function getDateFormated(){
+	return stringToDate(getToday());
+}
+
+function getSemana(date){
+	var dStart = new Date(date);
+	var dEnd = new Date(date);
+	var semana = new Date();
+	dStart.setDate(dStart.getDate() - 3);
+	dEnd.setDate(dEnd.getDate() + 3);
+	
+	semana.dStart = dStart;
+	semana.dEnd = dEnd;
+	
+	return semana;
+}
+
+function getMes(date){
+	var mes = {};
+	mes.dStart = new Date(date.getFullYear(), date.getMonth(), 1);
+	mes.dEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+	
+	return mes;
+	
+}
+
 function openModal(modal){
 	$('#'+modal).addClass("modal-on");
 	$('#content').addClass("blur");

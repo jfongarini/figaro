@@ -1,15 +1,8 @@
 app.controller('movimientosController', function ($scope, $http) {
  	 
 	//OBTENER LISTA DE MOVIMIENTOS
-	    $scope.getAll = function() {
-	        //$http.get("/rest/movimientos").then(function (response) {
-	        //    $scope.movimientos = response.data;
-	        //});
-	    	$scope.search = stringToDate(getToday());
-	        $http.get('/rest/movimientos/buscar',{params: { q: getStringDate($scope.search) }})		        
-	        .then(function successCallback(response) {	  	        	
-	            $scope.movimientos = response.data;	            
-	        })
+	    $scope.getAll = function() {	    	
+	    	$scope.searchMovimiento();	    	
 	    };
 
 	    //CLICK NUEVO MOVIMIENTO
@@ -109,6 +102,8 @@ app.controller('movimientosController', function ($scope, $http) {
 	        var date = new Date(ngMovimiento.fecha);
 	        return date;
 	    };
+
+/*	    
 	    
 	    //FILTRO DIA
 	    $scope.searchMovimientoDia = function() {	    	   	
@@ -119,7 +114,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	    }
 	    
 	    //FILTRO SEMANA
-	    $scope.searchMovimientoEntreDias = function() {	    	
+	    $scope.searchMovimientoEntreDias = function() {	 
 	    	var dStart = new Date($scope.search);
 	    	var dEnd = new Date($scope.search);
 	    	dStart.setDate(dStart.getDate() - 3);
@@ -140,13 +135,72 @@ app.controller('movimientosController', function ($scope, $http) {
 	            $scope.movimientos = response.data;	            
 	        })
 	    }
+
 	    
 	  //FILTRO CATEGORIA
-	    $scope.searchCategoria = function() {	    	   	
+	    $scope.searchCategoria = function() {
 	        $http.get('/rest/movimientos/buscarCategoria',{params: { q: $scope.searchC }})		        
 	        .then(function successCallback(response) {	  	        	
 	            $scope.movimientos = response.data;	            
 	        })
+	    }
+	    
+*/	    
+	  // LIMPIAR SELECT CATEGORIA
+	  $scope.limpiarSelect = function(){
+	    	$scope.searchC = $scope.busqueda.categoria;	
+	  }
+	    
+	  //LIMPIA FILTRO FECHA
+	  $scope.limpiaFecha = function() {
+		    $scope.search = '';
+		    $scope.busqueda.fechaInicio = getDateFormated();
+		    $scope.busqueda.fechaFin = getDateFormated();
+		    $scope.searchMovimiento();
+	  }  
+	    
+	  //LIMPIA FILTRO CATEGORIA
+	  $scope.limpiaCategoria = function() {
+		  	$scope.searchC = '';
+		    $scope.busqueda.categoria = '';		
+		    $scope.searchMovimiento();
+	  }  
+	    
+	  //FILTRO DIA
+	    $scope.searchMovimientoDia = function() {	    
+		    $scope.busqueda.fechaInicio = getStringDate(new Date($scope.search));
+		    $scope.busqueda.fechaFin = getStringDate(new Date($scope.search));
+		    $scope.searchMovimiento();
+	    } 
+	    
+	  //FILTRO SEMANA
+	    $scope.searchMovimientoSem = function() {
+	    	var semana = getSemana($scope.search);
+	    	$scope.busqueda.fechaInicio = getStringDate(semana.dStart);
+		    $scope.busqueda.fechaFin = getStringDate(semana.dEnd);
+		    $scope.searchMovimiento();
+	    }
+	    
+	  //FILTRO MES
+	    $scope.searchMovimientoMes = function() {	
+	    	var mes = getMes($scope.search);
+	    	$scope.busqueda.fechaInicio = getStringDate(mes.dStart);
+		    $scope.busqueda.fechaFin = getStringDate(mes.dEnd);
+		    $scope.searchMovimiento();
+	    }
+
+	  //FILTRO CATEGORIA    
+	    $scope.searchCategoria = function() {
+	    	$scope.busqueda.categoria = $scope.searchC;
+	    	$scope.searchMovimiento();
+	    }
+	    
+	  //FILTRO TOTAL
+	    $scope.searchMovimiento = function() {	
+	    	$http.get('/rest/movimientos/buscar',{params: { q1: $scope.busqueda.fechaInicio, q2: $scope.busqueda.fechaFin, q3: $scope.busqueda.categoria }})		        
+		        .then(function successCallback(response) {	  	        	
+		            $scope.movimientos = response.data;	            
+		        })
 	    }
 	    	    	    
 	    //MOSTRAR O NO MOSTRAR DIV DE BUSQUEDA
@@ -159,6 +213,7 @@ app.controller('movimientosController', function ($scope, $http) {
         	$scope.IsHiddenMes = true;
             $scope.IsHiddenDia = $scope.IsHiddenDia ? false : true;        	
             if($scope.IsHiddenDia === true){
+            	$scope.limpiaFecha();
             	$scope.getAll();	                    	
 	        }
         }        
@@ -168,6 +223,7 @@ app.controller('movimientosController', function ($scope, $http) {
         	$scope.IsHiddenMes = true;
             $scope.IsHiddenEntreDia = $scope.IsHiddenEntreDia ? false : true;        	
             if($scope.IsHiddenEntreDia === true){
+            	$scope.limpiaFecha();
             	$scope.getAll();
 	        }
         }        
@@ -177,6 +233,7 @@ app.controller('movimientosController', function ($scope, $http) {
         	$scope.IsHiddenEntreDia = true;
             $scope.IsHiddenMes = $scope.IsHiddenMes ? false : true;        	
             if($scope.IsHiddenMes === true){
+            	$scope.limpiaFecha();
             	$scope.getAll();
 	        }
         }
@@ -184,6 +241,10 @@ app.controller('movimientosController', function ($scope, $http) {
 	    //INIT
 	    $scope.activeCaja = true;
 	    $scope.search = '';
+	    $scope.busqueda = {};
+	    $scope.busqueda.fechaInicio = getDateFormated();
+	    $scope.busqueda.fechaFin = getDateFormated();
+	    $scope.busqueda.categoria = '';
 	    $scope.ngMovimiento = {};
 	    $scope.getAllCategorias();
 	    $scope.getAll();
