@@ -17,10 +17,10 @@
       <label class=banner-label ng-click="ShowHideMes()"><i class=material-icons >search</i> MES </label>
       <label class=banner-label ><i class=material-icons >more_vert</i></label>
  	    <label class=banner-label ><i class=material-icons >search</i>CATEGOR&Iacute;A</label>
-      <select  class=search-categoria ng-model="searchC" ng-change="searchCategoria()" ng-cloak>
+      <select  class=search-categoria ng-model="searchC" ng-change="searchCategoria()" ng-click="limpiarSelect()" ng-cloak>
             <option value="{{categoria.nombre}}" ng-repeat="categoria in categorias">{{categoria.nombre}}</option>
       </select>
-      <label class=banner-label ng-click="getAll()"><i class=material-icons >clear</i></label>
+      <label class=banner-label ng-click="limpiaCategoria()"><i class=material-icons >clear</i></label>
   </div>
 
   
@@ -28,7 +28,7 @@
   	<div class=banner>   		
   		<label class=banner-label-busqueda ng-click="ShowHideDia()"><i class=material-icons >clear</i></label>
    		<label class=banner-label-busqueda> B&Uacute;SQUEDA POR D&Iacute;A: </label>   	
-      	<input class=banner-label-busqueda type="date" data-id="day" ng-model="search" ng-change="searchMovimiento()"></input> 
+      	<input class=banner-label-busqueda type="date" ng-model="search" ng-change="searchMovimientoDia()"></input> 
     </div>
 </div>
 
@@ -36,7 +36,7 @@
   	<div class=banner>   		
   		<label class=banner-label-busqueda ng-click="ShowHideEntreDia()"><i class=material-icons >clear</i></label>
    		<label class=banner-label-busqueda> BUSCAR SEMANA:</label>   	
-      	<input class=banner-label-busqueda type="week" data-id="week" ng-model="search" ng-change="searchMovimiento()"></input>
+      	<input class=banner-label-busqueda type="week" ng-model="search" ng-change="searchMovimientoSem()"></input>
     </div>
 </div>
 
@@ -44,7 +44,7 @@
 	<div class=banner>   		
   		<label class=banner-label-busqueda ng-click="ShowHideMes()"><i class=material-icons >clear</i></label>
    		<label class=banner-label-busqueda> B&Uacute;SQUEDA POR MES: </label>   	
-      	<input class=banner-label-busqueda type="month" data-id="month" ng-model="search" ng-change="searchMovimiento()"></input>
+      	<input class=banner-label-busqueda type="month" ng-model="search" ng-change="searchMovimientoMes()"></input>
     </div>  
 </div>
   
@@ -88,6 +88,5 @@
 <#include "/html/common/javascript.html">
 <#include "/html/common/confirm.html">
 <script src="js/movimientosController.js" ></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.js"></script>
 </body>
 </html>

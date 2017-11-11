@@ -1,15 +1,8 @@
 app.controller('movimientosController', function ($scope, $http) {
  	 
 	//OBTENER LISTA DE MOVIMIENTOS
-	    $scope.getAll = function() {
-	    	
-	    	if ($scope.filtro == '') {
-	    		$scope.filtro = 'day';
-	    		$scope.search = stringToDate(getToday());
-	    	}	    	
-	    	$scope.varGetAll = true;
-	    	$scope.searchMovimiento();
-	    	
+	    $scope.getAll = function() {	    	
+	    	$scope.searchMovimiento();	    	
 	    };
 
 	    //CLICK NUEVO MOVIMIENTO
@@ -153,72 +146,61 @@ app.controller('movimientosController', function ($scope, $http) {
 	    }
 	    
 */	    
+	  // LIMPIAR SELECT CATEGORIA
+	  $scope.limpiarSelect = function(){
+	    	$scope.searchC = $scope.busqueda.categoria;	
+	  }
 	    
-	  //FILTRO CATEGORIA
-	    $scope.searchCategoria = function() {
-	    	$scope.varCategoria = true;
-	    	$scope.searchMovimiento();
-	    	$scope.varCategoria = false;
+	  //LIMPIA FILTRO FECHA
+	  $scope.limpiaFecha = function() {
+		    $scope.search = '';
+		    $scope.busqueda.fechaInicio = getDateFormated();
+		    $scope.busqueda.fechaFin = getDateFormated();
+		    $scope.searchMovimiento();
+	  }  
+	    
+	  //LIMPIA FILTRO CATEGORIA
+	  $scope.limpiaCategoria = function() {
+		  	$scope.searchC = '';
+		    $scope.busqueda.categoria = '';		
+		    $scope.searchMovimiento();
+	  }  
+	    
+	  //FILTRO DIA
+	    $scope.searchMovimientoDia = function() {	    
+		    $scope.busqueda.fechaInicio = getStringDate(new Date($scope.search));
+		    $scope.busqueda.fechaFin = getStringDate(new Date($scope.search));
+		    $scope.searchMovimiento();
+	    } 
+	    
+	  //FILTRO SEMANA
+	    $scope.searchMovimientoSem = function() {
+	    	var semana = getSemana($scope.search);
+	    	$scope.busqueda.fechaInicio = getStringDate(semana.dStart);
+		    $scope.busqueda.fechaFin = getStringDate(semana.dEnd);
+		    $scope.searchMovimiento();
 	    }
 	    
+	  //FILTRO MES
+	    $scope.searchMovimientoMes = function() {	
+	    	var mes = getMes($scope.search);
+	    	$scope.busqueda.fechaInicio = getStringDate(mes.dStart);
+		    $scope.busqueda.fechaFin = getStringDate(mes.dEnd);
+		    $scope.searchMovimiento();
+	    }
+
+	  //FILTRO CATEGORIA    
+	    $scope.searchCategoria = function() {
+	    	$scope.busqueda.categoria = $scope.searchC;
+	    	$scope.searchMovimiento();
+	    }
 	    
 	  //FILTRO TOTAL
-	    $scope.searchMovimiento = function() {		    	
-	    	if ((!$scope.varGetAll) && (!$scope.varCategoria)){
-	    		$scope.filtro = event.currentTarget.getAttribute("data-id");	    	
-	    	  } else {
-	    		  $scope.varGetAll = false;
-	    	  }	    	
-	    	if ($scope.filtro == "day"){
-	    		var dStart = new Date($scope.search);
-		    	var dEnd = new Date($scope.search);
-		    	dStart.setDate(dStart.getDate());
-		    	dEnd.setDate(dEnd.getDate());
-	          }
-	    	if ($scope.filtro == "week"){
-	    		var dStart = new Date($scope.search);
-		    	var dEnd = new Date($scope.search);
-		    	dStart.setDate(dStart.getDate() - 3);
-		    	dEnd.setDate(dEnd.getDate() + 3);
-	          } 
-	    	if ($scope.filtro == "month"){
-	    		var dStart = new Date($scope.search);
-		    	var dEnd = new Date($scope.search);
-		    	
-		    	var month = '' + (dStart.getMonth() + 1);
-		    	var day = '01'
-		    	var year = dStart.getFullYear();
-		    	if (month.length < 2) month = '0' + month;			    	
-		    	var fecha = [year, month, day].join('-');	
-		    	dStart = new Date(fecha);
-		    	dStart.setDate(dStart.getDate());
-		    			    	
-		    	var month = '' + (dEnd.getMonth() + 2);
-		    	var day = '01'
-		    	var year = dEnd.getFullYear();
-		    	if (month.length < 2) month = '0' + month;			    	
-		    	var fecha = [year, month, day].join('-');
-		    	dEnd = new Date(fecha);
-		    	dEnd.setDate(dEnd.getDate() - 1);
-		    	
-	          } 	    	
-	    	
-	    	var q1 = getStringDate(dStart); 
-	    	var q2 = getStringDate(dEnd);	    
-	    	
-	    	if ($scope.varCategoria) {
-	    		var q3 = $scope.searchC;
-	    		$http.get('/rest/movimientos/buscarEntreC',{params: { q1, q2, q3 }})		        
+	    $scope.searchMovimiento = function() {	
+	    	$http.get('/rest/movimientos/buscar',{params: { q1: $scope.busqueda.fechaInicio, q2: $scope.busqueda.fechaFin, q3: $scope.busqueda.categoria }})		        
 		        .then(function successCallback(response) {	  	        	
 		            $scope.movimientos = response.data;	            
 		        })
-	    	} else {
-	    		$http.get('/rest/movimientos/buscarEntre',{params: { q1, q2 }})		        
-		        .then(function successCallback(response) {	  	        	
-		            $scope.movimientos = response.data;	            
-		        })
-	    	}
-	        
 	    }
 	    	    	    
 	    //MOSTRAR O NO MOSTRAR DIV DE BUSQUEDA
@@ -231,6 +213,7 @@ app.controller('movimientosController', function ($scope, $http) {
         	$scope.IsHiddenMes = true;
             $scope.IsHiddenDia = $scope.IsHiddenDia ? false : true;        	
             if($scope.IsHiddenDia === true){
+            	$scope.limpiaFecha();
             	$scope.getAll();	                    	
 	        }
         }        
@@ -240,6 +223,7 @@ app.controller('movimientosController', function ($scope, $http) {
         	$scope.IsHiddenMes = true;
             $scope.IsHiddenEntreDia = $scope.IsHiddenEntreDia ? false : true;        	
             if($scope.IsHiddenEntreDia === true){
+            	$scope.limpiaFecha();
             	$scope.getAll();
 	        }
         }        
@@ -249,6 +233,7 @@ app.controller('movimientosController', function ($scope, $http) {
         	$scope.IsHiddenEntreDia = true;
             $scope.IsHiddenMes = $scope.IsHiddenMes ? false : true;        	
             if($scope.IsHiddenMes === true){
+            	$scope.limpiaFecha();
             	$scope.getAll();
 	        }
         }
@@ -256,9 +241,10 @@ app.controller('movimientosController', function ($scope, $http) {
 	    //INIT
 	    $scope.activeCaja = true;
 	    $scope.search = '';
-	    $scope.filtro = '';
-	    $scope.varGetAll = false;
-	    $scope.varCategoria = false;
+	    $scope.busqueda = {};
+	    $scope.busqueda.fechaInicio = getDateFormated();
+	    $scope.busqueda.fechaFin = getDateFormated();
+	    $scope.busqueda.categoria = '';
 	    $scope.ngMovimiento = {};
 	    $scope.getAllCategorias();
 	    $scope.getAll();

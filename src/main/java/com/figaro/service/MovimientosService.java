@@ -48,26 +48,9 @@ public class MovimientosService {
 	public void setRepository(MovimientosRepository repository) {
 		this.repository = repository;
 	}
-
-	public List<Movimiento> getAllMovimiento() {
-		LOGGER.debug("Obteniendo todos los movimientos");
-		return repository.getAll();
-	}
 	
-	public List<Movimiento> buscar(String search) {
-		return repository.buscar(search);
-	}
-	
-	public List<Movimiento> buscarE(Date search1, Date search2) {		
-		return repository.buscarE(search1,search2);
-	}
-	
-	public List<Movimiento> buscarCategoria(String search) {
-		return repository.buscarCategoria(search);
-	}	
-	
-	public List<Movimiento> buscarEC(Date search1, Date search2, String searchC) {		
-		return repository.buscarEC(search1,search2,searchC);
+	public List<Movimiento> buscar(Date search1, Date search2, String searchC) {		
+		return repository.buscar(search1,search2,searchC);
 	}
 	
 }

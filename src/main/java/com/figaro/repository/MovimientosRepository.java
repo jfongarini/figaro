@@ -1,5 +1,6 @@
 package com.figaro.repository;
 
+
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,9 @@ public class MovimientosRepository extends AbstractRepository{
 	
 	final static Logger LOGGER = Logger.getLogger(MovimientosService.class);
 
+	private static String QUERY_GET_MOVIMIENTOS = "FROM Movimiento m WHERE (m.fecha BETWEEN ?1 AND ?2)";
+	private static String QUERY_CATEGORIA = " AND (m.categoria = ?3)";
+	
 	public int saveMovimiento (Movimiento movimiento) {
 		return (int) getCurrentSession().save(movimiento); 
 	}
@@ -28,42 +32,17 @@ public class MovimientosRepository extends AbstractRepository{
 	public void deleteMovimiento(Movimiento movimiento) {
 		getCurrentSession().delete(movimiento);
 	}
-
-	@SuppressWarnings("unchecked")
-	public List<Movimiento> getAll() {
-		return getCurrentSession().createQuery("from Movimiento").list();
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Movimiento> buscar(String search) {
-		Query<Movimiento> query = getCurrentSession().createQuery("FROM Movimiento m WHERE m.fecha LIKE CONCAT('%',?1,'%')");
-	    query.setParameter(1, search);
-	    return query.getResultList();
-	}
 	
 	@SuppressWarnings({ "unchecked" })
-	public List<Movimiento> buscarE(Date search1, Date search2) {
-				
-		Query<Movimiento> query = getCurrentSession().createQuery( "FROM Movimiento m WHERE m.fecha BETWEEN ?1 AND ?2");
+	public List<Movimiento> buscar(Date search1, Date search2, String searchC) {
+		String querySql = QUERY_GET_MOVIMIENTOS;
+		if(!"".equals(searchC))
+			querySql += QUERY_CATEGORIA;
+		Query<Movimiento> query = getCurrentSession().createQuery(querySql);
 	    query.setParameter(1, search1);
 	    query.setParameter(2, search2);
-	    return query.getResultList();
-	}	
-	
-	@SuppressWarnings("unchecked")
-	public List<Movimiento> buscarCategoria(String search) {
-		Query<Movimiento> query = getCurrentSession().createQuery("FROM Movimiento m WHERE m.categoria = ?1");
-	    query.setParameter(1, search);
-	    return query.getResultList();
-	}
-	
-	@SuppressWarnings({ "unchecked" })
-	public List<Movimiento> buscarEC(Date search1, Date search2, String searchC) {
-				
-		Query<Movimiento> query = getCurrentSession().createQuery( "FROM Movimiento m WHERE (m.fecha BETWEEN ?1 AND ?2) AND (m.categoria = ?3)");
-	    query.setParameter(1, search1);
-	    query.setParameter(2, search2);
-	    query.setParameter(3, searchC);
+	    if(!"".equals(searchC))
+	    	query.setParameter(3, searchC);
 	    return query.getResultList();
 	}	
 
