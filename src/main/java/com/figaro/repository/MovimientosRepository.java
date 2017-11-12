@@ -10,6 +10,7 @@ import org.hibernate.query.Query;
 import com.figaro.model.Movimiento;
 import com.figaro.service.MovimientosService;
 
+@SuppressWarnings({ "unchecked" })
 public class MovimientosRepository extends AbstractRepository{
 	
 	final static Logger LOGGER = Logger.getLogger(MovimientosService.class);
@@ -33,16 +34,21 @@ public class MovimientosRepository extends AbstractRepository{
 		getCurrentSession().delete(movimiento);
 	}
 	
-	@SuppressWarnings({ "unchecked" })
-	public List<Movimiento> buscar(Date search1, Date search2, String searchC) {
+
+	public List<Movimiento> searchBetween(Date from, Date to) {
 		String querySql = QUERY_GET_MOVIMIENTOS;
-		if(!"".equals(searchC))
-			querySql += QUERY_CATEGORIA;
 		Query<Movimiento> query = getCurrentSession().createQuery(querySql);
-	    query.setParameter(1, search1);
-	    query.setParameter(2, search2);
-	    if(!"".equals(searchC))
-	    	query.setParameter(3, searchC);
+	    query.setParameter(1, from);
+	    query.setParameter(2, to);
+	    return query.getResultList();
+	}
+
+	public List<Movimiento> searchBetweenWithCategory(Date from, Date to, String category) {
+		String querySql = QUERY_GET_MOVIMIENTOS + QUERY_CATEGORIA;
+		Query<Movimiento> query = getCurrentSession().createQuery(querySql);
+	    query.setParameter(1, from);
+	    query.setParameter(2, to);
+	    query.setParameter(3, category);
 	    return query.getResultList();
 	}	
 

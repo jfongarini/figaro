@@ -97,6 +97,11 @@ public class Turno {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "Turno [id=" + id + ", cliente=" + cliente + ", peluquero=" + peluquero + ", desde=" + desde + ", hasta=" + hasta + ", cobrado=" + cobrado + ", movimiento=" + movimiento + ", trabajos=" + trabajos + "]";
+	}
 
 	public Movimiento getMovimiento() {
 		return movimiento;

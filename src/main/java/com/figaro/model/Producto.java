@@ -3,6 +3,7 @@ package com.figaro.model;
 import java.math.BigDecimal;
 
 public class Producto {
+
 	private int id;
 	private String nombre;
 	private String descripcion;
@@ -70,5 +71,10 @@ public class Producto {
 		return this;
 	}
 	
+	@Override
+	public String toString() {
+		return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", cantidad=" + cantidad + ", cantidadMinima=" + cantidadMinima + ", precio=" + precio + ", productoVenta=" + productoVenta+ "]";
+	}
+
 	
 }

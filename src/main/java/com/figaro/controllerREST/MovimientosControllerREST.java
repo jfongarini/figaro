@@ -3,6 +3,7 @@ package com.figaro.controllerREST;
 import java.util.Date;
 import java.util.List;
 
+import static com.figaro.util.Constants.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,6 +23,7 @@ import com.figaro.service.MovimientosService;
 @RequestMapping(value = "/rest/")
 public class MovimientosControllerREST {
 	
+
 	@Autowired
 	@Qualifier("MovimientosServiceTransactional")
 	private MovimientosService service;
@@ -43,8 +45,8 @@ public class MovimientosControllerREST {
 	}
 	
 	@RequestMapping(value = "movimientos/buscar",method=RequestMethod.GET,produces="application/json")
-    public ResponseEntity<List<Movimiento>> getAllMovimiento(@RequestParam  @DateTimeFormat(pattern="yyyy-MM-dd") Date q1, @RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") Date q2, @RequestParam String q3 ) {
-        return new ResponseEntity<List<Movimiento>> (service.buscar(q1,q2,q3),HttpStatus.CREATED);
+    public ResponseEntity<List<Movimiento>> getAllMovimiento(@RequestParam  @DateTimeFormat(pattern=DATE_FORMAT) Date from, @RequestParam @DateTimeFormat(pattern=DATE_FORMAT) Date to, @RequestParam String category ) {
+        return new ResponseEntity<List<Movimiento>> (service.searchMovimientos(from,to,category),HttpStatus.CREATED);
     }
 	
 	@RequestMapping(value = "movimientos/eliminar/{movimientoID}",method=RequestMethod.DELETE)	

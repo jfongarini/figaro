@@ -18,6 +18,8 @@ import com.figaro.repository.TurnosRepository;
 
 public class TurnosService {
 	
+	private static final String CATEGORIA_TURNOS = "Turnos";
+
 	final static Logger LOGGER = Logger.getLogger(TurnosService.class);
 	
 	private ClientesService clientesService;
@@ -25,7 +27,7 @@ public class TurnosService {
 	private MovimientosRepository movimientosRepository;
 	
 	public Turno saveTurno(Turno turno) {
-		LOGGER.info("Guardando un nuevo turno para: " + turno.getDesde() +" - "+turno.getHasta() +" " + turno.getPeluquero());
+		LOGGER.info("Guardando un nuevo turno: " + turno.toString());
 		validateTurno(turno);
 		int newID = getRepository().saveTurno(turno);
 		turno.setId(newID);
@@ -34,7 +36,7 @@ public class TurnosService {
 	}
 	
 	public Turno getTurno(int turnoId) {
-		LOGGER.debug("Obteniendo el turno con ID: " +  turnoId);
+		LOGGER.debug("Obteniendo el turno con ID: " + turnoId);
 		return repository.getTurno(turnoId);
 	}
 	
@@ -45,7 +47,6 @@ public class TurnosService {
 
 	
 	public Turno setCobrado(int turnoId) {
-		LOGGER.info("Modificando cobro del Turno con ID: " + turnoId);
 		Turno turno = getTurno(turnoId);
 		turno.setCobrado(!turno.getCobrado());
 		turno.setMovimiento(generateMovimiento(turno));
@@ -57,21 +58,21 @@ public class TurnosService {
 	}
 
 	public Turno updateTurno(Turno turno) {
-		LOGGER.info("Actualizando el Turno con ID: " + turno.getId());
+		LOGGER.info("Actualizando el Turno: " + turno.toString());
 		validateTurno(turno);
 		turno.setMovimiento(generateMovimiento(turno));
-		Turno old = getTurno(turno.getId());
-		old.update(turno);
-		repository.updateTurno(old);
+		Turno updated = getTurno(turno.getId());
+		updated.update(turno);
+		repository.updateTurno(updated);
 		LOGGER.info("El turno se actualizó correctamente");
-		return turno;
+		return updated;
 	}
 
 	private Movimiento generateMovimiento(Turno turno) {
 		if (!turno.getCobrado())
 			return null;
 		Movimiento movimiento = new Movimiento();
-		movimiento.setCategoria("Turnos");
+		movimiento.setCategoria(CATEGORIA_TURNOS);
 		movimiento.setIsGasto(false);
 		movimiento.setFecha(turno.getHasta());
 		BigDecimal precio = new BigDecimal(0);
@@ -85,7 +86,7 @@ public class TurnosService {
 	
 	public Turno deleteTurno(int turnoId) {
 		Turno turno = getTurno(turnoId);
-		LOGGER.info("Eliminando turno para: " + turno.getDesde() +" - "+turno.getHasta() +" " + turno.getPeluquero());
+		LOGGER.info("Eliminando turno: "+turno.toString());
 		repository.deleteTurno(turno);
 		LOGGER.info("El turno se eliminó correctamente");
 		return turno;
@@ -107,7 +108,7 @@ public class TurnosService {
 	}
 	
 	public List<Turno> getTurnosDelDia(Date fecha) {
-		LOGGER.info("Obteniendo turnos del dia: " + fecha );
+		LOGGER.debug("Obteniendo turnos del dia: " + fecha );
 		return searchTurno(fecha);
 	}
 

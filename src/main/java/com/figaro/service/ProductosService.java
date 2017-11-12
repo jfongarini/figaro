@@ -18,31 +18,31 @@ public class ProductosService {
 	}
 	
 	public Producto saveProducto (Producto producto) {
-		LOGGER.info("Guardando el Producto con ID: " + producto.getId()+" con:"+ producto.toString());
+		LOGGER.info("Guardando el Producto: " + producto.toString());
 		int id = repository.saveProducto(producto);
 		producto.setId(id);
 		return producto;
 	}	
 		
 	public Producto updateProducto(Producto producto) {
-		Producto old = getProducto(producto.getId());
-		LOGGER.info("Actualizando el Producto con ID: " + old.getId()+" con:"+ producto.toString());
-		old.update(producto);
-		repository.updateProducto(old);
-		return old;
+		Producto updated = getProducto(producto.getId());
+		LOGGER.info("Actualizando el Producto: " + producto.toString());
+		updated.update(producto);
+		repository.updateProducto(updated);
+		return updated;
 	}
 	
 	public Producto updateCantidad(int productoId, int cantidad) {
-		Producto old = getProducto(productoId);
-		LOGGER.info("Actualizando la cantidad de productos disponibles para el producto: " + old.getId()+" con:"+ old.toString());
-		old.setCantidad(cantidad);
-		repository.updateProducto(old);
-		return old;
+		Producto updated = getProducto(productoId);
+		updated.setCantidad(cantidad);
+		LOGGER.info("Actualizando el Producto: " + updated.toString());
+		repository.updateProducto(updated);
+		return updated;
 	}	
 	
 	public Producto deleteProducto(int productoId) {
 		Producto producto = getProducto(productoId);
-		LOGGER.info("Borrando el Producto con ID: " + productoId +" con:"+ producto.toString());
+		LOGGER.info("Guardando el Producto: " + producto.toString());
 		repository.deleteProducto(producto);
 		return producto;
 	}

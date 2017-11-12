@@ -22,24 +22,29 @@ public class MovimientosService {
 	}
 
 	public Movimiento saveMovimiento (Movimiento movimiento) {
-		LOGGER.info("Guardando el Movimiento con ID: " + movimiento.getId()+" con:"+ movimiento.toString());
+		LOGGER.info("Guardando el Movimiento: " + movimiento.toString());
 		int id = repository.saveMovimiento(movimiento);
 		movimiento.setId(id);	
 		return movimiento;
 	}	
 	
 	public Movimiento updateMovimiento(Movimiento movimiento) {
-		Movimiento old = getMovimiento(movimiento.getId());	
-		LOGGER.info("Actualizando el Movimiento con ID: " + old.getId()+" con:"+ movimiento.toString());	
-		old.update(movimiento);
-		repository.updateMovimiento(old);
-		return movimiento;
+		Movimiento updated = getMovimiento(movimiento.getId());	
+		LOGGER.info("Actualizando el Movimiento: " + movimiento.toString());	
+		updated.update(movimiento);
+		repository.updateMovimiento(updated);
+		return updated;
 	}
 	
 	public Movimiento deleteMovimiento(int movimientoID) {
 		Movimiento movimiento = getMovimiento(movimientoID);
+		LOGGER.info("Eliminando el Movimiento con: " + movimiento.toString());
 		repository.deleteMovimiento(movimiento);
 		return movimiento;
+	}
+	
+	public List<Movimiento> searchMovimientos(Date from, Date to, String category) {		
+		return (category.isEmpty()) ? repository.searchBetween (from,to) : repository.searchBetweenWithCategory (from,to,category); 
 	}
 	
 	public MovimientosRepository getRepository() {
@@ -49,8 +54,6 @@ public class MovimientosService {
 		this.repository = repository;
 	}
 	
-	public List<Movimiento> buscar(Date search1, Date search2, String searchC) {		
-		return repository.buscar(search1,search2,searchC);
-	}
+	
 	
 }

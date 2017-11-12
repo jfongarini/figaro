@@ -18,6 +18,7 @@ public abstract class Persona {
 	
 	
 	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -36,7 +37,6 @@ public abstract class Persona {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 	public String getTelefono() {
 		return telefono;
 	}
@@ -91,5 +91,8 @@ public abstract class Persona {
 	public void setDirDpto(String dirDpto) {
 		this.dirDpto = dirDpto;
 	}
-	
+	@Override
+	public String toString() {
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", sexo="+ sexo + ", telefono=" + telefono + ", dirCiudad=" + dirCiudad + ", dirCalle=" + dirCalle + ", dirNumeroCalle=" + dirNumeroCalle + ", dirPiso=" + dirPiso + ", dirDpto=" + dirDpto + ", fechaIngreso=" + fechaIngreso + "]";
+	}
 }

@@ -6,12 +6,21 @@ import java.util.Date;
 
 public class Movimiento {
 
+	
 	private Integer id;
 	private String categoria;
 	private BigDecimal precio;
 	private Date fecha;
 	private String detalle;
 	private Boolean isGasto;	
+	
+	public void update(Movimiento movimiento) {		
+		this.setCategoria(movimiento.getCategoria());
+		this.setDetalle(movimiento.getDetalle());
+		this.setFecha(movimiento.getFecha());
+		this.setIsGasto(movimiento.getIsGasto());
+		this.setPrecio(movimiento.getPrecio());
+	}
 	
 	public Integer getId() {
 		return id;
@@ -43,18 +52,17 @@ public class Movimiento {
 	public void setIsGasto(Boolean isGasto) {
 		this.isGasto = isGasto;
 	}	
-	public void update(Movimiento movimiento) {		
-		this.setCategoria(movimiento.getCategoria());
-		this.setDetalle(movimiento.getDetalle());
-		this.setFecha(movimiento.getFecha());
-		this.setIsGasto(movimiento.getIsGasto());
-		this.setPrecio(movimiento.getPrecio());
-	}
+	
 	public String getCategoria() {
 		return categoria;
 	}
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
+	}
+	
+	@Override
+	public String toString() {
+		return "Movimiento [id=" + id + ", categoria=" + categoria + ", precio=" + precio + ", fecha=" + fecha + ", detalle=" + detalle + ", isGasto=" + isGasto + "]";
 	}
 	
 }
