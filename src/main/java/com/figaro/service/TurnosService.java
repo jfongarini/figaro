@@ -31,7 +31,7 @@ public class TurnosService {
 		validateTurno(turno);
 		int newID = getRepository().saveTurno(turno);
 		turno.setId(newID);
-		LOGGER.info("Se guardo el nuevo turno con ID: " + turno.getId());
+		LOGGER.info("El turno se guardó correctamente");
 		return turno ;  
 	}
 	
@@ -96,7 +96,7 @@ public class TurnosService {
 	private void validateTurno(Turno turno) {
 		LOGGER.debug("Validando el Turno: " + turno.getDesde() +" - "+turno.getHasta() +" " + turno.getPeluquero() );
 		if ( turno.getDesde().compareTo(turno.getHasta()) >= 0 )
-			throw new HorarioInvalidoException();
+			throw new HorarioInvalidoException(turno.getDesde() +" - "+turno.getHasta());
 		List<Turno> turnosDelDia = searchTurno(turno.getDesde());
 		turnosDelDia.remove(turno);
 		for(Turno t : turnosDelDia) 
@@ -104,7 +104,7 @@ public class TurnosService {
 			    (t.getHasta().after(turno.getDesde()) && t.getHasta().before(turno.getHasta())) ||
 			    (t.getDesde().compareTo(turno.getDesde()) == 0) && (t.getHasta().compareTo(turno.getHasta()) == 0)) &&
 				t.getPeluquero().equals(turno.getPeluquero())) 
-			throw new TurnoOcupadoException();
+			throw new TurnoOcupadoException(turno);
 	}
 	
 	public List<Turno> getTurnosDelDia(Date fecha) {

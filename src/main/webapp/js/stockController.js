@@ -23,8 +23,8 @@ app.controller('stockController', function ($scope, $http) {
         });
     };
 
-    //ACTUALIZAR UN CAMPO PRODUCTO
-    $scope.upgradeProducto = function(id, cantidad){
+    //ACTUALIZAR CANTIDAD DISPONIBLE PRODUCTO
+    $scope.updateCantidad = function(id, cantidad){
         $http.patch('/rest/stock/editar/'+id,{} ,{params: { cantidad: cantidad }}).then(function (response) {
             $scope.getAll();
         });

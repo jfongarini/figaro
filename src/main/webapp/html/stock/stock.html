@@ -25,12 +25,12 @@
       </thead>
       <tbody>
         <tr class=data-row ng-repeat="producto in productos">
-          <td id={{producto.id}} data-id={{producto.id}} data-ng-dblclick="detailProducto($event)">{{producto.nombre}}</td>
-          <td id={{producto.id}} data-id={{producto.id}} data-ng-dblclick="detailProducto($event)">{{producto.descripcion}}</td>
-          <td class=numericotr id={{producto.id}} data-id={{producto.id}}>
-          <input  class="disponibletr" type="number" ng-model="producto.cantidad" ng-value="producto.cantidad"  ng-change="upgradeProducto(producto.id, producto.cantidad)"></td>
-          <td class=numericotr id={{producto.id}} data-id={{producto.id}} data-ng-click="detailProducto($event)">{{producto.cantidadMinima}}</td>
-          <td id={{producto.id}} data-id={{producto.id}} data-ng-click="deleteProducto($event)" class="tachotd"><lavel><i class="material-icons tachoi">clear</i></lavel></td>
+          <td id={{producto.nombre}} data-id={{producto.id}} data-ng-dblclick="detailProducto($event)">{{producto.nombre}}</td>
+          <td id={{producto.descripcion}} data-id={{producto.id}} data-ng-dblclick="detailProducto($event)">{{producto.descripcion}}</td>
+          <td class=numericotr data-id={{producto.id}}>
+          <input id={{producto.id}} class="disponibletr" type="number" ng-model="producto.cantidad" ng-value="producto.cantidad" ng-model-options="{updateOn: 'blur'}"ng-change="updateCantidad(producto.id, producto.cantidad)"></td>
+          <td class=numericotr data-id={{producto.id}} data-ng-click="detailProducto($event)">{{producto.cantidadMinima}}</td>
+          <td data-id={{producto.id}} data-ng-click="deleteProducto($event)" class="tachotd"><lavel><i class="material-icons tachoi">clear</i></lavel></td>
         </tr>
       </tbody>
     </table>

@@ -62,6 +62,15 @@ body{
     margin-left: 250px
 }
 
+.banner-title{
+    float: left;
+    text-align: right;
+    margin-top: 12px;
+    margin-right: 5px;
+    margin-left: 20px;    
+    font-size: 16px;
+}
+
 .banner-label{
     float: left;
     text-align: right;
@@ -288,8 +297,7 @@ li a:hover {
 .form-message{
     font-size: 13px;
     color: red;
-    margin-top: 20px;
-    width: 100%
+
 }
     
 .form-field{
@@ -306,7 +314,7 @@ li a:hover {
 }
 
 
-.modal-content form label{
+.modal-content .form-field label{
     display: inline-block;  
     clear: left;
     width: 95px
@@ -333,6 +341,7 @@ li a:hover {
     align-content: center;
     display: flex;
     margin-top: 30px;
+    margin-bottom: 10px
 }
 
 .modal-content form .button{

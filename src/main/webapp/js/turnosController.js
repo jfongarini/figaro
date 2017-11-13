@@ -18,6 +18,7 @@ app.controller('turnosController', function ($scope, $http) {
 
     //INIT TURNOS DE CLIENTE
     $scope.getTurnosDeCliente = function(){
+        $scope.activeTurnos = true;
         var clienteId = window.location.href.split("/").pop();
         $http.get('/rest/turnos/cliente/'+clienteId)
         .then(function successCallback(response) {
@@ -159,6 +160,7 @@ app.controller('turnosController', function ($scope, $http) {
     //SET CLIENTE
     $scope.setCliente = function (cliente) {
         $scope.ngTurno.cliente = cliente;
+        $scope.queryCliente='';
         $scope.clientes=[];
     }
     
