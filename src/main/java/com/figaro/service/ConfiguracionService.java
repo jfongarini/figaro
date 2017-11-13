@@ -89,7 +89,7 @@ public class ConfiguracionService {
 	}
 
 	public Integer save(Categoria categoria) {
-		LOGGER.info("Guardando la categoria: "+ categoria.toString());
+		LOGGER.info("Guardando la categoria: "+ categoria.getNombre());
 		return repository.saveCategoria(categoria);
 	}
 

@@ -197,7 +197,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	    
 	  //FILTRO TOTAL
 	    $scope.searchMovimiento = function() {	
-	    	$http.get('/rest/movimientos/buscar',{params: { q1: $scope.busqueda.fechaInicio, q2: $scope.busqueda.fechaFin, q3: $scope.busqueda.categoria }})		        
+	    	$http.get('/rest/movimientos/buscar',{params: { from: $scope.busqueda.fechaInicio, to: $scope.busqueda.fechaFin, category: $scope.busqueda.categoria }})		        
 		        .then(function successCallback(response) {	  	        	
 		            $scope.movimientos = response.data;	            
 		        })

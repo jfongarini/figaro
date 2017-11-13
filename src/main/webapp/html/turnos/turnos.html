@@ -31,9 +31,10 @@
       <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{getTotalTurno(turno.trabajos) | currency}}</td>
       <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{turno.peluquero}}</td>
       <td><input ng-checked="turno.cobrado" ng-click="setCobrado(turno.id)" type="checkbox"></td>
-      <td id={{turno.id}} data-id={{turno.id}} data-ng-click="deleteTurno($event)" class="tachotd" ><i class="material-icons tachoi">clear</i></td>
+      <td id={{turno.id}} data-id={{turno.id}} data-ng-click="confirmDelete(turno.id)" class="tachotd" ><i class="material-icons tachoi">clear</i></td>
     </tr>
     </tbody>
+
   </table>
       <div  ng-cloak ng-if="turnos.length > 0" class=banner>
           <label class=banner-label >{{getTotalDiario(turnos) | currency}}</label>
@@ -48,8 +49,9 @@
   <div ng-controller=clientesController >
   <#include "/html/clientes/clientes-modal.html">
   </div>
-  
+
   <#include "/html/common/javascript.html">
+  <#include "/html/common/confirm.html">
   <script src="/js/turnosController.js" ></script>
   <script src="/js/clientesController.js" ></script>
 </body>

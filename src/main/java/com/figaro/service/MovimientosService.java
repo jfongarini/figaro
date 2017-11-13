@@ -24,7 +24,8 @@ public class MovimientosService {
 	public Movimiento saveMovimiento (Movimiento movimiento) {
 		LOGGER.info("Guardando el Movimiento: " + movimiento.toString());
 		int id = repository.saveMovimiento(movimiento);
-		movimiento.setId(id);	
+		movimiento.setId(id);
+		LOGGER.info("El Movimiento se guardó correctamente");
 		return movimiento;
 	}	
 	
@@ -33,12 +34,13 @@ public class MovimientosService {
 		LOGGER.info("Actualizando el Movimiento: " + movimiento.toString());	
 		updated.update(movimiento);
 		repository.updateMovimiento(updated);
+		LOGGER.info("El Movimiento se actualizó correctamente");
 		return updated;
 	}
 	
 	public Movimiento deleteMovimiento(int movimientoID) {
 		Movimiento movimiento = getMovimiento(movimientoID);
-		LOGGER.info("Eliminando el Movimiento con: " + movimiento.toString());
+		LOGGER.info("Eliminando el Movimiento: " + movimiento.toString());
 		repository.deleteMovimiento(movimiento);
 		return movimiento;
 	}

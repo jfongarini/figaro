@@ -126,11 +126,24 @@ app.controller('turnosController', function ($scope, $http) {
     }
 
     //ELIMINTAR TURNO
-    $scope.deleteTurno = function() {
-        $scope.turnoId = event.currentTarget.getAttribute("data-id");
-        $http.delete('/rest/turnos/eliminar/'+$scope.turnoId).then(function (response) {
+    $scope.deleteTarget = function(id) {                
+        $http.delete('/rest/turnos/eliminar/'+id).then(function (response) {
             $scope.getTurnos();
         });
+        closeModal("modal-confirmarDelete");
+    };
+   
+    //CONFIRMA ELIMINTAR MOVIMIENTO
+    $scope.confirmDelete = function(id) {
+        $scope.idTarget = id;
+        openModal("modal-confirmarDelete");
+        
+    };
+
+    //CANCELAR ELIMINAR
+    $scope.discardConfirm = function(event){
+        $scope.ngMovimiento = {};
+        closeModal("modal-confirmarDelete");
     };
 
     //AGREGAR TRABAJOS
