@@ -45,6 +45,14 @@ public class TurnosService {
 		return repository.getTurnosCliente(clienteId);
 	}
 
+	public List<Turno> getTurnosDelDia(Date fecha) {
+		LOGGER.debug("Obteniendo turnos del dia: " + fecha );
+		return searchTurno(fecha);
+	}
+
+	public List<Turno> searchTurno(Date desde) {
+		return repository.searchTurno(desde);
+	}
 	
 	public Turno setCobrado(int turnoId) {
 		Turno turno = getTurno(turnoId);
@@ -92,28 +100,39 @@ public class TurnosService {
 		return turno;
 	}
 	
+	private void validateTurno(Turno nuevoTurno) {
+		LOGGER.debug("Validando el Turno: " + nuevoTurno.getDesde() +" - " +nuevoTurno.getHasta() +" "+ nuevoTurno.getPeluquero() );
+		if (horarioInvalido(nuevoTurno))
+			throw new HorarioInvalidoException(nuevoTurno.getDesde() +" - "+nuevoTurno.getHasta());
+		List<Turno> turnosDelDia = searchTurno(nuevoTurno.getDesde());
+		turnosDelDia.remove(nuevoTurno);
+		for(Turno turno : turnosDelDia) 
+			if(mismoPeluquero(nuevoTurno, turno) && horarioOcupado(nuevoTurno, turno)) 
+			throw new TurnoOcupadoException(nuevoTurno);
+	}
 
-	private void validateTurno(Turno turno) {
-		LOGGER.debug("Validando el Turno: " + turno.getDesde() +" - "+turno.getHasta() +" " + turno.getPeluquero() );
-		if ( turno.getDesde().compareTo(turno.getHasta()) >= 0 )
-			throw new HorarioInvalidoException(turno.getDesde() +" - "+turno.getHasta());
-		List<Turno> turnosDelDia = searchTurno(turno.getDesde());
-		turnosDelDia.remove(turno);
-		for(Turno t : turnosDelDia) 
-			if(((t.getDesde().after(turno.getDesde()) && t.getDesde().before(turno.getHasta())) || 
-			    (t.getHasta().after(turno.getDesde()) && t.getHasta().before(turno.getHasta())) ||
-			    (t.getDesde().compareTo(turno.getDesde()) == 0) && (t.getHasta().compareTo(turno.getHasta()) == 0)) &&
-				t.getPeluquero().equals(turno.getPeluquero())) 
-			throw new TurnoOcupadoException(turno);
+	private boolean horarioOcupado(Turno nuevoTurno, Turno turno) {
+		return horarioInicioOcupado(nuevoTurno, turno) || horarioFinOcupado(nuevoTurno, turno) || mismoHorario(nuevoTurno, turno);
 	}
 	
-	public List<Turno> getTurnosDelDia(Date fecha) {
-		LOGGER.debug("Obteniendo turnos del dia: " + fecha );
-		return searchTurno(fecha);
+	private boolean horarioInicioOcupado(Turno nuevoTurno, Turno turno) {
+		return turno.getDesde().after(nuevoTurno.getDesde()) && turno.getDesde().before(nuevoTurno.getHasta());
+	}
+	
+	private boolean horarioFinOcupado(Turno nuevoTurno, Turno turno) {
+		return turno.getHasta().after(nuevoTurno.getDesde()) && turno.getHasta().before(nuevoTurno.getHasta());
 	}
 
-	public List<Turno> searchTurno(Date desde) {
-		return repository.searchTurno(desde);
+	private boolean mismoHorario(Turno nuevoTurno, Turno turno) {
+		return (turno.getDesde().compareTo(nuevoTurno.getDesde()) == 0) && (turno.getHasta().compareTo(nuevoTurno.getHasta()) == 0);
+	}
+	
+	private boolean mismoPeluquero(Turno nuevoTurno, Turno turno) {
+		return turno.getPeluquero().equals(nuevoTurno.getPeluquero());
+	}
+	
+	private boolean horarioInvalido(Turno nuevoTurno) {
+		return nuevoTurno.getDesde().compareTo(nuevoTurno.getHasta()) >= 0;
 	}
 
 	public TurnosRepository getRepository() {
@@ -123,7 +142,6 @@ public class TurnosService {
 	public void setRepository(TurnosRepository repository) {
 		this.repository = repository;
 	}
-
 
 	public MovimientosRepository getMovimientosRepository() {
 		return movimientosRepository;
