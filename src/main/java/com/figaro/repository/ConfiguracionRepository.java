@@ -2,6 +2,7 @@ package com.figaro.repository;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.query.Query;
 
 import com.figaro.model.Categoria;
@@ -12,26 +13,32 @@ import com.figaro.model.Trabajo;
 @SuppressWarnings("unchecked")
 public class ConfiguracionRepository extends AbstractRepository {
 
+	final static Logger LOGGER = Logger.getLogger(ConfiguracionRepository.class);
+	
+	//CIUDADES
 	public Integer saveCiudad (Ciudad ciudad) {
 		return (Integer) getCurrentSession().save(ciudad); 
 	}
 
 	public void deleteCiudad(Integer idCiudad) {
-		Ciudad toDelte = getCurrentSession().load(Ciudad.class, idCiudad);
-		getCurrentSession().delete(toDelte);
+		Ciudad ciudad = getCurrentSession().load(Ciudad.class, idCiudad);
+		LOGGER.info("Eliminando la ciudad: "+ ciudad.getNombre());
+		getCurrentSession().delete(ciudad);
 	}
 	
 	public List<Ciudad> getCiudades() {
 		return getCurrentSession().createQuery("from Ciudad").list();
 	}
 	
+	//TRABAJOS
 	public Integer saveTrabajo(Trabajo trabajo) {
 		return (Integer) getCurrentSession().save("Trabajo",trabajo);
 	}
 
 	public void deleteTrabajo(Integer idTrabajo) {
-		Trabajo toDelte = (Trabajo) getCurrentSession().get("Trabajo", idTrabajo);
-		getCurrentSession().delete(toDelte);
+		Trabajo trabajo = (Trabajo) getCurrentSession().get("Trabajo", idTrabajo);
+		LOGGER.info("Eliminando el Trabajo: "+ trabajo.getDescripcion());
+		getCurrentSession().delete(trabajo);
 	}
 	
 	public List<Trabajo> getTrabajos() {
@@ -48,19 +55,22 @@ public class ConfiguracionRepository extends AbstractRepository {
 	    return query.getResultList();
 	}
 
+	//PELUQUEROS
 	public Integer savePeluquero(Peluquero peluquero) {
 		return (Integer) getCurrentSession().save(peluquero);
 	}
 
 	public void deletePeluquero(Integer idPeluquero) {
-		Peluquero toDelte = getCurrentSession().load(Peluquero.class, idPeluquero);
-		getCurrentSession().delete(toDelte);
+		Peluquero peluquero = getCurrentSession().load(Peluquero.class, idPeluquero);
+		LOGGER.info("Eliminando el Peluquero: "+ peluquero.getNombre());
+		getCurrentSession().delete(peluquero);
 	}
 
 	public List<Peluquero> getPeluqueros() {
 		return getCurrentSession().createQuery("from Peluquero").list();
 	}
-
+	
+	//CATEGORIAS
 	public List<Categoria> getCategorias() {
 		return getCurrentSession().createQuery("from Categoria").list();
 	}
@@ -70,8 +80,9 @@ public class ConfiguracionRepository extends AbstractRepository {
 	}
 
 	public void deleteCategoria(Integer idCategoria) {
-		Categoria toDelte = getCurrentSession().load(Categoria.class, idCategoria);
-		getCurrentSession().delete(toDelte);
+		Categoria categoria = getCurrentSession().load(Categoria.class, idCategoria);
+		LOGGER.info("Eliminando la Categoria: "+ categoria.getNombre());
+		getCurrentSession().delete(categoria);
 	}
 
 

@@ -17,29 +17,34 @@ public class ConfiguracionService {
 
 	private ConfiguracionRepository repository;
 	
+	//CIUDADES
 	public Integer saveCiudad(Ciudad ciudad) {
 		LOGGER.info("Guardando la ciudad: "+ ciudad.getNombre());
 		return repository.saveCiudad(ciudad);
 	}	
 	
 	public void deleteCiudad(Integer idCiudad) {
-		LOGGER.info("Eliminando la ciudad con ID: " + idCiudad);
 		repository.deleteCiudad(idCiudad);
-	}
-	
-	public Integer saveTrabajo(Trabajo trabajo) {
-		LOGGER.info("Guardando el trabajo: "+ trabajo.getDescripcion() +" "+ trabajo.getPrecio());
-		return repository.saveTrabajo(trabajo);
 	}
 	
 	public List<Ciudad> getCiudades() {
 		LOGGER.debug("Obteniendo todas las ciudades");
 		return repository.getCiudades();
 	}
+
+	//TRABAJOS
+	public Integer saveTrabajo(Trabajo trabajo) {
+		LOGGER.info("Guardando el trabajo: "+ trabajo.getDescripcion() +" "+ trabajo.getPrecio());
+		return repository.saveTrabajo(trabajo);
+	}
 	
 	public void deleteTrabajo(Integer idTrabajo) {
-		LOGGER.info("Eliminando el trabajo con ID: " + idTrabajo);
 		repository.deleteTrabajo(idTrabajo);		
+	}
+	
+	public Trabajo getTrabajo(Integer idTrabajo) {
+		LOGGER.debug("Obteniendo el trabajo con ID: " + idTrabajo);
+		return repository.getTrabajo(idTrabajo);
 	}
 
 	public List<Trabajo> getTrabajos() {
@@ -47,13 +52,8 @@ public class ConfiguracionService {
 		return repository.getTrabajos();
 	}
 
-	public Trabajo getTrabajo(Integer idTrabajo) {
-		LOGGER.debug("Obteniendo el trabajo con ID: " + idTrabajo);
-		return repository.getTrabajo(idTrabajo);
-	}
-	
 	public Trabajo updateTrabajo(Trabajo trabajo) {
-		LOGGER.info("Actualizando el trabajo con ID: " + trabajo.getId());
+		LOGGER.info("Actualizando el trabajo: "+ trabajo.getDescripcion() +" "+ trabajo.getPrecio());
 		Trabajo repoTrabajo = getTrabajo(trabajo.getId());
 		repoTrabajo.setDescripcion(trabajo.getDescripcion());
 		repoTrabajo.setPrecio(trabajo.getPrecio());
@@ -62,18 +62,18 @@ public class ConfiguracionService {
 		return repoTrabajo;
 	}
 	
-	public List<Trabajo> buscar(String search) {
-		LOGGER.debug("Bsucando trabajos: "+ search);
+	public List<Trabajo> buscarTrabajos(String search) {
+		LOGGER.debug("Buscando trabajos: "+ search);
 		return repository.buscar(search);
 	}
 	
+	//PELUQUEROS
 	public Integer savePeluquero(Peluquero peluquero) {
 		LOGGER.info("Guardando el nuevo peluquero: "+ peluquero.getNombre());
 		return repository.savePeluquero(peluquero);
 	}
 
 	public void deletePeluquero(Integer idPeluquero) {
-		LOGGER.info("Eliminando el peluquero con ID: " + idPeluquero);
 		repository.deletePeluquero(idPeluquero);
 	}
 	
@@ -82,6 +82,7 @@ public class ConfiguracionService {
 		return repository.getPeluqueros();
 	}
 	
+	//CATEGORIAS
 	public List<Categoria> getCategorias() {
 		LOGGER.debug("Obteniendo todas las categorias");
 		return repository.getCategorias();
@@ -93,9 +94,9 @@ public class ConfiguracionService {
 	}
 
 	public void deleteCategoria(Integer idCategoria) {
-		LOGGER.info("Eliminando la categoria con ID: " + idCategoria);
 		repository.deleteCategoria(idCategoria);
 	}
+	
 	
 	public ConfiguracionRepository getRepository() {
 		return repository;

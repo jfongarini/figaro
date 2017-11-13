@@ -77,7 +77,7 @@ public class ConfiguracionControllerREST {
 	
 	@RequestMapping(value = "/trabajos/buscar",method=RequestMethod.GET,produces="application/json")
     public ResponseEntity<List<Trabajo>> searchTrabajo(@RequestParam String search) {
-        return new ResponseEntity<List<Trabajo>>(service.buscar(search), HttpStatus.OK);
+        return new ResponseEntity<List<Trabajo>>(service.buscarTrabajos(search), HttpStatus.OK);
     }
 	
 	@RequestMapping(value = "/peluqueros",method=RequestMethod.GET)
