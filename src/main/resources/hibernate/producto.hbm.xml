@@ -2,7 +2,6 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="com.figaro.model.Producto"  table="PRODUCTO">
-	
 		<id name="id" type="int" column="ID_PRODUCTO" >
 			<generator class="increment"/>
 		</id>		
@@ -11,6 +10,5 @@
 	 	<property name="cantidad" 		column="CANTIDAD" 		 type="int"/> 	
 	    <property name="cantidadMinima" column="CANTIDAD_MINIMA" type="int"/> 
 		<property name="precio"  		column="PRECIO"   		 type="big_decimal"/>
-		<property name="productoVenta"	column="PRODUCTO_VENTA"	 type="boolean"/>	
 	</class>
 </hibernate-mapping>

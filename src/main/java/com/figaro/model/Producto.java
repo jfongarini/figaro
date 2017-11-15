@@ -9,8 +9,7 @@ public class Producto {
 	private String descripcion;
 	private int cantidad;
 	private int cantidadMinima;
-	private BigDecimal precio;
-	private Boolean productoVenta; 
+	private BigDecimal precio; 
 	
 	public String getNombre() {
 		return nombre;
@@ -52,29 +51,21 @@ public class Producto {
 	public void setPrecio(BigDecimal precio) {
 		this.precio = precio;
 	}
-	
-	public Boolean getProductoVenta() {
-		return productoVenta;
-	}
-	
-	public void setProductoVenta(Boolean venta) {
-		this.productoVenta = venta;
-	}
-	
+		
 	public Producto update(Producto producto) {
 		setNombre(producto.getNombre());
 		setDescripcion(producto.getDescripcion());
 		setCantidad(producto.getCantidad());
 		setCantidadMinima(producto.getCantidadMinima());
 		setPrecio(producto.getPrecio());
-		setProductoVenta(producto.getProductoVenta());
 		return this;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", cantidad=" + cantidad + ", cantidadMinima=" + cantidadMinima + ", precio=" + precio + ", productoVenta=" + productoVenta+ "]";
+		return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", cantidad=" + cantidad + ", cantidadMinima=" + cantidadMinima + ", precio=" + precio + "]";
 	}
+	
 
 	
 }

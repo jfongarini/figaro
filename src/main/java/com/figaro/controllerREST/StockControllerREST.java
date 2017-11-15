@@ -61,6 +61,7 @@ public class StockControllerREST {
         return service.buscar(search);
     }
 	
+	
 	public ProductosService getService() {
 		return service;
 	}
