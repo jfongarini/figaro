@@ -14,14 +14,31 @@ app.controller('stockController', function ($scope, $http) {
     	openModal("modal-stock");
         $scope.ngProducto={}; 
     };
+    //CLICK VENDER PRODUCTO
+    $scope.ventaProducto = function() {
+        openModal("modal-stockVenta");
+        $scope.ngProducto={}; 
+    };
 
     //ELIMINTAR PRODUCTO
-    $scope.deleteProducto = function(event) {
-        $scope.productoId = event.currentTarget.getAttribute("data-id");
-        $http.delete('/rest/stock/eliminar/'+ $scope.productoId).then(function (response) {
+    $scope.deleteTarget = function(id) {      
+        $http.delete('/rest/stock/eliminar/'+id).then(function (response) {	           
+            closeModal("modal-confirmarDelete");
             $scope.getAll();
         });
     };
+
+    //CONFIRMA ELIMINTAR PRODUCTO
+    $scope.confirmDelete = function(id) {
+        $scope.idTarget = id;
+        openModal("modal-confirmarDelete");    
+    };
+
+    //DESCARTAR PRODUCTO
+    $scope.discardConfirm = function(event){
+	    $scope.ngProducto = {};
+	    closeModal("modal-confirmarDelete");
+	};
 
     //ACTUALIZAR UN CAMPO PRODUCTO
     $scope.upgradeProducto = function(id, cantidad){
