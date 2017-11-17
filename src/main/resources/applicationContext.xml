@@ -229,5 +229,32 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	
+	<!-- ESTADISTICAS !-->
+	<bean id="EstadisticasServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="EstadisticasService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="EstadisticasService" class="com.figaro.service.EstadisticasService">
+		<property name="repository">
+			<ref bean="EstadisticasRepository" />
+		</property>
+	</bean>
+
+	<bean id="EstadisticasRepository"	class="com.figaro.repository.EstadisticasRepository">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 
 </beans>

@@ -1,0 +1,34 @@
+<!Doctype html>
+<html>
+<head> 
+  <title>ESTADISTICAS</title>
+  <#include "/html/common/head.html">
+</head>
+<body ng-app=figaro ng-controller=estadisticasController ng-cloak>
+<#include "/html/common/menu.html">
+<div id=content class=content>
+  	<div class=banner>
+    </div>  
+ 
+ 
+	<div class=graf-caja>  
+		<canvas id="bar" class="chart chart-bar"
+  			chart-data="data" chart-labels="labels" chart-series="series">
+		</canvas>
+ 	</div>
+ 	
+ 	<div class=graf-caja>  
+		<canvas id="bar" class="chart chart-bar"
+  			chart-data="data" chart-labels="labels" chart-series="series">
+		</canvas>
+ 	</div>
+ 	
+</div>
+<#include "/html/common/javascript.html">
+<#include "/html/common/confirm.html">
+<script src="js/vendor/Chart-min.js"></script>
+<script src="js/vendor/Chart.js"></script>
+<script src="js/vendor/angular-chart.min.js"></script>
+<script src="js/estadisticasController.js" ></script>
+</body>
+</html>
