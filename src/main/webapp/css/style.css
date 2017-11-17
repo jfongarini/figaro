@@ -537,3 +537,21 @@ tr:hover .disponibletr{
     color: white;
     cursor: pointer
 }
+
+
+
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+
+
+@media (max-width: 700px){
+    body, .form-field{font-size: 12px}
+    table, .banner {width: 98%;}
+    .menu{width: 60px}
+    .logo{display: none}
+    .link-label{display: none}
+    .content, .message{margin-left: 80px}
+}
