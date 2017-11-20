@@ -538,10 +538,3 @@ tr:hover .disponibletr{
     cursor: pointer
 }
 
-.graf-caja {
-    width: 450px;
-    padding: 20px;
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 50px;
-}
