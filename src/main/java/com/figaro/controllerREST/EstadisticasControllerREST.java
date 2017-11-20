@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.figaro.model.Cliente;
+import com.figaro.model.Ciudad;
 import com.figaro.service.EstadisticasService;
 
 @RestController
@@ -32,6 +33,16 @@ public class EstadisticasControllerREST {
 	@RequestMapping(value = "estadisticas/clientes",method=RequestMethod.GET,produces="application/json")
     public ResponseEntity<List<Cliente>> getAllClientes() {
         return new ResponseEntity<List<Cliente>>(service.getAllClientes(), HttpStatus.OK);
+    }
+	
+	@RequestMapping(value = "estadisticas/ciudad",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<List<Ciudad>> getCiudades() {
+        return new ResponseEntity<List<Ciudad>>(service.getCiudades(), HttpStatus.OK);
+    }
+	
+	@RequestMapping(value = "estadisticas/buscarClienteCiudad",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<List<Cliente>> buscarClienteCiudad(@RequestParam String search) {
+        return new ResponseEntity<List<Cliente>>(service.buscarClienteCiudad(search), HttpStatus.OK);
     }
 	
 	

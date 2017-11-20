@@ -20,6 +20,13 @@ app.controller('estadisticasController', function ($scope, $http) {
 		            $scope.clientes = response.data;		            
 		        });			      
 		    };
+		    
+		//OBTENER LISTA DE CIUDADES
+		    $scope.getAllCiudad = function() {
+		        $http.get("/rest/estadisticas/ciudad").then(function (response) {
+		            $scope.ciudad = response.data;		            
+		        });			      
+		    };
 		  
 		  
 		//BUSCAR CLIENTE SEXO
@@ -41,22 +48,23 @@ app.controller('estadisticasController', function ($scope, $http) {
 		    
 		  //BUSCAR CLIENTE CIUDAD
 		    $scope.searchClienteCiudad = function() {	
-		            var totalLP = 0;
-		            var totalBer = 0;
-		            var totalEns = 0;
-			        angular.forEach($scope.clientes, function(ngCliente){	          
-			          if (ngCliente.dirCiudad == "La Plata"){
-			        	  totalLP = totalLP + 1;
-			          }	else if (ngCliente.dirCiudad == "Berisso") {
-			        	  totalBer = totalBer + 1;
-			          } else {
-			        	  totalEns = totalEns + 1;
-			          }     
-			        })			       			       
-			        arregloColumnaBar = ['La Plata', 'Berisso', 'Ensenada'] ;
-			        arregloLabelBar = 'Total' ;
-			        arregloDataBar = [totalLP, totalBer, totalEns] ;
-			        $scope.seleccionarGrafico();			                		       
+		    	var total = [];
+		    	var ciudad = [];
+		    	var i = 0;
+		        angular.forEach($scope.ciudad, function(ngCiudad){
+		        	ciudad[i] = ngCiudad.nombre;
+		        	total[i] = 0;
+		        	angular.forEach($scope.clientes, function(ngCliente){
+		        		if (ngCliente.dirCiudad == ciudad[i]) {
+		        			total[i] = total[i] + 1;
+		        		}
+		        	})	
+		        	arregloColumnaBar[i] = ciudad[i];
+		        	arregloDataBar[i] = total[i];
+		            i ++;	
+		        })			          	
+		        arregloLabelBar = 'Total' ;
+		        $scope.seleccionarGrafico();   		                		       
 		    };
 		    
 //GRAFICOS
@@ -104,8 +112,7 @@ app.controller('estadisticasController', function ($scope, $http) {
 				var color24 = 'rgba(255,99,132,0.4)';
 				
 					// GENERAR GRAFICOS DE BARRA 2
-						$scope.generarGraficoBarra2 = function(){	
-							ctx2.clearRect(0,0, ctx2.canvas.width, ctx2.canvas.height);
+						$scope.generarGraficoBarra2 = function(){								
 							data2 = {
 						            labels: arregloColumnaBar,
 						            datasets: [
@@ -146,5 +153,8 @@ app.controller('estadisticasController', function ($scope, $http) {
 
   	    $scope.ngCliente = {};
 		$scope.getAllClientes();   
+		
+		$scope.ngCiudad = {};
+		$scope.getAllCiudad();
 		    
 });
