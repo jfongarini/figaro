@@ -1,6 +1,18 @@
 var app = angular.module('figaro', ['chart.js']);
 app.controller('estadisticasController', function ($scope, $http) {
 	
+		//SELECCIONA GRAFICO
+			$scope.seleccionarGrafico = function(){
+				$scope.graficoID = event.currentTarget.getAttribute("data-id");
+		        if ($scope.graficoID == "grafico1"){
+		        	grafico1.destroy();
+		        	$scope.generarGraficoBarra();
+		        } else {
+		        	grafico2.destroy();
+		        	$scope.generarGraficoBarra2();
+		        }
+			}
+	
 	
 		//OBTENER LISTA DE CLIENTES
 		    $scope.getAllClientes = function() {
@@ -24,13 +36,7 @@ app.controller('estadisticasController', function ($scope, $http) {
 			        arregloColumnaBar = ['Hombre', 'Mujer'] ;
 			        arregloLabelBar = 'Total' ;
 			        arregloDataBar = [totalHombre, totalMujer] ;
-			        $scope.graficoID = event.currentTarget.getAttribute("data-id");
-			        if ($scope.graficoID == "grafico1"){
-			        	$scope.generarGraficoBarra();
-			        } else {
-			        	$scope.generarGraficoBarra2();
-			        }
-			        			        		       
+			        $scope.seleccionarGrafico();       
 		    };
 		    
 		  //BUSCAR CLIENTE CIUDAD
@@ -50,13 +56,7 @@ app.controller('estadisticasController', function ($scope, $http) {
 			        arregloColumnaBar = ['La Plata', 'Berisso', 'Ensenada'] ;
 			        arregloLabelBar = 'Total' ;
 			        arregloDataBar = [totalLP, totalBer, totalEns] ;
-			        $scope.graficoID = event.currentTarget.getAttribute("data-id");
-			        if ($scope.graficoID == "grafico1"){
-			        	$scope.generarGraficoBarra();
-			        } else {
-			        	$scope.generarGraficoBarra2();
-			        }
-			        			        		       
+			        $scope.seleccionarGrafico();			                		       
 		    };
 		    
 //GRAFICOS
@@ -76,7 +76,7 @@ app.controller('estadisticasController', function ($scope, $http) {
 		var color11 = 'rgba(41,41,97,0.1)';
 		var color14 = 'rgba(41,41,97,0.4)';
 		
-			// GENERAR GRAFICOS DE BARRA
+			// GENERAR GRAFICOS DE BARRA 1
 				$scope.generarGraficoBarra = function(){					
 					data1 = {
 				            labels: arregloColumnaBar,
@@ -103,8 +103,9 @@ app.controller('estadisticasController', function ($scope, $http) {
 				var color21 = 'rgba(255,99,132,0.1)';
 				var color24 = 'rgba(255,99,132,0.4)';
 				
-					// GENERAR GRAFICOS DE BARRA
-						$scope.generarGraficoBarra2 = function(){							
+					// GENERAR GRAFICOS DE BARRA 2
+						$scope.generarGraficoBarra2 = function(){	
+							ctx2.clearRect(0,0, ctx2.canvas.width, ctx2.canvas.height);
 							data2 = {
 						            labels: arregloColumnaBar,
 						            datasets: [
@@ -134,6 +135,9 @@ app.controller('estadisticasController', function ($scope, $http) {
 		var canvas2 = document.getElementById("grafico2");
 		var ctx2 = canvas2.getContext('2d');
 		
+		
+
+	    
 		var arregloColumnaBar = [] ;
 		var arregloLabelBar = [] ;
 		var arregloDataBar = [] ;
