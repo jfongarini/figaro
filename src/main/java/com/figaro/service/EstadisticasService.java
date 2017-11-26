@@ -2,7 +2,9 @@ package com.figaro.service;
 
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -15,26 +17,32 @@ public class EstadisticasService {
 	final static Logger LOGGER = Logger.getLogger(EstadisticasService.class);
 	
 	private EstadisticasRepository repository;
+	private ClientesService clientesService;
+	
+	public Map<String, Integer> buscarClienteCiudad(){
+		List<Cliente> allClientes = clientesService.getAllClientes();
+		Map<String, Integer> mapClientes = new HashMap<String, Integer>();
+		for (Cliente cliente : allClientes) {
+			String ciudad = cliente.getDirCiudad();
+			Integer cantidadHabitantes = mapClientes.get(ciudad);
+			if (cantidadHabitantes == null) {
+				mapClientes.put(ciudad, 1);
+			} else {
+				cantidadHabitantes ++;
+				mapClientes.put(ciudad, cantidadHabitantes);
+			}
+		}
+		return mapClientes;
+	}
 	
 	public List<Cliente> buscarClienteSexo(String search) {
 		return repository.buscarClienteSexo(search);
-	}
-	
-	public List<Cliente> getAllClientes(){
-		LOGGER.debug("Obteniendo todos los clientes");
-		return repository.getAll();
 	}
 	
 	public List<Ciudad> getCiudades(){
 		LOGGER.debug("Obteniendo todos las ciudades");
 		return repository.getCiudades();
 	}
-	
-	public List<Cliente> buscarClienteCiudad(String search){
-		LOGGER.debug("Obteniendo clientes por ciudad");
-		return repository.buscarClienteCiudad(search);
-	}	
-	
 
 	public EstadisticasRepository getRepository() {
 		return repository;
@@ -42,6 +50,14 @@ public class EstadisticasService {
 
 	public void setRepository(EstadisticasRepository repository) {
 		this.repository = repository;
+	}
+
+	public ClientesService getClientesService() {
+		return clientesService;
+	}
+
+	public void setClientesService(ClientesService clientesService) {
+		this.clientesService = clientesService;
 	}
 	
 }

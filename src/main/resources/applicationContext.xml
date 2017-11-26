@@ -249,6 +249,9 @@
 		<property name="repository">
 			<ref bean="EstadisticasRepository" />
 		</property>
+		<property name="clientesService">
+			<ref bean="ClientesServiceTransactional" />
+		</property>
 	</bean>
 
 	<bean id="EstadisticasRepository"	class="com.figaro.repository.EstadisticasRepository">

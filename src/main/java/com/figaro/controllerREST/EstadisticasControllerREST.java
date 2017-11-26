@@ -3,6 +3,7 @@ package com.figaro.controllerREST;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,19 +31,14 @@ public class EstadisticasControllerREST {
 		return new ResponseEntity<List<Cliente>>(service.buscarClienteSexo(search), HttpStatus.OK);
     }	
 	
-	@RequestMapping(value = "estadisticas/clientes",method=RequestMethod.GET,produces="application/json")
-    public ResponseEntity<List<Cliente>> getAllClientes() {
-        return new ResponseEntity<List<Cliente>>(service.getAllClientes(), HttpStatus.OK);
-    }
-	
 	@RequestMapping(value = "estadisticas/ciudad",method=RequestMethod.GET,produces="application/json")
     public ResponseEntity<List<Ciudad>> getCiudades() {
         return new ResponseEntity<List<Ciudad>>(service.getCiudades(), HttpStatus.OK);
     }
 	
-	@RequestMapping(value = "estadisticas/buscarClienteCiudad",method=RequestMethod.GET,produces="application/json")
-    public ResponseEntity<List<Cliente>> buscarClienteCiudad(@RequestParam String search) {
-        return new ResponseEntity<List<Cliente>>(service.buscarClienteCiudad(search), HttpStatus.OK);
+	@RequestMapping(value = "estadisticas/clientesCiudad",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<Map<String, Integer>> buscarClienteCiudad() {
+        return new ResponseEntity<Map<String, Integer>>(service.buscarClienteCiudad(), HttpStatus.OK);
     }
 	
 	

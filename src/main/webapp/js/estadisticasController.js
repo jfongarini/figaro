@@ -66,7 +66,34 @@ app.controller('estadisticasController', function ($scope, $http) {
 		        arregloLabelBar = 'Total' ;
 		        $scope.seleccionarGrafico();   		                		       
 		    };
-		    
+
+		//OBTENER LISTA DE CIUDADES
+		    $scope.getClientesCiudad = function() {
+		        $http.get("/rest/estadisticas/clientesCiudad").then(function (response) {
+		            $scope.clientesCiudad = response.data;		            
+		        });			      
+		    };
+
+		   
+
+		  //BUSCAR CLIENTE CIUDAD
+		    $scope.searchClienteCiudad2 = function() {
+		    	
+		    	arregloColumnaBar = [] ;
+				arregloLabelBar = [] ;
+				arregloDataBar = [] ;
+		    	var cliCiu = $scope.clientesCiudad;
+
+				for (var key in cliCiu) {
+    				arregloColumnaBar.push(key);
+    				arregloDataBar.push(cliCiu[key]);
+				}
+				arregloLabelBar = 'Total' ;
+		        $scope.seleccionarGrafico(); 
+
+		    }
+
+		      
 //GRAFICOS
 			  
 		//OPTIONS
@@ -152,9 +179,9 @@ app.controller('estadisticasController', function ($scope, $http) {
 		$scope.generarGraficoBarra2();
 
   	    $scope.ngCliente = {};
-		$scope.getAllClientes();   
+ 
 		
 		$scope.ngCiudad = {};
-		$scope.getAllCiudad();
+		$scope.getClientesCiudad();
 		    
 });
