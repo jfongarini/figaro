@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.figaro.model.Cliente;
-import com.figaro.model.Ciudad;
 import com.figaro.service.EstadisticasService;
 
 @RestController
@@ -26,19 +24,14 @@ public class EstadisticasControllerREST {
 	@Qualifier("EstadisticasServiceTransactional")
 	private EstadisticasService service;
 	
-	@RequestMapping(value = "estadisticas/buscarClienteSexo",method=RequestMethod.GET,produces="application/json")
-    public ResponseEntity<List<Cliente>> searchClienteSexo(@RequestParam String search) {
-		return new ResponseEntity<List<Cliente>>(service.buscarClienteSexo(search), HttpStatus.OK);
-    }	
-	
-	@RequestMapping(value = "estadisticas/ciudad",method=RequestMethod.GET,produces="application/json")
-    public ResponseEntity<List<Ciudad>> getCiudades() {
-        return new ResponseEntity<List<Ciudad>>(service.getCiudades(), HttpStatus.OK);
-    }
-	
 	@RequestMapping(value = "estadisticas/clientesCiudad",method=RequestMethod.GET,produces="application/json")
     public ResponseEntity<Map<String, Integer>> buscarClienteCiudad() {
         return new ResponseEntity<Map<String, Integer>>(service.buscarClienteCiudad(), HttpStatus.OK);
+    }
+	
+	@RequestMapping(value = "estadisticas/clientesSexo",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<Map<String, Integer>> buscarClienteSexo() {
+        return new ResponseEntity<Map<String, Integer>>(service.buscarClienteSexo(), HttpStatus.OK);
     }
 	
 	

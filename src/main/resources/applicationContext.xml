@@ -253,6 +253,7 @@
 			<ref bean="ClientesServiceTransactional" />
 		</property>
 	</bean>
+	
 
 	<bean id="EstadisticasRepository"	class="com.figaro.repository.EstadisticasRepository">
 		<property name="sessionFactory">

@@ -9,7 +9,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.figaro.model.Cliente;
-import com.figaro.model.Ciudad;
 import com.figaro.repository.EstadisticasRepository;
 
 public class EstadisticasService {
@@ -35,13 +34,20 @@ public class EstadisticasService {
 		return mapClientes;
 	}
 	
-	public List<Cliente> buscarClienteSexo(String search) {
-		return repository.buscarClienteSexo(search);
-	}
-	
-	public List<Ciudad> getCiudades(){
-		LOGGER.debug("Obteniendo todos las ciudades");
-		return repository.getCiudades();
+	public Map<String, Integer> buscarClienteSexo(){
+		List<Cliente> allClientes = clientesService.getAllClientes();
+		Map<String, Integer> mapClientes = new HashMap<String, Integer>();
+		for (Cliente cliente : allClientes) {
+			String sexo = cliente.getSexo();
+			Integer cantidadHabitantes = mapClientes.get(sexo);
+			if (cantidadHabitantes == null) {
+				mapClientes.put(sexo, 1);
+			} else {
+				cantidadHabitantes ++;
+				mapClientes.put(sexo, cantidadHabitantes);
+			}
+		}
+		return mapClientes;
 	}
 
 	public EstadisticasRepository getRepository() {
