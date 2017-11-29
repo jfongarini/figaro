@@ -17,8 +17,8 @@
 	    <property name="dirNumeroCalle" column="NUMERO"   type="int"/> 	
 	    <property name="dirPiso" 	    column="PISO"     type="int"/> 	
 	    <property name="dirDpto" 		column="DPTO"     type="string"/>
-	
      	<union-subclass name="com.figaro.model.Cliente" table="CLIENTE">
+     			<property name="notas" 		    column="NOTAS"    type="string"/>
 				<property name="ultimaVisita" 	column="ULT_VISITA" type="date"/>
 		</union-subclass>
 	     	

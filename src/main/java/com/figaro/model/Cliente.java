@@ -5,7 +5,9 @@ import java.util.Date;
 public class Cliente extends Persona {
 	
 	private Date ultimaVisita;
-
+	private String notas;
+	
+	
 	public Date getUltimaVisita() {
 		return ultimaVisita;
 	}
@@ -14,6 +16,14 @@ public class Cliente extends Persona {
 		this.ultimaVisita = ultimaVisita;
 	}
 
+	public String getNotas() {
+		return notas;
+	}
+
+	public void setNotas(String notas) {
+		this.notas = notas;
+	}
+	
 	public void update(Cliente cliente) {
 		this.setNombre(cliente.getNombre());
 		this.setApellido(cliente.getApellido());
@@ -25,6 +35,9 @@ public class Cliente extends Persona {
 		this.setDirNumeroCalle(cliente.getDirNumeroCalle());
 		this.setDirPiso(cliente.getDirPiso());
 		this.setDirDpto(cliente.getDirDpto());
+		this.setNotas(cliente.getNotas());
 	}
+
+	
 
 }
