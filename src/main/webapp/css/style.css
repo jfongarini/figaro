@@ -80,6 +80,15 @@ body{
     font-size: 13px;
 }
 
+.banner-label-right{
+    float: right;
+    text-align: right;
+    margin-top: 12px;
+    margin-right: 30px;
+    margin-left: 20px;    
+    font-size: 13px;
+}
+
  .confirm-message{
    width: 100%
 }
@@ -538,3 +547,19 @@ tr:hover .disponibletr{
     cursor: pointer
 }
 
+.cuotas{
+    
+    width: 32px;   
+    /*border-right-width: 1px;   
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-color: #000; */
+}
+
+.cuotas-oculto{
+    display: block;
+} 
+
+.material-icons.rojo { color: rgba(249, 0, 0, .7); }
+.material-icons.verde { color: rgba(0, 249, 0, .5); }

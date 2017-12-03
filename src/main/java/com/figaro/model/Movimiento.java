@@ -12,7 +12,8 @@ public class Movimiento {
 	private BigDecimal precio;
 	private Date fecha;
 	private String detalle;
-	private Boolean isGasto;	
+	private Boolean isGasto;
+	private String tipoPago;
 	
 	public void update(Movimiento movimiento) {		
 		this.setCategoria(movimiento.getCategoria());
@@ -20,6 +21,7 @@ public class Movimiento {
 		this.setFecha(movimiento.getFecha());
 		this.setIsGasto(movimiento.getIsGasto());
 		this.setPrecio(movimiento.getPrecio());
+		this.setTipoPago(movimiento.getTipoPago());
 	}
 	
 	public Integer getId() {
@@ -60,9 +62,17 @@ public class Movimiento {
 		this.categoria = categoria;
 	}
 	
+	public String getTipoPago() {
+		return tipoPago;
+	}
+
+	public void setTipoPago(String tipoPago) {
+		this.tipoPago = tipoPago;
+	}
+	
 	@Override
 	public String toString() {
-		return "Movimiento [id=" + id + ", categoria=" + categoria + ", precio=" + precio + ", fecha=" + fecha + ", detalle=" + detalle + ", isGasto=" + isGasto + "]";
+		return "Movimiento [id=" + id + ", categoria=" + categoria + ", precio=" + precio + ", fecha=" + fecha + ", detalle=" + detalle + ", isGasto=" + isGasto + ", tipoPago=" + tipoPago + "]";
 	}
 	
 }
