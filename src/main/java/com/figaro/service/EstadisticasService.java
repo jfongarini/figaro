@@ -1,7 +1,8 @@
 package com.figaro.service;
 
-
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.figaro.model.Cliente;
+import com.figaro.model.Movimiento;
 import com.figaro.repository.EstadisticasRepository;
 
 public class EstadisticasService {
@@ -17,6 +19,7 @@ public class EstadisticasService {
 	
 	private EstadisticasRepository repository;
 	private ClientesService clientesService;
+	private MovimientosService movimientosService;
 	
 	public Map<String, Integer> buscarClienteCiudad(){
 		List<Cliente> allClientes = clientesService.getAllClientes();
@@ -49,6 +52,31 @@ public class EstadisticasService {
 		}
 		return mapClientes;
 	}
+	
+	public Map<String, Integer> buscarProductoMasVendido() throws ParseException{
+
+		String category = "Ventas";
+
+		String oldstring2 = "2017-12-01";
+		Date from = new SimpleDateFormat("yyyy-MM-dd").parse(oldstring2);	
+		
+		String oldstring3 = "2017-12-31";
+		Date to = new SimpleDateFormat("yyyy-MM-dd").parse(oldstring3);	
+		
+		List<Movimiento> searchMovimientos = movimientosService.searchMovimientos(from, to, category);
+		Map<String, Integer> mapMovimientos = new HashMap<String, Integer>();
+		for (Movimiento movimiento : searchMovimientos) {
+			String producto = movimiento.getDetalle();
+			Integer cantidadVentas = mapMovimientos.get(producto);
+			if (cantidadVentas == null) {
+				mapMovimientos.put(producto, 1);
+			} else {
+				cantidadVentas ++;
+				mapMovimientos.put(producto, cantidadVentas);
+			}
+		}
+		return mapMovimientos;
+	}
 
 	public EstadisticasRepository getRepository() {
 		return repository;
@@ -64,6 +92,14 @@ public class EstadisticasService {
 
 	public void setClientesService(ClientesService clientesService) {
 		this.clientesService = clientesService;
+	}
+
+	public MovimientosService getMovimientosService() {
+		return movimientosService;
+	}
+
+	public void setMovimientosService(MovimientosService movimientosService) {
+		this.movimientosService = movimientosService;
 	}
 	
 }

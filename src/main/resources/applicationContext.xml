@@ -252,6 +252,9 @@
 		<property name="clientesService">
 			<ref bean="ClientesServiceTransactional" />
 		</property>
+		<property name="movimientosService">
+			<ref bean="MovimientosServiceTransactional" />
+		</property>
 	</bean>
 	
 

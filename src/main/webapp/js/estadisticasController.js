@@ -45,6 +45,28 @@ app.controller('estadisticasController', function ($scope, $http) {
 		        $scope.seleccionarGrafico();		    	
 		    }
 
+
+		//OBTENER LISTA DE Producto mas vendido
+		    $scope.getProductoMasVendido = function() {
+		        $http.get("/rest/estadisticas/productoMasVendido").then(function (response) {
+		            $scope.productoMasVendido = response.data;		            
+		        });			      
+		    };	
+		    
+		  //BUSCAR Producto mas vendido
+		    $scope.searchProductoMasVendido = function() {
+		    	arregloColumnaBar = [] ;
+				arregloLabelBar = [] ;
+				arregloDataBar = [] ;
+		    	var prodMasVendido = $scope.productoMasVendido;
+
+				for (var key in prodMasVendido) {
+    				arregloColumnaBar.push(key);
+    				arregloDataBar.push(prodMasVendido[key]);
+				}
+				arregloLabelBar = 'Total' ;
+		        $scope.seleccionarGrafico();		    	
+		    }
 		      
 //GRAFICOS
 		    
@@ -94,5 +116,6 @@ app.controller('estadisticasController', function ($scope, $http) {
 
 		$scope.getClientesCiudad();
 		$scope.getClientesSexo();
+		$scope.getProductoMasVendido();
 		    
 });
