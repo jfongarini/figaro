@@ -3,12 +3,12 @@
       <form ng-submit="cobrar(turnoTarget)"> 
         
             <div class=form-field><label>FORMA DE PAGO:</label>          
-              <input type="radio" name=tipoPago ng-model="ngMovimiento.tipoPago" value="C" required> Contado
-              <input type="radio" name=tipoPago ng-model="ngMovimiento.tipoPago" value="D" required> D&eacute;bito
+              <input type="radio" name=tipoPago ng-model="ngMovimiento.tipoPago" ng-change="ngMovimiento.cuotas=1"  value="C" required> Contado
+              <input type="radio" name=tipoPago ng-model="ngMovimiento.tipoPago" ng-change="ngMovimiento.cuotas=1"  value="D" required> D&eacute;bito
               <input type="radio" name=tipoPago ng-model="ngMovimiento.tipoPago" value="T" required> Cr&eacute;dito         
             </div>
  			<div class=form-field><label>CUOTAS:</label>
-          		<input class="cuotas" type="number" min="0" ng-model="ngMovimiento.cuotas"></input>
+          		<input class="cuotas" type="number" min="1" ng-disabled="ngMovimiento.tipoPago !== 'T'" ng-model="ngMovimiento.cuotas"></input>
         	</div>
 
  		<div class=buttons>
