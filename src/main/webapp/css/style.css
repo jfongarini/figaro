@@ -80,6 +80,15 @@ body{
     font-size: 13px;
 }
 
+.banner-label-right{
+    float: right;
+    text-align: right;
+    margin-top: 12px;
+    margin-right: 30px;
+    margin-left: 20px;    
+    font-size: 13px;
+}
+
  .confirm-message{
    width: 100%
 }
@@ -538,14 +547,23 @@ tr:hover .disponibletr{
     cursor: pointer
 }
 
+.cuotas{
+    
+    width: 32px;   
+    /*border-right-width: 1px;   
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-color: #000; */
 
 
 
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
-}
+.cuotas-oculto{
+    display: block;
+} 
 
-
+.material-icons.rojo { color: rgba(249, 0, 0, .7); }
+.material-icons.verde { color: rgba(0, 249, 0, .5); }
 
 @media (max-width: 700px){
     body, .form-field{font-size: 12px}
@@ -554,4 +572,8 @@ tr:hover .disponibletr{
     .logo{display: none}
     .link-label{display: none}
     .content, .message{margin-left: 80px}
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
 }

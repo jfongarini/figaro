@@ -54,10 +54,10 @@ public class TurnosService {
 		return repository.searchTurno(desde);
 	}
 	
-	public Turno setCobrado(int turnoId) {
+	public Turno setCobrado(int turnoId, Movimiento cobro) {
 		Turno turno = getTurno(turnoId);
-		turno.setCobrado(!turno.getCobrado());
-		turno.setMovimiento(generateMovimiento(turno));
+		turno.setCobrado(true);
+		turno.setMovimiento(generateCobro(turno,cobro));
 		repository.updateTurno(turno);
 		Cliente cliente = turno.getCliente();
 		cliente.setUltimaVisita(turno.getDesde());
@@ -65,10 +65,19 @@ public class TurnosService {
 		return turno;
 	}
 
+	
+	public Turno cancelCobro(int turnoId) {
+		Turno turno = getTurno(turnoId);
+		turno.setCobrado(false);
+		turno.setMovimiento(null);
+		repository.updateTurno(turno);
+		return turno;
+	}
+	
 	public Turno updateTurno(Turno turno) {
 		LOGGER.info("Actualizando el Turno: " + turno.toString());
 		validateTurno(turno);
-		turno.setMovimiento(generateMovimiento(turno));
+		turno.setMovimiento(updateMovimiento(turno));
 		Turno updated = getTurno(turno.getId());
 		updated.update(turno);
 		repository.updateTurno(updated);
@@ -76,9 +85,7 @@ public class TurnosService {
 		return updated;
 	}
 
-	private Movimiento generateMovimiento(Turno turno) {
-		if (!turno.getCobrado())
-			return null;
+	private Movimiento generateCobro(Turno turno,Movimiento cobro) {
 		Movimiento movimiento = new Movimiento();
 		movimiento.setCategoria(CATEGORIA_TURNOS);
 		movimiento.setIsGasto(false);
@@ -89,7 +96,15 @@ public class TurnosService {
 		movimiento.setPrecio(precio);
 		List<String> descripionesTrabjo = turno.getTrabajos().stream().map(Trabajo::getDescripcion).collect(Collectors.toList());
 		movimiento.setDetalle(String.join(" ", descripionesTrabjo)) ;
+		movimiento.setTipoPago(cobro.getTipoPago());
 		return movimiento;
+	}
+	
+	
+	private Movimiento updateMovimiento(Turno turno) {
+		if (!turno.getCobrado())
+			return null;
+		return generateCobro(turno,turno.getMovimiento());
 	}
 	
 	public Turno deleteTurno(int turnoId) {

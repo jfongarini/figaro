@@ -10,7 +10,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	        $scope.isNuevoMovimiento = true
 	    	openModal("modal-caja");
 	        $scope.ngMovimiento={};
-	        $scope.ngMovimiento.fecha = new Date(getToday()); 
+	        $scope.ngMovimiento.fecha = new Date(getToday()); 	        
 	        $scope.message='';
 	    };
 
@@ -21,13 +21,20 @@ app.controller('movimientosController', function ($scope, $http) {
 	        $scope.movimientoID = event.currentTarget.getAttribute("data-id");
 	        $http.get('/rest/movimientos/'+$scope.movimientoID).then(function (response) {
 	            $scope.ngMovimiento = response.data;
-	            $scope.ngMovimiento.fecha = new Date($scope.ngMovimiento.fecha); 
+	            $scope.ngMovimiento.fecha = new Date($scope.ngMovimiento.fecha);	            
+	            if ($scope.ngMovimiento.tipoPago != "D" && $scope.ngMovimiento.tipoPago != ""){
+	            	$scope.ngMovimiento.cuotas = parseInt($scope.ngMovimiento.tipoPago);
+	            	$scope.ngMovimiento.tipoPago = "T";	            
+	            }
 	            openModal("modal-caja");
 		    });
 	    };
 
 	    //CLICK ACEPTAR FORMULARIO
 	    $scope.sendMovimiento = function() {
+	    	if($scope.ngMovimiento.tipoPago === "T"){
+	        	$scope.ngMovimiento.tipoPago = $scope.ngMovimiento.cuotas;
+	        }	        
 	        if($scope.isNuevoMovimiento === true){
 	            $http.post('/rest/movimientos/alta', $scope.ngMovimiento).then(function (response) {
 	                $scope.movimientos.push(response.data);
@@ -96,6 +103,36 @@ app.controller('movimientosController', function ($scope, $http) {
 	        })
 	        return total;
 	    }
+
+	    //CALCULAR EL TOTAL DE CAJA
+	    $scope.calculaTotalEfectivo = function(){
+	        var total = 0;
+	        angular.forEach($scope.movimientos, function(ngMovimiento){	          
+	       	  if (ngMovimiento.tipoPago == ''){
+	          	if (ngMovimiento.isGasto == true){
+	        		total = total - ngMovimiento.precio
+	          	} else {
+	        		total = total + ngMovimiento.precio
+	          	}	 
+	          }         
+	        })
+	        return total;
+	    }
+
+	    //CALCULAR EL TOTAL DE CAJA
+	    $scope.calculaTotalTarjeta = function(){
+	        var total = 0;
+	        angular.forEach($scope.movimientos, function(ngMovimiento){
+	          if (ngMovimiento.tipoPago != ''){     
+	          	if (ngMovimiento.isGasto == true){
+	        	  	total = total - ngMovimiento.precio
+	          	} else {
+	        	  	total = total + ngMovimiento.precio
+	          	}	     
+	          }     
+	        })
+	        return total;
+	    }
 	    
 	    //ORDENAR POR FECHA	    
 	    $scope.sortFecha = function(ngMovimiento) {
@@ -103,49 +140,6 @@ app.controller('movimientosController', function ($scope, $http) {
 	        return date;
 	    };
 
-/*	    
-	    
-	    //FILTRO DIA
-	    $scope.searchMovimientoDia = function() {	    	   	
-	        $http.get('/rest/movimientos/buscar',{params: { q: getStringDate($scope.search) }})		        
-	        .then(function successCallback(response) {	  	        	
-	            $scope.movimientos = response.data;	            
-	        })
-	    }
-	    
-	    //FILTRO SEMANA
-	    $scope.searchMovimientoEntreDias = function() {	 
-	    	var dStart = new Date($scope.search);
-	    	var dEnd = new Date($scope.search);
-	    	dStart.setDate(dStart.getDate() - 3);
-	    	dEnd.setDate(dEnd.getDate() + 3);
-	    	var q1 = getStringDate(dStart); 
-	    	var q2 = getStringDate(dEnd);	    
-	    	
-	        $http.get('/rest/movimientos/buscarEntre',{params: { q1, q2 }})		        
-	        .then(function successCallback(response) {	  	        	
-	            $scope.movimientos = response.data;	            
-	        })
-	    }
-	    
-	    //FILTRO MES
-	    $scope.searchMovimientoMes = function() {	    	   	
-	        $http.get('/rest/movimientos/buscar',{params: { q: getStringMonth($scope.search) }})		        
-	        .then(function successCallback(response) {	  	        	
-	            $scope.movimientos = response.data;	            
-	        })
-	    }
-
-	    
-	  //FILTRO CATEGORIA
-	    $scope.searchCategoria = function() {
-	        $http.get('/rest/movimientos/buscarCategoria',{params: { q: $scope.searchC }})		        
-	        .then(function successCallback(response) {	  	        	
-	            $scope.movimientos = response.data;	            
-	        })
-	    }
-	    
-*/	    
 	  // LIMPIAR SELECT CATEGORIA
 	  $scope.limpiarSelect = function(){
 	    	$scope.searchC = $scope.busqueda.categoria;	

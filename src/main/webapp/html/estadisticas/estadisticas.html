@@ -1,0 +1,48 @@
+<!Doctype html>
+<html>
+<head> 
+  <title>ESTADISTICAS</title>
+  <#include "/html/common/head.html">
+  <link rel="stylesheet" type="text/css" href="/css/estadisticas.css">
+</head>
+<body ng-app=figaro ng-controller=estadisticasController ng-cloak>
+<#include "/html/common/menu.html">
+<div id=content class=content>
+  	<div class=banner-est>
+  		<div class=buttons>
+          <button class="button accept" type="button" data-id="grafico1" ng-click="searchClienteSexo()">Sexo</button>          
+        </div>
+        <div class=buttons>
+          <button class="button accept" type="button" data-id="grafico1" ng-click="searchClienteCiudad()">Ciudad</button>          
+        </div>     
+        <div class=buttons>
+          <button class="button accept" type="button" data-id="grafico1" ng-click="searchProductoMasVendido()">Producto mas vendido</button>          
+        </div>  
+    </div>      
+    
+    <div class=banner-est>
+  		<div class=buttons>
+          <button class="button accept" type="button" data-id="grafico2" ng-click="searchClienteSexo()">Sexo</button>          
+        </div>
+        <div class=buttons>
+          <button class="button accept" type="button" data-id="grafico2" ng-click="searchClienteCiudad()">Ciudad</button>          
+        </div>        
+    </div>  
+    
+	<div class=graf-caja>  
+		<canvas id="grafico1" class="chart chart-bar"></canvas>
+ 	</div>
+ 	
+ 	<div class=graf-caja>  
+		<canvas id="grafico2" class="chart chart-bar"></canvas>
+ 	</div>
+ 	
+</div>
+<#include "/html/common/javascript.html">
+<#include "/html/common/confirm.html">
+<script src="js/vendor/Chart-min.js"></script>
+<script src="js/vendor/Chart.js"></script>
+<script src="js/vendor/angular-chart.min.js"></script>
+<script src="js/estadisticasController.js" ></script>
+</body>
+</html>

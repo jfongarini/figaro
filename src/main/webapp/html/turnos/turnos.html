@@ -25,13 +25,13 @@
     </thead>
     <tbody>
     <tr  ng-cloak class=data-row ng-repeat="turno in turnos  track by turno.id"  >
-      <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{turno.desde.split(' ')[1]}} - {{turno.hasta.split(' ')[1]}}</td>
-      <td id={{turno.id}} data-id={{turno.id}} ><a class=cliente-link ng-href="/turnos/cliente/{{turno.cliente.id}}"> {{turno.cliente.nombre}} {{turno.cliente.apellido}} </a></td>
-      <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)"><span ng-repeat="trabajo in turno.trabajos"> {{trabajo.descripcion}} </span></td>
-      <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{getTotalTurno(turno.trabajos) | currency}}</td>
-      <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{turno.peluquero}}</td>
-      <td><input ng-checked="turno.cobrado" ng-click="setCobrado(turno.id)" type="checkbox"></td>
-      <td id={{turno.id}} data-id={{turno.id}} data-ng-click="confirmDelete(turno.id)" class="tachotd" ><i class="material-icons tachoi">clear</i></td>
+      <td data-id={{turno.id}} data-ng-click="detailTurno($event)">{{turno.desde.split(' ')[1]}} - {{turno.hasta.split(' ')[1]}}</td>
+      <td data-id={{turno.id}} ><a class=cliente-link ng-href="/turnos/cliente/{{turno.cliente.id}}"> {{turno.cliente.nombre}} {{turno.cliente.apellido}} </a></td>
+      <td data-id={{turno.id}} data-ng-click="detailTurno($event)"><span ng-repeat="trabajo in turno.trabajos"> {{trabajo.descripcion}} </span></td>
+      <td data-id={{turno.id}} data-ng-click="detailTurno($event)">{{getTotalTurno(turno.trabajos) | currency}}</td>
+      <td data-id={{turno.id}} data-ng-click="detailTurno($event)">{{turno.peluquero}}</td>
+      <td><input ng-model="turno.cobrado" ng-click="setCobrado(turno)" type="checkbox"></td>
+      <td data-id={{turno.id}} data-ng-click="confirmDelete(turno.id)" class="tachotd" ><i class="material-icons tachoi">clear</i></td>
     </tr>
     </tbody>
 
@@ -50,6 +50,8 @@
   <#include "/html/clientes/clientes-modal.html">
   </div>
 
+  <#include "/html/turnos/cobrar.html">
+  <#include "/html/turnos/deshacer-cobrado.html">
   <#include "/html/common/javascript.html">
   <#include "/html/common/confirm.html">
   <script src="/js/turnosController.js" ></script>

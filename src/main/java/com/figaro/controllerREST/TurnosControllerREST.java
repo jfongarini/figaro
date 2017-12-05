@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.figaro.model.Movimiento;
 import com.figaro.model.Turno;
 import com.figaro.service.TurnosService;
 
@@ -51,9 +52,15 @@ public class TurnosControllerREST {
 		return new ResponseEntity<Turno>(updated, HttpStatus.OK);
 	}
 	
+	
+	@RequestMapping(value = "turnos/{turnoId}/cobrado",method=RequestMethod.PUT)
+    public ResponseEntity<Turno> setCobrado( @PathVariable int turnoId, @RequestBody Movimiento movimiento) {
+		return new ResponseEntity<Turno>(service.setCobrado(turnoId,movimiento), HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "turnos/{turnoId}/cobrado",method=RequestMethod.PATCH)
-    public ResponseEntity<Turno> setCobrado( @PathVariable int turnoId) {
-		return new ResponseEntity<Turno>(service.setCobrado(turnoId), HttpStatus.OK);
+    public ResponseEntity<Turno> cancelCobro( @PathVariable int turnoId) {
+		return new ResponseEntity<Turno>(service.cancelCobro(turnoId), HttpStatus.OK);
 	}
 	
 	

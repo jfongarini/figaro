@@ -33,7 +33,7 @@
 </div>
 
 <div class=banner-busqueda ng-hide = "IsHiddenEntreDia" ng-cloak>
-  	<div class=banner>   		
+  	<div>   		
   		<label class=banner-label-busqueda ng-click="ShowHideEntreDia()"><i class=material-icons >clear</i></label>
    		<label class=banner-label-busqueda> BUSCAR SEMANA:</label>   	
       	<input class=banner-label-busqueda type="week" ng-model="search" ng-change="searchMovimientoSem()"></input>
@@ -41,7 +41,7 @@
 </div>
 
 <div class=banner-busqueda ng-hide = "IsHiddenMes" ng-cloak>
-	<div class=banner>   		
+	<div>   		
   		<label class=banner-label-busqueda ng-click="ShowHideMes()"><i class=material-icons >clear</i></label>
    		<label class=banner-label-busqueda> B&Uacute;SQUEDA POR MES: </label>   	
       	<input class=banner-label-busqueda type="month" ng-model="search" ng-change="searchMovimientoMes()"></input>
@@ -55,7 +55,8 @@
           <th>FECHA</th>
           <th>CATEGORIA</th>
           <th>MONTO</th>
-          <th>DETALLE</th>   
+          <th>DETALLE</th>
+          <th>PAGO</th>
           <th></th>           
       </tr>
     </thead>
@@ -69,11 +70,16 @@
         <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos'">{{movimiento.categoria}}</td>
         <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos'">{{movimiento.categoria}}</td>
         
-	    <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos'"> <font ng-class='{green : !movimiento.isGasto, red: movimiento.isGasto}'>{{movimiento.precio | currency }}</font></td>
-	    <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos'"> <font ng-class='{green : !movimiento.isGasto, red: movimiento.isGasto}'>{{movimiento.precio | currency}}</font></td>
+	      <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos'"> <font ng-class='{green : !movimiento.isGasto, red: movimiento.isGasto}'>{{movimiento.precio | currency }}</font></td>
+	      <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos'"> <font ng-class='{green : !movimiento.isGasto, red: movimiento.isGasto}'>{{movimiento.precio | currency}}</font></td>
 	    
         <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos'">{{movimiento.detalle}}</td>
         <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos'">{{movimiento.detalle}}</td>
+
+        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos' && movimiento.tipoPago == ''">{{movimiento.tipoPago}}</td>
+        <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos' && movimiento.tipoPago == ''">{{movimiento.tipoPago}}</td>
+        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos' && movimiento.tipoPago != ''"><i class=material-icons>credit_card</i>{{movimiento.tipoPago}}</td>
+        <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos' && movimiento.tipoPago != ''"><i class=material-icons >credit_card</i>{{movimiento.tipoPago}}</td>
           
         <td class="tachotd" id={{movimiento.id}} data-id={{movimiento.id}} data-ng-click="confirmDelete(movimiento.id)" ng-if="movimiento.categoria != 'Turnos'"><label><i class="material-icons tachoi" >clear</i></label></td>
         <td class="tachotd" ng-if="movimiento.categoria == 'Turnos'"></td>
@@ -82,6 +88,10 @@
   </table>
   <div class=banner>
       <label class=banner-label ><i class=material-icons >account_balance_wallet</i> Total: <font ng-cloak ng-class='{green : calculaTotal() >= 0, red: calculaTotal() < 0}'>{{ calculaTotal() | currency }}</font></label>
+      
+      <label class=banner-label-right ><i class=material-icons >account_balance_wallet</i> Total Tarjeta: <font ng-cloak ng-class='{green : calculaTotalTarjeta() >= 0, red: calculaTotalTarjeta() < 0}'>{{ calculaTotalTarjeta() | currency }}</font></label>
+      <label class=banner-label-right ><i class=material-icons >more_vert</i></label>
+      <label class=banner-label-right ><i class=material-icons >account_balance_wallet</i> Total Efectivo: <font ng-cloak ng-class='{green : calculaTotalEfectivo() >= 0, red: calculaTotalEfectivo() < 0}'>{{ calculaTotalEfectivo() | currency }}</font></label>
   </div>
 </div>
 <#include "/html/caja/caja-modal.html">
