@@ -76,10 +76,10 @@
         <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos'">{{movimiento.detalle}}</td>
         <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos'">{{movimiento.detalle}}</td>
 
-        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos' && movimiento.tipoPago == ''">{{movimiento.tipoPago}}</td>
-        <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos' && movimiento.tipoPago == ''">{{movimiento.tipoPago}}</td>
-        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos' && movimiento.tipoPago != ''"><i class=material-icons>credit_card</i>{{movimiento.tipoPago}}</td>
-        <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos' && movimiento.tipoPago != ''"><i class=material-icons >credit_card</i>{{movimiento.tipoPago}}</td>
+        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos' && movimiento.tipoPago == 'E'"></td>
+        <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos' && movimiento.tipoPago == 'E'"></td>
+        <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos' && movimiento.tipoPago != 'E'"><i class=material-icons>credit_card</i>{{movimiento.tipoPago}}</td>
+        <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos' && movimiento.tipoPago != 'E'"><i class=material-icons >credit_card</i>{{movimiento.tipoPago}}</td>
           
         <td class="tachotd" id={{movimiento.id}} data-id={{movimiento.id}} data-ng-click="confirmDelete(movimiento.id)" ng-if="movimiento.categoria != 'Turnos'"><label><i class="material-icons tachoi" >clear</i></label></td>
         <td class="tachotd" ng-if="movimiento.categoria == 'Turnos'"></td>
