@@ -22,7 +22,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	        $http.get('/rest/movimientos/'+$scope.movimientoID).then(function (response) {
 	            $scope.ngMovimiento = response.data;
 	            $scope.ngMovimiento.fecha = new Date($scope.ngMovimiento.fecha);	            
-	            if ($scope.ngMovimiento.tipoPago != "D" && $scope.ngMovimiento.tipoPago != ""){
+	            if ($scope.ngMovimiento.tipoPago != "D" && $scope.ngMovimiento.tipoPago != "E"){
 	            	$scope.ngMovimiento.cuotas = parseInt($scope.ngMovimiento.tipoPago);
 	            	$scope.ngMovimiento.tipoPago = "T";	            
 	            }
@@ -108,7 +108,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	    $scope.calculaTotalEfectivo = function(){
 	        var total = 0;
 	        angular.forEach($scope.movimientos, function(ngMovimiento){	          
-	       	  if (ngMovimiento.tipoPago == ''){
+	       	  if (ngMovimiento.tipoPago == 'E'){
 	          	if (ngMovimiento.isGasto == true){
 	        		total = total - ngMovimiento.precio
 	          	} else {
@@ -123,7 +123,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	    $scope.calculaTotalTarjeta = function(){
 	        var total = 0;
 	        angular.forEach($scope.movimientos, function(ngMovimiento){
-	          if (ngMovimiento.tipoPago != ''){     
+	          if (ngMovimiento.tipoPago != 'E'){     
 	          	if (ngMovimiento.isGasto == true){
 	        	  	total = total - ngMovimiento.precio
 	          	} else {

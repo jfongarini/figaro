@@ -11,7 +11,8 @@
 	 	<property name="detalle" 		column="DETALLE"  	type="string"/>
 	 	<property name="categoria" 		column="CATEGORIA"  	type="string"/>	 	
 	 	<property name="isGasto" 		column="ISGASTO"  	type="boolean"/>
-	 	<property name="tipoPago" 		column="TIPOPAGO"  	type="string"/>	 
+	 	<property name="tipoPago" 		column="TIPOPAGO"  	type="string"/>
+	 	<property name="cuotas" 		column="CUOTAS"  	type="int"/>	 	 
      	
 	</class>
 </hibernate-mapping>
