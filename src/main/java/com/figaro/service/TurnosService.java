@@ -56,6 +56,7 @@ public class TurnosService {
 	
 	public Turno setCobrado(int turnoId, Movimiento cobro) {
 		Turno turno = getTurno(turnoId);
+		LOGGER.info("Cobrando el Turno: " + turno.toString() + " Con el movimiento: " + cobro.toString());
 		turno.setCobrado(true);
 		turno.setMovimiento(generateCobro(turno,cobro));
 		repository.updateTurno(turno);
@@ -68,6 +69,7 @@ public class TurnosService {
 	
 	public Turno cancelCobro(int turnoId) {
 		Turno turno = getTurno(turnoId);
+		LOGGER.info("Cancelando el cobro del Turno: " + turno.toString());
 		turno.setCobrado(false);
 		turno.setMovimiento(null);
 		repository.updateTurno(turno);
