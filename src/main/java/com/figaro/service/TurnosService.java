@@ -99,6 +99,7 @@ public class TurnosService {
 		List<String> descripionesTrabjo = turno.getTrabajos().stream().map(Trabajo::getDescripcion).collect(Collectors.toList());
 		movimiento.setDetalle(String.join(" ", descripionesTrabjo)) ;
 		movimiento.setTipoPago(cobro.getTipoPago());
+		movimiento.setCuotas(cobro.getCuotas());
 		return movimiento;
 	}
 	
