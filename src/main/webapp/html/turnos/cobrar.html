@@ -2,7 +2,7 @@
     <div class=modal-content>
       <form ng-submit="cobrar(turnoTarget)"> 
         
-            <div class=form-field ng-init="ngMovimiento.tipoPago='contado';ngMovimiento.cuotas=0">
+            <div class=form-field ng-init="initMovimiento()">
               <label>FORMA DE PAGO:</label>          
               <input type="radio" name=tipoPago ng-model="ngMovimiento.tipoPago" ng-change="ngMovimiento.cuotas=0"  value="contado"  required> Contado
               <input type="radio" name=tipoPago ng-model="ngMovimiento.tipoPago" ng-change="ngMovimiento.cuotas=0"  value="debito"  required> D&eacute;bito

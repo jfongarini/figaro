@@ -190,16 +190,25 @@ app.controller('turnosController', function ($scope, $http) {
         }
     }
 
+    //INICIALIZAR MOVIMIENTO
+    $scope.initMovimiento = function(){
+        $scope.ngMovimiento = {};
+        $scope.ngMovimiento.tipoPago='contado';
+        $scope.ngMovimiento.cuotas=0;
+    };
+
     //CONFIRMAR COBRO
     $scope.cobrar = function(turno){
         $http.put('/rest/turnos/'+turno.id+'/cobrado', $scope.ngMovimiento);
         closeModal("modal-cobrar");
+        $scope.initMovimiento();
     };
 
     //CANCELAR COBRO
     $scope.discardCobro = function(turno){
         turno.cobrado = false;
         closeModal("modal-cobrar");
+        $scope.initMovimiento();
     };
     
 
