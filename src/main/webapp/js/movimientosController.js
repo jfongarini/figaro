@@ -1,8 +1,9 @@
 app.controller('movimientosController', function ($scope, $http) {
  	 
+ 
 	//OBTENER LISTA DE MOVIMIENTOS
 	    $scope.getAll = function() {	    	
-	    	$scope.searchMovimiento();	    	
+	    	$scope.searchMovimiento();
 	    };
 
 	    //CLICK NUEVO MOVIMIENTO
@@ -21,20 +22,13 @@ app.controller('movimientosController', function ($scope, $http) {
 	        $scope.movimientoID = event.currentTarget.getAttribute("data-id");
 	        $http.get('/rest/movimientos/'+$scope.movimientoID).then(function (response) {
 	            $scope.ngMovimiento = response.data;
-	            $scope.ngMovimiento.fecha = new Date($scope.ngMovimiento.fecha);	            
-	            if ($scope.ngMovimiento.tipoPago != "D" && $scope.ngMovimiento.tipoPago != "E"){
-	            	$scope.ngMovimiento.cuotas = parseInt($scope.ngMovimiento.tipoPago);
-	            	$scope.ngMovimiento.tipoPago = "T";	            
-	            }
+	            $scope.ngMovimiento.fecha = new Date($scope.ngMovimiento.fecha);	           
 	            openModal("modal-caja");
 		    });
 	    };
 
 	    //CLICK ACEPTAR FORMULARIO
-	    $scope.sendMovimiento = function() {
-	    	if($scope.ngMovimiento.tipoPago === "T"){
-	        	$scope.ngMovimiento.tipoPago = $scope.ngMovimiento.cuotas;
-	        }	        
+	    $scope.sendMovimiento = function() {	    	        
 	        if($scope.isNuevoMovimiento === true){
 	            $http.post('/rest/movimientos/alta', $scope.ngMovimiento).then(function (response) {
 	                $scope.movimientos.push(response.data);
@@ -108,7 +102,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	    $scope.calculaTotalEfectivo = function(){
 	        var total = 0;
 	        angular.forEach($scope.movimientos, function(ngMovimiento){	          
-	       	  if (ngMovimiento.tipoPago == 'E'){
+	       	  if (ngMovimiento.tipoPago == 'contado'){
 	          	if (ngMovimiento.isGasto == true){
 	        		total = total - ngMovimiento.precio
 	          	} else {
@@ -123,7 +117,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	    $scope.calculaTotalTarjeta = function(){
 	        var total = 0;
 	        angular.forEach($scope.movimientos, function(ngMovimiento){
-	          if (ngMovimiento.tipoPago != 'E'){     
+	          if (ngMovimiento.tipoPago != 'contado'){     
 	          	if (ngMovimiento.isGasto == true){
 	        	  	total = total - ngMovimiento.precio
 	          	} else {
@@ -193,10 +187,21 @@ app.controller('movimientosController', function ($scope, $http) {
 	    $scope.searchMovimiento = function() {	
 	    	$http.get('/rest/movimientos/buscar',{params: { from: $scope.busqueda.fechaInicio, to: $scope.busqueda.fechaFin, category: $scope.busqueda.categoria }})		        
 		        .then(function successCallback(response) {	  	        	
-		            $scope.movimientos = response.data;	            
+		            $scope.movimientos = response.data;
+		            $scope.formatTipoPago();         
 		        })
 	    }
-	    	    	    
+	    	 
+	    $scope.formatTipoPago = function() {
+	    	for(var key in $scope.movimientos ){
+	    		if ($scope.movimientos[key].tipoPago == 'debito') {
+	    			$scope.movimientos[key].tipoPago = 'D';
+	    		} else if ($scope.movimientos[key].tipoPago == 'credito') {
+	    			$scope.movimientos[key].tipoPago = $scope.movimientos[key].cuotas;
+	    		}
+	    	}
+	    }
+
 	    //MOSTRAR O NO MOSTRAR DIV DE BUSQUEDA
 	    $scope.IsHiddenDia = true;
 	    $scope.IsHiddenEntreDia = true;
