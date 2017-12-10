@@ -1,5 +1,6 @@
 .graf-caja {
-    width: 45%;
+    /*width: 45%;*/
+    width: 80%;
     height: auto;
     padding: 20px;
     display: inline-block;
@@ -20,4 +21,18 @@
     margin-right: 20px;
     background-color: #FFF;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+}
+
+.search-estadistica {
+    float: left;
+    width: 200px;
+    margin-top: 12px;
+    margin-left: 5px;   
+    background: transparent;
+    border-bottom-color: #EEE;
+    border-bottom-width: 2px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px
+
 }

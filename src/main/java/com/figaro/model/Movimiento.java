@@ -15,6 +15,7 @@ public class Movimiento {
 	private Boolean isGasto;
 	private String tipoPago;
 	private Integer cuotas;
+	private Integer descuento;
 	
 	public void update(Movimiento movimiento) {		
 		this.setCategoria(movimiento.getCategoria());
@@ -24,6 +25,7 @@ public class Movimiento {
 		this.setPrecio(movimiento.getPrecio());
 		this.setTipoPago(movimiento.getTipoPago());
 		this.setCuotas(movimiento.getCuotas());
+		this.setDescuento(movimiento.getDescuento());
 	}
 	
 	public Integer getId() {
@@ -71,11 +73,6 @@ public class Movimiento {
 	public void setTipoPago(String tipoPago) {
 		this.tipoPago = tipoPago;
 	}
-	
-	@Override
-	public String toString() {
-		return "Movimiento [id=" + id + ", categoria=" + categoria + ", precio=" + precio + ", fecha=" + fecha + ", detalle=" + detalle + ", isGasto=" + isGasto + ", tipoPago=" + tipoPago + ", cuotas=" + cuotas + "]";
-	}
 
 	public Integer getCuotas() {
 		return cuotas;
@@ -83,6 +80,19 @@ public class Movimiento {
 
 	public void setCuotas(Integer cuotas) {
 		this.cuotas = cuotas;
+	}
+
+	public Integer getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(Integer descuento) {
+		this.descuento = descuento;
+	}
+	
+	@Override
+	public String toString() {
+		return "Movimiento [id=" + id + ", categoria=" + categoria + ", precio=" + precio + ", fecha=" + fecha + ", detalle=" + detalle + ", isGasto=" + isGasto + ", tipoPago=" + tipoPago + ", cuotas=" + cuotas + ", descuento=" + descuento + "]";
 	}
 	
 }

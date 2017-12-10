@@ -11,6 +11,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	        $scope.isNuevoMovimiento = true
 	    	openModal("modal-caja");
 	        $scope.ngMovimiento={};
+	        $scope.ngMovimiento.descuento = 0;
 	        $scope.ngMovimiento.fecha = new Date(getToday()); 	        
 	        $scope.message='';
 	    };
@@ -32,6 +33,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	        if($scope.isNuevoMovimiento === true){
 	            $http.post('/rest/movimientos/alta', $scope.ngMovimiento).then(function (response) {
 	                $scope.movimientos.push(response.data);
+	                $scope.formatTipoPago();
 	            });
 	            $scope.ngMovimiento={};
 	        }else{
@@ -90,9 +92,9 @@ app.controller('movimientosController', function ($scope, $http) {
 	        var total = 0;
 	        angular.forEach($scope.movimientos, function(ngMovimiento){	          
 	          if (ngMovimiento.isGasto == true){
-	        	  total = total - ngMovimiento.precio
+	        	  total = total - (ngMovimiento.precio - ngMovimiento.descuento);
 	          } else {
-	        	  total = total + ngMovimiento.precio
+	        	  total = total + (ngMovimiento.precio - ngMovimiento.descuento);
 	          }	          
 	        })
 	        return total;
@@ -104,9 +106,9 @@ app.controller('movimientosController', function ($scope, $http) {
 	        angular.forEach($scope.movimientos, function(ngMovimiento){	          
 	       	  if (ngMovimiento.tipoPago == 'contado'){
 	          	if (ngMovimiento.isGasto == true){
-	        		total = total - ngMovimiento.precio
+	        		total = total - (ngMovimiento.precio - ngMovimiento.descuento);
 	          	} else {
-	        		total = total + ngMovimiento.precio
+	        		total = total + (ngMovimiento.precio - ngMovimiento.descuento);
 	          	}	 
 	          }         
 	        })
@@ -119,15 +121,32 @@ app.controller('movimientosController', function ($scope, $http) {
 	        angular.forEach($scope.movimientos, function(ngMovimiento){
 	          if (ngMovimiento.tipoPago != 'contado'){     
 	          	if (ngMovimiento.isGasto == true){
-	        	  	total = total - ngMovimiento.precio
+	        	  	total = total - (ngMovimiento.precio - ngMovimiento.descuento);
 	          	} else {
-	        	  	total = total + ngMovimiento.precio
+	        	  	total = total + (ngMovimiento.precio - ngMovimiento.descuento);
 	          	}	     
 	          }     
 	        })
 	        return total;
 	    }
-	    
+
+	    // MUESTRA DESCUENTO
+	    $scope.mostrarDescuento = function(item){	 
+	    	if (item.tipoPago != 'contado') {  	
+	    		if (item.descuento == 0){
+	    			return item.tipoPago;
+	    		} else {
+		    		return item.tipoPago + " ( -" + item.descuento + " )";
+	    		}
+	    	} else {
+	    		if (item.descuento == 0){
+	    			return "";
+	    		} else {
+		    		return "( -" + item.descuento + " )";
+	    		}
+	    	}
+	    }
+
 	    //ORDENAR POR FECHA	    
 	    $scope.sortFecha = function(ngMovimiento) {
 	        var date = new Date(ngMovimiento.fecha);

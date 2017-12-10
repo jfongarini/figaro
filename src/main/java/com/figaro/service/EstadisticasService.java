@@ -53,15 +53,15 @@ public class EstadisticasService {
 		return mapClientes;
 	}
 	
-	public Map<String, Integer> buscarProductoMasVendido() throws ParseException{
+	public Map<String, Integer> buscarProductoMasVendido(Date from, Date to) throws ParseException{
 
 		String category = "Ventas";
 
-		String oldstring2 = "2017-12-01";
-		Date from = new SimpleDateFormat("yyyy-MM-dd").parse(oldstring2);	
+//		String oldstring2 = "2017-12-01";
+//		Date from = new SimpleDateFormat("yyyy-MM-dd").parse(oldstring2);	
 		
-		String oldstring3 = "2017-12-31";
-		Date to = new SimpleDateFormat("yyyy-MM-dd").parse(oldstring3);	
+//		String oldstring3 = "2017-12-31";
+//		Date to = new SimpleDateFormat("yyyy-MM-dd").parse(oldstring3);	
 		
 		List<Movimiento> searchMovimientos = movimientosService.searchMovimientos(from, to, category);
 		Map<String, Integer> mapMovimientos = new HashMap<String, Integer>();

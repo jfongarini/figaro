@@ -20,6 +20,9 @@
         <div class=form-field><label>CUOTAS:</label>
               <input class="cuotas" type="number" min="1" ng-disabled="ngMovimiento.tipoPago !== 'credito'" ng-model="ngMovimiento.cuotas"></input>
         </div>
+        <div class=form-field><label>DESCUENTO:</label>
+              <input class="cuotas" type="number" min="0" ng-model="ngMovimiento.descuento"></input>
+        </div>
         <div class=form-field><label>DETALLE:</label>      <input type="text"          ng-model="ngMovimiento.detalle"></input></div>
  
  		   <div class=buttons>
