@@ -6,7 +6,6 @@ import static com.figaro.util.Constants.DATE_FORMAT;
 
 import java.text.ParseException;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.figaro.model.Movimiento;
 import com.figaro.service.EstadisticasService;
 
 @RestController

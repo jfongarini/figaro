@@ -10,13 +10,18 @@ public class Movimiento {
 	private Integer id;
 	private String categoria;
 	private BigDecimal precio;
+	private BigDecimal descuento;
 	private Date fecha;
 	private String detalle;
 	private Boolean isGasto;
 	private String tipoPago;
 	private Integer cuotas;
-	private Integer descuento;
-	
+
+	public Movimiento () {
+		this.precio = new BigDecimal(0);
+		this.descuento = new BigDecimal(0);
+	}
+
 	public void update(Movimiento movimiento) {		
 		this.setCategoria(movimiento.getCategoria());
 		this.setDetalle(movimiento.getDetalle());
@@ -82,17 +87,19 @@ public class Movimiento {
 		this.cuotas = cuotas;
 	}
 
-	public Integer getDescuento() {
+	public BigDecimal getDescuento() {
 		return descuento;
 	}
 
-	public void setDescuento(Integer descuento) {
+	public void setDescuento(BigDecimal descuento) {
 		this.descuento = descuento;
 	}
+	
 	
 	@Override
 	public String toString() {
 		return "Movimiento [id=" + id + ", categoria=" + categoria + ", precio=" + precio + ", fecha=" + fecha + ", detalle=" + detalle + ", isGasto=" + isGasto + ", tipoPago=" + tipoPago + ", cuotas=" + cuotas + ", descuento=" + descuento + "]";
 	}
-	
+
+
 }
