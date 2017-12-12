@@ -92,9 +92,9 @@ app.controller('movimientosController', function ($scope, $http) {
 	        var total = 0;
 	        angular.forEach($scope.movimientos, function(ngMovimiento){	          
 	          if (ngMovimiento.isGasto == true){
-	        	  total = total - (ngMovimiento.precio - ngMovimiento.descuento);
+	        	  total = total - (ngMovimiento.precio);
 	          } else {
-	        	  total = total + (ngMovimiento.precio - ngMovimiento.descuento);
+	        	  total = total + (ngMovimiento.precio);
 	          }	          
 	        })
 	        return total;
@@ -106,9 +106,9 @@ app.controller('movimientosController', function ($scope, $http) {
 	        angular.forEach($scope.movimientos, function(ngMovimiento){	          
 	       	  if (ngMovimiento.tipoPago == 'contado'){
 	          	if (ngMovimiento.isGasto == true){
-	        		total = total - (ngMovimiento.precio - ngMovimiento.descuento);
+	        		total = total - (ngMovimiento.precio);
 	          	} else {
-	        		total = total + (ngMovimiento.precio - ngMovimiento.descuento);
+	        		total = total + (ngMovimiento.precio);
 	          	}	 
 	          }         
 	        })
@@ -121,9 +121,9 @@ app.controller('movimientosController', function ($scope, $http) {
 	        angular.forEach($scope.movimientos, function(ngMovimiento){
 	          if (ngMovimiento.tipoPago != 'contado'){     
 	          	if (ngMovimiento.isGasto == true){
-	        	  	total = total - (ngMovimiento.precio - ngMovimiento.descuento);
+	        	  	total = total - (ngMovimiento.precio);
 	          	} else {
-	        	  	total = total + (ngMovimiento.precio - ngMovimiento.descuento);
+	        	  	total = total + (ngMovimiento.precio);
 	          	}	     
 	          }     
 	        })

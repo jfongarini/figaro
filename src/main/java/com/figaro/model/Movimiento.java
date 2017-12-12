@@ -3,6 +3,8 @@ package com.figaro.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.figaro.exception.DescuentoInvalidoException;
+
 
 public class Movimiento {
 
@@ -31,6 +33,22 @@ public class Movimiento {
 		this.setTipoPago(movimiento.getTipoPago());
 		this.setCuotas(movimiento.getCuotas());
 		this.setDescuento(movimiento.getDescuento());
+		this.descontar();
+	}
+	
+	private void validarDescuento(BigDecimal descuento) {
+		if(descuento.compareTo(this.precio) > 0)
+			throw new DescuentoInvalidoException();
+	}
+	
+	public void descontar () {
+		validarDescuento(descuento);
+		this.precio = this.precio.subtract(this.descuento);
+	}
+	
+	public void setDescuento(BigDecimal descuento) {
+		this.descuento = descuento;
+		
 	}
 	
 	public Integer getId() {
@@ -91,9 +109,7 @@ public class Movimiento {
 		return descuento;
 	}
 
-	public void setDescuento(BigDecimal descuento) {
-		this.descuento = descuento;
-	}
+
 	
 	
 	@Override

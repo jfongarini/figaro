@@ -70,7 +70,7 @@
         <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos'">{{movimiento.categoria}}</td>
         <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos'">{{movimiento.categoria}}</td>
         
-	      <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos'"> <font ng-class='{green : !movimiento.isGasto, red: movimiento.isGasto}'>{{movimiento.precio  - movimiento.descuento | currency }}</font></td>
+	      <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos'"> <font ng-class='{green : !movimiento.isGasto, red: movimiento.isGasto}'>{{movimiento.precio | currency }}</font></td>
 	      <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos'"> <font ng-class='{green : !movimiento.isGasto, red: movimiento.isGasto}'>{{movimiento.precio - movimiento.descuento | currency}}</font></td>
 	    
         <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos' && movimiento.tipoPago == 'contado'">{{mostrarDescuento(movimiento)}}</td>

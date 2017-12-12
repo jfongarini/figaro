@@ -23,6 +23,7 @@ public class MovimientosService {
 
 	public Movimiento saveMovimiento (Movimiento movimiento) {
 		LOGGER.info("Guardando el Movimiento: " + movimiento.toString());
+		movimiento.descontar();
 		int id = repository.saveMovimiento(movimiento);
 		movimiento.setId(id);
 		LOGGER.info("El Movimiento se guardó correctamente");

@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 
-import com.figaro.exception.DescuentoInvalidoException;
 import com.figaro.exception.HorarioInvalidoException;
 import com.figaro.exception.TurnoOcupadoException;
 import com.figaro.model.Cliente;
@@ -89,7 +88,6 @@ public class TurnosService {
 	}
 
 	private Movimiento generateCobro(Turno turno,Movimiento cobro) {
-		
 		Movimiento movimiento = new Movimiento();
 		movimiento.setCategoria(CATEGORIA_TURNOS);
 		movimiento.setIsGasto(false);
@@ -99,10 +97,10 @@ public class TurnosService {
 		BigDecimal precio = new BigDecimal(0);
 		for (Trabajo t : turno.getTrabajos())
 			precio = precio.add(t.getPrecio());
-		precio = precio.subtract(cobro.getDescuento());
+		
 		movimiento.setDescuento(cobro.getDescuento());
 		movimiento.setPrecio(precio);
-		validateCobro(movimiento);
+		movimiento.descontar();
 		
 		List<String> descripionesTrabjo = turno.getTrabajos().stream().map(Trabajo::getDescripcion).collect(Collectors.toList());
 		movimiento.setDetalle(String.join(" ", descripionesTrabjo)) ;
@@ -110,10 +108,6 @@ public class TurnosService {
 	}
 	
 	
-	private void validateCobro(Movimiento cobro) {
-		if(cobro.getDescuento().compareTo(cobro.getPrecio()) > 0)
-			throw new DescuentoInvalidoException();
-	}
 
 	private Movimiento updateMovimiento(Turno turno) {
 		if (!turno.getCobrado())
