@@ -1,21 +1,27 @@
 package com.figaro.model;
 
-public class Peluquero  {
+import java.util.List;
 
-	private Integer id;
-	private String nombre;
+public class Peluquero extends Persona {
 	
-	public String getNombre() {
-		return nombre;
+	private List<Trabajo> trabajos;
+	private int comision;
+
+	public List<Trabajo> getTrabajos() {
+		return trabajos;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+
+	public void setTrabajos(List<Trabajo> trabajos) {
+		this.trabajos = trabajos;
 	}
-	public Integer getId() {
-		return id;
+
+	public int getComision() {
+		return comision;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+
+	public void setComision(int comision) {
+		this.comision = comision;
 	}
+
 	
 }

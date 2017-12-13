@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 
 import com.figaro.model.Categoria;
 import com.figaro.model.Ciudad;
-import com.figaro.model.Peluquero;
 import com.figaro.model.Trabajo;
 import com.figaro.repository.ConfiguracionRepository;
 
@@ -67,20 +66,6 @@ public class ConfiguracionService {
 		return repository.buscar(search);
 	}
 	
-	//PELUQUEROS
-	public Integer savePeluquero(Peluquero peluquero) {
-		LOGGER.info("Guardando el nuevo peluquero: "+ peluquero.getNombre());
-		return repository.savePeluquero(peluquero);
-	}
-
-	public void deletePeluquero(Integer idPeluquero) {
-		repository.deletePeluquero(idPeluquero);
-	}
-	
-	public List<Peluquero> getPeluqueros() {
-		LOGGER.debug("Obteniendo todos los peluqueros");
-		return repository.getPeluqueros();
-	}
 	
 	//CATEGORIAS
 	public List<Categoria> getCategorias() {

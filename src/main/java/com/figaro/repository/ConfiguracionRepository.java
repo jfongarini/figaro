@@ -7,7 +7,6 @@ import org.hibernate.query.Query;
 
 import com.figaro.model.Categoria;
 import com.figaro.model.Ciudad;
-import com.figaro.model.Peluquero;
 import com.figaro.model.Trabajo;
 
 @SuppressWarnings("unchecked")
@@ -55,21 +54,6 @@ public class ConfiguracionRepository extends AbstractRepository {
 	    return query.getResultList();
 	}
 
-	//PELUQUEROS
-	public Integer savePeluquero(Peluquero peluquero) {
-		return (Integer) getCurrentSession().save(peluquero);
-	}
-
-	public void deletePeluquero(Integer idPeluquero) {
-		Peluquero peluquero = getCurrentSession().load(Peluquero.class, idPeluquero);
-		LOGGER.info("Eliminando el Peluquero: "+ peluquero.getNombre());
-		getCurrentSession().delete(peluquero);
-	}
-
-	public List<Peluquero> getPeluqueros() {
-		return getCurrentSession().createQuery("from Peluquero").list();
-	}
-	
 	//CATEGORIAS
 	public List<Categoria> getCategorias() {
 		return getCurrentSession().createQuery("from Categoria").list();

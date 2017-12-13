@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.figaro.model.Categoria;
 import com.figaro.model.Ciudad;
-import com.figaro.model.Peluquero;
 import com.figaro.model.Trabajo;
 import com.figaro.service.ConfiguracionService;
 
@@ -75,28 +74,11 @@ public class ConfiguracionControllerREST {
 		return new ResponseEntity<Trabajo>(trabajo ,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/trabajos/buscar",method=RequestMethod.GET,produces="application/json")
+	@RequestMapping(value = "/trabajos/buscar",method=RequestMethod.GET)
     public ResponseEntity<List<Trabajo>> searchTrabajo(@RequestParam String search) {
         return new ResponseEntity<List<Trabajo>>(service.buscarTrabajos(search), HttpStatus.OK);
     }
 	
-	@RequestMapping(value = "/peluqueros",method=RequestMethod.GET)
-    public ResponseEntity<List<Peluquero>> getPeluqueros() {
-		return new ResponseEntity<List<Peluquero>>(service.getPeluqueros(), HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = "/peluqueros/alta",method=RequestMethod.POST)
-    public ResponseEntity<Peluquero> addPeluquero(@RequestBody Peluquero peluquero) {
-		Integer newID = service.savePeluquero(peluquero);
-		peluquero.setId(newID);
-		return new ResponseEntity<Peluquero>(peluquero, HttpStatus.CREATED);
-	}
-	
-	@RequestMapping(value = "/peluqueros/baja/{idPeluquero}",method=RequestMethod.DELETE)
-    public ResponseEntity<Peluquero> deletePeluquero(@PathVariable Integer idPeluquero) {
-		service.deletePeluquero(idPeluquero);
-		return new ResponseEntity<Peluquero>(HttpStatus.OK);
-	}
 	
 	@RequestMapping(value = "/categorias",method=RequestMethod.GET)
     public ResponseEntity<List<Categoria>> getCategorias() {

@@ -136,6 +136,37 @@
 	</bean>
 	
 	
+	
+	<!-- PELUQUEROS !-->
+	<bean id="PeluquerosServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="PeluquerosService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="PeluquerosService" class="com.figaro.service.PeluquerosService">
+		<property name="repository">
+			<ref bean="PeluquerosRepository" />
+		</property>
+	</bean>
+
+	<bean id="PeluquerosRepository"	class="com.figaro.repository.PeluquerosRepository">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+	
+	
 	<!-- CONFIGURACION !-->
 	<bean id="ConfiguracionServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager">
