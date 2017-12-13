@@ -25,7 +25,7 @@
     <div class=trabajos-list>  
         <div class=form-field><label>TRABAJOS:</label></div>
         <label ng-repeat="trabajo in trabajos">
-          <input type="checkbox" name="selectedTrabajos[]" value="{{trabajo}}" ng-checked="selection.indexOf(trabajo) > -1" ng-click="toggleSelection(trabajo)" > {{trabajo.descripcion}} <br>
+          <input type="checkbox"  value="trabajo" ng-model="trabajo.selected" > {{trabajo.descripcion}} <br>
         </label>
     </div>
       <div class=buttons>

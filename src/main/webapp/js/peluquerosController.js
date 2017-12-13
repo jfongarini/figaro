@@ -4,6 +4,7 @@ app.controller('peluquerosController', function ($scope, $http) {
     $scope.init = function(){
         $scope.activePeluqueros = true;
         $scope.ngPeluquero = {};
+        $scope.ngPeluquero.trabajos = [];
         $scope.getAll();
         $scope.getAllCiudades();
         $scope.getAllTrabajos();
@@ -37,8 +38,9 @@ app.controller('peluquerosController', function ($scope, $http) {
 
     //CLICK ACEPTAR FORMULARIO
     $scope.sendPeluquero = function() {
+        $scope.save();
         $scope.selectedTrabajos;
-
+        
         if($scope.update == null){
             $scope.ngPeluquero.fechaIngreso = getToday();
             $http.post('/rest/peluqueros/alta', $scope.ngPeluquero)
@@ -59,6 +61,12 @@ app.controller('peluquerosController', function ($scope, $http) {
         }
     };
 
+    $scope.save = function(){
+        
+        angular.forEach($scope.trabajos, function(trabajo){
+          if (!!trabajo.selected) $scope.ngPeluquero.trabajos.push(trabajo);
+        })
+      }
 
     //DESCARTAR FORMULARIO
     $scope.discardPeluquero = function(event){

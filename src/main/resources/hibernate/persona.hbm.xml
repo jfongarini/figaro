@@ -23,8 +23,20 @@
 		</union-subclass>
 	     	
 	     <union-subclass name="com.figaro.model.Peluquero" table="PELUQUERO">
-     			<property name="comision" 	    column="COMISION"     type="int"/>		
+     			<property name="comision" 	    column="COMISION"     type="int"/>
+     			
+     			<bag name="trabajos" table="PELUQUEROS_TRABAJO" lazy="false" fetch="select" inverse="false" cascade="save-update">
+     
+					<key column="ID_USUARIO"  /> 
+					<many-to-many class="Trabajo" column="ID_TRABAJO" />
+	
+	
+				</bag>
+   
+      				
 		</union-subclass>
-      	
+		
+		
+		 
 	</class>
 </hibernate-mapping>
