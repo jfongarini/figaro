@@ -36,9 +36,15 @@ public class PeluquerosControllerREST {
 	
 	@RequestMapping(value = "/peluqueros/alta",method=RequestMethod.POST)
     public ResponseEntity<Peluquero> addPeluquero(@RequestBody Peluquero peluquero) {
-		Integer newID = service.savePeluquero(peluquero);
-		peluquero.setId(newID);
+		Integer newId = service.savePeluquero(peluquero);
+		peluquero.setId(newId);
 		return new ResponseEntity<Peluquero>(peluquero, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/peluqueros/actualizar/{peluqueroId}",method=RequestMethod.PUT)
+    public ResponseEntity<Peluquero> updateCliente(@RequestBody Peluquero peluquero) {
+		Peluquero updated = service.updatePeluquero(peluquero);
+		return new ResponseEntity<Peluquero>(updated, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/peluqueros/baja/{idPeluquero}",method=RequestMethod.DELETE)
@@ -47,5 +53,4 @@ public class PeluquerosControllerREST {
 		return new ResponseEntity<Peluquero>(HttpStatus.OK);
 	}
 	
-		
 }

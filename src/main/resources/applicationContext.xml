@@ -56,9 +56,8 @@
 			<list>
   				<value>hibernate/categoria.hbm.xml</value>
   				<value>hibernate/ciudad.hbm.xml</value>
-  				<value>hibernate/cliente.hbm.xml</value>
   				<value>hibernate/movimiento.hbm.xml</value>
-  				<value>hibernate/peluquero.hbm.xml</value>
+  				<value>hibernate/persona.hbm.xml</value>
   				<value>hibernate/producto.hbm.xml</value>
 				<value>hibernate/trabajo.hbm.xml</value>  				
   				<value>hibernate/turno.hbm.xml</value>

@@ -24,6 +24,15 @@ public class PeluquerosService {
 		LOGGER.info("Guardando el nuevo peluquero: "+ peluquero.getNombre());
 		return repository.savePeluquero(peluquero);
 	}
+	
+	public Peluquero updatePeluquero(Peluquero peluquero) {
+		LOGGER.info("Actualizando Peluquero " + peluquero.toString());
+		Peluquero updated = getPeluquero(peluquero.getId());
+		updated.update(peluquero);
+		repository.updatePeluquero(updated);
+		LOGGER.info("El Peluquero se actualizo correctamente");
+		return updated;
+	}
 
 	public void deletePeluquero(Integer idPeluquero) {
 		repository.deletePeluquero(idPeluquero);
@@ -38,6 +47,8 @@ public class PeluquerosService {
 	public void setRepository(PeluquerosRepository repository) {
 		this.repository = repository;
 	}
+
+
 
 	
 

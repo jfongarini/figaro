@@ -11,8 +11,8 @@ public abstract class Persona {
 	private String telefono;
 	private String dirCiudad;
 	private String dirCalle;
-	private int dirNumeroCalle;
-	private int dirPiso;
+	private Integer dirNumeroCalle;
+	private Integer dirPiso;
 	private String dirDpto;
 	private Date fechaIngreso;
 	
@@ -73,16 +73,16 @@ public abstract class Persona {
 	public void setFechaIngreso(Date fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
-	public int getDirNumeroCalle() {
+	public Integer getDirNumeroCalle() {
 		return dirNumeroCalle;
 	}
-	public void setDirNumeroCalle(int dirNumeroCalle) {
+	public void setDirNumeroCalle(Integer dirNumeroCalle) {
 		this.dirNumeroCalle = dirNumeroCalle;
 	}
-	public int getDirPiso() {
+	public Integer getDirPiso() {
 		return dirPiso;
 	}
-	public void setDirPiso(int dirPiso) {
+	public void setDirPiso(Integer dirPiso) {
 		this.dirPiso = dirPiso;
 	}
 	public String getDirDpto() {

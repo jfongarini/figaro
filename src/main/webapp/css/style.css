@@ -282,15 +282,21 @@ li a:hover {
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
 }
 
-.modal-content {
+.modal-double, .modal-content{
     position: relative;
     margin: auto;
     background-color: #fefefe;
     padding: 20px;
     border: 1px solid #888;
-    width: 360px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    
+}
+
+.modal-content {
+    width: 360px;
+}
+
+.modal-double{
+    width: 500px;
 }
 
 .form-message{
@@ -313,29 +319,30 @@ li a:hover {
 }
 
 
-.modal-content .form-field label{
+
+.modal-content, .modal-double  .form-field label{
     display: inline-block;  
     clear: left;
     width: 95px
 }
 
-.modal-content form input {
+.modal-content, .modal-double form input {
     font-family: 'Roboto', sans-serif;
     display: inline-block
 }
 
-.modal-content form input:focus, form select:focus {
+.modal-content, .modal-double form input:focus, form select:focus {
     outline: none !important;
     border-bottom: 2px solid #292961
 }
 
-.modal-content form input, form input:focus { 
+.modal-content, .modal-double form input, form input:focus { 
     border-top-width: 0px;
     border-right-width: 0px;
     border-left-width: 0px
 }
 
-.modal-content form .buttons{
+.modal-content, .modal-double form .buttons{
     width: 100%;
     align-content: center;
     display: flex;
@@ -343,7 +350,7 @@ li a:hover {
     margin-bottom: 10px
 }
 
-.modal-content form .button{
+.modal-content, .modal-double form .button{
     cursor: pointer;
     font-weight: 800;
     font-family: 'Roboto', sans-serif;
@@ -358,7 +365,7 @@ li a:hover {
     box-shadow: 0 1px 4px rgba(0, 0, 0, .6)
 }
 
-.modal-content form select{
+.modal-content, .modal-double form select{
     width: 191px;
     background: transparent;
     border-bottom-color: #EEE;
@@ -374,6 +381,11 @@ li a:hover {
     text-decoration: none;
 }
 
+.peluquero-fields{
+    float: left;
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
 
 .card input {
     font-family: 'Roboto', sans-serif;

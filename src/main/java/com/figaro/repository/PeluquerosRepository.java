@@ -15,6 +15,10 @@ public class PeluquerosRepository extends AbstractRepository {
 		return (Integer) getCurrentSession().save(peluquero);
 	}
 
+	public void updatePeluquero(Peluquero peluquero) {
+		getCurrentSession().update(peluquero);
+	}
+	
 	public void deletePeluquero(Integer idPeluquero) {
 		Peluquero peluquero = getCurrentSession().load(Peluquero.class, idPeluquero);
 		LOGGER.info("Eliminando el Peluquero: "+ peluquero.getNombre());
@@ -28,5 +32,7 @@ public class PeluquerosRepository extends AbstractRepository {
 	public Peluquero getPeluquero(int peluqueroId) {
 		return (Peluquero) getCurrentSession().get(Peluquero.class, peluqueroId);
 	}
+
+
 	
 }

@@ -5,6 +5,8 @@ app.controller('peluquerosController', function ($scope, $http) {
         $scope.activePeluqueros = true;
         $scope.ngPeluquero = {};
         $scope.getAll();
+        $scope.getAllCiudades();
+        $scope.getAllTrabajos();
     }
 
     //OBTENER LISTA DE PELUQUEROS
@@ -35,12 +37,14 @@ app.controller('peluquerosController', function ($scope, $http) {
 
     //CLICK ACEPTAR FORMULARIO
     $scope.sendPeluquero = function() {
+        $scope.selectedTrabajos;
+
         if($scope.update == null){
-            $scope.ngCliente.fechaIngreso = getToday();
+            $scope.ngPeluquero.fechaIngreso = getToday();
             $http.post('/rest/peluqueros/alta', $scope.ngPeluquero)
             .then(function successCallback(response) {
                 $scope.peluqueros.push(response.data);
-                $scope.discardClient();
+                $scope.discardPeluquero();
               }, function errorCallback(response) {
                 $scope.message=response.data.message;
             });
@@ -63,6 +67,21 @@ app.controller('peluquerosController', function ($scope, $http) {
         closeModal("modal-peluqueros");
     };
 
+
+
+    //OBTENER LISTA DE CIUDADES
+    $scope.getAllCiudades = function() {
+        $http.get("/rest/configuracion/ciudades").then(function (response) {
+            $scope.ciudades = response.data;
+        });
+    };
+
+    //OBTENER LISTA DE TRABAJOS
+    $scope.getAllTrabajos = function() {
+        $http.get("/rest/configuracion/trabajos").then(function (response) {
+            $scope.trabajos = response.data;
+        });
+    };
     
     //APRETAR ESCAPE
     document.addEventListener('keyup', function(e) {
