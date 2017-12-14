@@ -3,8 +3,7 @@ app.controller('peluquerosController', function ($scope, $http) {
     //INIT PELUQUEROS
     $scope.init = function(){
         $scope.activePeluqueros = true;
-        $scope.ngPeluquero = {};
-        $scope.ngPeluquero.trabajos = [];
+        $scope.ngPeluquero = {"trabajos" :[]};
         $scope.getAll();
         $scope.getAllCiudades();
         $scope.getAllTrabajos();
@@ -27,17 +26,33 @@ app.controller('peluquerosController', function ($scope, $http) {
     //CLICK FILA PELUQUERO
     $scope.detailPeluquero = function(event){
         $scope.message='';
+        
         $scope.update = true;
         $scope.peluqueroId = event.currentTarget.getAttribute("data-id");
         $http.get('/rest/peluqueros/'+$scope.peluqueroId).then(function (response) {
             $scope.ngPeluquero = response.data;
+            $scope.trabajos.forEach(function(trabajo) {
+                trabajo.selected = $scope.isInPeluquero(trabajo);
+            });
             openModal("modal-peluqueros");
 	    });
+    };
+    
+    //BUSCA UN TRABAJO EN PELUQUERO
+    $scope.isInPeluquero = function (trabajo){ 
+        let found = false;
+        $scope.ngPeluquero.trabajos.forEach(function(item) {
+            if(item.id==trabajo.id)
+                found = true;
+        });
+        return found;
     };
 
     //CLICK ACEPTAR FORMULARIO
     $scope.sendPeluquero = function() {
-               
+
+        $scope.actualizarTrabajos();
+    
         if($scope.update == null){
             $scope.ngPeluquero.fechaIngreso = getToday();
             $http.post('/rest/peluqueros/alta', $scope.ngPeluquero)
@@ -58,29 +73,18 @@ app.controller('peluquerosController', function ($scope, $http) {
         }
     };
 
-    // Toggle selection for a given fruit by name
-    $scope.toggleSelection = function toggleSelection(trabajo) {
-        var idx =  $scope.ngPeluquero.trabajos.indexOf(trabajo);
-
-        // Is currently selected
-        if (idx > -1) {
-          $scope.ngPeluquero.trabajos.splice(idx, 1);
-        }
-
-        // Is newly selected
-        else {
-          $scope.ngPeluquero.trabajos.push(trabajo);
-        }
+    $scope.actualizarTrabajos = function() {
+        $scope.ngPeluquero.trabajos = [];
+        $scope.trabajos.forEach(function(trabajo) {
+            if (trabajo.selected)
+                $scope.ngPeluquero.trabajos.push(trabajo)
+        });    
     };
-
-    $scope.isSelected = function isSelected(trabajo) {
-        return $scope.ngPeluquero.trabajos.indexOf(trabajo) > -1
-    }
-
+    
     //DESCARTAR FORMULARIO
     $scope.discardPeluquero = function(event){
         $scope.update = null;
-        $scope.ngPeluquero = {};
+        $scope.ngPeluquero = {"trabajos" :[]};
         closeModal("modal-peluqueros");
     };
 

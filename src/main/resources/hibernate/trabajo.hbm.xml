@@ -9,7 +9,7 @@
 	 	<property name="descripcion" column="DESCRIPCION" type="string"/>
 	 	<property name="precio" column="PRECIO" type="big_decimal"/>
 	 	
- 		 <set name="peluqueros" table="TRABAJO_PELUQUERO" inverse="true" lazy="false" fetch="select">
+ 		 <set name="peluqueros" table="TRABAJO_PELUQUERO" inverse="false" lazy="false" fetch="select">
           		<key>
               		<column name="ID_TRABAJO" not-null="true" />
           		</key>

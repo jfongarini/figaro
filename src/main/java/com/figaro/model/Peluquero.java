@@ -1,6 +1,5 @@
 package com.figaro.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,9 +25,7 @@ public class Peluquero extends Persona {
 		this.setDirPiso(peluquero.getDirPiso());
 		this.setDirDpto(peluquero.getDirDpto());
 		this.setComision(peluquero.getComision());
-	
-		this.trabajos.removeAll(new ArrayList<Trabajo>(this.trabajos));
-		this.trabajos.addAll(peluquero.getTrabajos());
+		this.setTrabajos(peluquero.getTrabajos());
 	}
 	
 	public Set<Trabajo> getTrabajos() {
