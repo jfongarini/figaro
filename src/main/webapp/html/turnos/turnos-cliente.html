@@ -25,7 +25,7 @@
           <td id={{turno.id}} data-id={{turno.id}}>{{turno.desde.split(' ')[0] | date}} {{turno.desde.split(' ')[1]}}</td>
           <td id={{turno.id}} data-id={{turno.id}}><span ng-repeat="trabajo in turno.trabajos"> {{trabajo.descripcion}} </span></td>
           <td id={{turno.id}} data-id={{turno.id}}>{{getTotalTurno(turno.trabajos) | currency}}</td>
-          <td id={{turno.id}} data-id={{turno.id}}>{{turno.peluquero}}</td>
+          <td id={{turno.id}} data-id={{turno.id}}>{{turno.peluquero.nombre}} {{turno.peluquero.apellido}}</td>
           <td><input ng-checked="turno.cobrado"  type="checkbox" disabled></td>
         </tr>
         </tbody>

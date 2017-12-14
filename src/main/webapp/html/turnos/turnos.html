@@ -29,7 +29,7 @@
       <td data-id={{turno.id}} ><a class=cliente-link ng-href="/turnos/cliente/{{turno.cliente.id}}"> {{turno.cliente.nombre}} {{turno.cliente.apellido}} </a></td>
       <td data-id={{turno.id}} data-ng-click="detailTurno($event)"><span ng-repeat="trabajo in turno.trabajos"> {{trabajo.descripcion}} </span></td>
       <td data-id={{turno.id}} data-ng-click="detailTurno($event)">{{getTotalTurno(turno.trabajos) | currency}}</td>
-      <td data-id={{turno.id}} data-ng-click="detailTurno($event)">{{turno.peluquero}}</td>
+      <td data-id={{turno.id}} data-ng-click="detailTurno($event)">{{turno.peluquero.nombre}} {{turno.peluquero.apellido}}</td>
       <td><input ng-model="turno.cobrado" ng-click="setCobrado(turno)" type="checkbox"></td>
       <td data-id={{turno.id}} data-ng-click="confirmDelete(turno.id)" class="tachotd" ><i class="material-icons tachoi">clear</i></td>
     </tr>

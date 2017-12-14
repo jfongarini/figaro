@@ -22,7 +22,7 @@
         
         
         <div class=form-field><label>PELUQUERO:</label>
-          <select name=peluquero  ng-model="peluquero" ng-change="trabajosPeluquero = peluquero.trabajos; trabajosSeleccionados =[]" ng-options="peluquero as peluquero.nombre for peluquero in peluqueros" required>
+          <select name=peluquero  ng-model="peluquero" ng-change="bindTrabajos()" ng-options="peluquero as peluquero.nombre for peluquero in peluqueros" required>
             <option value=""></option>
           </select>
         </div>

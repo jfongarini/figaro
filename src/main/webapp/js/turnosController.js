@@ -52,6 +52,7 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.turnoId = event.currentTarget.getAttribute("data-id");
         $http.get('/rest/turnos/'+$scope.turnoId).then(function (response) {
             $scope.ngTurno = response.data;
+
             $scope.startHour = $scope.ngTurno.desde.split(' ')[1];
             $scope.endHour = $scope.ngTurno.hasta.split(' ')[1];
             $scope.trabajosSeleccionados = $scope.ngTurno.trabajos;
@@ -59,12 +60,16 @@ app.controller('turnosController', function ($scope, $http) {
             $scope.update=true;
 
             //BIND PELUQUERO Y FORMULARIO CHECKBOXES
+            $scope.peluquero = $scope.ngTurno.peluquero;
+
             $scope.peluqueros.forEach(function(peluquero) {
-                if(peluquero.nombre +" "+peluquero.apellido == $scope.ngTurno.peluquero){
+                if(peluquero.id == $scope.ngTurno.peluquero.id){
                     $scope.peluquero = peluquero;
-                    $scope.trabajosPeluquero = peluquero.trabajos;
                 }
             });  
+
+            $scope.trabajosPeluquero = $scope.ngTurno.peluquero.trabajos;
+
             
             //BIND FORMULARIO CHECKS
             $scope.trabajosPeluquero.forEach(function(trabajo) {
@@ -75,18 +80,26 @@ app.controller('turnosController', function ($scope, $http) {
             });  
             
             
-           
-
-
             openModal("modal-turnos");
+
+
+            
         });
     };
+
+    $scope.bindTrabajos = function() {
+        $scope.trabajosSeleccionados = [];
+        $scope.totalTrabajosSeleccionados=0;
+        $scope.trabajosPeluquero = $scope.peluquero.trabajos; 
+        
+    };
+
 
     //CLICK ACEPTAR FORMULARIO
     $scope.sendTurno = function() {
         $scope.ngTurno.desde = getStringDate($scope.ngDateTurno)+" "+$scope.startHour;
         $scope.ngTurno.hasta = getStringDate($scope.ngDateTurno)+" "+$scope.endHour;
-        $scope.ngTurno.peluquero = $scope.peluquero.nombre +" "+$scope.peluquero.apellido ;
+        $scope.ngTurno.peluquero = $scope.peluquero;
         $scope.ngTurno.trabajos = $scope.trabajosSeleccionados;
         if($scope.isNuevoTurno === true && $scope.validateTurno() === true){
             $http.post('/rest/turnos/alta', $scope.ngTurno)

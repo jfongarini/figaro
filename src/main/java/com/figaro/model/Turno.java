@@ -10,7 +10,7 @@ public class Turno {
 
 	private int id;
 	private Cliente cliente;
-	private String peluquero;
+	private Peluquero peluquero;
 	@JsonFormat(pattern=DATE_TIME_FORMAT)
 	private Date desde;
 	@JsonFormat(pattern=DATE_TIME_FORMAT)
@@ -26,10 +26,10 @@ public class Turno {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	public String getPeluquero() {
+	public Peluquero getPeluquero() {
 		return peluquero;
 	}
-	public void setPeluquero(String peluquero) {
+	public void setPeluquero(Peluquero peluquero) {
 		this.peluquero = peluquero;
 	}
 	public int getId() {
