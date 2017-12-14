@@ -1,15 +1,16 @@
 package com.figaro.model;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Peluquero extends Persona {
 	
-	private List<Trabajo> trabajos;
+	private Set<Trabajo> trabajos;
 	private Integer comision;
 	
 	public Peluquero() {
-		this.trabajos = new ArrayList<Trabajo>();
+		this.trabajos = new HashSet<Trabajo>();
 	}
 	
 
@@ -27,16 +28,14 @@ public class Peluquero extends Persona {
 		this.setComision(peluquero.getComision());
 	
 		this.trabajos.removeAll(new ArrayList<Trabajo>(this.trabajos));
-		for(Trabajo t : peluquero.getTrabajos())
-			t.setId(null);
 		this.trabajos.addAll(peluquero.getTrabajos());
 	}
 	
-	public List<Trabajo> getTrabajos() {
+	public Set<Trabajo> getTrabajos() {
 		return trabajos;
 	}
 
-	public void setTrabajos(List<Trabajo> trabajos) {
+	public void setTrabajos(Set<Trabajo> trabajos) {
 		this.trabajos = trabajos;
 	}
 

@@ -43,22 +43,6 @@
       </form>
     </div>
 
-    <div class="card peluqueros">
-      <form ng-submit="addPeluquero()">
-        <div class=card-title><i class="material-icons">supervisor_account</i><label class=card-title>PELUQUEROS</label></div>
-        <input type="text" placeholder="Nombre" ng-model="ngPeluquero.nombre" maxlength="25" pattern="^[^\s].*([A-zÀ-ž\s]){2,25}" ng-pattern-restrict required>
-        <table id=table>
-          <tbody>
-          <tr ng-cloak id={{peluquero.id}} class=data-row ng-repeat="peluquero in peluqueros">
-          <td>{{peluquero.nombre}}</td>
-          <td class=delete ><i class="material-icons" data-id={{peluquero.id}} ng-click="removePeluquero($event)">clear</i></td>
-          </tr>
-          </tbody>
-        </table>
-        <label  ng-cloak class=form-message>{{messagePeluquero}}</label>
-      </form>
-    </div>
-
     <div class="card ciudades"> 
       <form ng-submit="addCiudad()">
         <div class=card-title><i class="material-icons">place </i><label class=card-title> CIUDADES</label></div>

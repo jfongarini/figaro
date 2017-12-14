@@ -25,7 +25,7 @@
     <div class=trabajos-list>  
         <div class=form-field><label>TRABAJOS:</label></div>
         <label ng-repeat="trabajo in trabajos">
-          <input type="checkbox"  value="trabajo" ng-model="trabajo.selected" > {{trabajo.descripcion}} <br>
+          <input type="checkbox"  value="trabajo"  ng-click="toggleSelection(trabajo)" ng-model="ngPeluquero.trabajos[trabajo]"> {{trabajo.descripcion}} {{trabajo.precio}}<br>
         </label>
     </div>
       <div class=buttons>

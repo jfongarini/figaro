@@ -19,7 +19,6 @@ app.controller('peluquerosController', function ($scope, $http) {
 
     //CLICK NUEVO PELUQUERO
     $scope.newPeluquero = function() {
-        $scope.ngPeluquero={};
         $scope.message='';
         ($scope.isModalOpen == true) ? $('#modal-peluqueros').addClass("modal-on-top") : openModal("modal-peluqueros");
         $('#modal-peluqueros-focus').focus();
@@ -38,9 +37,7 @@ app.controller('peluquerosController', function ($scope, $http) {
 
     //CLICK ACEPTAR FORMULARIO
     $scope.sendPeluquero = function() {
-        $scope.save();
-        $scope.selectedTrabajos;
-        
+               
         if($scope.update == null){
             $scope.ngPeluquero.fechaIngreso = getToday();
             $http.post('/rest/peluqueros/alta', $scope.ngPeluquero)
@@ -61,12 +58,24 @@ app.controller('peluquerosController', function ($scope, $http) {
         }
     };
 
-    $scope.save = function(){
-        
-        angular.forEach($scope.trabajos, function(trabajo){
-          if (!!trabajo.selected) $scope.ngPeluquero.trabajos.push(trabajo);
-        })
-      }
+    // Toggle selection for a given fruit by name
+    $scope.toggleSelection = function toggleSelection(trabajo) {
+        var idx =  $scope.ngPeluquero.trabajos.indexOf(trabajo);
+
+        // Is currently selected
+        if (idx > -1) {
+          $scope.ngPeluquero.trabajos.splice(idx, 1);
+        }
+
+        // Is newly selected
+        else {
+          $scope.ngPeluquero.trabajos.push(trabajo);
+        }
+    };
+
+    $scope.isSelected = function isSelected(trabajo) {
+        return $scope.ngPeluquero.trabajos.indexOf(trabajo) > -1
+    }
 
     //DESCARTAR FORMULARIO
     $scope.discardPeluquero = function(event){

@@ -4,12 +4,10 @@ app.controller('configuracionController', function ($scope, $http) {
     $scope.init = function(){
         $scope.activeConfiguracion = true;
         $scope.getAllTrabajos();
-        $scope.getAllPeluqueros();
         $scope.getAllCiudades();
         $scope.getAllCategorias();
         $scope.ngCiudad={};
         $scope.ngTrabajo={};
-        $scope.ngPeluquero={};
         $scope.ngCategoria={};
     }
   
@@ -103,42 +101,6 @@ app.controller('configuracionController', function ($scope, $http) {
         $http.get('/rest/configuracion/trabajos/'+ $scope.trabajoID)
             .then(function successCallback(response) {
                 $scope.ngTrabajo=response.data;
-            });
-    };
-
-    //AGREGAR PELUQUERO
-    $scope.addPeluquero = function() {
-        $http.post('/rest/configuracion/peluqueros/alta', $scope.ngPeluquero)
-            .then(function successCallback(response) {
-                $scope.peluqueros.push(response.data);
-                $scope.ngPeluquero={};
-                $scope.messagePeluquero='';
-              }, function errorCallback(response) {
-                $scope.messagePeluquero=response.data.message;
-            });
-    };
-
-    //OBTENER LISTA DE PELUQUEROS
-    $scope.getAllPeluqueros = function() {
-        $http.get("/rest/configuracion/peluqueros").then(function (response) {
-            $scope.peluqueros = response.data;
-        });
-    };
-
-    //ELIMINAR PELUQUERO
-    $scope.removePeluquero = function(event) {
-        var id = event.currentTarget.getAttribute("data-id");
-        var peluquero = $scope.peluqueros.filter(function( obj ) {
-            return obj.id == id;
-        });
-        var index = $scope.peluqueros.indexOf(peluquero);
-        $scope.peluqueros.splice(index, 1);  
-        $http.delete('/rest/configuracion/peluqueros/baja/'+ id)
-            .then(function successCallback(response) {
-                $scope.getAllPeluqueros();
-                $scope.messagePeluquero='';
-              }, function errorCallback(response) {
-                $scope.messagePeluquero=response.data.message;
             });
     };
 

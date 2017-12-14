@@ -8,6 +8,16 @@
         </id>
 	 	<property name="descripcion" column="DESCRIPCION" type="string"/>
 	 	<property name="precio" column="PRECIO" type="big_decimal"/>
+	 	
+ 		 <set name="peluqueros" table="TRABAJO_PELUQUERO" inverse="true" lazy="false" fetch="select">
+          		<key>
+              		<column name="ID_TRABAJO" not-null="true" />
+          		</key>
+          		<many-to-many entity-name="com.figaro.model.Peluquero">
+              		<column name="ID_USUARIO" not-null="true" />
+          		</many-to-many>
+     	</set>
+	 	
 	</class>
 	
 	 <class name="com.figaro.model.Trabajo" table="TRABAJO_TURNO" entity-name="TrabajoTurno">
@@ -18,5 +28,8 @@
 	 	<property name="precio" column="PRECIO" type="big_decimal"/>
 	 	
 	</class>
+
+		
+      		
 	
 </hibernate-mapping>
