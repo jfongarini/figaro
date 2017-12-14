@@ -19,6 +19,7 @@ app.controller('peluquerosController', function ($scope, $http) {
     //CLICK NUEVO PELUQUERO
     $scope.newPeluquero = function() {
         $scope.message='';
+        $scope.allChecked = false;
         ($scope.isModalOpen == true) ? $('#modal-peluqueros').addClass("modal-on-top") : openModal("modal-peluqueros");
         $('#modal-peluqueros-focus').focus();
     }
@@ -26,7 +27,7 @@ app.controller('peluquerosController', function ($scope, $http) {
     //CLICK FILA PELUQUERO
     $scope.detailPeluquero = function(event){
         $scope.message='';
-        
+        $scope.allChecked = false;
         $scope.update = true;
         $scope.peluqueroId = event.currentTarget.getAttribute("data-id");
         $http.get('/rest/peluqueros/'+$scope.peluqueroId).then(function (response) {
@@ -38,15 +39,6 @@ app.controller('peluquerosController', function ($scope, $http) {
 	    });
     };
     
-    //BUSCA UN TRABAJO EN PELUQUERO
-    $scope.isInPeluquero = function (trabajo){ 
-        let found = false;
-        $scope.ngPeluquero.trabajos.forEach(function(item) {
-            if(item.id==trabajo.id)
-                found = true;
-        });
-        return found;
-    };
 
     //CLICK ACEPTAR FORMULARIO
     $scope.sendPeluquero = function() {
@@ -73,6 +65,17 @@ app.controller('peluquerosController', function ($scope, $http) {
         }
     };
 
+
+    //BUSCA UN TRABAJO EN PELUQUERO
+    $scope.isInPeluquero = function (trabajo){ 
+        let found = false;
+        $scope.ngPeluquero.trabajos.forEach(function(item) {
+            if(item.id==trabajo.id)
+                found = true;
+        });
+    return found;
+    };
+
     $scope.actualizarTrabajos = function() {
         $scope.ngPeluquero.trabajos = [];
         $scope.trabajos.forEach(function(trabajo) {
@@ -80,6 +83,16 @@ app.controller('peluquerosController', function ($scope, $http) {
                 $scope.ngPeluquero.trabajos.push(trabajo)
         });    
     };
+
+    
+    $scope.checkAllTrabajos = function (){ 
+        $scope.trabajos.forEach(function(trabajo) {
+            trabajo.selected = $scope.allChecked
+        });    
+    };
+
+
+
     
     //DESCARTAR FORMULARIO
     $scope.discardPeluquero = function(event){

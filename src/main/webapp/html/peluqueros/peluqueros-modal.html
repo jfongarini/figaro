@@ -24,10 +24,10 @@
     
     <div class=trabajos-list>  
         <div class=form-field><label>TRABAJOS:</label></div>
-        <input type="checkbox" ng-model="all" > Todos<br>
-        <hr>
+        <input type="checkbox" ng-model="allChecked" ng-click="checkAllTrabajos()" > Todos<br>
+        <hr class=resume noshade>
         <label ng-repeat="trabajo in trabajos">
-          <input type="checkbox"  value="trabajo" ng-checked="all" ng-model=trabajo.selected> {{trabajo.descripcion}} {{trabajo.precio}}<br>
+          <input type="checkbox"  value="trabajo" ng-model=trabajo.selected> {{trabajo.descripcion}}: {{trabajo.precio | currency}}<br>
         </label>
     </div>
       <div class=buttons>

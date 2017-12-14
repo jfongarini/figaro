@@ -15,6 +15,7 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.turnos={};
         $scope.ngTurno={};
         $scope.clientes=[];
+        $scope.getAllPeluqueros();
     }
 
 
@@ -37,26 +38,46 @@ app.controller('turnosController', function ($scope, $http) {
     $scope.newTurno = function() {
         $scope.ngTurno = {};
         $scope.totalTrabajosSeleccionados=0;
+        $scope.trabajosPeluquero = [];
         $scope.ngTurno.cobrado = false;
         $scope.isNuevoTurno = true;
-        $scope.getAllPeluqueros();
         openModal("modal-turnos");
     };
 
     //CLICK FILA TURNO
     $scope.detailTurno = function(event){
         $scope.discardTurno();
+        
         $scope.isNuevoTurno = false;
-        $scope.getAllPeluqueros();
         $scope.turnoId = event.currentTarget.getAttribute("data-id");
         $http.get('/rest/turnos/'+$scope.turnoId).then(function (response) {
             $scope.ngTurno = response.data;
             $scope.startHour = $scope.ngTurno.desde.split(' ')[1];
             $scope.endHour = $scope.ngTurno.hasta.split(' ')[1];
-            $scope.peluquero = $scope.ngTurno.peluquero;
             $scope.trabajosSeleccionados = $scope.ngTurno.trabajos;
-            $scope.totalTrabajosSeleccionados=$scope.getTotalTurno($scope.trabajosSeleccionados);
+            $scope.totalTrabajosSeleccionados = $scope.getTotalTurno($scope.trabajosSeleccionados);
             $scope.update=true;
+
+            //BIND PELUQUERO Y FORMULARIO CHECKBOXES
+            $scope.peluqueros.forEach(function(peluquero) {
+                if(peluquero.nombre +" "+peluquero.apellido == $scope.ngTurno.peluquero){
+                    $scope.peluquero = peluquero;
+                    $scope.trabajosPeluquero = peluquero.trabajos;
+                }
+            });  
+            
+            //BIND FORMULARIO CHECKS
+            $scope.trabajosPeluquero.forEach(function(trabajo) {
+                for(var i = 0; i < $scope.ngTurno.trabajos.length; i++)
+                if(trabajo.descripcion == $scope.ngTurno.trabajos[i].descripcion ){
+                    trabajo.selected = true;
+                 }
+            });  
+            
+            
+           
+
+
             openModal("modal-turnos");
         });
     };
@@ -65,7 +86,7 @@ app.controller('turnosController', function ($scope, $http) {
     $scope.sendTurno = function() {
         $scope.ngTurno.desde = getStringDate($scope.ngDateTurno)+" "+$scope.startHour;
         $scope.ngTurno.hasta = getStringDate($scope.ngDateTurno)+" "+$scope.endHour;
-        $scope.ngTurno.peluquero = $scope.peluquero;
+        $scope.ngTurno.peluquero = $scope.peluquero.nombre +" "+$scope.peluquero.apellido ;
         $scope.ngTurno.trabajos = $scope.trabajosSeleccionados;
         if($scope.isNuevoTurno === true && $scope.validateTurno() === true){
             $http.post('/rest/turnos/alta', $scope.ngTurno)
@@ -148,6 +169,14 @@ app.controller('turnosController', function ($scope, $http) {
         closeModal("modal-confirmarDelete");
     };
 
+    $scope.toggleTrabajo = function (trabajo){
+        if (trabajo.selected)
+            $scope.addTrabajo(trabajo)
+        else
+            $scope.removeTrabajo(trabajo)
+    }
+
+
     //AGREGAR TRABAJOS
     $scope.addTrabajo = function (trabajo) {
         if($scope.isSeleccionado(trabajo) === false) {
@@ -182,12 +211,10 @@ app.controller('turnosController', function ($scope, $http) {
     //POP UP COBRADO
     $scope.setCobrado = function (turno) {
         $scope.turnoTarget = turno;
-        if(turno.cobrado){
+        if(turno.cobrado)
             openModal("modal-cobrar");
-        }
-        else{
+        else
             openModal("modal-cancelar-cobro");
-        }
     }
 
     //INICIALIZAR MOVIMIENTO
@@ -244,19 +271,13 @@ app.controller('turnosController', function ($scope, $http) {
         });  
     };
 
-    //BUSCAR TRABAJO
-    $scope.searchTrabajo = function() {
-        if ($scope.queryTrabajo == "") 
-            return $scope.trabajos=[];       
-        $http.get('/rest/configuracion/trabajos/buscar',{params: { search: $scope.queryTrabajo }})
-        .then(function successCallback(response) {
-            $scope.trabajos = response.data;
-        });  
-    };
+
+
+
 
     //OBTENER LISTA DE PELUQUEROS
     $scope.getAllPeluqueros = function() {
-        $http.get("/rest/configuracion/peluqueros").then(function (response) {
+        $http.get("/rest/peluqueros").then(function (response) {
             $scope.peluqueros = response.data;
         });
     };
