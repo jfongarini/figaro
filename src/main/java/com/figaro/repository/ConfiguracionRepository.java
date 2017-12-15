@@ -8,7 +8,6 @@ import org.hibernate.query.Query;
 import com.figaro.model.Categoria;
 import com.figaro.model.Ciudad;
 import com.figaro.model.Servicio;
-import com.figaro.model.Trabajo;
 
 @SuppressWarnings("unchecked")
 public class ConfiguracionRepository extends AbstractRepository {

@@ -88,8 +88,9 @@ app.controller('turnosController', function ($scope, $http) {
     $scope.bindTrabajos = function() {
         $scope.trabajosSeleccionados = [];
         $scope.totalTrabajosSeleccionados=0;
-        $scope.trabajosPeluquero = $scope.peluquero.trabajos; 
-        
+        for(var i = 0; i < $scope.peluquero.trabajos.length; i++)
+            if($scope.peluquero.trabajos[i].servicio != null)
+                $scope.trabajosPeluquero.push($scope.peluquero.trabajos[i])
     };
 
 
