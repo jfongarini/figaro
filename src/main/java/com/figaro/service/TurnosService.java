@@ -11,7 +11,7 @@ import com.figaro.exception.HorarioInvalidoException;
 import com.figaro.exception.TurnoOcupadoException;
 import com.figaro.model.Cliente;
 import com.figaro.model.Movimiento;
-import com.figaro.model.Servicio;
+import com.figaro.model.Trabajo;
 import com.figaro.model.Turno;
 import com.figaro.repository.MovimientosRepository;
 import com.figaro.repository.TurnosRepository;
@@ -95,14 +95,14 @@ public class TurnosService {
 		movimiento.setTipoPago(cobro.getTipoPago());
 		movimiento.setCuotas(cobro.getCuotas());
 		BigDecimal precio = new BigDecimal(0);
-		for (Servicio t : turno.getTrabajos())
-			precio = precio.add(t.getPrecio());
+		for (Trabajo t : turno.getTrabajos())
+			precio = precio.add(t.getServicio().getPrecio());
 		
 		movimiento.setDescuento(cobro.getDescuento());
 		movimiento.setPrecio(precio);
 		movimiento.descontar();
 		
-		List<String> descripionesTrabjo = turno.getTrabajos().stream().map(Servicio::getDescripcion).collect(Collectors.toList());
+		List<String> descripionesTrabjo = turno.getTrabajos().stream().map(t -> t.getServicio().getDescripcion()).collect(Collectors.toList());
 		movimiento.setDetalle(String.join(" ", descripionesTrabjo)) ;
 		return movimiento;
 	}

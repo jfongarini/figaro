@@ -11,7 +11,7 @@
 	
 		
          
-         <set name="trabajos"  inverse="true" cascade="all-delete-orphan" lazy="false" fetch="select" >
+         <set name="trabajos"  inverse="false" cascade="save-update" lazy="false" fetch="select" >
           <key column="ID_SERVICIO" />
           <one-to-many  entity-name="Trabajo"/>
       	</set>

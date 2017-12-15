@@ -81,8 +81,6 @@ app.controller('turnosController', function ($scope, $http) {
             
             
             openModal("modal-turnos");
-
-
             
         });
     };
@@ -194,7 +192,7 @@ app.controller('turnosController', function ($scope, $http) {
     $scope.addTrabajo = function (trabajo) {
         if($scope.isSeleccionado(trabajo) === false) {
           trabajo.id = null;
-          $scope.totalTrabajosSeleccionados += trabajo.precio;
+          $scope.totalTrabajosSeleccionados += trabajo.servicio.precio;
           $scope.trabajosSeleccionados.push(trabajo);
         }
     };
@@ -202,7 +200,7 @@ app.controller('turnosController', function ($scope, $http) {
     //QUITAR TRABAJOS
     $scope.removeTrabajo = function (trabajo) {
         $scope.trabajosSeleccionados.splice($scope.isSeleccionado(trabajo), 1);
-        $scope.totalTrabajosSeleccionados -= trabajo.precio;
+        $scope.totalTrabajosSeleccionados -= trabajo.servicio.precio;
 
     };
 

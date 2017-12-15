@@ -1,9 +1,13 @@
 package com.figaro.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Trabajo {
 	
 	private Integer id;
 	private Servicio servicio;
+	@JsonIgnore
+	private Peluquero peluquero;
 	private Integer comision;
 	
 	public Servicio getServicio() {
@@ -54,6 +58,12 @@ public class Trabajo {
 		} else if (!servicio.equals(other.servicio))
 			return false;
 		return true;
+	}
+	public Peluquero getPeluquero() {
+		return peluquero;
+	}
+	public void setPeluquero(Peluquero peluquero) {
+		this.peluquero = peluquero;
 	}
 	
 }

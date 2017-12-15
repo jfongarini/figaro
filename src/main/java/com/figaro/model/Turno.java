@@ -1,9 +1,11 @@
 package com.figaro.model;
 
+import static com.figaro.util.Constants.DATE_TIME_FORMAT;
+
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import static com.figaro.util.Constants.*;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Turno {
@@ -17,7 +19,7 @@ public class Turno {
 	private Date hasta;
 	private Boolean cobrado;
 	private Movimiento movimiento;
-	private List<Servicio> trabajos;
+	private Set<Trabajo> trabajos;
 	
 	public Cliente getCliente() {
 		return cliente;
@@ -44,10 +46,10 @@ public class Turno {
 	public void setCobrado(Boolean cobrado) {
 		this.cobrado = cobrado;
 	}
-	public List<Servicio> getTrabajos() {
+	public Set<Trabajo> getTrabajos() {
 		return trabajos;
 	}
-	public void setTrabajos(List<Servicio> trabajos) {
+	public void setTrabajos(Set<Trabajo> trabajos) {
 		this.trabajos = trabajos;
 	}
 	public Date getHasta() {
@@ -69,8 +71,8 @@ public class Turno {
 		this.hasta = turno.getHasta();
 		this.cobrado = turno.getCobrado();
 		this.movimiento = turno.getMovimiento();
-		this.trabajos.removeAll(new ArrayList<Servicio>(this.trabajos));
-		for(Servicio t : turno.getTrabajos())
+		this.trabajos.removeAll(new ArrayList<Trabajo>(this.trabajos));
+		for(Trabajo t : turno.getTrabajos())
 			t.setId(null);
 		this.trabajos.addAll(turno.getTrabajos());
 		this.movimiento = turno.getMovimiento();

@@ -13,11 +13,26 @@
              <column name="ID_SERVICIO" />
          </many-to-one>
 	
-	
+		<many-to-one name="peluquero"  class="com.figaro.model.Peluquero" lazy="false" fetch="select">
+             <column name="ID_USUARIO" />
+         </many-to-one>
 	
 	</class>
 	
 		
-      		
+      
+	 <class name="com.figaro.model.Trabajo" table="TRABAJO_TURNO" entity-name="TrabajoTurno">
+         <id name="id" type="int" column="ID_TRABAJO" >
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="peluquero"  class="com.figaro.model.Peluquero" lazy="false" fetch="select">
+             <column name="ID_USUARIO" />
+         </many-to-one>
+	 	<many-to-one name="servicio" entity-name="Servicio" lazy="false" fetch="select">
+             <column name="ID_SERVICIO" />
+         </many-to-one>
+	 	
+	 	
+	</class>	
 	
 </hibernate-mapping>

@@ -70,7 +70,7 @@ app.controller('peluquerosController', function ($scope, $http) {
     $scope.isInPeluquero = function (servicio){ 
         let found = false;
         $scope.ngPeluquero.trabajos.forEach(function(trabajo) {
-            if(trabajo.servicio.id==servicio.id)
+            if(trabajo.servicio != null && trabajo.servicio.id==servicio.id)
                 found = true;
         });
     return found;
