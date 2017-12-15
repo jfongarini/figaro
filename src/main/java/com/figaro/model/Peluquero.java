@@ -23,6 +23,10 @@ public class Peluquero extends Persona {
 		this.setDirNumeroCalle(peluquero.getDirNumeroCalle());
 		this.setDirPiso(peluquero.getDirPiso());
 		this.setDirDpto(peluquero.getDirDpto());
+		for(Trabajo trabajo : peluquero.getTrabajos()) {
+			trabajo.setId(null);
+			
+		}
 		this.getTrabajos().removeAll(this.getTrabajos());
 		this.getTrabajos().addAll(peluquero.getTrabajos());
 	}

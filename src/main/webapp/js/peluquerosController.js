@@ -67,10 +67,10 @@ app.controller('peluquerosController', function ($scope, $http) {
 
 
     //BUSCA UN TRABAJO EN PELUQUERO
-    $scope.isInPeluquero = function (trabajo){ 
+    $scope.isInPeluquero = function (servicio){ 
         let found = false;
-        $scope.ngPeluquero.trabajos.forEach(function(item) {
-            if(item.id==trabajo.id)
+        $scope.ngPeluquero.trabajos.forEach(function(trabajo) {
+            if(trabajo.servicio.id==servicio.id)
                 found = true;
         });
     return found;
@@ -79,11 +79,12 @@ app.controller('peluquerosController', function ($scope, $http) {
     $scope.actualizarTrabajos = function() {
         $scope.ngPeluquero.trabajos = [];
         $scope.servicios.forEach(function(servicio) {
-            if (servicio.selected)
-                trabajo = {}; 
+            if (servicio.selected){
+                var trabajo = {}; 
                 trabajo.servicio = servicio;
                 trabajo.comision = servicio.comision;
-                $scope.ngPeluquero.trabajos.push(trabajo)
+                $scope.ngPeluquero.trabajos.push(trabajo);
+            }
         });    
     };
 

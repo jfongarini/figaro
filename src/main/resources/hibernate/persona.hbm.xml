@@ -25,8 +25,8 @@
 	     	
 	     <union-subclass name="com.figaro.model.Peluquero" table="PELUQUERO" >
      			
-   		     <set name="trabajos" table="TRABAJO_PELUQUERO" inverse="false"  cascade="all-delete-orphan" lazy="false" fetch="select">
-         		<key><column name="ID_USUARIO" /></key>
+   		     <set name="trabajos" inverse="false"  cascade="all-delete-orphan" lazy="false" fetch="select">
+         		<key><column name="ID_USUARIO" not-null="true" /></key>
          		<one-to-many entity-name="Trabajo"/>
     	     </set>
       		
