@@ -17,6 +17,7 @@
 	    <property name="dirNumeroCalle" column="NUMERO"   type="int"/> 	
 	    <property name="dirPiso" 	    column="PISO"     type="int"/>
 	    <property name="dirDpto" 		column="DPTO"     type="string"/>
+     	
      	<union-subclass name="com.figaro.model.Cliente" table="CLIENTE">
      			<property name="notas" 		    column="NOTAS"    type="string"/>
 				<property name="ultimaVisita" 	column="ULT_VISITA" type="date"/>
@@ -24,16 +25,12 @@
 	     	
 	     <union-subclass name="com.figaro.model.Peluquero" table="PELUQUERO" >
      			
-    		<property name="comision" 	    column="COMISION"     type="int"/>
-     			
-   	
-    				
-    		 <set name="trabajos" table="TRABAJO_PELUQUERO" inverse="false" lazy="false" fetch="select">
-          		<key><column name="ID_USUARIO" not-null="true" /></key>
-          		<many-to-many entity-name="Trabajo">
-              		<column name="ID_TRABAJO" not-null="true" />
-          		</many-to-many>
-      		</set>
+   		     <set name="trabajos" table="TRABAJO_PELUQUERO" inverse="false"  cascade="all-delete-orphan" lazy="false" fetch="select">
+         		<key><column name="ID_USUARIO" /></key>
+         		<one-to-many entity-name="Trabajo"/>
+    	     </set>
+      		
+      				
       				
 		</union-subclass>
 		

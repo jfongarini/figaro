@@ -3,11 +3,11 @@ app.controller('configuracionController', function ($scope, $http) {
     //INIT CONFIGURACION
     $scope.init = function(){
         $scope.activeConfiguracion = true;
-        $scope.getAllTrabajos();
+        $scope.getAllServicios();
         $scope.getAllCiudades();
         $scope.getAllCategorias();
         $scope.ngCiudad={};
-        $scope.ngTrabajo={};
+        $scope.ngServicio={};
         $scope.ngCategoria={};
     }
   
@@ -47,60 +47,60 @@ app.controller('configuracionController', function ($scope, $http) {
         });
     };
 
-    //AGREGAR TRABAJO
-    $scope.addTrabajo = function() {
-        if($scope.ngTrabajo.id  === undefined){
-            $http.post('/rest/configuracion/trabajos/alta', $scope.ngTrabajo)
+    //AGREGAR SERVICIO
+    $scope.addServicio = function() {
+        if($scope.ngServicio.id  === undefined){
+            $http.post('/rest/configuracion/servicios/alta', $scope.ngServicio)
                 .then(function successCallback(response) {
-                    $scope.trabajos.push(response.data);
-                    $scope.ngTrabajo={};
-                    $scope.messageTrabajo='';
+                    $scope.servicios.push(response.data);
+                    $scope.ngServicio={};
+                    $scope.messageservicio='';
                 }, function errorCallback(response) {
-                    $scope.messageTrabajo=response.data.message;
+                    $scope.messageservicio=response.data.message;
                 });
         }else{
-            $http.put('/rest/configuracion/trabajos/actualizar/'+ $scope.ngTrabajo.id,$scope.ngTrabajo)
+            $http.put('/rest/configuracion/servicios/actualizar/'+ $scope.ngServicio.id,$scope.ngServicio)
                 .then(function successCallback(response) {
-                    $scope.getAllTrabajos();
-                    $scope.ngTrabajo={};
-                    $scope.messageTrabajo='';
+                    $scope.getAllServicios();
+                    $scope.ngServicio={};
+                    $scope.messageservicio='';
                 }, function errorCallback(response) {
-                    $scope.messageTrabajo=response.data.message;
+                    $scope.messageservicio=response.data.message;
                 });
         }
     };
 
-    //OBTENER LISTA DE TRABAJOS
-    $scope.getAllTrabajos = function() {
-        $http.get("/rest/configuracion/trabajos").then(function (response) {
-            $scope.trabajos = response.data;
+    //OBTENER LISTA DE SERVICIOS
+    $scope.getAllServicios = function() {
+        $http.get("/rest/configuracion/servicios").then(function (response) {
+            $scope.servicios = response.data;
         });
     };
 
-    //ELIMINAR TRABAJO
-    $scope.removeTrabajo = function(event) {
+    //ELIMINAR SERVICIO
+    $scope.removeServicio = function(event) {
         var id = event.currentTarget.getAttribute("data-id");
-        var trabajo = $scope.trabajos.filter(function( obj ) {
+        var servicio = $scope.servicios.filter(function( obj ) {
             return obj.id == id;
         });
-        var index = $scope.trabajos.indexOf(trabajo);
-        $scope.trabajos.splice(index, 1);  
-        $http.delete('/rest/configuracion/trabajos/baja/'+ id)
+        var index = $scope.servicios.indexOf(servicio);
+        $scope.servicios.splice(index, 1);  
+        $http.delete('/rest/configuracion/servicios/baja/'+ id)
             .then(function successCallback(response) {
-                $scope.getAllTrabajos();
-                $scope.ngTrabajo={};
-                $scope.messageTrabajo='';
+                $scope.getAllServicios();
+                $scope.ngServicio={};
+                $scope.messageServicio='';
               }, function errorCallback(response) {
-                $scope.messageTrabajo=response.data.message;
+                $scope.messageServicio=response.data.message;
             });
     };
 
-    //OBTENER TRABAJO
-    $scope.loadTrabajo = function(event) {
-        $scope.trabajoID = event.currentTarget.getAttribute("data-id");
-        $http.get('/rest/configuracion/trabajos/'+ $scope.trabajoID)
+    //OBTENER SERVICIO
+    $scope.loadServicio = function(event) {
+        $scope.servicioID = event.currentTarget.getAttribute("data-id");
+        $http.get('/rest/configuracion/servicios/'+ $scope.servicioID)
             .then(function successCallback(response) {
-                $scope.ngTrabajo=response.data;
+                $scope.ngServicio=response.data;
             });
     };
 

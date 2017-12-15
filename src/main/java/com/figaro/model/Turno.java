@@ -17,7 +17,7 @@ public class Turno {
 	private Date hasta;
 	private Boolean cobrado;
 	private Movimiento movimiento;
-	private List<Trabajo> trabajos;
+	private List<Servicio> trabajos;
 	
 	public Cliente getCliente() {
 		return cliente;
@@ -44,10 +44,10 @@ public class Turno {
 	public void setCobrado(Boolean cobrado) {
 		this.cobrado = cobrado;
 	}
-	public List<Trabajo> getTrabajos() {
+	public List<Servicio> getTrabajos() {
 		return trabajos;
 	}
-	public void setTrabajos(List<Trabajo> trabajos) {
+	public void setTrabajos(List<Servicio> trabajos) {
 		this.trabajos = trabajos;
 	}
 	public Date getHasta() {
@@ -69,8 +69,8 @@ public class Turno {
 		this.hasta = turno.getHasta();
 		this.cobrado = turno.getCobrado();
 		this.movimiento = turno.getMovimiento();
-		this.trabajos.removeAll(new ArrayList<Trabajo>(this.trabajos));
-		for(Trabajo t : turno.getTrabajos())
+		this.trabajos.removeAll(new ArrayList<Servicio>(this.trabajos));
+		for(Servicio t : turno.getTrabajos())
 			t.setId(null);
 		this.trabajos.addAll(turno.getTrabajos());
 		this.movimiento = turno.getMovimiento();

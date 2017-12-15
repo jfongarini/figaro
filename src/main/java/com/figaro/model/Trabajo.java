@@ -1,32 +1,22 @@
 package com.figaro.model;
 
-import java.math.BigDecimal;
-import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class Trabajo {
 	
-	public boolean equals(Trabajo param) {
-		return this.id == param.id;
-	}
 	private Integer id;
-	private String descripcion;
-	private BigDecimal precio;
-	@JsonIgnore
-	private Set<Peluquero> peluqueros;
+	private Servicio servicio;
+	private Integer comision;
 	
-	public String getDescripcion() {
-		return descripcion;
+	public Servicio getServicio() {
+		return servicio;
 	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setServicio(Servicio servicio) {
+		this.servicio = servicio;
 	}
-	public BigDecimal getPrecio() {
-		return precio;
+	public Integer getComision() {
+		return comision;
 	}
-	public void setPrecio(BigDecimal precio) {
-		this.precio = precio;
+	public void setComision(Integer comision) {
+		this.comision = comision;
 	}
 	public Integer getId() {
 		return id;
@@ -34,17 +24,14 @@ public class Trabajo {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Set<Peluquero> getPeluqueros() {
-		return peluqueros;
-	}
-	public void setPeluqueros(Set<Peluquero> peluqueros) {
-		this.peluqueros = peluqueros;
-	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((servicio == null) ? 0 : servicio.hashCode());
 		return result;
 	}
 	@Override
@@ -61,9 +48,12 @@ public class Trabajo {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (servicio == null) {
+			if (other.servicio != null)
+				return false;
+		} else if (!servicio.equals(other.servicio))
+			return false;
 		return true;
 	}
-	
-	
 	
 }

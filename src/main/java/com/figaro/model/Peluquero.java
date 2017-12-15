@@ -6,7 +6,6 @@ import java.util.Set;
 public class Peluquero extends Persona {
 	
 	private Set<Trabajo> trabajos;
-	private Integer comision;
 	
 	public Peluquero() {
 		this.trabajos = new HashSet<Trabajo>();
@@ -24,8 +23,8 @@ public class Peluquero extends Persona {
 		this.setDirNumeroCalle(peluquero.getDirNumeroCalle());
 		this.setDirPiso(peluquero.getDirPiso());
 		this.setDirDpto(peluquero.getDirDpto());
-		this.setComision(peluquero.getComision());
-		this.setTrabajos(peluquero.getTrabajos());
+		this.getTrabajos().removeAll(this.getTrabajos());
+		this.getTrabajos().addAll(peluquero.getTrabajos());
 	}
 	
 	public Set<Trabajo> getTrabajos() {
@@ -36,13 +35,6 @@ public class Peluquero extends Persona {
 		this.trabajos = trabajos;
 	}
 
-	public Integer getComision() {
-		return comision;
-	}
-
-	public void setComision(Integer comision) {
-		this.comision = comision;
-	}
 
 	
 }

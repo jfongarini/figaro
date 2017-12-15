@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.figaro.model.Categoria;
 import com.figaro.model.Ciudad;
-import com.figaro.model.Trabajo;
+import com.figaro.model.Servicio;
 import com.figaro.repository.ConfiguracionRepository;
 
 public class ConfiguracionService {
@@ -31,38 +31,38 @@ public class ConfiguracionService {
 		return repository.getCiudades();
 	}
 
-	//TRABAJOS
-	public Integer saveTrabajo(Trabajo trabajo) {
-		LOGGER.info("Guardando el trabajo: "+ trabajo.getDescripcion() +" "+ trabajo.getPrecio());
-		return repository.saveTrabajo(trabajo);
+	//SERVICIOS
+	public Integer saveServicio(Servicio servicio) {
+		LOGGER.info("Guardando el servicio: "+ servicio.getDescripcion() +" "+ servicio.getPrecio());
+		return repository.saveServicio(servicio);
 	}
 	
-	public void deleteTrabajo(Integer idTrabajo) {
-		repository.deleteTrabajo(idTrabajo);		
+	public void deleteServicio(Integer idServicio) {
+		repository.deleteServicio(idServicio);		
 	}
 	
-	public Trabajo getTrabajo(Integer idTrabajo) {
-		LOGGER.debug("Obteniendo el trabajo con ID: " + idTrabajo);
-		return repository.getTrabajo(idTrabajo);
+	public Servicio getServicio(Integer idServicio) {
+		LOGGER.debug("Obteniendo el servicio con ID: " + idServicio);
+		return repository.getServicio(idServicio);
 	}
 
-	public List<Trabajo> getTrabajos() {
-		LOGGER.debug("Obteniendo todos los trabajos");
-		return repository.getTrabajos();
+	public List<Servicio> getServicio() {
+		LOGGER.debug("Obteniendo todos los servicios");
+		return repository.getServicios();
 	}
 
-	public Trabajo updateTrabajo(Trabajo trabajo) {
-		LOGGER.info("Actualizando el trabajo: "+ trabajo.getDescripcion() +" "+ trabajo.getPrecio());
-		Trabajo repoTrabajo = getTrabajo(trabajo.getId());
-		repoTrabajo.setDescripcion(trabajo.getDescripcion());
-		repoTrabajo.setPrecio(trabajo.getPrecio());
-		saveTrabajo(repoTrabajo);
+	public Servicio updateServicio(Servicio servicio) {
+		LOGGER.info("Actualizando el servicio: "+ servicio.getDescripcion() +" "+ servicio.getPrecio());
+		Servicio repoServicio = getServicio(servicio.getId());
+		repoServicio.setDescripcion(servicio.getDescripcion());
+		repoServicio.setPrecio(servicio.getPrecio());
+		saveServicio(repoServicio);
 		LOGGER.info("El trabajo se actualizó correctamente");
-		return repoTrabajo;
+		return repoServicio;
 	}
 	
-	public List<Trabajo> buscarTrabajos(String search) {
-		LOGGER.debug("Buscando trabajos: "+ search);
+	public List<Servicio> buscarTrabajos(String search) {
+		LOGGER.debug("Buscando servicios: "+ search);
 		return repository.buscar(search);
 	}
 	

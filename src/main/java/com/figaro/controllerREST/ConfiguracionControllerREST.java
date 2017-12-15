@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.figaro.model.Categoria;
 import com.figaro.model.Ciudad;
-import com.figaro.model.Trabajo;
+import com.figaro.model.Servicio;
 import com.figaro.service.ConfiguracionService;
 
 @RestController
@@ -44,39 +44,39 @@ public class ConfiguracionControllerREST {
 		return new ResponseEntity<Ciudad>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/trabajos",method=RequestMethod.GET)
-    public ResponseEntity<List<Trabajo>> getTrabajos() {
-		return new ResponseEntity<List<Trabajo>>(service.getTrabajos(), HttpStatus.OK);
+	@RequestMapping(value = "/servicios",method=RequestMethod.GET)
+    public ResponseEntity<List<Servicio>> getTrabajos() {
+		return new ResponseEntity<List<Servicio>>(service.getServicio(), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/trabajos/alta",method=RequestMethod.POST)
-    public ResponseEntity<Trabajo> addTrabajo(@RequestBody Trabajo trabajo) {
-		Integer newID = service.saveTrabajo(trabajo);
+	@RequestMapping(value = "/servicios/alta",method=RequestMethod.POST)
+    public ResponseEntity<Servicio> addTrabajo(@RequestBody Servicio trabajo) {
+		Integer newID = service.saveServicio(trabajo);
 		trabajo.setId(newID);
-		return new ResponseEntity<Trabajo>(trabajo, HttpStatus.CREATED);
+		return new ResponseEntity<Servicio>(trabajo, HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value = "/trabajos/baja/{idTrabajo}",method=RequestMethod.DELETE)
-    public ResponseEntity<Trabajo> deleteTrabajo(@PathVariable Integer idTrabajo) {
-		service.deleteTrabajo(idTrabajo);
-		return new ResponseEntity<Trabajo>(HttpStatus.OK);
+	@RequestMapping(value = "/servicios/baja/{idServicio}",method=RequestMethod.DELETE)
+    public ResponseEntity<Servicio> deleteServicio(@PathVariable Integer idServicio) {
+		service.deleteServicio(idServicio);
+		return new ResponseEntity<Servicio>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/trabajos/actualizar/{idTrabajo}",method=RequestMethod.PUT)
-    public ResponseEntity<Trabajo> updateTrabajo(@RequestBody Trabajo trabajo) {
-		Trabajo updated = service.updateTrabajo(trabajo);
-		return new ResponseEntity<Trabajo>(updated ,HttpStatus.OK);
+	@RequestMapping(value = "/servicios/actualizar/{idServicio}",method=RequestMethod.PUT)
+    public ResponseEntity<Servicio> updateServicio(@RequestBody Servicio servicio) {
+		Servicio updated = service.updateServicio(servicio);
+		return new ResponseEntity<Servicio>(updated ,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/trabajos/{idTrabajo}",method=RequestMethod.GET)
-    public ResponseEntity<Trabajo> getTrabajo(@PathVariable Integer idTrabajo) {
-		Trabajo trabajo = service.getTrabajo(idTrabajo);
-		return new ResponseEntity<Trabajo>(trabajo ,HttpStatus.OK);
+	@RequestMapping(value = "/servicios/{idServicio}",method=RequestMethod.GET)
+    public ResponseEntity<Servicio> getServicio(@PathVariable Integer idServicio) {
+		Servicio trabajo = service.getServicio(idServicio);
+		return new ResponseEntity<Servicio>(trabajo ,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/trabajos/buscar",method=RequestMethod.GET)
-    public ResponseEntity<List<Trabajo>> searchTrabajo(@RequestParam String search) {
-        return new ResponseEntity<List<Trabajo>>(service.buscarTrabajos(search), HttpStatus.OK);
+	@RequestMapping(value = "/servicios/buscar",method=RequestMethod.GET)
+    public ResponseEntity<List<Servicio>> searchServicio(@RequestParam String search) {
+        return new ResponseEntity<List<Servicio>>(service.buscarTrabajos(search), HttpStatus.OK);
     }
 	
 	

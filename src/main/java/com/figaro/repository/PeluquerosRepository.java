@@ -16,7 +16,7 @@ public class PeluquerosRepository extends AbstractRepository {
 	}
 
 	public void updatePeluquero(Peluquero peluquero) {
-		getCurrentSession().merge(peluquero);
+		getCurrentSession().update(peluquero);
 	}
 	
 	public void deletePeluquero(Integer idPeluquero) {

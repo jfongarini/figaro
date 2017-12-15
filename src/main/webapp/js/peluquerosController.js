@@ -32,7 +32,7 @@ app.controller('peluquerosController', function ($scope, $http) {
         $scope.peluqueroId = event.currentTarget.getAttribute("data-id");
         $http.get('/rest/peluqueros/'+$scope.peluqueroId).then(function (response) {
             $scope.ngPeluquero = response.data;
-            $scope.trabajos.forEach(function(trabajo) {
+            $scope.servicios.forEach(function(trabajo) {
                 trabajo.selected = $scope.isInPeluquero(trabajo);
             });
             openModal("modal-peluqueros");
@@ -78,16 +78,19 @@ app.controller('peluquerosController', function ($scope, $http) {
 
     $scope.actualizarTrabajos = function() {
         $scope.ngPeluquero.trabajos = [];
-        $scope.trabajos.forEach(function(trabajo) {
-            if (trabajo.selected)
+        $scope.servicios.forEach(function(servicio) {
+            if (servicio.selected)
+                trabajo = {}; 
+                trabajo.servicio = servicio;
+                trabajo.comision = servicio.comision;
                 $scope.ngPeluquero.trabajos.push(trabajo)
         });    
     };
 
     
     $scope.checkAllTrabajos = function (){ 
-        $scope.trabajos.forEach(function(trabajo) {
-            trabajo.selected = $scope.allChecked
+        $scope.servicios.forEach(function(servicio) {
+            servicio.selected = $scope.allChecked
         });    
     };
 
@@ -97,7 +100,7 @@ app.controller('peluquerosController', function ($scope, $http) {
     //DESCARTAR FORMULARIO
     $scope.discardPeluquero = function(event){
         $scope.update = null;
-        $scope.ngPeluquero = {"trabajos" :[]};
+        $scope.ngPeluquero = {"servicios" :[]};
         closeModal("modal-peluqueros");
     };
 
@@ -112,8 +115,8 @@ app.controller('peluquerosController', function ($scope, $http) {
 
     //OBTENER LISTA DE TRABAJOS
     $scope.getAllTrabajos = function() {
-        $http.get("/rest/configuracion/trabajos").then(function (response) {
-            $scope.trabajos = response.data;
+        $http.get("/rest/configuracion/servicios").then(function (response) {
+            $scope.servicios = response.data;
         });
     };
     
