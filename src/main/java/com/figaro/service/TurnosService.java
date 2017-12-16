@@ -59,7 +59,7 @@ public class TurnosService {
 		LOGGER.info("Cobrando el Turno: " + turno.toString() + " Con el movimiento: " + cobro.toString());
 		turno.setCobrado(true);
 		turno.setMovimiento(generateCobro(turno,cobro));
-		repository.updateTurno(turno);
+		repository.updateTurnoCobro(turno);
 		Cliente cliente = turno.getCliente();
 		cliente.setUltimaVisita(turno.getDesde());
 		clientesService.updateCliente(cliente);
@@ -72,7 +72,7 @@ public class TurnosService {
 		LOGGER.info("Cancelando el cobro del Turno: " + turno.toString());
 		turno.setCobrado(false);
 		turno.setMovimiento(null);
-		repository.updateTurno(turno);
+		repository.updateTurnoCobro(turno);
 		return turno;
 	}
 	

@@ -27,7 +27,6 @@
 		</id>
 		<property name="comision" column="COMISION" type="int"/>
 		
-		<many-to-one name="turno" class="com.figaro.model.Turno" entity-name="Turno"  column="ID_TURNO"/>
 	 	
 	 	<many-to-one name="servicio" entity-name="ServicioTurno" cascade="all-delete-orphan" column="ID_SERVICIO" unique="true"/>
 	 	

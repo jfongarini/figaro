@@ -11,9 +11,6 @@ public class Trabajo {
 	@JsonIgnore
 	private Peluquero peluquero;
 	
-	@JsonIgnore
-	private Turno turno;
-	
 	
 	
 	public Servicio getServicio() {
@@ -70,12 +67,6 @@ public class Trabajo {
 	}
 	public void setPeluquero(Peluquero peluquero) {
 		this.peluquero = peluquero;
-	}
-	public Turno getTurno() {
-		return turno;
-	}
-	public void setTurno(Turno turno) {
-		this.turno = turno;
 	}
 	
 }

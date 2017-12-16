@@ -34,6 +34,11 @@ public class TurnosRepository extends AbstractRepository{
 		getCurrentSession().update(turno);
 	}
 
+
+	public void updateTurnoCobro(Turno turno) {
+		getCurrentSession().update(turno);
+	}
+	
 	public void deleteTurno(Turno turno) {
 		getCurrentSession().delete(turno);
 	}
@@ -57,6 +62,7 @@ public class TurnosRepository extends AbstractRepository{
 		.setParameter("hasta", hasta)
 		.list();
 	}
+
 
 	
 
