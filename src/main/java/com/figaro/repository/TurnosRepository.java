@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.figaro.model.Trabajo;
 import com.figaro.model.Turno;
 
 @SuppressWarnings("unchecked")
@@ -13,6 +14,10 @@ public class TurnosRepository extends AbstractRepository{
 
 
 	public int saveTurno (Turno turno) {
+		for(Trabajo trabajo : turno.getTrabajos()) {
+			trabajo.setId(null);
+			trabajo.getServicio().setId(null);
+		}
 		return (int) getCurrentSession().save(turno); 
 	}
 
@@ -22,6 +27,10 @@ public class TurnosRepository extends AbstractRepository{
 	
 	
 	public void updateTurno(Turno turno) {
+		for(Trabajo trabajo : turno.getTrabajos()) {
+			trabajo.setId(null);
+			trabajo.getServicio().setId(null);
+		}
 		getCurrentSession().update(turno);
 	}
 

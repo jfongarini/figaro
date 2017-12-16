@@ -25,13 +25,11 @@
          <id name="id" type="int" column="ID_TRABAJO" >
 			<generator class="increment"/>
 		</id>
-		<many-to-one name="peluquero"  class="com.figaro.model.Peluquero" lazy="false" fetch="select">
-             <column name="ID_USUARIO" />
-         </many-to-one>
-	 	<many-to-one name="servicio" entity-name="Servicio" lazy="false" fetch="select">
-             <column name="ID_SERVICIO" />
-         </many-to-one>
+		<property name="comision" column="COMISION" type="int"/>
+		
+		<many-to-one name="turno" class="com.figaro.model.Turno" entity-name="Turno"  column="ID_TURNO"/>
 	 	
+	 	<many-to-one name="servicio" entity-name="ServicioTurno" cascade="all-delete-orphan" column="ID_SERVICIO" unique="true"/>
 	 	
 	</class>	
 	

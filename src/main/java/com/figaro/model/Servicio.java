@@ -12,6 +12,9 @@ public class Servicio {
 	private BigDecimal precio;
 	
 	@JsonIgnore
+	private Trabajo trabajoTurno;
+	
+	@JsonIgnore
 	private Set<Trabajo> trabajos;
 	
 	public String getDescripcion() {
@@ -61,6 +64,12 @@ public class Servicio {
 	}
 	public void setTrabajos(Set<Trabajo> trabajos) {
 		this.trabajos = trabajos;
+	}
+	public Trabajo getTrabajoTurno() {
+		return trabajoTurno;
+	}
+	public void setTrabajoTurno(Trabajo trabajoTurno) {
+		this.trabajoTurno = trabajoTurno;
 	}
 	
 	

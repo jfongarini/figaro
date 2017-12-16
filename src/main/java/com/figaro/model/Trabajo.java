@@ -6,9 +6,15 @@ public class Trabajo {
 	
 	private Integer id;
 	private Servicio servicio;
+	private Integer comision;
+	
 	@JsonIgnore
 	private Peluquero peluquero;
-	private Integer comision;
+	
+	@JsonIgnore
+	private Turno turno;
+	
+	
 	
 	public Servicio getServicio() {
 		return servicio;
@@ -64,6 +70,12 @@ public class Trabajo {
 	}
 	public void setPeluquero(Peluquero peluquero) {
 		this.peluquero = peluquero;
+	}
+	public Turno getTurno() {
+		return turno;
+	}
+	public void setTurno(Turno turno) {
+		this.turno = turno;
 	}
 	
 }

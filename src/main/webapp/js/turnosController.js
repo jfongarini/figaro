@@ -191,17 +191,18 @@ app.controller('turnosController', function ($scope, $http) {
 
     //AGREGAR TRABAJOS
     $scope.addTrabajo = function (trabajo) {
-        if($scope.isSeleccionado(trabajo) === false) {
-          trabajo.id = null;
+        
           $scope.totalTrabajosSeleccionados += trabajo.servicio.precio;
           $scope.trabajosSeleccionados.push(trabajo);
-        }
+        
     };
 
     //QUITAR TRABAJOS
     $scope.removeTrabajo = function (trabajo) {
-        $scope.trabajosSeleccionados.splice($scope.isSeleccionado(trabajo), 1);
-        $scope.totalTrabajosSeleccionados -= trabajo.servicio.precio;
+        if($scope.isSeleccionado()){
+            $scope.trabajosSeleccionados.splice((trabajo), 1);
+            $scope.totalTrabajosSeleccionados -= trabajo.servicio.precio;
+        }
 
     };
 
