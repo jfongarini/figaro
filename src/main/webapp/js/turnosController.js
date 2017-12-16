@@ -86,12 +86,13 @@ app.controller('turnosController', function ($scope, $http) {
 
     function isListaTrabajos(trabajo){
         for(var i = 0; i < $scope.trabajosPeluquero.length; i++)  
-            if(trabajo.servicio.descripcion == $scope.trabajosPeluquero[i].servicio.descripcion )
+            if(trabajo.servicio ==null || trabajo.servicio.descripcion == $scope.trabajosPeluquero[i].servicio.descripcion )
                 return true;
         return false;
     }
 
     $scope.bindTrabajos = function() {
+        $scope.trabajosPeluquero=[];
         $scope.trabajosSeleccionados = [];
         $scope.totalTrabajosSeleccionados=0;
         for(var i = 0; i < $scope.peluquero.trabajos.length; i++)
