@@ -52,7 +52,6 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.turnoId = event.currentTarget.getAttribute("data-id");
         $http.get('/rest/turnos/'+$scope.turnoId).then(function (response) {
             $scope.ngTurno = response.data;
-
             $scope.startHour = $scope.ngTurno.desde.split(' ')[1];
             $scope.endHour = $scope.ngTurno.hasta.split(' ')[1];
             $scope.trabajosSeleccionados = $scope.ngTurno.trabajos;
@@ -66,24 +65,31 @@ app.controller('turnosController', function ($scope, $http) {
                 if(peluquero.id == $scope.ngTurno.peluquero.id){
                     $scope.peluquero = peluquero;
                 }
-            });  
+                });  
 
-            $scope.trabajosPeluquero = $scope.ngTurno.peluquero.trabajos;
-
+            //BIND FORMULARIO TRABAJOS EN TURNO CHECKS
+            $scope.trabajosPeluquero=[];
+            $scope.ngTurno.trabajos.forEach(function(trabajo) {
+                trabajo.selected = true;
+                $scope.trabajosPeluquero.push(trabajo);
+            });
             
             //BIND FORMULARIO CHECKS
-            $scope.trabajosPeluquero.forEach(function(trabajo) {
-                for(var i = 0; i < $scope.ngTurno.trabajos.length; i++)
-                if(trabajo.descripcion == $scope.ngTurno.trabajos[i].descripcion ){
-                    trabajo.selected = true;
-                 }
-            });  
-            
-            
+            $scope.ngTurno.peluquero.trabajos.forEach(function(trabajo) {
+                for(var i = 0; i < $scope.ngTurno.peluquero.trabajos.length; i++)
+                    if(!isListaTrabajos(trabajo))
+                    $scope.trabajosPeluquero.push(trabajo);
+            });    
             openModal("modal-turnos");
-            
         });
     };
+
+    function isListaTrabajos(trabajo){
+        for(var i = 0; i < $scope.trabajosPeluquero.length; i++)  
+            if(trabajo.servicio.descripcion == $scope.trabajosPeluquero[i].servicio.descripcion )
+                return true;
+        return false;
+    }
 
     $scope.bindTrabajos = function() {
         $scope.trabajosSeleccionados = [];
@@ -134,7 +140,7 @@ app.controller('turnosController', function ($scope, $http) {
     $scope.getTotalTurno = function(trabajos) {
         var total = 0;
         for(var i = 0; i < trabajos.length; i++)
-            total += trabajos[i].precio;
+            total += trabajos[i].servicio.precio;
     return total;
     };
 
@@ -143,7 +149,7 @@ app.controller('turnosController', function ($scope, $http) {
         var total = 0;
         for(var i = 0; i < turnos.length; i++)
         for(var j = 0; j < turnos[i].trabajos.length; j++)
-            total += turnos[i].trabajos[j].precio;
+            total += turnos[i].trabajos[j].servicio.precio;
     return total;
     };
 
@@ -191,15 +197,13 @@ app.controller('turnosController', function ($scope, $http) {
 
     //AGREGAR TRABAJOS
     $scope.addTrabajo = function (trabajo) {
-        
-          $scope.totalTrabajosSeleccionados += trabajo.servicio.precio;
-          $scope.trabajosSeleccionados.push(trabajo);
-        
+        $scope.totalTrabajosSeleccionados += trabajo.servicio.precio;
+        $scope.trabajosSeleccionados.push(trabajo);        
     };
 
     //QUITAR TRABAJOS
     $scope.removeTrabajo = function (trabajo) {
-        if($scope.isSeleccionado()){
+        if($scope.isSeleccionado(trabajo)){
             $scope.trabajosSeleccionados.splice((trabajo), 1);
             $scope.totalTrabajosSeleccionados -= trabajo.servicio.precio;
         }
@@ -210,7 +214,7 @@ app.controller('turnosController', function ($scope, $http) {
     $scope.isSeleccionado = function (trabajo) {
         for(var i = 0; i < $scope.trabajosSeleccionados.length; i++)
         if ($scope.trabajosSeleccionados[i].descripcion === trabajo.descripcion)
-            return i;
+            return true;
         return false;
     };
 
