@@ -27,7 +27,8 @@
         <hr class=resume noshade>
         <label ng-repeat="servicio in servicios">
           <input type="checkbox"  value="servicio" ng-model=servicio.selected> {{servicio.descripcion}}: {{servicio.precio | currency}}
-          <label>COMISI&Oacute;N:</label><input type="number"  ng-init="servicio.comision=100" ng-model="servicio.comision" min=1 max=100 size=1 required/>%
+          <label>COMISI&Oacute;N:</label>
+          <input type="number"  ng-init="servicio.comision=100" ng-model="servicio.comision" min=1 max=100 size=1 required/>%
           <br>
         </label>
     </div>

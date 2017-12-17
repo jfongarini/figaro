@@ -46,7 +46,7 @@ app.controller('turnosController', function ($scope, $http) {
 
     //CLICK FILA TURNO
     $scope.detailTurno = function(event){
-        $scope.discardTurno();
+        $scope.init();
         
         $scope.isNuevoTurno = false;
         $scope.turnoId = event.currentTarget.getAttribute("data-id");
@@ -59,13 +59,16 @@ app.controller('turnosController', function ($scope, $http) {
             $scope.update=true;
 
             //BIND PELUQUERO Y FORMULARIO CHECKBOXES
-            $scope.peluquero = $scope.ngTurno.peluquero;
-
             $scope.peluqueros.forEach(function(peluquero) {
                 if(peluquero.id == $scope.ngTurno.peluquero.id){
                     $scope.peluquero = peluquero;
                 }
-                });  
+            });
+            if(null == $scope.peluquero){
+                $scope.peluquero = $scope.ngTurno.peluquero;
+                $scope.peluqueros.push($scope.peluquero);
+            }
+
 
             //BIND FORMULARIO TRABAJOS EN TURNO CHECKS
             $scope.trabajosPeluquero=[];
@@ -77,20 +80,23 @@ app.controller('turnosController', function ($scope, $http) {
             //BIND FORMULARIO CHECKS
             $scope.ngTurno.peluquero.trabajos.forEach(function(trabajo) {
                 for(var i = 0; i < $scope.ngTurno.peluquero.trabajos.length; i++)
-                    if(!isListaTrabajos(trabajo))
+                    if(!isInListaTrabajos(trabajo))
                     $scope.trabajosPeluquero.push(trabajo);
-            });    
+            }); 
+               
             openModal("modal-turnos");
         });
     };
 
-    function isListaTrabajos(trabajo){
+    //BUSCA TRABAJO EN PELUQUERO
+    function isInListaTrabajos(trabajo){
         for(var i = 0; i < $scope.trabajosPeluquero.length; i++)  
             if(trabajo.servicio ==null || trabajo.servicio.descripcion == $scope.trabajosPeluquero[i].servicio.descripcion )
                 return true;
         return false;
     }
 
+    //ACTULIZA FORMULARIO CON LOS TRABAJOS DEL TURNO
     $scope.bindTrabajos = function() {
         $scope.trabajosPeluquero=[];
         $scope.trabajosSeleccionados = [];
@@ -195,7 +201,6 @@ app.controller('turnosController', function ($scope, $http) {
             $scope.removeTrabajo(trabajo)
     }
 
-
     //AGREGAR TRABAJOS
     $scope.addTrabajo = function (trabajo) {
         $scope.totalTrabajosSeleccionados += trabajo.servicio.precio;
@@ -245,7 +250,6 @@ app.controller('turnosController', function ($scope, $http) {
 
     //CONFIRMAR COBRO
     $scope.cobrar = function(turno){
-
         $http.put('/rest/turnos/'+turno.id+'/cobrado', $scope.ngMovimiento).then(
             function successCallback(response) {
                 closeModal("modal-cobrar");
@@ -253,19 +257,15 @@ app.controller('turnosController', function ($scope, $http) {
           }, function errorCallback(response) {
                 $scope.message=response.data.message;
         });
-
     };
 
-    
     //CANCELAR COBRO
     $scope.discardCobro = function(turno){
         turno.cobrado = false;
         closeModal("modal-cobrar");
         $scope.initMovimiento();
     };
-    
-
-
+  
    //CANCELAR DESHACER COBRO
     $scope.discardCancelarCobro = function(turno){
         turno.cobrado = true;
@@ -278,7 +278,6 @@ app.controller('turnosController', function ($scope, $http) {
         closeModal("modal-cancelar-cobro");      
     }
 
-
     //BUSCAR CLIENTE
     $scope.searchCliente = function() {
         if ($scope.queryCliente.length < 2) 
@@ -289,22 +288,22 @@ app.controller('turnosController', function ($scope, $http) {
         });  
     };
 
-
-
-
-
     //OBTENER LISTA DE PELUQUEROS
     $scope.getAllPeluqueros = function() {
-        $http.get("/rest/peluqueros").then(function (response) {
+        $http.get("/rest/peluqueros/habilitados").then(function (response) {
             $scope.peluqueros = response.data;
         });
     };
 
     //DESCARTAR FORMULARIO
     $scope.discardTurno = function(event){
+        if ($scope.peluquero !=null && !$scope.peluquero.habilitado){
+            let index = $scope.peluqueros.indexOf($scope.peluquero);
+            $scope.peluqueros.splice((index), 1);
+        }
         $scope.startHour= "";
         $scope.endHour = ""; 
-        $scope.peluquero = "";
+        $scope.peluquero = {};
         $scope.clientes=[];
         $scope.trabajos=[];
         $scope.trabajosSeleccionados=[];      
@@ -322,5 +321,4 @@ app.controller('turnosController', function ($scope, $http) {
         }
     });
     
-   
 });

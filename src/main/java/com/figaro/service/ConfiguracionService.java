@@ -57,7 +57,6 @@ public class ConfiguracionService {
 		repoServicio.setDescripcion(servicio.getDescripcion());
 		repoServicio.setPrecio(servicio.getPrecio());
 		saveServicio(repoServicio);
-		LOGGER.info("El trabajo se actualizó correctamente");
 		return repoServicio;
 	}
 	

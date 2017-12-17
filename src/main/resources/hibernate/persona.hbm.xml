@@ -3,7 +3,7 @@
 <hibernate-mapping>
 	<class name="com.figaro.model.Persona"  abstract="true" table="PERSONA">
 		
-		<id name="id" type="int" column="ID_USUARIO" >
+		<id name="id" type="int" column="ID_PERSONA" >
 			<generator class="increment"/>
 		</id>
 	 	<property name="nombre"  		column="NOMBRE"   type="string"/>
@@ -24,13 +24,11 @@
 		</union-subclass>
 	     	
 	     <union-subclass name="com.figaro.model.Peluquero" table="PELUQUERO" >
-     			
-   		     <set name="trabajos" inverse="false"  cascade="all" lazy="false" fetch="select">
-         		<key><column name="ID_USUARIO" not-null="true" /></key>
+     		 <property name="habilitado" 	    column="HABILITADO"    type="boolean"/> 
+   		     <set name="trabajos" inverse="false"   cascade="all" lazy="false" fetch="select">
+         		<key><column name="ID_PERSONA" not-null="true" /></key>
          		<one-to-many entity-name="Trabajo"/>
     	     </set>
-      		
-      				
       				
 		</union-subclass>
 		

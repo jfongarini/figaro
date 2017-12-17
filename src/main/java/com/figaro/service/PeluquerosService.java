@@ -2,6 +2,7 @@ package com.figaro.service;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 
@@ -30,10 +31,17 @@ public class PeluquerosService {
 		Peluquero updated = getPeluquero(peluquero.getId());
 		updated.update(peluquero);
 		repository.updatePeluquero(updated);
-		LOGGER.info("El Peluquero se actualizo correctamente");
 		return updated;
 	}
 
+	public void habilitarPeluquero(Integer idPeluquero) {
+		Peluquero peluquero = getPeluquero(idPeluquero);
+		LOGGER.info("Habilitando Peluquero " + peluquero.toString());
+		peluquero.setHabilitado(!peluquero.isHabilitado());
+		repository.updatePeluquero(peluquero);
+		
+	}
+	
 	public void deletePeluquero(Integer idPeluquero) {
 		repository.deletePeluquero(idPeluquero);
 	}
@@ -47,6 +55,13 @@ public class PeluquerosService {
 	public void setRepository(PeluquerosRepository repository) {
 		this.repository = repository;
 	}
+
+	public List<Peluquero> getPeluquerosHabilitados() {
+		List<Peluquero> peluqueros = getPeluqueros();
+		return peluqueros.stream().filter(p -> p.isHabilitado()).collect(Collectors.toList());
+	}
+
+	
 
 
 

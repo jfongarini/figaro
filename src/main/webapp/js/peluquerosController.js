@@ -20,6 +20,7 @@ app.controller('peluquerosController', function ($scope, $http) {
     $scope.newPeluquero = function() {
         $scope.message='';
         $scope.allChecked = false;
+        $scope.checkAllTrabajos();
         ($scope.isModalOpen == true) ? $('#modal-peluqueros').addClass("modal-on-top") : openModal("modal-peluqueros");
         $('#modal-peluqueros-focus').focus();
     }
@@ -39,7 +40,6 @@ app.controller('peluquerosController', function ($scope, $http) {
 	    });
     };
     
-
     //CLICK ACEPTAR FORMULARIO
     $scope.sendPeluquero = function() {
 
@@ -65,7 +65,6 @@ app.controller('peluquerosController', function ($scope, $http) {
         }
     };
 
-
     //BUSCA UN TRABAJO EN PELUQUERO
     $scope.isInPeluquero = function (servicio){ 
         let found = false;
@@ -76,6 +75,7 @@ app.controller('peluquerosController', function ($scope, $http) {
     return found;
     };
 
+    //ASIGNAR TRABAJOS SELECCIONADOS A PELUQUEROS
     $scope.actualizarTrabajos = function() {
         $scope.ngPeluquero.trabajos = [];
         $scope.servicios.forEach(function(servicio) {
@@ -88,15 +88,12 @@ app.controller('peluquerosController', function ($scope, $http) {
         });    
     };
 
-    
+    //SELECCIONAR TODOS
     $scope.checkAllTrabajos = function (){ 
         $scope.servicios.forEach(function(servicio) {
             servicio.selected = $scope.allChecked
         });    
     };
-
-
-
     
     //DESCARTAR FORMULARIO
     $scope.discardPeluquero = function(event){
@@ -104,8 +101,6 @@ app.controller('peluquerosController', function ($scope, $http) {
         $scope.ngPeluquero = {"servicios" :[]};
         closeModal("modal-peluqueros");
     };
-
-
 
     //OBTENER LISTA DE CIUDADES
     $scope.getAllCiudades = function() {

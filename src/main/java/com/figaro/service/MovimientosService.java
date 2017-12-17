@@ -26,7 +26,6 @@ public class MovimientosService {
 		movimiento.descontar();
 		int id = repository.saveMovimiento(movimiento);
 		movimiento.setId(id);
-		LOGGER.info("El Movimiento se guardó correctamente");
 		return movimiento;
 	}	
 	
@@ -35,7 +34,6 @@ public class MovimientosService {
 		LOGGER.info("Actualizando el Movimiento: " + movimiento.toString());	
 		updated.update(movimiento);
 		repository.updateMovimiento(updated);
-		LOGGER.info("El Movimiento se actualizó correctamente");
 		return updated;
 	}
 	

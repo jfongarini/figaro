@@ -6,6 +6,7 @@ app.controller('configuracionController', function ($scope, $http) {
         $scope.getAllServicios();
         $scope.getAllCiudades();
         $scope.getAllCategorias();
+        $scope.getAllPeluqueros();
         $scope.ngCiudad={};
         $scope.ngServicio={};
         $scope.ngCategoria={};
@@ -141,4 +142,16 @@ app.controller('configuracionController', function ($scope, $http) {
             });
     };
     
+    //OBTENER LISTA DE CATEGORIAS
+    $scope.getAllPeluqueros = function() {
+        $http.get("/rest/peluqueros").then(function (response) {
+            $scope.peluqueros = response.data;
+        });
+    };
+
+    //HABILITAR - DESHABILITAR PELUQUERO
+    $scope.togglePeluquero = function(peluquero) {
+      $http.patch('/rest/peluqueros/'+peluquero.id+'/habilitar');
+    };
+
 });

@@ -27,6 +27,20 @@
       </form>
     </div>
 
+      <div class="card peluqueros"> 
+      
+        <div class=card-title><i class="material-icons">content_cut </i><label class=card-title> PELUQUEROS HABILITADOS</label></div>
+        <table id=table >
+          <tbody>
+          <tr ng-cloak id={{ciudad.id}} class=data-row ng-repeat="peluquero in peluqueros" >
+          <td ><input type="checkbox"  value="servicio" ng-click=togglePeluquero(peluquero) ng-model=peluquero.habilitado> {{peluquero.nombre}} {{peluquero.apellido}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <label  ng-cloak class=form-message>{{messagePeluquero}}</label>
+      
+    </div>
+
     <div class="card categorias">
       <form ng-submit="addCategoria()">
         <div class=card-title><i class="material-icons">label</i><label class=card-title>CATEGOR&Iacute;AS</label></div>
@@ -58,7 +72,6 @@
         <label  ng-cloak class=form-message>{{messageCiudad}}</label>
       </form>
     </div>
-
 </div>
 <#include "/html/common/javascript.html">
 <script src="js/configuracionController.js" ></script>

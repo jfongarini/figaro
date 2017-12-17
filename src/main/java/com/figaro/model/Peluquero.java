@@ -6,8 +6,10 @@ import java.util.Set;
 public class Peluquero extends Persona {
 	
 	private Set<Trabajo> trabajos;
+	private Boolean habilitado;
 	
 	public Peluquero() {
+		this.habilitado = true;
 		this.trabajos = new HashSet<Trabajo>();
 	}
 	
@@ -25,7 +27,6 @@ public class Peluquero extends Persona {
 		this.setDirDpto(peluquero.getDirDpto());
 		for(Trabajo trabajo : peluquero.getTrabajos()) {
 			trabajo.setId(null);
-			
 		}
 		this.getTrabajos().removeAll(this.getTrabajos());
 		this.getTrabajos().addAll(peluquero.getTrabajos());
@@ -37,6 +38,15 @@ public class Peluquero extends Persona {
 
 	public void setTrabajos(Set<Trabajo> trabajos) {
 		this.trabajos = trabajos;
+	}
+
+
+	public Boolean isHabilitado() {
+		return habilitado;
+	}
+
+	public void setHabilitado(Boolean habilitado) {
+		this.habilitado = habilitado;
 	}
 
 

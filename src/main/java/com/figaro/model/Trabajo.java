@@ -12,7 +12,6 @@ public class Trabajo {
 	private Peluquero peluquero;
 	
 	
-	
 	public Servicio getServicio() {
 		return servicio;
 	}
@@ -31,7 +30,12 @@ public class Trabajo {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+	public Peluquero getPeluquero() {
+		return peluquero;
+	}
+	public void setPeluquero(Peluquero peluquero) {
+		this.peluquero = peluquero;
+	}
 	
 	@Override
 	public int hashCode() {
@@ -62,11 +66,6 @@ public class Trabajo {
 			return false;
 		return true;
 	}
-	public Peluquero getPeluquero() {
-		return peluquero;
-	}
-	public void setPeluquero(Peluquero peluquero) {
-		this.peluquero = peluquero;
-	}
+
 	
 }

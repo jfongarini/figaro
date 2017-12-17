@@ -22,7 +22,6 @@ public class ClientesService {
 		LOGGER.info("Guardando cliente: " + cliente.toString());
 		int newID = repository.saveCliente(cliente);
 		cliente.setId(newID);
-		LOGGER.info("Se guardo el nuevo cliente");
 		return cliente;
 	}
 	
@@ -31,7 +30,6 @@ public class ClientesService {
 		Cliente updated = getCliente(cliente.getId());
 		updated.update(cliente);
 		repository.updateCliente(updated);
-		LOGGER.info("El cliente se actualizó correctamente");
 		return updated;
 	}
 	

@@ -31,7 +31,6 @@ public class TurnosService {
 		validateTurno(turno);
 		int newID = getRepository().saveTurno(turno);
 		turno.setId(newID);
-		LOGGER.info("El turno se guardó correctamente");
 		return turno ;  
 	}
 	
@@ -83,7 +82,6 @@ public class TurnosService {
 		Turno updated = getTurno(turno.getId());
 		updated.update(turno);
 		repository.updateTurno(updated);
-		LOGGER.info("El turno se actualizó correctamente");
 		return updated;
 	}
 
@@ -119,7 +117,6 @@ public class TurnosService {
 		Turno turno = getTurno(turnoId);
 		LOGGER.info("Eliminando turno: "+turno.toString());
 		repository.deleteTurno(turno);
-		LOGGER.info("El turno se eliminó correctamente");
 		return turno;
 	}
 	

@@ -11,11 +11,11 @@
      	<property name="cobrado"	column="COBRADO"	type="boolean"/>
 		
 	 	<many-to-one name="cliente" class="com.figaro.model.Cliente" lazy="false" fetch="select">
-            <column name="CLIENTE_ID" not-null="true" />
+            <column name="ID_CLIENTE" not-null="true" />
         </many-to-one>
         
         <many-to-one name="peluquero" class="com.figaro.model.Peluquero" lazy="false" fetch="select">
-            <column name="PELUQUERO_ID" not-null="true" />
+            <column name="ID_PELUQUERO" not-null="true" />
         </many-to-one>
      	<many-to-one name="movimiento" unique="true"  cascade="all-delete-orphan" class="com.figaro.model.Movimiento" lazy="false"  fetch="select">
             <column name="ID_MOVIMIENTO" />

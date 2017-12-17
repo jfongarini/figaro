@@ -13,9 +13,7 @@
           <key column="ID_SERVICIO" />
           <one-to-many  entity-name="Trabajo"/>
       	</set>
-	
 	</class>
-	
 		
      <class name="com.figaro.model.Servicio" table="SERVICIO_TURNO" entity-name="ServicioTurno">
 		<id name="id" column="ID_SERVICIO" type="integer" >

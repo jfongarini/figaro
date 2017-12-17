@@ -29,6 +29,11 @@ public class PeluquerosControllerREST {
 		return new ResponseEntity<List<Peluquero>>(service.getPeluqueros(), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/peluqueros/habilitados",method=RequestMethod.GET)
+    public ResponseEntity<List<Peluquero>> getPeluquerosHabilitados() {
+		return new ResponseEntity<List<Peluquero>>(service.getPeluquerosHabilitados(), HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "/peluqueros/{peluqueroId}",method=RequestMethod.GET)
     public ResponseEntity<Peluquero> getPeluquero(@PathVariable int peluqueroId) {
 		return new ResponseEntity<Peluquero>(service.getPeluquero(peluqueroId), HttpStatus.OK);
@@ -50,6 +55,12 @@ public class PeluquerosControllerREST {
 	@RequestMapping(value = "/peluqueros/baja/{idPeluquero}",method=RequestMethod.DELETE)
     public ResponseEntity<Peluquero> deletePeluquero(@PathVariable Integer idPeluquero) {
 		service.deletePeluquero(idPeluquero);
+		return new ResponseEntity<Peluquero>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/peluqueros/{idPeluquero}/habilitar",method=RequestMethod.PATCH)
+    public ResponseEntity<Peluquero> habilitarPeluquero(@PathVariable Integer idPeluquero) {
+		service.habilitarPeluquero(idPeluquero);
 		return new ResponseEntity<Peluquero>(HttpStatus.OK);
 	}
 	
