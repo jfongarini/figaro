@@ -21,17 +21,21 @@
       <div class=form-field><label>PISO:</label><input type="number"     ng-model="ngPeluquero.dirPiso"  min=0 max=100 maxlength=3  > <label>DPTO:</label><input type="text" ng-model="ngPeluquero.dirDpto" maxlength="3" size="3"></div>
     </div>
     
-    <div class=trabajos-list>  
-        <div class=form-field><label>TRABAJOS:</label></div>
-        <input type="checkbox" ng-model="allChecked" ng-click="checkAllTrabajos()" > Todos<br>
-        <hr class=resume noshade>
-        <label ng-repeat="servicio in servicios">
-          <input type="checkbox"  value="servicio" ng-model=servicio.selected> {{servicio.descripcion}}: {{servicio.precio | currency}}
-          <label>COMISI&Oacute;N:</label>
-          <input type="number"  ng-init="servicio.comision=100" ng-model="servicio.comision" min=1 max=100 size=1 required/>%
-          <br>
-        </label>
+    <div >  
+        <table class=trabajos-list>
+            <tbody>
+            <tr><th></th><th>TRABAJO</th><th>COMISI&Oacute;N</th></tr>  
+            <tr><td><input type="checkbox" ng-model="allChecked" ng-click="checkAllTrabajos()" ></td><td>Todos</td><td></td></tr>
+            <tr ng-cloak   class=data-row  ng-repeat="servicio in servicios" >
+            <td><input type="checkbox"  value="servicio" ng-model=servicio.selected></td>
+            <td>{{servicio.descripcion}}</td>
+            <td><input type="number"  ng-init="servicio.comision=0" ng-model="servicio.comision" min=0 max=100 size=1 required/>%</td>
+            </tr>
+          </tbody>
+          </table>
     </div>
+
+        
       <div class=buttons>
         <button class="button cancel"  type="button" ng-click="discardPeluquero()">CANCELAR</button>
         <button class="button accept" type="submit">ACEPTAR</button>

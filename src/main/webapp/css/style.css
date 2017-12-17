@@ -175,8 +175,6 @@ table tr{
     height: 30px
 }
 
-
-
 tr:hover td {
     background-color: #292961;
     color: white;
@@ -193,7 +191,6 @@ td,th{
 }
 
 th {
-    letter-spacing: 1px;
     font-weight: 400;
 }
 
@@ -222,6 +219,28 @@ li a:hover {
     background-color: #6666c4;
     color: #FFFFFF;
     cursor: pointer
+}
+
+.trabajos-list{
+    width: 350px;
+}
+
+.trabajos-list input{
+   border-width: 0px;
+   max-width: 45px;
+   background-color: transparent;
+}
+
+.trabajos-list tr:hover td input {
+    color: white;
+}
+
+.trabajos-list th{
+    text-align: left;
+}
+
+.trabajos-list tr:nth-child(odd) {
+    background-color: #FFF
 }
 
 .active a{
@@ -365,8 +384,7 @@ li a:hover {
     box-shadow: 0 1px 4px rgba(0, 0, 0, .6)
 }
 
-.modal-content form select, .modal-double form select{
-    width: 191px;
+.modal-content form select, .modal-double form select{    
     background: transparent;
     border-bottom-color: #EEE;
     border-bottom-width: 2px;
@@ -557,7 +575,7 @@ tr:hover .disponibletr{
     border-bottom-width: 1px;
     border-left-width: 1px;
     border-color: #000; */
-
+}
 
 
 .cuotas-oculto{
@@ -566,6 +584,7 @@ tr:hover .disponibletr{
 
 .material-icons.rojo { color: rgba(249, 0, 0, .7); }
 .material-icons.verde { color: rgba(0, 249, 0, .5); }
+
 
 @media (max-width: 700px){
     body, .form-field{font-size: 12px}
