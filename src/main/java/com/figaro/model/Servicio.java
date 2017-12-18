@@ -2,16 +2,13 @@ package com.figaro.model;
 
 import java.math.BigDecimal;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class Servicio {
 	
 	private Integer id;
 	private String descripcion;
 	private BigDecimal precio;
 	
-	@JsonIgnore
-	private Trabajo trabajoTurno;
+	
 	
 	public Integer getId() {
 		return id;
@@ -55,15 +52,5 @@ public class Servicio {
 			return false;
 		return true;
 	}
-	public Trabajo getTrabajoTurno() {
-		return trabajoTurno;
-	}
-	public void setTrabajoTurno(Trabajo trabajoTurno) {
-		this.trabajoTurno = trabajoTurno;
-	}
-
-	
-	
-	
 	
 }
