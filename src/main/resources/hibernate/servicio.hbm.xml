@@ -8,11 +8,6 @@
         </id>
 	 	<property name="descripcion" column="DESCRIPCION" type="string"/>
 	 	<property name="precio" column="PRECIO" type="big_decimal"/>
-	
-		<set name="trabajos"  inverse="false" cascade="save-update" lazy="false" fetch="select" >
-          <key column="ID_SERVICIO" />
-          <one-to-many  entity-name="Trabajo"/>
-      	</set>
 	</class>
 		
      <class name="com.figaro.model.Servicio" table="SERVICIO_TURNO" entity-name="ServicioTurno">

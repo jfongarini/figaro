@@ -6,33 +6,17 @@ app.controller('turnosController', function ($scope, $http) {
 
     //INIT TURNOS
     $scope.init = function(){
-        $scope.activeTurnos = true;
+        $scope.getAllPeluqueros();
         $scope.ngDateTurno = stringToDate(getToday());
         $scope.getTurnos();
+        $scope.activeTurnos = true;
         $scope.queryCliente ='';
         $scope.trabajosSeleccionados=[];
         $scope.totalDiario=0;
         $scope.turnos={};
         $scope.ngTurno={};
-        $scope.clientes=[];
-        $scope.getAllPeluqueros();
+        $scope.clientes=[];       
     }
-
-
-    //INIT TURNOS DE CLIENTE
-    $scope.getTurnosDeCliente = function(){
-        $scope.activeTurnos = true;
-        var clienteId = window.location.href.split("/").pop();
-        $http.get('/rest/turnos/cliente/'+clienteId)
-        .then(function successCallback(response) {
-            $scope.turnos = response.data;
-            if ( $scope.turnos.length > 0){
-                $scope.cliente = ($scope.turnos[0].cliente.nombre +' '+ $scope.turnos[0].cliente.apellido) 
-                $scope.getTotalDiario($scope.turnos);
-            }
-        });
-    }
-
 
     //CLICK NUEVO TURNO
     $scope.newTurno = function() {
@@ -46,47 +30,51 @@ app.controller('turnosController', function ($scope, $http) {
 
     //CLICK FILA TURNO
     $scope.detailTurno = function(event){
-        $scope.init();
-        
+        $scope.update=true;
         $scope.isNuevoTurno = false;
         $scope.turnoId = event.currentTarget.getAttribute("data-id");
-        $http.get('/rest/turnos/'+$scope.turnoId).then(function (response) {
-            $scope.ngTurno = response.data;
-            $scope.startHour = $scope.ngTurno.desde.split(' ')[1];
-            $scope.endHour = $scope.ngTurno.hasta.split(' ')[1];
-            $scope.trabajosSeleccionados = $scope.ngTurno.trabajos;
-            $scope.totalTrabajosSeleccionados = $scope.getTotalTurno($scope.trabajosSeleccionados);
-            $scope.update=true;
+        
+        $scope.ngTurno = null;
+        var i = 0;
+        while($scope.ngTurno == null){
+            if ($scope.turnoId == $scope.turnos[i].id) 
+                $scope.ngTurno= angular.copy($scope.turnos[i]);
+            else i++;
+        }
 
-            //BIND PELUQUERO Y FORMULARIO CHECKBOXES
-            $scope.peluqueros.forEach(function(peluquero) {
-                if(peluquero.id == $scope.ngTurno.peluquero.id){
-                    $scope.peluquero = peluquero;
-                }
-            });
-            if(null == $scope.peluquero){
-                $scope.peluquero = $scope.ngTurno.peluquero;
-                $scope.peluqueros.push($scope.peluquero);
-            }
+        $scope.startHour = $scope.ngTurno.desde.split(' ')[1];
+        $scope.endHour = $scope.ngTurno.hasta.split(' ')[1];
+        
+        
+        //BIND PELUQUERO 
+        $scope.peluquero = $scope.ngTurno.peluquero;
+        $scope.peluqueros.push($scope.peluquero);
+        if($scope.peluquero.habilitado){
+            for(var i = 0; i < $scope.peluqueros.length; i++)
+                if($scope.peluquero.id == $scope.peluqueros[i])
+                    $scope.peluqueros.splice(i, 1);
+        }
 
-
-            //BIND FORMULARIO TRABAJOS EN TURNO CHECKS
-            $scope.trabajosPeluquero=[];
-            $scope.ngTurno.trabajos.forEach(function(trabajo) {
-                trabajo.selected = true;
-                $scope.trabajosPeluquero.push(trabajo);
-            });
-            
-            //BIND FORMULARIO CHECKS
-            $scope.ngTurno.peluquero.trabajos.forEach(function(trabajo) {
-                for(var i = 0; i < $scope.ngTurno.peluquero.trabajos.length; i++)
-                    if(!isInListaTrabajos(trabajo))
-                    $scope.trabajosPeluquero.push(trabajo);
-            }); 
-               
-            openModal("modal-turnos");
+        //BIND FORMULARIO TRABAJOS EN TURNO CHECKS
+        $scope.trabajosSeleccionados = $scope.ngTurno.trabajos;
+        $scope.totalTrabajosSeleccionados = $scope.getTotalTurno($scope.trabajosSeleccionados);
+        $scope.trabajosPeluquero=[];
+        $scope.ngTurno.trabajos.forEach(function(trabajo) {
+            trabajo.selected = true;
+            $scope.trabajosPeluquero.push(trabajo);
         });
+        
+        //BIND TRABAJOS EN FORMULARIO 
+        $scope.ngTurno.peluquero.trabajos.forEach(function(trabajo) {
+            for(var i = 0; i < $scope.ngTurno.peluquero.trabajos.length; i++)
+                if(!isInListaTrabajos(trabajo))
+                $scope.trabajosPeluquero.push(trabajo);
+        }); 
+           
+        openModal("modal-turnos");
     };
+
+
 
     //BUSCA TRABAJO EN PELUQUERO
     function isInListaTrabajos(trabajo){

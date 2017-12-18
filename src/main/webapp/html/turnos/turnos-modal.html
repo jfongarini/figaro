@@ -49,7 +49,7 @@
         </div>
         <div class="form-field">TOTAL: <span >{{totalTrabajosSeleccionados | currency}}</span></div>
         <div class="form-field"><span>CLIENTE: </span><a class=cliente-link target="_blank" ng-href="/turnos/cliente/{{ngTurno.cliente.id}}"> {{ngTurno.cliente.nombre}} {{ngTurno.cliente.apellido}} </a> </div>
-        <label class=form-message>{{ngTurno.cliente.notas}}</label>
+        <label>{{ngTurno.cliente.notas}}</label>
         <div class=buttons>
           <button class="button cancel" type="button" ng-click="discardTurno()">CANCELAR</button>
           <button class="button accept" type="submit">ACEPTAR</button>

@@ -7,6 +7,7 @@ import org.hibernate.query.Query;
 
 import com.figaro.model.Categoria;
 import com.figaro.model.Ciudad;
+import com.figaro.model.Movimiento;
 import com.figaro.model.Servicio;
 
 @SuppressWarnings("unchecked")
@@ -38,6 +39,12 @@ public class ConfiguracionRepository extends AbstractRepository {
 		Servicio servicio = (Servicio) getCurrentSession().get("Servicio", idServicio);
 		LOGGER.info("Eliminando el Servicio: "+ servicio.getDescripcion());
 		getCurrentSession().delete(servicio);
+		
+		Query<Movimiento> query = getCurrentSession().createNativeQuery("delete from TRABAJO_PELUQUERO WHERE ID_SERVICIO = ?1");
+	    query.setParameter(1, idServicio);
+	    query.executeUpdate();
+	    
+
 	}
 	
 	public List<Servicio> getServicios() {

@@ -1,7 +1,6 @@
 package com.figaro.model;
 
 import java.math.BigDecimal;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -14,9 +13,12 @@ public class Servicio {
 	@JsonIgnore
 	private Trabajo trabajoTurno;
 	
-	@JsonIgnore
-	private Set<Trabajo> trabajos;
-	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -29,18 +31,12 @@ public class Servicio {
 	public void setPrecio(BigDecimal precio) {
 		this.precio = precio;
 	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
 		return result;
 	}
 	@Override
@@ -52,18 +48,12 @@ public class Servicio {
 		if (getClass() != obj.getClass())
 			return false;
 		Servicio other = (Servicio) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (getId() == null) {
+			if (other.getId() != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!getId().equals(other.getId()))
 			return false;
 		return true;
-	}
-	public Set<Trabajo> getTrabajos() {
-		return trabajos;
-	}
-	public void setTrabajos(Set<Trabajo> trabajos) {
-		this.trabajos = trabajos;
 	}
 	public Trabajo getTrabajoTurno() {
 		return trabajoTurno;
@@ -71,6 +61,7 @@ public class Servicio {
 	public void setTrabajoTurno(Trabajo trabajoTurno) {
 		this.trabajoTurno = trabajoTurno;
 	}
+
 	
 	
 	

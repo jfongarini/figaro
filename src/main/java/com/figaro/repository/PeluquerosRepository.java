@@ -17,6 +17,8 @@ public class PeluquerosRepository extends AbstractRepository {
 
 	public void updatePeluquero(Peluquero peluquero) {
 		getCurrentSession().merge(peluquero);
+		getCurrentSession().createQuery("delete from Trabajo tp WHERE tp.servicio is null").executeUpdate();
+		getCurrentSession().createQuery("delete from Trabajo tp WHERE tp.peluquero is null").executeUpdate();
 	}
 	
 	public void deletePeluquero(Integer idPeluquero) {
