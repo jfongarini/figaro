@@ -2,8 +2,6 @@ app.controller('turnosController', function ($scope, $http) {
     
     $scope.horarios = ["08:00","08:15","08:30","08:45","09:00","09:15","09:30","09:45","10:00","10:15","10:30","10:45","11:00","11:15","11:30","11:45","12:00","12:15","12:30","12:45","13:00","13:15","13:30","13:45","14:00","14:15","14:30","14:45","15:00","15:15","15:30","15:45","16:00","16:15","16:30","16:45","17:00","17:15","17:30","17:45","18:00","18:15","18:30","18:45","19:00","19:15","19:30","19:45","20:00","20:15","20:30","20:45"];
 
-
-
     //INIT TURNOS
     $scope.init = function(){
         $scope.getAllPeluqueros();
@@ -23,6 +21,7 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.ngTurno = {};
         $scope.totalTrabajosSeleccionados=0;
         $scope.trabajosPeluquero = [];
+        $scope.trabajosSeleccionados = [];
         $scope.ngTurno.cobrado = false;
         $scope.isNuevoTurno = true;
         openModal("modal-turnos");
@@ -33,7 +32,7 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.update=true;
         $scope.isNuevoTurno = false;
         $scope.turnoId = event.currentTarget.getAttribute("data-id");
-        
+    
         $scope.ngTurno = null;
         var i = 0;
         while($scope.ngTurno == null){
@@ -45,16 +44,15 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.startHour = $scope.ngTurno.desde.split(' ')[1];
         $scope.endHour = $scope.ngTurno.hasta.split(' ')[1];
         
-        
         //BIND PELUQUERO 
-        $scope.peluquero = $scope.ngTurno.peluquero;
-        $scope.peluqueros.push($scope.peluquero);
-        if($scope.peluquero.habilitado){
+        if($scope.ngTurno.peluquero.habilitado){
             for(var i = 0; i < $scope.peluqueros.length; i++)
-                if($scope.peluquero.id == $scope.peluqueros[i])
-                    $scope.peluqueros.splice(i, 1);
+            if($scope.ngTurno.peluquero.id == $scope.peluqueros[i].id)
+                $scope.peluquero = $scope.peluqueros[i];
+        }else{
+            $scope.peluqueros.push($scope.peluquero);
         }
-
+        
         //BIND FORMULARIO TRABAJOS EN TURNO CHECKS
         $scope.trabajosSeleccionados = $scope.ngTurno.trabajos;
         $scope.totalTrabajosSeleccionados = $scope.getTotalTurno($scope.trabajosSeleccionados);
@@ -69,8 +67,7 @@ app.controller('turnosController', function ($scope, $http) {
             for(var i = 0; i < $scope.ngTurno.peluquero.trabajos.length; i++)
                 if(!isInListaTrabajos(trabajo))
                 $scope.trabajosPeluquero.push(trabajo);
-        }); 
-           
+        });  
         openModal("modal-turnos");
     };
 
@@ -79,7 +76,7 @@ app.controller('turnosController', function ($scope, $http) {
     //BUSCA TRABAJO EN PELUQUERO
     function isInListaTrabajos(trabajo){
         for(var i = 0; i < $scope.trabajosPeluquero.length; i++)  
-            if(trabajo.servicio ==null || trabajo.servicio.descripcion == $scope.trabajosPeluquero[i].servicio.descripcion )
+            if(trabajo.servicio.descripcion == $scope.trabajosPeluquero[i].servicio.descripcion )
                 return true;
         return false;
     }
@@ -89,9 +86,10 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.trabajosPeluquero=[];
         $scope.trabajosSeleccionados = [];
         $scope.totalTrabajosSeleccionados=0;
-        for(var i = 0; i < $scope.peluquero.trabajos.length; i++)
-            if($scope.peluquero.trabajos[i].servicio != null)
-                $scope.trabajosPeluquero.push($scope.peluquero.trabajos[i])
+        for(var i = 0; i < $scope.peluquero.trabajos.length; i++){
+            $scope.peluquero.trabajos[i].selected=false;
+            $scope.trabajosPeluquero.push($scope.peluquero.trabajos[i])
+        }
     };
 
 

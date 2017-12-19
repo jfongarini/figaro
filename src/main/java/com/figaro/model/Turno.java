@@ -21,10 +21,24 @@ public class Turno {
 	private Movimiento movimiento;
 	private Set<Trabajo> trabajos;
 	
+	public void update(Turno turno) {
+		this.cliente = turno.getCliente();
+		this.peluquero = turno.getPeluquero();
+		this.desde = turno.getDesde();
+		this.hasta = turno.getHasta();
+		this.cobrado = turno.getCobrado();
+		this.movimiento = turno.getMovimiento();
+		this.trabajos.removeAll(new ArrayList<Trabajo>(this.trabajos));
+		this.trabajos.addAll(turno.getTrabajos());
+		this.movimiento = turno.getMovimiento();
+		if(this.movimiento != null) 
+			this.movimiento.setId(null);
+		
+	}
+	
 	public Cliente getCliente() {
 		return cliente;
 	}
-	
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
@@ -64,21 +78,16 @@ public class Turno {
 	public void setDesde(Date desde) {
 		this.desde = desde;
 	}
-	public void update(Turno turno) {
-		this.cliente = turno.getCliente();
-		this.peluquero = turno.getPeluquero();
-		this.desde = turno.getDesde();
-		this.hasta = turno.getHasta();
-		this.cobrado = turno.getCobrado();
-		this.movimiento = turno.getMovimiento();
-		this.trabajos.removeAll(new ArrayList<Trabajo>(this.trabajos));
-		for(Trabajo t : turno.getTrabajos())
-			t.setId(null);
-		this.trabajos.addAll(turno.getTrabajos());
-		this.movimiento = turno.getMovimiento();
-		if(this.movimiento != null) this.movimiento.setId(null);
-		
+	
+	public Movimiento getMovimiento() {
+		return movimiento;
 	}
+
+	public void setMovimiento(Movimiento movimiento) {
+		this.movimiento = movimiento;
+	}
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -105,11 +114,5 @@ public class Turno {
 		return "Turno [id=" + id + ", cliente=" + cliente + ", peluquero=" + peluquero + ", desde=" + desde + ", hasta=" + hasta + ", cobrado=" + cobrado + ", movimiento=" + movimiento + ", trabajos=" + trabajos + "]";
 	}
 
-	public Movimiento getMovimiento() {
-		return movimiento;
-	}
 
-	public void setMovimiento(Movimiento movimiento) {
-		this.movimiento = movimiento;
-	}
 }
