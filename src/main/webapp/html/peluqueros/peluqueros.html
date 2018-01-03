@@ -7,27 +7,22 @@
 <body ng-app=figaro ng-controller=peluquerosController data-ng-init="init()" >
   <#include "/html/common/menu.html">
   <div id=content class=content>
-    <div class="banner">
-        <label class="banner-label add"><i class=material-icons ng-click="newPeluquero()" >add content_cut</i></label>
+        
+    <label class="add custom-button" ng-click="newPeluquero()"><i class=material-icons  >add content_cut</i> </label><br>
+    
+    <div class=main-card>
+      <table>
+        <tbody>
+          <tr data-id={{peluquero.id}} class=data-row ng-repeat="peluquero in peluqueros" data-ng-click="detailPeluquero($event)" ng-cloak>
+            <td>{{peluquero.nombre}}</td>
+            <td>{{peluquero.apellido}}</td>
+            <td><i class="material-icons"> payment </i></td>
+            <td><i class="material-icons"> history </i></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <table id=table class=main-table>
-      <thead>
-        <tr>
-            <th>NOMBRE</th>
-            <th>APELLIDO</th>
-            <th>EMAIL</th>
-            <th>TEL&Eacute;FONO</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr id={{peluquero.id}} data-id={{peluquero.id}} class=data-row ng-repeat="peluquero in peluqueros" data-ng-click="detailPeluquero($event)" ng-cloak>
-          <td>{{peluquero.nombre}}</td>
-          <td>{{peluquero.apellido}}</td>
-          <td>{{peluquero.email}}</td>
-          <td>{{peluquero.telefono}}</td>
-        </tr>
-      </tbody>
-    </table>
+  </div>
   </div>
   <#include "/html/peluqueros/peluqueros-modal.html">
   <#include "/html/common/javascript.html">

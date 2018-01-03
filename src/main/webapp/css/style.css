@@ -120,7 +120,7 @@ body{
 }
 
 
-.card, .banner, .banner-busqueda{
+.card, .banner, .banner-busqueda, .main-card{
     margin-top: 30px;
     background-color: #FFF;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
@@ -459,9 +459,6 @@ li a:hover {
     cursor: pointer
 }
 
-
-
-
 .card-title{
     margin-bottom: 20px
 }
@@ -501,6 +498,29 @@ li a:hover {
     background-color: white;
     color:black;
     cursor: pointer
+}
+
+.main-card{
+    max-width: 600px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+}
+
+.main-card table{
+    width: 100%
+}
+
+.custom-button {
+    background-color: #292961; 
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6)
+    
 }
 
 .trabajo-precio{

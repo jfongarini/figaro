@@ -92,19 +92,24 @@ public class TurnosService {
 		movimiento.setFecha(turno.getHasta());
 		movimiento.setTipoPago(cobro.getTipoPago());
 		movimiento.setCuotas(cobro.getCuotas());
-		BigDecimal precio = new BigDecimal(0);
-		for (Trabajo t : turno.getTrabajos())
-			precio = precio.add(t.getServicio().getPrecio());
-		
+		movimiento.setPrecio(generatePrecio(turno));
 		movimiento.setDescuento(cobro.getDescuento());
-		movimiento.setPrecio(precio);
 		movimiento.descontar();
-		
-		List<String> descripionesTrabjo = turno.getTrabajos().stream().map(t -> t.getServicio().getDescripcion()).collect(Collectors.toList());
-		movimiento.setDetalle(String.join(" ", descripionesTrabjo)) ;
+		movimiento.setDetalle(generateDescripcion(turno)) ;
 		return movimiento;
 	}
 	
+	private BigDecimal generatePrecio(Turno turno){
+		BigDecimal precio = new BigDecimal(0);
+		for (Trabajo t : turno.getTrabajos())
+			precio = precio.add(t.getServicio().getPrecio());
+		return precio;
+	}
+	
+	private String generateDescripcion (Turno turno){
+		List<String> descripionesTrabjo = turno.getTrabajos().stream().map(t -> t.getServicio().getDescripcion()).collect(Collectors.toList());
+		return String.join(" ", descripionesTrabjo);
+	}
 	
 
 	private Movimiento updateMovimiento(Turno turno) {
@@ -127,10 +132,19 @@ public class TurnosService {
 		List<Turno> turnosDelDia = searchTurno(nuevoTurno.getDesde());
 		turnosDelDia.remove(nuevoTurno);
 		for(Turno turno : turnosDelDia) 
-			if(mismoPeluquero(nuevoTurno, turno) && horarioOcupado(nuevoTurno, turno)) 
+			if(  (mismoPeluquero(nuevoTurno, turno) && horarioOcupado(nuevoTurno, turno)) || (mismoCliente(nuevoTurno, turno) && horarioOcupado(nuevoTurno, turno))    ) 
 			throw new TurnoOcupadoException(nuevoTurno);
 	}
 
+	
+	private boolean mismoPeluquero(Turno nuevoTurno, Turno turno) {
+		return turno.getPeluquero().equals(nuevoTurno.getPeluquero());
+	}
+	
+	private boolean mismoCliente(Turno nuevoTurno, Turno turno) {
+		return turno.getCliente().equals(nuevoTurno.getCliente());
+	}
+	
 	private boolean horarioOcupado(Turno nuevoTurno, Turno turno) {
 		return horarioInicioOcupado(nuevoTurno, turno) || horarioFinOcupado(nuevoTurno, turno) || mismoHorario(nuevoTurno, turno);
 	}
@@ -145,10 +159,6 @@ public class TurnosService {
 
 	private boolean mismoHorario(Turno nuevoTurno, Turno turno) {
 		return (turno.getDesde().compareTo(nuevoTurno.getDesde()) == 0) && (turno.getHasta().compareTo(nuevoTurno.getHasta()) == 0);
-	}
-	
-	private boolean mismoPeluquero(Turno nuevoTurno, Turno turno) {
-		return turno.getPeluquero().equals(nuevoTurno.getPeluquero());
 	}
 	
 	private boolean horarioInvalido(Turno nuevoTurno) {

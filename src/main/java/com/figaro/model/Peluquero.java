@@ -51,4 +51,5 @@ public class Peluquero extends Persona {
 
 
 	
+	
 }
