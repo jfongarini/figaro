@@ -35,6 +35,7 @@ app.controller('peluquerosController', function ($scope, $http) {
             $scope.ngPeluquero = response.data;
             $scope.servicios.forEach(function(trabajo) {
                 trabajo.selected = $scope.isInPeluquero(trabajo);
+
             });
             openModal("modal-peluqueros");
 	    });
@@ -69,8 +70,10 @@ app.controller('peluquerosController', function ($scope, $http) {
     $scope.isInPeluquero = function (servicio){ 
         let found = false;
         $scope.ngPeluquero.trabajos.forEach(function(trabajo) {
-            if(trabajo.servicio != null && trabajo.servicio.id==servicio.id)
+            if(trabajo.servicio != null && trabajo.servicio.id==servicio.id){
                 found = true;
+                servicio.comision = trabajo.comision
+            }
         });
     return found;
     };

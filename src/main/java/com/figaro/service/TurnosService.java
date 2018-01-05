@@ -160,7 +160,7 @@ public class TurnosService {
 			BigDecimal precio = t.getServicio().getPrecio();
 			precio = precio.multiply(new BigDecimal(t.getComision()));
 			precio = precio.divide(new BigDecimal(100));
-			montoTotal.add(precio);
+			montoTotal = montoTotal.add(precio);
 		}
 		return montoTotal;
 	}

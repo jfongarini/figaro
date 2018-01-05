@@ -145,6 +145,23 @@ app.controller('turnosController', function ($scope, $http) {
     return total;
     };
 
+    //OBTENER PAGO A PELUQUERO POR TURNO
+    $scope.getPago = function(trabajos) {
+        var total = 0;
+        for(var i = 0; i < trabajos.length; i++)
+            total += (trabajos[i].servicio.precio * trabajos[i].comision) /100 ;
+        return total;
+    };
+
+    //OBTENER TOTAL PAGOS
+    $scope.getTotalPago = function(turnos) {
+        var total = 0;
+        for(var i = 0; i < turnos.length; i++)
+        for(var j = 0; j < turnos[i].trabajos.length; j++)
+            total += (turnos[i].trabajos[j].servicio.precio * turnos[i].trabajos[j].comision) /100 ;
+        return total;
+    };
+
     //VALIDAR FORMULARIO
     $scope.validateTurno = function() {
         if (!("cliente" in $scope.ngTurno) || $scope.ngTurno.cliente === null){
@@ -216,14 +233,6 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.clientes=[];
     }
     
-    //POP UP COBRADO
-    $scope.setCobrado = function (turno) {
-        $scope.turnoTarget = turno;
-        if(turno.cobrado)
-            openModal("modal-cobrar");
-        else
-            openModal("modal-cancelar-cobro");
-    }
 
     //INICIALIZAR MOVIMIENTO
     $scope.initMovimiento = function(){
@@ -244,6 +253,15 @@ app.controller('turnosController', function ($scope, $http) {
         });
     };
 
+    //POP UP COBRADO
+    $scope.setCobrado = function (turno) {
+        $scope.turnoTarget = turno;
+        if(turno.cobrado)
+            openModal("modal-cobrar");
+        else
+            openModal("modal-cancelar-cobro");
+    }
+
     //CANCELAR COBRO
     $scope.discardCobro = function(turno){
         turno.cobrado = false;
@@ -263,8 +281,26 @@ app.controller('turnosController', function ($scope, $http) {
         closeModal("modal-cancelar-cobro");      
     }
 
-    //CONFIRMAR DESHACER COBRO
+
+
+    //POP UP PAGADO
+    $scope.setPagado = function (turno) {
+        $scope.turnoTarget = turno;
+        if(!turno.pagado)
+            openModal("modal-cancelar-pago");
+        else
+            $scope.togglePago(turno);
+    }
+
+   //CANCELAR DESHACER PAGO
+    $scope.discardCancelarPago = function(turno){
+        turno.pagado = true;
+        closeModal("modal-cancelar-pago");
+    };
+
+    //CONFIRMAR PAGO
     $scope.togglePago = function (turno) {
+        closeModal("modal-cancelar-pago");
         $http.put('/rest/turnos/'+turno.id+'/pago');
     }
 

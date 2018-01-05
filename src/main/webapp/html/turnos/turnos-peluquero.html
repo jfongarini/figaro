@@ -16,6 +16,7 @@
               <th>FECHA</th>
               <th>TRABAJOS</th>
               <th>PRECIO</th>
+              <th>PAGO</th>
               <th>REALIZADO</th>
               <th>PAGADO</th>
           </tr>
@@ -25,13 +26,14 @@
           <td id={{turno.id}} data-id={{turno.id}}>{{turno.desde.split(' ')[0] | date}} {{turno.desde.split(' ')[1]}}</td>
           <td id={{turno.id}} data-id={{turno.id}}><span ng-repeat="trabajo in turno.trabajos"> {{trabajo.servicio.descripcion}} ({{trabajo.comision}}%) </span></td>
           <td id={{turno.id}} data-id={{turno.id}}>{{getTotalTurno(turno.trabajos) | currency}}</td>
+          <td id={{turno.id}} data-id={{turno.id}}>{{getPago(turno.trabajos) | currency}}</td>
           <td><input ng-checked="turno.cobrado"  type="checkbox" disabled></td>
-          <td><input ng-click="togglePago(turno)" ng-checked="turno.pagado"  type="checkbox"></td>
+          <td><input ng-model="turno.pagado"  ng-click="setPagado(turno)"  type="checkbox"></td>
         </tr>
         </tbody>
       </table>
-      <div ng-cloak class=banner>
-          <label class=banner-label >{{getTotalDiario(turnos) | currency}}</label>
+      <div  class=banner>
+          <label class=banner-label >{{getTotalPago(turnos) | currency}}</label>
       </div>
   </div>
 
@@ -39,6 +41,7 @@
     <div class="message-content">{{message}}</div>
   </div>
 
+  <#include "/html/turnos/deshacer-cobrado-pagado.html">
   <#include "/html/common/javascript.html">
   <script src="/js/turnosController.js" ></script>
   <script src="/js/clientesController.js" ></script>
