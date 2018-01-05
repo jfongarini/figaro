@@ -22,7 +22,6 @@ app.controller('turnosController', function ($scope, $http) {
         $scope.totalTrabajosSeleccionados=0;
         $scope.trabajosPeluquero = [];
         $scope.trabajosSeleccionados = [];
-        $scope.ngTurno.cobrado = false;
         $scope.isNuevoTurno = true;
         openModal("modal-turnos");
     };
@@ -260,8 +259,13 @@ app.controller('turnosController', function ($scope, $http) {
     
     //CONFIRMAR DESHACER COBRO
     $scope.toggleCobro = function (turno) {
-        $http.patch('/rest/turnos/'+turno.id+'/cobrado');
+        $http.put('/rest/turnos/'+turno.id+'/cobrado/cancelar');
         closeModal("modal-cancelar-cobro");      
+    }
+
+    //CONFIRMAR DESHACER COBRO
+    $scope.togglePago = function (turno) {
+        $http.put('/rest/turnos/'+turno.id+'/pago');
     }
 
     //BUSCAR CLIENTE
@@ -290,6 +294,31 @@ app.controller('turnosController', function ($scope, $http) {
             $scope.turnos = response.data;
             if ( $scope.turnos.length > 0){
                 $scope.cliente = ($scope.turnos[0].cliente.nombre +' '+ $scope.turnos[0].cliente.apellido) 
+                $scope.getTotalDiario($scope.turnos);
+            }
+        });
+    }
+
+    //INIT TURNOS DE CLIENTE
+    $scope.getTurnosDePeluquero = function(){
+        $scope.activeTurnos = true;
+        url = '/rest/turnos/peluquero/';
+        path = window.location.href.split("/").pop();
+        if (path == 'sinpagar'){
+            isSinPagar = true;
+            $scope.message = 'No existen turnos para pagar a este peluquero.';
+            peluqueroId = window.location.href.split("/")[5];
+            url = url + peluqueroId + '/sinpagar';
+        }else{
+            isSinPagar = false;
+            $scope.message = 'No existen turnos para este peluquero.';
+            url = url + path;
+        }
+        $http.get(url)
+        .then(function successCallback(response) {
+            $scope.turnos = response.data;
+            if ( $scope.turnos.length > 0){
+                $scope.peluquero = ($scope.turnos[0].peluquero.nombre +' '+ $scope.turnos[0].peluquero.apellido) 
                 $scope.getTotalDiario($scope.turnos);
             }
         });

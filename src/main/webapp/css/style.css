@@ -221,22 +221,27 @@ li a:hover {
     cursor: pointer
 }
 
+.td-link{
+    height:100%;
+    width:100%
+}
+
 .trabajos-list{
-    width: 350px;
+    width: 350px
 }
 
 .trabajos-list input{
    border-width: 0px;
    max-width: 45px;
-   background-color: transparent;
+   background-color: transparent
 }
 
 .trabajos-list tr:hover td input {
-    color: white;
+    color: white
 }
 
 .trabajos-list th{
-    text-align: left;
+    text-align: left
 }
 
 .trabajos-list tr:nth-child(odd) {
@@ -250,9 +255,8 @@ li a:hover {
 }
 
 .table-remove{
-    width: 5px;
+    width: 5px
 }
-
 
 .active {
     border-left-width: 3px;
@@ -260,13 +264,11 @@ li a:hover {
     border-left-color:  #6666c4
 }
 
-
 .material-icons{
     margin-right: 8px;
     font-size: 18px;
     vertical-align: sub
 }
-
 
 .modal {
     display: none
@@ -337,8 +339,6 @@ li a:hover {
     filter: blur(5px)
 }
 
-
-
 .modal-content .form-field label, .modal-double .form-field label{
     display: inline-block;  
     clear: left;
@@ -393,7 +393,7 @@ li a:hover {
     border-left-width: 0px
 }
 
-.cliente-link {
+.link {
     color: #292961;
     font-weight: 800;
     text-decoration: none;

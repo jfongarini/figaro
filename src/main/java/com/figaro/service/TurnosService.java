@@ -19,6 +19,7 @@ import com.figaro.repository.TurnosRepository;
 public class TurnosService {
 	
 	private static final String CATEGORIA_TURNOS = "Turnos";
+	private static final String CATEGORIA_PELUQUERO = "Peluqueros";
 
 	final static Logger LOGGER = Logger.getLogger(TurnosService.class);
 	
@@ -40,8 +41,18 @@ public class TurnosService {
 	}
 	
 	public List<Turno> getTurnosCliente(int clienteId) {
-		LOGGER.debug("Obteniendo lost turnos para el cliente con ID: " +  clienteId);
+		LOGGER.debug("Obteniendo los turnos para el cliente con ID: " +  clienteId);
 		return repository.getTurnosCliente(clienteId);
+	}
+	
+	public List<Turno> getTurnosPeluquero(int peluqueroId) {
+		LOGGER.debug("Obteniendo los turnos para el peluquero con ID: " +  peluqueroId);
+		return repository.getTurnosPeluquero(peluqueroId);
+	}
+	
+	public List<Turno> getTurnosPeluqueroSinPagar(int peluqueroId) {
+		LOGGER.debug("Obteniendo los turnos sin pagar para el peluquero con ID: " +  peluqueroId);
+		return repository.getTurnosPeluqueroSinPagar(peluqueroId);
 	}
 
 	public List<Turno> getTurnosDelDia(Date fecha) {
@@ -53,24 +64,49 @@ public class TurnosService {
 		return repository.searchTurno(desde);
 	}
 	
+	public Turno pago(int turnoId){
+		Turno turno = getTurno(turnoId);
+		return (turno.getPagado()) ?  cancelPago(turnoId) : setPagado(turnoId);
+	}
+	
+	public Turno setPagado(int turnoId) {
+		Turno turno = getTurno(turnoId);
+		LOGGER.info("Pagando el Turno: " + turno.toString() );
+		turno.setPagado(true);
+		BigDecimal montoTotal = generatePrecioPeluquero(turno);
+		Movimiento pago = generatePago(turno, montoTotal);
+		turno.setPago(pago);
+		repository.updateTurnoCobro(turno);
+		return turno;
+	}
+
+	
 	public Turno setCobrado(int turnoId, Movimiento cobro) {
 		Turno turno = getTurno(turnoId);
 		LOGGER.info("Cobrando el Turno: " + turno.toString() + " Con el movimiento: " + cobro.toString());
 		turno.setCobrado(true);
-		turno.setMovimiento(generateCobro(turno,cobro));
+		turno.setCobro(generateCobro(turno,cobro));
 		repository.updateTurnoCobro(turno);
 		Cliente cliente = turno.getCliente();
 		cliente.setUltimaVisita(turno.getDesde());
 		clientesService.updateCliente(cliente);
 		return turno;
 	}
-
 	
 	public Turno cancelCobro(int turnoId) {
 		Turno turno = getTurno(turnoId);
 		LOGGER.info("Cancelando el cobro del Turno: " + turno.toString());
 		turno.setCobrado(false);
-		turno.setMovimiento(null);
+		turno.setCobro(null);
+		repository.updateTurnoCobro(turno);
+		return turno;
+	}
+	
+	public Turno cancelPago(int turnoId) {
+		Turno turno = getTurno(turnoId);
+		LOGGER.info("Cancelando el pago del Turno: " + turno.toString());
+		turno.setPagado(false);
+		turno.setPago(null);
 		repository.updateTurnoCobro(turno);
 		return turno;
 	}
@@ -78,7 +114,7 @@ public class TurnosService {
 	public Turno updateTurno(Turno turno) {
 		LOGGER.info("Actualizando el Turno: " + turno.toString());
 		validateTurno(turno);
-		turno.setMovimiento(updateMovimiento(turno));
+		turno.setCobro(updateMovimiento(turno));
 		Turno updated = getTurno(turno.getId());
 		updated.update(turno);
 		repository.updateTurno(updated);
@@ -106,6 +142,28 @@ public class TurnosService {
 		return precio;
 	}
 	
+	private Movimiento generatePago(Turno turno,BigDecimal montoTotal) {
+		Movimiento movimiento = new Movimiento();
+		movimiento.setCategoria(CATEGORIA_PELUQUERO);
+		movimiento.setCuotas(0);
+		movimiento.setDetalle(turno.getPeluquero().getNombre() +" "+ turno.getPeluquero().getApellido());
+		movimiento.setFecha(new Date());
+		movimiento.setIsGasto(true);
+		movimiento.setPrecio(montoTotal);
+		movimiento.setTipoPago("contado");
+		return movimiento;
+	}
+	
+	private BigDecimal generatePrecioPeluquero(Turno turno) {
+		BigDecimal montoTotal = new BigDecimal(0);
+		for (Trabajo t : turno.getTrabajos()) {
+			BigDecimal precio = t.getServicio().getPrecio();
+			precio = precio.multiply(new BigDecimal(t.getComision()));
+			precio = precio.divide(new BigDecimal(100));
+			montoTotal.add(precio);
+		}
+		return montoTotal;
+	}
 	private String generateDescripcion (Turno turno){
 		List<String> descripionesTrabjo = turno.getTrabajos().stream().map(t -> t.getServicio().getDescripcion()).collect(Collectors.toList());
 		return String.join(" ", descripionesTrabjo);
@@ -115,7 +173,7 @@ public class TurnosService {
 	private Movimiento updateMovimiento(Turno turno) {
 		if (!turno.getCobrado())
 			return null;
-		return generateCobro(turno,turno.getMovimiento());
+		return generateCobro(turno,turno.getCobro());
 	}
 	
 	public Turno deleteTurno(int turnoId) {
@@ -127,12 +185,16 @@ public class TurnosService {
 	
 	private void validateTurno(Turno nuevoTurno) {
 		LOGGER.debug("Validando el Turno: " + nuevoTurno.getDesde() +" - " +nuevoTurno.getHasta() +" "+ nuevoTurno.getPeluquero() );
+		
 		if (horarioInvalido(nuevoTurno))
 			throw new HorarioInvalidoException(nuevoTurno.getDesde() +" - "+nuevoTurno.getHasta());
+		
 		List<Turno> turnosDelDia = searchTurno(nuevoTurno.getDesde());
 		turnosDelDia.remove(nuevoTurno);
+		
 		for(Turno turno : turnosDelDia) 
-			if(  (mismoPeluquero(nuevoTurno, turno) && horarioOcupado(nuevoTurno, turno)) || (mismoCliente(nuevoTurno, turno) && horarioOcupado(nuevoTurno, turno))    ) 
+			if(  (mismoPeluquero(nuevoTurno, turno) && horarioOcupado(nuevoTurno, turno)) || 
+				 (mismoCliente(nuevoTurno, turno)   && horarioOcupado(nuevoTurno, turno))    ) 
 			throw new TurnoOcupadoException(nuevoTurno);
 	}
 

@@ -12,6 +12,9 @@ import com.figaro.model.Turno;
 @SuppressWarnings("unchecked")
 public class TurnosRepository extends AbstractRepository{
 
+	public Turno getTurno(int turnoId) {
+		return (Turno) getCurrentSession().get(Turno.class, turnoId);
+	}
 
 	public int saveTurno (Turno turno) {
 		for(Trabajo trabajo : turno.getTrabajos()) {
@@ -21,11 +24,6 @@ public class TurnosRepository extends AbstractRepository{
 		return (int) getCurrentSession().save(turno); 
 	}
 
-	public Turno getTurno(int turnoId) {
-		return (Turno) getCurrentSession().get(Turno.class, turnoId);
-	}
-	
-	
 	public void updateTurno(Turno turno) {
 		for(Trabajo trabajo : turno.getTrabajos()) {
 			trabajo.setId(null);
@@ -49,6 +47,18 @@ public class TurnosRepository extends AbstractRepository{
 				.list();
 	}
 	
+	
+	public List<Turno> getTurnosPeluquero(int peluqueroId) {
+		return getCurrentSession().createQuery( "FROM Turno AS t WHERE t.peluquero.id = :peluqueroId ORDER BY t.desde DESC")
+				.setParameter("peluqueroId", peluqueroId)
+				.list();
+	}
+	
+	public List<Turno> getTurnosPeluqueroSinPagar(int peluqueroId) {
+		return getCurrentSession().createQuery( "FROM Turno AS t WHERE t.peluquero.id = :peluqueroId AND t.pagado = false ORDER BY t.desde DESC")
+				.setParameter("peluqueroId", peluqueroId)
+				.list();
+	}
 	
 	public List<Turno> searchTurno (Date desdeParam) {
 		LocalDate localDate = desdeParam.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();

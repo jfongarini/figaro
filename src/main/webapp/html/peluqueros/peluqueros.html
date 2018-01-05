@@ -11,13 +11,21 @@
     <label class="add custom-button" ng-click="newPeluquero()"><i class=material-icons  >add content_cut</i> </label><br>
     
     <div class=main-card>
-      <table>
+      <table class=main-table>
+        <thead>
+        <tr>
+            <th>NOMBRE</th>
+            <th>APELLIDO</th>
+            <th>PAGAR</th>
+            <th>HISTORIAL</th>
+        </tr>
+      </thead>
         <tbody>
           <tr data-id={{peluquero.id}} class=data-row ng-repeat="peluquero in peluqueros" data-ng-click="detailPeluquero($event)" ng-cloak>
             <td>{{peluquero.nombre}}</td>
             <td>{{peluquero.apellido}}</td>
-            <td><i class="material-icons"> payment </i></td>
-            <td><i class="material-icons"> history </i></td>
+            <td><a class=link ng-href="/turnos/peluquero/{{peluquero.id}}/sinpagar"><div class=td-link><i class="material-icons"> payment </i></div></a></td>
+            <td><a class=link ng-href="/turnos/peluquero/{{peluquero.id}}"><div class=td-link><i class="material-icons"> history </i></div></a></td>
           </tr>
         </tbody>
       </table>

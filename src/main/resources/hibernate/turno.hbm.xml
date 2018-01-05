@@ -9,6 +9,7 @@
 		<property name="desde"	column="DESDE"	type="java.sql.Timestamp"/>
      	<property name="hasta"	column="HASTA"	type="java.sql.Timestamp"/>
      	<property name="cobrado"	column="COBRADO"	type="boolean"/>
+		<property name="pagado"	column="PAGADO"	type="boolean"/>
 		
 	 	<many-to-one name="cliente" class="com.figaro.model.Cliente" lazy="false" fetch="select">
             <column name="ID_CLIENTE" not-null="true" />
@@ -17,8 +18,12 @@
         <many-to-one name="peluquero" class="com.figaro.model.Peluquero" lazy="false" fetch="select">
             <column name="ID_PELUQUERO" not-null="true" />
         </many-to-one>
-     	<many-to-one name="movimiento" unique="true"  cascade="all-delete-orphan" class="com.figaro.model.Movimiento" lazy="false"  fetch="select">
-            <column name="ID_MOVIMIENTO" />
+     	<many-to-one name="cobro" unique="true"  cascade="all-delete-orphan" class="com.figaro.model.Movimiento" lazy="false"  fetch="select">
+            <column name="ID_COBRO" />
+        </many-to-one>
+        
+        <many-to-one name="pago" unique="true"  cascade="all-delete-orphan" class="com.figaro.model.Movimiento" lazy="false"  fetch="select">
+            <column name="ID_PAGO" />
         </many-to-one>
         
         <set name="trabajos" cascade="all-delete-orphan"  lazy="false" fetch="select" >

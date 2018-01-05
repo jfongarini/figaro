@@ -4,6 +4,7 @@ import static com.figaro.util.Constants.DATE_TIME_FORMAT;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -18,8 +19,16 @@ public class Turno {
 	@JsonFormat(pattern=DATE_TIME_FORMAT)
 	private Date hasta;
 	private Boolean cobrado;
-	private Movimiento movimiento;
+	private Boolean pagado;
+	private Movimiento cobro;
+	private Movimiento pago;
 	private Set<Trabajo> trabajos;
+	
+	public Turno () {
+		this.cobrado = false;
+		this.pagado = false;
+		this.trabajos = new HashSet<>();
+	}
 	
 	public void update(Turno turno) {
 		this.cliente = turno.getCliente();
@@ -27,12 +36,15 @@ public class Turno {
 		this.desde = turno.getDesde();
 		this.hasta = turno.getHasta();
 		this.cobrado = turno.getCobrado();
-		this.movimiento = turno.getMovimiento();
+		this.cobro = turno.getCobro();
 		this.trabajos.removeAll(new ArrayList<Trabajo>(this.trabajos));
 		this.trabajos.addAll(turno.getTrabajos());
-		this.movimiento = turno.getMovimiento();
-		if(this.movimiento != null) 
-			this.movimiento.setId(null);
+		this.cobro = turno.getCobro();
+		this.pago =  turno.getPago();
+		if(this.cobro != null) 
+			this.cobro.setId(null);
+		if(this.pago != null) 
+			this.pago.setId(null);
 		
 	}
 	
@@ -78,13 +90,23 @@ public class Turno {
 	public void setDesde(Date desde) {
 		this.desde = desde;
 	}
-	
-	public Movimiento getMovimiento() {
-		return movimiento;
+	public Movimiento getCobro() {
+		return cobro;
 	}
-
-	public void setMovimiento(Movimiento movimiento) {
-		this.movimiento = movimiento;
+	public void setCobro(Movimiento movimiento) {
+		this.cobro = movimiento;
+	}
+	public Boolean getPagado() {
+		return pagado;
+	}
+	public void setPagado(Boolean pagado) {
+		this.pagado = pagado;
+	}
+	public Movimiento getPago() {
+		return pago;
+	}
+	public void setPago(Movimiento pago) {
+		this.pago = pago;
 	}
 	
 
@@ -111,8 +133,7 @@ public class Turno {
 	
 	@Override
 	public String toString() {
-		return "Turno [id=" + id + ", cliente=" + cliente + ", peluquero=" + peluquero + ", desde=" + desde + ", hasta=" + hasta + ", cobrado=" + cobrado + ", movimiento=" + movimiento + ", trabajos=" + trabajos + "]";
+		return "Turno [id=" + id + ", cliente=" + cliente + ", peluquero=" + peluquero + ", desde=" + desde + ", hasta=" + hasta + ", cobrado=" + cobrado + ", movimiento=" + cobro + ", trabajos=" + trabajos + "]";
 	}
-
 
 }
