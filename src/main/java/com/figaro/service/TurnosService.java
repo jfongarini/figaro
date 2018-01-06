@@ -1,6 +1,10 @@
 package com.figaro.service;
 
 import java.math.BigDecimal;
+import static com.figaro.util.Constants.TIPO_PAGO_CONTADO;
+import static com.figaro.util.Constants.CATEGORIA_PELUQUERO;
+import static com.figaro.util.Constants.CATEGORIA_TURNOS;
+
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,9 +22,6 @@ import com.figaro.repository.TurnosRepository;
 
 public class TurnosService {
 	
-	private static final String CATEGORIA_TURNOS = "Turnos";
-	private static final String CATEGORIA_PELUQUERO = "Peluqueros";
-
 	final static Logger LOGGER = Logger.getLogger(TurnosService.class);
 	
 	private ClientesService clientesService;
@@ -122,7 +123,7 @@ public class TurnosService {
 		movimiento.setFecha(new Date());
 		movimiento.setIsGasto(true);
 		movimiento.setPrecio(montoTotal);
-		movimiento.setTipoPago("contado");
+		movimiento.setTipoPago(TIPO_PAGO_CONTADO);
 		return movimiento;
 	}
 	
