@@ -72,9 +72,9 @@ public class TurnosControllerREST {
 		return new ResponseEntity<Turno>(service.cancelCobro(turnoId), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "turnos/{turnoId}/pago",method=RequestMethod.PUT)
+	@RequestMapping(value = "turnos/{turnoId}/pagar",method=RequestMethod.PUT)
     public ResponseEntity<Turno> pago( @PathVariable int turnoId) {
-		return new ResponseEntity<Turno>(service.pago(turnoId), HttpStatus.OK);
+		return new ResponseEntity<Turno>(service.pagar(turnoId), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "turnos",method=RequestMethod.GET)

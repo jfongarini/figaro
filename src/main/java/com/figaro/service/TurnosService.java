@@ -34,37 +34,8 @@ public class TurnosService {
 		turno.setId(newID);
 		return turno ;  
 	}
-	
-	public Turno getTurno(int turnoId) {
-		LOGGER.debug("Obteniendo el turno con ID: " + turnoId);
-		return repository.getTurno(turnoId);
-	}
-	
-	public List<Turno> getTurnosCliente(int clienteId) {
-		LOGGER.debug("Obteniendo los turnos para el cliente con ID: " +  clienteId);
-		return repository.getTurnosCliente(clienteId);
-	}
-	
-	public List<Turno> getTurnosPeluquero(int peluqueroId) {
-		LOGGER.debug("Obteniendo los turnos para el peluquero con ID: " +  peluqueroId);
-		return repository.getTurnosPeluquero(peluqueroId);
-	}
-	
-	public List<Turno> getTurnosPeluqueroSinPagar(int peluqueroId) {
-		LOGGER.debug("Obteniendo los turnos sin pagar para el peluquero con ID: " +  peluqueroId);
-		return repository.getTurnosPeluqueroSinPagar(peluqueroId);
-	}
 
-	public List<Turno> getTurnosDelDia(Date fecha) {
-		LOGGER.debug("Obteniendo turnos del dia: " + fecha );
-		return searchTurno(fecha);
-	}
-
-	public List<Turno> searchTurno(Date desde) {
-		return repository.searchTurno(desde);
-	}
-	
-	public Turno pago(int turnoId){
+	public Turno pagar(int turnoId){
 		Turno turno = getTurno(turnoId);
 		return (turno.getPagado()) ?  cancelPago(turnoId) : setPagado(turnoId);
 	}
@@ -73,8 +44,7 @@ public class TurnosService {
 		Turno turno = getTurno(turnoId);
 		LOGGER.info("Pagando el Turno: " + turno.toString() );
 		turno.setPagado(true);
-		BigDecimal montoTotal = generatePrecioPeluquero(turno);
-		Movimiento pago = generatePago(turno, montoTotal);
+		Movimiento pago = generatePago(turno);
 		turno.setPago(pago);
 		repository.updateTurnoCobro(turno);
 		return turno;
@@ -114,7 +84,8 @@ public class TurnosService {
 	public Turno updateTurno(Turno turno) {
 		LOGGER.info("Actualizando el Turno: " + turno.toString());
 		validateTurno(turno);
-		turno.setCobro(updateMovimiento(turno));
+		updatePago(turno);
+		updateCobro(turno);
 		Turno updated = getTurno(turno.getId());
 		updated.update(turno);
 		repository.updateTurno(updated);
@@ -142,7 +113,8 @@ public class TurnosService {
 		return precio;
 	}
 	
-	private Movimiento generatePago(Turno turno,BigDecimal montoTotal) {
+	private Movimiento generatePago(Turno turno) {
+		BigDecimal montoTotal = generatePrecioPeluquero(turno);
 		Movimiento movimiento = new Movimiento();
 		movimiento.setCategoria(CATEGORIA_PELUQUERO);
 		movimiento.setCuotas(0);
@@ -164,17 +136,22 @@ public class TurnosService {
 		}
 		return montoTotal;
 	}
+	
 	private String generateDescripcion (Turno turno){
 		List<String> descripionesTrabjo = turno.getTrabajos().stream().map(t -> t.getServicio().getDescripcion()).collect(Collectors.toList());
 		return String.join(" ", descripionesTrabjo);
 	}
 	
-
-	private Movimiento updateMovimiento(Turno turno) {
-		if (!turno.getCobrado())
-			return null;
-		return generateCobro(turno,turno.getCobro());
+	private void updateCobro(Turno turno) {
+		if (turno.getCobrado())
+		  turno.setCobro(generateCobro(turno,turno.getCobro()));
 	}
+
+	private void updatePago(Turno turno) {
+		if (turno.getPagado())
+		    turno.setPago(generatePago(turno));	
+		}
+	
 	
 	public Turno deleteTurno(int turnoId) {
 		Turno turno = getTurno(turnoId);
@@ -198,6 +175,34 @@ public class TurnosService {
 			throw new TurnoOcupadoException(nuevoTurno);
 	}
 
+	public Turno getTurno(int turnoId) {
+		LOGGER.debug("Obteniendo el turno con ID: " + turnoId);
+		return repository.getTurno(turnoId);
+	}
+	
+	public List<Turno> getTurnosCliente(int clienteId) {
+		LOGGER.debug("Obteniendo los turnos para el cliente con ID: " +  clienteId);
+		return repository.getTurnosCliente(clienteId);
+	}
+	
+	public List<Turno> getTurnosPeluquero(int peluqueroId) {
+		LOGGER.debug("Obteniendo los turnos para el peluquero con ID: " +  peluqueroId);
+		return repository.getTurnosPeluquero(peluqueroId);
+	}
+	
+	public List<Turno> getTurnosPeluqueroSinPagar(int peluqueroId) {
+		LOGGER.debug("Obteniendo los turnos sin pagar para el peluquero con ID: " +  peluqueroId);
+		return repository.getTurnosPeluqueroSinPagar(peluqueroId);
+	}
+
+	public List<Turno> getTurnosDelDia(Date fecha) {
+		LOGGER.debug("Obteniendo turnos del dia: " + fecha );
+		return searchTurno(fecha);
+	}
+
+	public List<Turno> searchTurno(Date desde) {
+		return repository.searchTurno(desde);
+	}
 	
 	private boolean mismoPeluquero(Turno nuevoTurno, Turno turno) {
 		return turno.getPeluquero().equals(nuevoTurno.getPeluquero());

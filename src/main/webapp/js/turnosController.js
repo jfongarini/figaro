@@ -301,7 +301,7 @@ app.controller('turnosController', function ($scope, $http) {
     //CONFIRMAR PAGO
     $scope.togglePago = function (turno) {
         closeModal("modal-cancelar-pago");
-        $http.put('/rest/turnos/'+turno.id+'/pago');
+        $http.put('/rest/turnos/'+turno.id+'/pagar');
     }
 
     //BUSCAR CLIENTE
