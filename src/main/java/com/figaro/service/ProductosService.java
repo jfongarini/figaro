@@ -52,6 +52,14 @@ public class ProductosService {
 		return repository.getAll();
 	}
 	
+	public List<Producto> buscarFaltante() {
+		LOGGER.debug("Obteniendo todos los productos faltantes");
+		return repository.buscarFaltante();
+		//return repository.getAll();
+	}	
+	
+	
+	
 	public ProductosRepository getRepository() {
 		return repository;
 	}
@@ -62,5 +70,8 @@ public class ProductosService {
 	public List<Producto> buscar(String search) {
 		return repository.buscar(search);
 	}
+	
+
+	
 	
 }

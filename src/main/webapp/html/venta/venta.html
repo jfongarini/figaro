@@ -1,0 +1,74 @@
+<!Doctype html>
+<html>
+  <head> 
+	  <title>venta</title>
+    <#include "/html/common/head.html"> 
+  </head>
+  <body ng-app=figaro ng-controller=ventaController ng-cloak >
+    <#include "/html/common/menu.html">
+    <div id=content class=content>
+      <font face="arial" color="000" size="06"> 
+        Venta de productos
+      </font>      
+      <p>
+<!--Inicio Seleccion de producto -->
+      <div class="card venta">
+        <form ng-submit="">
+          <div class=card-title><i class="material-icons">add_shopping_cart</i><label>Productos</label></div>
+          <div class=form-field><label>Seleccionar producto: </label>
+            <select name="producto" ng-model="producto" ng-change="verProducto(producto)">
+              <option value="{{producto.id}}" ng-repeat= "producto in productos">{{producto.nombre}} ({{producto.descripcion}})</option>
+            </select>
+          </div>
+          <table id=tableDetalle>
+            <tbody>
+              <tr><td>Nombre: {{ngProductoVenta.nombre}}</td></tr>
+              <tr><td>Descripci&oacute;n: {{ngProductoVenta.descripcion}}</td></tr>
+              <tr><td>Disponibilidad: {{ngProductoVenta.cantidad}}</td></tr>
+              <tr><td>Precio unitario: {{ngProductoVenta.precio | currency}}</td></tr>
+              <tr></tr>
+              <tr>
+                <td class=form-field><label>Cantidad a vender:</label>
+                  <input ng-model="aVender" ng-value="aVender" type="number" ng-init="aVender=0" min="1" max="{{ngProductoVenta.cantidad}}"></input>
+                </td>
+              </tr>
+            </tbody>
+          </table>          
+          <button type="submit">Enviar a carrito</button>
+        </form>
+      </div>
+<!-- Fin seleccionar producto -->
+      
+<!--Inicio Carrito -->
+      <div class="card venta">
+        <form ng-submit="">
+          <div class=card-title><i class="material-icons">local_grocery_store</i><label>Carrito</label></div>
+          <table id=tableCarrito>
+            <tbody>
+              <tr>
+                <td>Producto </td>
+                <td>Unidades </td>
+                <td>Precio </td>
+              </tr>
+              <tr ng-cloak class=data-row  ng-repeat="prodCarrito in ngCarrito" >
+                <td>{{prodCarrito.producto.nombre}} ({{prodCarrito.producto.descripcion}}) {{prodCarrito.producto.precio | currency}}</td>
+                <td>{{prodCarrito.unidades}}</td>
+                <td>{{prodCarrito.precio | currency}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+          <div class=banner>
+            <label class=banner-label ><i class=material-icons >account_balance_wallet</i> Total: {{ ngTotalVenta | currency }}</font></label>
+          </div>
+          <button type="submit">VENDER</button>
+        </form>
+      </div>
+<!--Fin Carrito -->
+
+    </div>
+    <#include "/html/common/confirm.html">
+    <#include "/html/common/javascript.html">
+    <script src="../js/ventaController.js" ></script>
+  </body>
+</html>

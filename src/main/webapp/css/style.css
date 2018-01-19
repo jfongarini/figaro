@@ -430,9 +430,6 @@ li a:hover {
     cursor: pointer
 }
 
-
-
-
 .card-title{
     margin-bottom: 20px
 }
@@ -446,6 +443,13 @@ li a:hover {
     width: 450px;
     padding: 20px
 }
+.venta{
+    display: inline-flex;
+    float: left;
+    margin-right: 30px;
+    width: 400px;
+    padding: 20px
+}
 
 .card label{
     width: auto;
@@ -456,10 +460,30 @@ li a:hover {
     margin-bottom: 20px;
 }
 
-.card button{
-    display: none;
+.boton-stock{
+    cursor: pointer;
 }
 
+.card.venta button{
+    cursor: pointer;
+    font-weight: 800;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    width: auto;
+    border-width: 0;
+    outline: none;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    background-color: #292961;
+    color: white
+    
+}
+.card.trabajos button{
+    display: none;
+}
 .card table>tbody>tr:nth-child(odd) {
     background-color: white;
 }
@@ -481,7 +505,10 @@ li a:hover {
 .red {
     color: red; 
 }
-
+.red-background {
+    background-color: rgba(255, 99, 132, .3);
+    backg
+}
 .green {
     color: green;
 }
@@ -529,9 +556,9 @@ width: 50px;
 .numericotr{
     width: 120px;
     text-align: center;
-    
 }
 
+/*STOCK - campo numericos */
 tr:hover .disponibletr{
     background-color: #292961;
     color: white;

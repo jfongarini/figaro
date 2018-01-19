@@ -28,6 +28,11 @@ public class StockControllerREST {
         return service.getAllProductos();
     }
 	
+	@RequestMapping(value = "/faltante",method=RequestMethod.GET,produces="application/json")
+    public List<Producto> getProductosFaltantes() {
+        return service.buscarFaltante();	
+	}
+	
 	@RequestMapping(value = "/{productoId}",method=RequestMethod.GET,produces="application/json")
     public Producto getProducto(@PathVariable int productoId) {
         return service.getProducto(productoId);
@@ -56,11 +61,18 @@ public class StockControllerREST {
 	}
 	
 	
-	@RequestMapping(value = "/buscar",method=RequestMethod.GET,produces="application/json")
+	/* lo cambio por el otro buscar para que sea igual a los demas
+	 @RequestMapping(value = "/buscar",method=RequestMethod.GET,produces="application/json")
     public List<Producto> getAllProductos(@RequestParam String search) {
         return service.buscar(search);
-    }
+    }*/
 	
+	
+	@RequestMapping(value = "/buscar",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<List<Producto>> getAllProductos(@RequestParam String search) {
+        return new ResponseEntity<List<Producto>>(service.buscar(search), HttpStatus.OK);
+    }
+		
 	
 	public ProductosService getService() {
 		return service;

@@ -62,6 +62,7 @@
   				<value>hibernate/producto.hbm.xml</value>
 				<value>hibernate/trabajo.hbm.xml</value>  				
   				<value>hibernate/turno.hbm.xml</value>
+				<value>hibernate/venta.hbm.xml</value>
  			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -135,6 +136,32 @@
 		</property>
 	</bean>
 	
+	<!-- VENTA !-->
+	<bean id="VentaServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="VentaService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="VentaService" class="com.figaro.service.VentaService">
+		<property name="repository">
+			<ref bean="VentaRepository" />
+		</property>
+	</bean>
+
+	<bean id="VentaRepository"	class="com.figaro.repository.VentaRepository">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
 	
 	<!-- CONFIGURACION !-->
 	<bean id="ConfiguracionServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
@@ -190,8 +217,6 @@
 		</property>
 	</bean>
 	
-	
-	
 	<!-- TURNOS !-->
 	<bean id="TurnosServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager">
@@ -206,7 +231,6 @@
 			</props>
 		</property>
 	</bean>
-
 
 	<bean id="TurnosService" class="com.figaro.service.TurnosService">
 		

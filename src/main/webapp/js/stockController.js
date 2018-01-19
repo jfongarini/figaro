@@ -14,6 +14,7 @@ app.controller('stockController', function ($scope, $http) {
     	openModal("modal-stock");
         $scope.ngProducto={}; 
     };
+
     //CLICK VENDER PRODUCTO
     $scope.ventaProducto = function() {
         openModal("modal-stockVenta");
@@ -80,11 +81,18 @@ app.controller('stockController', function ($scope, $http) {
         closeModal("modal-stock");
     };
     
-    //BUSCAR
+    //BUSCAR POR NOMBRE Y DESCRIPCION
     $scope.searchProducto = function() {        
         $http.get('/rest/stock/buscar',{params: { search: $scope.search }})
         .then(function successCallback(response) {
-            $scope.productos = response.data; 
+            $scope.productos = response.data;
+        })
+    };
+
+    //BUSCAR PRUDUCTOS CON FALTANTES DE STOCK
+    $scope.searchProductoFaltante = function() {
+        $http.get('/rest/stock/faltante').then(function successCallback(response){
+            $scope.productos = response.data;
         })
     };
 
@@ -95,10 +103,47 @@ app.controller('stockController', function ($scope, $http) {
         }
     });
 
+    //VER DETALLE PRODUCTO VENTA
+    $scope.verProducto = function(prodID) {
+        $http.get('/rest/stock/'+prodID).then(function(response){
+            $scope.ngProductoVenta = response.data;
+        })
+        $scope.ngProdCarrito = {};
+        inicializarNgProdCarrito();
+    }
+
+    //inicializa objeto ngProdCarrito
+    function inicializarNgProdCarrito(){
+        $scope.ngProdCarrito.unidades = 0;
+        $scope.ngProdCarrito.producto = {};
+        $scope.ngProdCarrito.precio = 0;
+    }
+
+    //SUMAR PRODUCTO AL CARRITO
+    $scope.sumarCarrito = function(prodVenta, uniAVender){
+        $scope.ngProdCarrito.producto = prodVenta;
+        $scope.ngProdCarrito.unidades = uniAVender;
+        $scope.ngProdCarrito.precio = ($scope.ngProdCarrito.producto.precio * $scope.ngProdCarrito.unidades);
+        $scope.ngCarrito.push($scope.ngProdCarrito);
+        $scope.ngTotalVenta = calculaTotalVenta();
+    }
+
+    //CALCULA TOTAL DE LA VENTA
+    function calculaTotalVenta(){
+        var total = 0;
+        angular.forEach($scope.ngCarrito, function(key){
+            total = total + key.precio;
+        })
+        return total;
+    }
+
+
     //INIT
     $scope.activeStock = true;
     $scope.search = '';
     $scope.ngProducto = {};
+    $scope.ngProductoVenta = {};
+    $scope.ngCarrito = [];
     $scope.getAll();
 
 });
