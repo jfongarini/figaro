@@ -4,9 +4,11 @@ package com.figaro.controllerREST;
 
 import static com.figaro.util.Constants.DATE_FORMAT;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,7 +44,27 @@ public class EstadisticasControllerREST {
     public ResponseEntity<Map<String, Integer>> buscarProductoMasVendido(@RequestParam  @DateTimeFormat(pattern=DATE_FORMAT) Date from, @RequestParam @DateTimeFormat(pattern=DATE_FORMAT) Date to) throws ParseException {		
         return new ResponseEntity<Map<String, Integer>>(service.buscarProductoMasVendido(from,to), HttpStatus.OK);
     }
+	
+	@RequestMapping(value = "estadisticas/totalesDeCaja",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<Map<String, BigDecimal>> buscarTotalesDeCaja(@RequestParam  @DateTimeFormat(pattern=DATE_FORMAT) Date from, @RequestParam @DateTimeFormat(pattern=DATE_FORMAT) Date to) throws ParseException {		
+        return new ResponseEntity<Map<String, BigDecimal>>(service.buscarTotalesDeCaja(from,to), HttpStatus.OK);
+    }
 		
+	@RequestMapping(value = "estadisticas/turnosPorPeluqueroCant",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<Map<String, Integer>> buscarTurnosPorPeluqueroCant(@RequestParam  @DateTimeFormat(pattern=DATE_FORMAT) Date from, @RequestParam @DateTimeFormat(pattern=DATE_FORMAT) Date to) throws ParseException {		
+        return new ResponseEntity<Map<String, Integer>>(service.buscarTurnosPorPeluqueroCant(from,to), HttpStatus.OK);
+    }
+	
+	@RequestMapping(value = "estadisticas/turnosPorPeluqueroIngreso",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<Map<String, BigDecimal>> buscarTurnosPorPeluqueroIngreso(@RequestParam  @DateTimeFormat(pattern=DATE_FORMAT) Date from, @RequestParam @DateTimeFormat(pattern=DATE_FORMAT) Date to) throws ParseException {		
+        return new ResponseEntity<Map<String, BigDecimal>>(service.buscarTurnosPorPeluqueroIngreso(from,to), HttpStatus.OK);
+    }
+		
+	@RequestMapping(value = "estadisticas/turnosMasSolicitado",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<TreeMap<String, Integer>> buscarTurnoMasSolicitado(@RequestParam  @DateTimeFormat(pattern=DATE_FORMAT) Date from, @RequestParam @DateTimeFormat(pattern=DATE_FORMAT) Date to) throws ParseException {		
+        return new ResponseEntity<TreeMap<String, Integer>>(service.buscarTurnoMasSolicitado(from,to), HttpStatus.OK);
+    }
+	
 	public EstadisticasService getService() {
 		return service;
 	}

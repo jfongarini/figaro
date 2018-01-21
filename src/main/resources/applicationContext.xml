@@ -287,6 +287,9 @@
 		<property name="movimientosService">
 			<ref bean="MovimientosServiceTransactional" />
 		</property>
+		<property name="turnosService">
+			<ref bean="TurnosServiceTransactional" />
+		</property>
 	</bean>
 	
 

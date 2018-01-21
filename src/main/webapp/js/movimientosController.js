@@ -23,7 +23,8 @@ app.controller('movimientosController', function ($scope, $http) {
 	        $scope.movimientoID = event.currentTarget.getAttribute("data-id");
 	        $http.get('/rest/movimientos/'+$scope.movimientoID).then(function (response) {
 	            $scope.ngMovimiento = response.data;
-	            $scope.ngMovimiento.fecha = new Date($scope.ngMovimiento.fecha);	           
+	            $scope.ngMovimiento.fecha = new Date($scope.ngMovimiento.fecha);	
+	            $scope.ngMovimiento.precio = $scope.ngMovimiento.precio + $scope.ngMovimiento.descuento;           
 	            openModal("modal-caja");
 		    });
 	    };

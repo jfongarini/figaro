@@ -100,19 +100,13 @@ public class TurnosService {
 		movimiento.setFecha(turno.getHasta());
 		movimiento.setTipoPago(cobro.getTipoPago());
 		movimiento.setCuotas(cobro.getCuotas());
-		movimiento.setPrecio(generatePrecio(turno));
+		movimiento.setPrecio(turno.calculatePrecio());
 		movimiento.setDescuento(cobro.getDescuento());
 		movimiento.descontar();
 		movimiento.setDetalle(generateDescripcion(turno)) ;
 		return movimiento;
 	}
 	
-	private BigDecimal generatePrecio(Turno turno){
-		BigDecimal precio = new BigDecimal(0);
-		for (Trabajo t : turno.getTrabajos())
-			precio = precio.add(t.getServicio().getPrecio());
-		return precio;
-	}
 	
 	private Movimiento generatePago(Turno turno) {
 		BigDecimal montoTotal = generatePrecioPeluquero(turno);

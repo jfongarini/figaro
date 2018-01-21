@@ -2,6 +2,7 @@ package com.figaro.model;
 
 import static com.figaro.util.Constants.DATE_TIME_FORMAT;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -47,6 +48,14 @@ public class Turno {
 			this.pago.setId(null);
 		
 	}
+	
+	public BigDecimal calculatePrecio(){
+		BigDecimal precio = new BigDecimal(0);
+		for (Trabajo t : this.getTrabajos())
+			precio = precio.add(t.getServicio().getPrecio());
+		return precio;
+	}
+	
 	
 	public Cliente getCliente() {
 		return cliente;
