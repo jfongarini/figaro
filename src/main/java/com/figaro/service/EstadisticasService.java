@@ -1,11 +1,7 @@
 package com.figaro.service;
 
-import static com.figaro.util.Constants.DATE_TIME_FORMAT;
-
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,8 +10,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import com.figaro.model.Cliente;
 import com.figaro.model.Movimiento;
@@ -31,8 +25,6 @@ public class EstadisticasService {
 	private ClientesService clientesService;
 	private MovimientosService movimientosService;
 	private TurnosService turnosService;
-	@JsonFormat(pattern=DATE_TIME_FORMAT)
-	private Date pruebaHasta;
 	
 	public Map<String, Integer> buscarClienteCiudad(){
 		List<Cliente> allClientes = clientesService.getAllClientes();
@@ -151,34 +143,53 @@ public class EstadisticasService {
 			}
 		}
 		return mapTurnos;
-	}
+	}	
 	
 	public TreeMap<String, Integer> buscarTurnoMasSolicitado(Date from, Date to) throws ParseException{
 		
 		List<Turno> searchTurnos = repository.searchBetween (from,to);
-		Map<String, Integer> mapTurnos = new HashMap<String, Integer>();
-		DateFormat format = new SimpleDateFormat(DATE_TIME_FORMAT);
+		Map<String, Integer> mapTurnos = new HashMap<String, Integer>();		
+		
+		String[] horarios = {"08:00","08:15","08:30","08:45","09:00","09:15","09:30","09:45","10:00","10:15","10:30","10:45","11:00","11:15","11:30","11:45","12:00","12:15","12:30","12:45","13:00","13:15","13:30","13:45","14:00","14:15","14:30","14:45","15:00","15:15","15:30","15:45","16:00","16:15","16:30","16:45","17:00","17:15","17:30","17:45","18:00","18:15","18:30","18:45","19:00","19:15","19:30","19:45","20:00","20:15","20:30","20:45","21:00"};		
+		for (String horario : horarios) {				
+			mapTurnos.put(horario, 0);			
+		}		
 		
 		for (Turno turno : searchTurnos) {
 			
 			Date desde = turno.getDesde();
-			Date hasta = turno.getHasta();			
-			String fechaSuma = fechaString(desde);			
+			Date hasta = turno.getHasta();	
 			
+			Calendar calendarDesde = Calendar.getInstance();
+			calendarDesde.setTime(desde);
+			Calendar calendarHasta = Calendar.getInstance();
+			calendarHasta.setTime(hasta);
+			int horaDesde = calendarDesde.get(Calendar.HOUR_OF_DAY);
+			int minDesde = calendarDesde.get(Calendar.MINUTE);			
+			int horaHasta = calendarHasta.get(Calendar.HOUR_OF_DAY);
+			int minHasta = calendarHasta.get(Calendar.MINUTE);		
+						
+			String horaMinDesde = ordenarTiempo(horaDesde)+":"+ordenarTiempo(minDesde);
+			String horaMinHasta = ordenarTiempo(horaHasta)+":"+ordenarTiempo(minHasta);
+						
 			for (int i=0; i<1;) {
-				Integer cantidadTurnos = mapTurnos.get(fechaSuma);
-				if (cantidadTurnos == null) {
-					mapTurnos.put(fechaSuma, 1);
+				
+				Integer cantidadTurnos = mapTurnos.get(horaMinDesde);
+				cantidadTurnos ++;
+				mapTurnos.put(horaMinDesde, cantidadTurnos);
+				
+				if (minDesde == 45) {
+					minDesde = 0;
+					horaDesde++;
 				} else {
-					cantidadTurnos ++;
-					mapTurnos.put(fechaSuma, cantidadTurnos);
-				}
-				Date fechaFormat = format.parse(fechaSuma);
-				fechaSuma = fechaSumaQuince(fechaFormat);
-				this.pruebaHasta = fechaFormat;				
-				if (this.pruebaHasta.compareTo(hasta) == 0) {
+					minDesde = minDesde + 15;
+				}			
+				
+				if (horaMinHasta.compareTo(horaMinDesde) == 0) {
 					i=1;
-				}					
+				}
+				
+				horaMinDesde = ordenarTiempo(horaDesde)+":"+ordenarTiempo(minDesde);
 			}
 		}
 		
@@ -190,25 +201,12 @@ public class EstadisticasService {
 		return sorted;
 	}
 	
-	public String fechaSumaQuince(Date fecha) {
-		final long ONE_MINUTE_IN_MILLIS=60000;
-        Calendar date = Calendar.getInstance();
-        date.setTime(fecha);
-        long t= date.getTimeInMillis();		        
-        Date afterAddingTenMins=new Date(t + (15 * ONE_MINUTE_IN_MILLIS));	       
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.0");
-        String strDate = sdf.format(afterAddingTenMins);
-        return strDate;
-	}
-	
-	public String fechaString(Date fecha) {		
-        Calendar date = Calendar.getInstance();
-        date.setTime(fecha);
-        long t= date.getTimeInMillis();		        
-        Date afterAddingTenMins=new Date(t);	       
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.0");
-        String strDate = sdf.format(afterAddingTenMins);
-        return strDate;
+	public String ordenarTiempo(int tiempo) {
+		if (tiempo < 10) {
+			return "0"+String.valueOf(tiempo);
+		} else {
+			return String.valueOf(tiempo);
+		}		
 	}
 	
 	public EstadisticasRepository getRepository() {
