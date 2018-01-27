@@ -2,12 +2,14 @@ package com.figaro.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class Venta {
 
 	private int id;
 	private BigDecimal precio;
 	private Date fecha;
+	private List<Item> items;
 	
 	public int getId() {
 		return id;
@@ -30,16 +32,16 @@ public class Venta {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-		
-	public Venta update(Venta venta) {
-		setPrecio(venta.getPrecio());
-		setFecha(venta.fecha);
-		return this;
-	}
 
 	@Override
 	public String toString() {
 		return "Venta [id=" + id + ", precio=" + precio + ", fecha=" + fecha + "]";
+	}
+	public List<Item> getItems() {
+		return items;
+	}
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 	
 }

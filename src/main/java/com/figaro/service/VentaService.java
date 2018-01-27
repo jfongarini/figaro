@@ -2,6 +2,8 @@ package com.figaro.service;
 
 import java.util.List;
 import org.apache.log4j.Logger;
+
+import com.figaro.model.Item;
 import com.figaro.model.Venta;
 import com.figaro.repository.VentaRepository;
 
@@ -20,18 +22,20 @@ public class VentaService {
 	
 	public Venta saveVenta (Venta venta) {
 		LOGGER.info("Guardando la Venta: " + venta.toString());
-		int id = repository.saveVenta(venta);
-		venta.setId(id);
-		return venta;
-	}	
 		
-	public Venta updateVenta(Venta venta) {
-		Venta updated = getVenta(venta.getId());
-		LOGGER.info("Actualizando la Venta: " + venta.toString());
-		updated.update(venta);
-		repository.updateVenta(updated);
-		return updated;
+		/*for (Item i : venta.getItems())
+			i.setId(createItem(i));
+		*/
+		Integer newId = getRepository().saveVenta(venta);
+		venta.setId(newId);
+		LOGGER.info("La venta se guardó correctamente");
+		return venta;
 	}
+
+	public Integer createItem (Item item) {	
+		return repository.saveItem(item);
+	}
+	
 	
 	public Venta deleteVenta(int ventaId) {
 		Venta venta = getVenta(ventaId);

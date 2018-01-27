@@ -13,7 +13,7 @@
       <p>
 <!--Inicio Seleccion de producto -->
       <div class="card venta">
-        <form ng-submit="">
+        <form ng-submit="sumarCarrito(ngProductoVenta, aVender)">
           <div class=card-title><i class="material-icons">add_shopping_cart</i><label>Productos</label></div>
           <div class=form-field><label>Seleccionar producto: </label>
             <select name="producto" ng-model="producto" ng-change="verProducto(producto)">
@@ -35,13 +35,16 @@
             </tbody>
           </table>          
           <button type="submit">Enviar a carrito</button>
+          <div>
+            <label class=form-message>{{message}}</label>
+          </div>
         </form>
       </div>
 <!-- Fin seleccionar producto -->
       
 <!--Inicio Carrito -->
       <div class="card venta">
-        <form ng-submit="">
+        <form ng-submit="crearVenta()">
           <div class=card-title><i class="material-icons">local_grocery_store</i><label>Carrito</label></div>
           <table id=tableCarrito>
             <tbody>
@@ -51,9 +54,9 @@
                 <td>Precio </td>
               </tr>
               <tr ng-cloak class=data-row  ng-repeat="prodCarrito in ngCarrito" >
-                <td>{{prodCarrito.producto.nombre}} ({{prodCarrito.producto.descripcion}}) {{prodCarrito.producto.precio | currency}}</td>
-                <td>{{prodCarrito.unidades}}</td>
-                <td>{{prodCarrito.precio | currency}}</td>
+                <td>{{prodCarrito.nombreProducto}} ({{prodCarrito.descripcionProducto}}) {{prodCarrito.precioUnitario | currency}}</td>
+                <td>{{prodCarrito.cantidad}}</td>
+                <td>{{prodCarrito.precioTotal | currency}}</td>
               </tr>
             </tbody>
           </table>
@@ -65,6 +68,26 @@
         </form>
       </div>
 <!--Fin Carrito -->
+
+
+<!--Prueba -->
+<div class="card venta">
+
+    <div class=card-title><i class="material-icons">local_grocery_store</i><label>Ventas creadas</label></div>
+    <table id=tableVenta>
+      <tbody>
+        <tr>
+          <td>Venta </td>
+        </tr>
+        <tr ng-cloak class=data-row  ng-repeat="venta in ngVentasCreadas" >
+          <td>{{venta.id}} ({{venta.fecha}}) {{venta.precio | currency}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+</div>
+
+<!--Fin Prueba -->
 
     </div>
     <#include "/html/common/confirm.html">

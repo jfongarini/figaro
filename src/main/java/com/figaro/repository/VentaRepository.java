@@ -1,8 +1,10 @@
 package com.figaro.repository;
 
 import java.util.List;
-import org.hibernate.query.Query;
+
+import com.figaro.model.Item;
 import com.figaro.model.Venta;
+
 
 public class VentaRepository extends AbstractRepository {
 	
@@ -10,6 +12,10 @@ public class VentaRepository extends AbstractRepository {
 		return (Integer) getCurrentSession().save(venta);
 	}
 
+	public Integer saveItem(Item item) {
+		return (Integer) getCurrentSession().save(item);
+	}
+	
 	public void updateVenta(Venta venta) {
 		getCurrentSession().update(venta);
 	}

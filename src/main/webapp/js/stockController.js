@@ -15,12 +15,6 @@ app.controller('stockController', function ($scope, $http) {
         $scope.ngProducto={}; 
     };
 
-    //CLICK VENDER PRODUCTO
-    $scope.ventaProducto = function() {
-        openModal("modal-stockVenta");
-        $scope.ngProducto={}; 
-    };
-
     //ELIMINTAR PRODUCTO
     $scope.deleteTarget = function(id) {      
         $http.delete('/rest/stock/eliminar/'+id).then(function (response) {	           
@@ -103,47 +97,10 @@ app.controller('stockController', function ($scope, $http) {
         }
     });
 
-    //VER DETALLE PRODUCTO VENTA
-    $scope.verProducto = function(prodID) {
-        $http.get('/rest/stock/'+prodID).then(function(response){
-            $scope.ngProductoVenta = response.data;
-        })
-        $scope.ngProdCarrito = {};
-        inicializarNgProdCarrito();
-    }
-
-    //inicializa objeto ngProdCarrito
-    function inicializarNgProdCarrito(){
-        $scope.ngProdCarrito.unidades = 0;
-        $scope.ngProdCarrito.producto = {};
-        $scope.ngProdCarrito.precio = 0;
-    }
-
-    //SUMAR PRODUCTO AL CARRITO
-    $scope.sumarCarrito = function(prodVenta, uniAVender){
-        $scope.ngProdCarrito.producto = prodVenta;
-        $scope.ngProdCarrito.unidades = uniAVender;
-        $scope.ngProdCarrito.precio = ($scope.ngProdCarrito.producto.precio * $scope.ngProdCarrito.unidades);
-        $scope.ngCarrito.push($scope.ngProdCarrito);
-        $scope.ngTotalVenta = calculaTotalVenta();
-    }
-
-    //CALCULA TOTAL DE LA VENTA
-    function calculaTotalVenta(){
-        var total = 0;
-        angular.forEach($scope.ngCarrito, function(key){
-            total = total + key.precio;
-        })
-        return total;
-    }
-
-
     //INIT
     $scope.activeStock = true;
     $scope.search = '';
     $scope.ngProducto = {};
-    $scope.ngProductoVenta = {};
-    $scope.ngCarrito = [];
     $scope.getAll();
 
 });

@@ -5,7 +5,10 @@
 		<id name="id" type="int" column="ID_VENTA" >
 			<generator class="increment"/>
 		</id>		
-		<!-- me falta realizar la relacion con el objeto Item -->
+		<bag name="items" cascade="all-delete-orphan"  lazy="false" fetch="select" >
+          <key column="ID_VENTA"/>
+          <one-to-many  class="com.figaro.model.Item"/>
+      	</bag>
 		<property name="precio" column="PRECIO" type="big_decimal"/>
 		<property name="fecha"	column="FECHA"	type="java.sql.Timestamp"/>
 	</class>

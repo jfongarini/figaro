@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.figaro.model.Venta;
 import com.figaro.service.VentaService;
+
+
 
 @RestController
 @RequestMapping(value = "/rest/venta")
@@ -36,12 +37,6 @@ public class VentaControllerREST {
 	@RequestMapping(value = "/alta",method=RequestMethod.POST)
     public ResponseEntity<Venta> newVenta(@RequestBody Venta venta) {
 		return new ResponseEntity<Venta>(service.saveVenta(venta), HttpStatus.CREATED);
-	}
-	
-	@RequestMapping(value = "/actualizar/{ventaId}",method=RequestMethod.PUT)
-    public ResponseEntity<Venta> updateVenta(@RequestBody Venta venta) {
-		Venta updated = service.updateVenta(venta);
-		return new ResponseEntity<Venta>(updated, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/eliminar/{ventaId}",method=RequestMethod.DELETE)

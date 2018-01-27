@@ -63,6 +63,7 @@
 				<value>hibernate/trabajo.hbm.xml</value>  				
   				<value>hibernate/turno.hbm.xml</value>
 				<value>hibernate/venta.hbm.xml</value>
+				<value>hibernate/item.hbm.xml</value>
  			</list>
 		</property>
 		<property name="hibernateProperties">

@@ -60,20 +60,11 @@ public class StockControllerREST {
 		return new ResponseEntity<Producto>(service.deleteProducto(productoId), HttpStatus.OK);
 	}
 	
-	
-	/* lo cambio por el otro buscar para que sea igual a los demas
-	 @RequestMapping(value = "/buscar",method=RequestMethod.GET,produces="application/json")
-    public List<Producto> getAllProductos(@RequestParam String search) {
-        return service.buscar(search);
-    }*/
-	
-	
 	@RequestMapping(value = "/buscar",method=RequestMethod.GET,produces="application/json")
     public ResponseEntity<List<Producto>> getAllProductos(@RequestParam String search) {
         return new ResponseEntity<List<Producto>>(service.buscar(search), HttpStatus.OK);
     }
 		
-	
 	public ProductosService getService() {
 		return service;
 	}
