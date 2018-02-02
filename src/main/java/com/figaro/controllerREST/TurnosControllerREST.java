@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.figaro.model.Movimiento;
 import com.figaro.model.Turno;
 import com.figaro.service.TurnosService;
 
@@ -45,17 +46,36 @@ public class TurnosControllerREST {
 		return new ResponseEntity<List<Turno>>(service.getTurnosCliente(clienteId), HttpStatus.OK);
     }
 	
+	@RequestMapping(value = "turnos/peluquero/{peluqueroId}",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<List<Turno>> getTurnosPeluquero( @PathVariable int peluqueroId) {
+		return new ResponseEntity<List<Turno>>(service.getTurnosPeluquero(peluqueroId), HttpStatus.OK);
+    }
+	
+	@RequestMapping(value = "turnos/peluquero/{peluqueroId}/sinpagar",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<List<Turno>> getTurnosPeluqueroSinPagar( @PathVariable int peluqueroId) {
+		return new ResponseEntity<List<Turno>>(service.getTurnosPeluqueroSinPagar(peluqueroId), HttpStatus.OK);
+    }
+	
 	@RequestMapping(value = "turnos/actualizar/{turnoId}",method=RequestMethod.PUT)
     public ResponseEntity<Turno> updateTurno(@RequestBody Turno turno) {
 		Turno updated = service.updateTurno(turno);
 		return new ResponseEntity<Turno>(updated, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "turnos/{turnoId}/cobrado",method=RequestMethod.PATCH)
-    public ResponseEntity<Turno> setCobrado( @PathVariable int turnoId) {
-		return new ResponseEntity<Turno>(service.setCobrado(turnoId), HttpStatus.OK);
+	@RequestMapping(value = "turnos/{turnoId}/cobrado",method=RequestMethod.PUT)
+    public ResponseEntity<Turno> setCobrado( @PathVariable int turnoId, @RequestBody Movimiento movimiento) {
+		return new ResponseEntity<Turno>(service.setCobrado(turnoId,movimiento), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "turnos/{turnoId}/cobrado/cancelar",method=RequestMethod.PUT)
+    public ResponseEntity<Turno> cancelCobro( @PathVariable int turnoId) {
+		return new ResponseEntity<Turno>(service.cancelCobro(turnoId), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "turnos/{turnoId}/pagar",method=RequestMethod.PUT)
+    public ResponseEntity<Turno> pago( @PathVariable int turnoId) {
+		return new ResponseEntity<Turno>(service.pagar(turnoId), HttpStatus.OK);
+	}
 	
 	@RequestMapping(value = "turnos",method=RequestMethod.GET)
     public ResponseEntity<List<Turno>> getTurnosDelDia(@RequestParam @DateTimeFormat(pattern=DATE_FORMAT) Date fecha) {

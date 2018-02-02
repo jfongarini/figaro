@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CajaController {
 	
-	@RequestMapping("/caja")
+	@RequestMapping("/peluqueros")
 	public String caja() {
-		return "html/caja/caja";
+		return "html/peluqueros/peluqueros";
 	}
 
 }

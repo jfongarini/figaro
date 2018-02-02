@@ -1,7 +1,9 @@
 package com.figaro.repository;
 
 import java.util.List;
+
 import org.hibernate.query.Query;
+
 import com.figaro.model.Producto;
 
 public class ProductosRepository extends AbstractRepository {

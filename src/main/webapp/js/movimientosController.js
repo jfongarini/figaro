@@ -1,8 +1,9 @@
 app.controller('movimientosController', function ($scope, $http) {
  	 
+ 
 	//OBTENER LISTA DE MOVIMIENTOS
 	    $scope.getAll = function() {	    	
-	    	$scope.searchMovimiento();	    	
+	    	$scope.searchMovimiento();
 	    };
 
 	    //CLICK NUEVO MOVIMIENTO
@@ -10,7 +11,8 @@ app.controller('movimientosController', function ($scope, $http) {
 	        $scope.isNuevoMovimiento = true
 	    	openModal("modal-caja");
 	        $scope.ngMovimiento={};
-	        $scope.ngMovimiento.fecha = new Date(getToday()); 
+	        $scope.ngMovimiento.descuento = 0;
+	        $scope.ngMovimiento.fecha = new Date(getToday()); 	        
 	        $scope.message='';
 	    };
 
@@ -21,16 +23,18 @@ app.controller('movimientosController', function ($scope, $http) {
 	        $scope.movimientoID = event.currentTarget.getAttribute("data-id");
 	        $http.get('/rest/movimientos/'+$scope.movimientoID).then(function (response) {
 	            $scope.ngMovimiento = response.data;
-	            $scope.ngMovimiento.fecha = new Date($scope.ngMovimiento.fecha); 
+	            $scope.ngMovimiento.fecha = new Date($scope.ngMovimiento.fecha);	
+	            $scope.ngMovimiento.precio = $scope.ngMovimiento.precio + $scope.ngMovimiento.descuento;           
 	            openModal("modal-caja");
 		    });
 	    };
 
 	    //CLICK ACEPTAR FORMULARIO
-	    $scope.sendMovimiento = function() {
+	    $scope.sendMovimiento = function() {	    	        
 	        if($scope.isNuevoMovimiento === true){
 	            $http.post('/rest/movimientos/alta', $scope.ngMovimiento).then(function (response) {
 	                $scope.movimientos.push(response.data);
+	                $scope.formatTipoPago();
 	            });
 	            $scope.ngMovimiento={};
 	        }else{
@@ -89,63 +93,67 @@ app.controller('movimientosController', function ($scope, $http) {
 	        var total = 0;
 	        angular.forEach($scope.movimientos, function(ngMovimiento){	          
 	          if (ngMovimiento.isGasto == true){
-	        	  total = total - ngMovimiento.precio
+	        	  total = total - (ngMovimiento.precio);
 	          } else {
-	        	  total = total + ngMovimiento.precio
+	        	  total = total + (ngMovimiento.precio);
 	          }	          
 	        })
 	        return total;
 	    }
-	    
+
+	    //CALCULAR EL TOTAL DE CAJA
+	    $scope.calculaTotalEfectivo = function(){
+	        var total = 0;
+	        angular.forEach($scope.movimientos, function(ngMovimiento){	          
+	       	  if (ngMovimiento.tipoPago == 'contado'){
+	          	if (ngMovimiento.isGasto == true){
+	        		total = total - (ngMovimiento.precio);
+	          	} else {
+	        		total = total + (ngMovimiento.precio);
+	          	}	 
+	          }         
+	        })
+	        return total;
+	    }
+
+	    //CALCULAR EL TOTAL DE CAJA
+	    $scope.calculaTotalTarjeta = function(){
+	        var total = 0;
+	        angular.forEach($scope.movimientos, function(ngMovimiento){
+	          if (ngMovimiento.tipoPago != 'contado'){     
+	          	if (ngMovimiento.isGasto == true){
+	        	  	total = total - (ngMovimiento.precio);
+	          	} else {
+	        	  	total = total + (ngMovimiento.precio);
+	          	}	     
+	          }     
+	        })
+	        return total;
+	    }
+
+	    // MUESTRA DESCUENTO
+	    $scope.mostrarDescuento = function(item){	 
+	    	if (item.tipoPago != 'contado') {  	
+	    		if (item.descuento == 0){
+	    			return item.tipoPago;
+	    		} else {
+		    		return item.tipoPago + " ( -" + item.descuento + " )";
+	    		}
+	    	} else {
+	    		if (item.descuento == 0){
+	    			return "";
+	    		} else {
+		    		return "( -" + item.descuento + " )";
+	    		}
+	    	}
+	    }
+
 	    //ORDENAR POR FECHA	    
 	    $scope.sortFecha = function(ngMovimiento) {
 	        var date = new Date(ngMovimiento.fecha);
 	        return date;
 	    };
 
-/*	    
-	    
-	    //FILTRO DIA
-	    $scope.searchMovimientoDia = function() {	    	   	
-	        $http.get('/rest/movimientos/buscar',{params: { q: getStringDate($scope.search) }})		        
-	        .then(function successCallback(response) {	  	        	
-	            $scope.movimientos = response.data;	            
-	        })
-	    }
-	    
-	    //FILTRO SEMANA
-	    $scope.searchMovimientoEntreDias = function() {	 
-	    	var dStart = new Date($scope.search);
-	    	var dEnd = new Date($scope.search);
-	    	dStart.setDate(dStart.getDate() - 3);
-	    	dEnd.setDate(dEnd.getDate() + 3);
-	    	var q1 = getStringDate(dStart); 
-	    	var q2 = getStringDate(dEnd);	    
-	    	
-	        $http.get('/rest/movimientos/buscarEntre',{params: { q1, q2 }})		        
-	        .then(function successCallback(response) {	  	        	
-	            $scope.movimientos = response.data;	            
-	        })
-	    }
-	    
-	    //FILTRO MES
-	    $scope.searchMovimientoMes = function() {	    	   	
-	        $http.get('/rest/movimientos/buscar',{params: { q: getStringMonth($scope.search) }})		        
-	        .then(function successCallback(response) {	  	        	
-	            $scope.movimientos = response.data;	            
-	        })
-	    }
-
-	    
-	  //FILTRO CATEGORIA
-	    $scope.searchCategoria = function() {
-	        $http.get('/rest/movimientos/buscarCategoria',{params: { q: $scope.searchC }})		        
-	        .then(function successCallback(response) {	  	        	
-	            $scope.movimientos = response.data;	            
-	        })
-	    }
-	    
-*/	    
 	  // LIMPIAR SELECT CATEGORIA
 	  $scope.limpiarSelect = function(){
 	    	$scope.searchC = $scope.busqueda.categoria;	
@@ -199,10 +207,21 @@ app.controller('movimientosController', function ($scope, $http) {
 	    $scope.searchMovimiento = function() {	
 	    	$http.get('/rest/movimientos/buscar',{params: { from: $scope.busqueda.fechaInicio, to: $scope.busqueda.fechaFin, category: $scope.busqueda.categoria }})		        
 		        .then(function successCallback(response) {	  	        	
-		            $scope.movimientos = response.data;	            
+		            $scope.movimientos = response.data;
+		            $scope.formatTipoPago();         
 		        })
 	    }
-	    	    	    
+	    	 
+	    $scope.formatTipoPago = function() {
+	    	for(var key in $scope.movimientos ){
+	    		if ($scope.movimientos[key].tipoPago == 'debito') {
+	    			$scope.movimientos[key].tipoPago = 'D';
+	    		} else if ($scope.movimientos[key].tipoPago == 'credito') {
+	    			$scope.movimientos[key].tipoPago = $scope.movimientos[key].cuotas;
+	    		}
+	    	}
+	    }
+
 	    //MOSTRAR O NO MOSTRAR DIV DE BUSQUEDA
 	    $scope.IsHiddenDia = true;
 	    $scope.IsHiddenEntreDia = true;

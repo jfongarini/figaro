@@ -7,8 +7,8 @@ import org.hibernate.query.Query;
 
 import com.figaro.model.Categoria;
 import com.figaro.model.Ciudad;
-import com.figaro.model.Peluquero;
-import com.figaro.model.Trabajo;
+import com.figaro.model.Movimiento;
+import com.figaro.model.Servicio;
 
 @SuppressWarnings("unchecked")
 public class ConfiguracionRepository extends AbstractRepository {
@@ -30,46 +30,37 @@ public class ConfiguracionRepository extends AbstractRepository {
 		return getCurrentSession().createQuery("from Ciudad").list();
 	}
 	
-	//TRABAJOS
-	public Integer saveTrabajo(Trabajo trabajo) {
-		return (Integer) getCurrentSession().save("Trabajo",trabajo);
+	//SERVICIOS
+	public Integer saveServicio(Servicio servicio) {
+		return (Integer) getCurrentSession().save("Servicio",servicio);
 	}
 
-	public void deleteTrabajo(Integer idTrabajo) {
-		Trabajo trabajo = (Trabajo) getCurrentSession().get("Trabajo", idTrabajo);
-		LOGGER.info("Eliminando el Trabajo: "+ trabajo.getDescripcion());
-		getCurrentSession().delete(trabajo);
+	public void deleteServicio(Integer idServicio) {
+		Servicio servicio = (Servicio) getCurrentSession().get("Servicio", idServicio);
+		LOGGER.info("Eliminando el Servicio: "+ servicio.getDescripcion());
+		getCurrentSession().delete(servicio);
+		
+		Query<Movimiento> query = getCurrentSession().createNativeQuery("delete from TRABAJO_PELUQUERO WHERE ID_SERVICIO = ?1");
+	    query.setParameter(1, idServicio);
+	    query.executeUpdate();
+	    
+
 	}
 	
-	public List<Trabajo> getTrabajos() {
-		return getCurrentSession().createQuery("from Trabajo").list();
+	public List<Servicio> getServicios() {
+		return getCurrentSession().createQuery("from Servicio").list();
 	}
 	
-	public Trabajo getTrabajo(Integer idTrabajo) {
-		return (Trabajo) getCurrentSession().get("Trabajo", idTrabajo);
+	public Servicio getServicio(Integer idServicio) {
+		return (Servicio) getCurrentSession().get("Servicio", idServicio);
 	}
 	
-	public List<Trabajo> buscar(String search) {
-		Query<Trabajo> query = getCurrentSession().createQuery("FROM Trabajo t WHERE t.descripcion LIKE CONCAT('%',:search,'%')");
+	public List<Servicio> buscar(String search) {
+		Query<Servicio> query = getCurrentSession().createQuery("FROM Servicio t WHERE t.descripcion LIKE CONCAT('%',:search,'%')");
 		query.setParameter("search", search);
 	    return query.getResultList();
 	}
 
-	//PELUQUEROS
-	public Integer savePeluquero(Peluquero peluquero) {
-		return (Integer) getCurrentSession().save(peluquero);
-	}
-
-	public void deletePeluquero(Integer idPeluquero) {
-		Peluquero peluquero = getCurrentSession().load(Peluquero.class, idPeluquero);
-		LOGGER.info("Eliminando el Peluquero: "+ peluquero.getNombre());
-		getCurrentSession().delete(peluquero);
-	}
-
-	public List<Peluquero> getPeluqueros() {
-		return getCurrentSession().createQuery("from Peluquero").list();
-	}
-	
 	//CATEGORIAS
 	public List<Categoria> getCategorias() {
 		return getCurrentSession().createQuery("from Categoria").list();

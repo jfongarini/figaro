@@ -56,11 +56,12 @@
 			<list>
   				<value>hibernate/categoria.hbm.xml</value>
   				<value>hibernate/ciudad.hbm.xml</value>
-  				<value>hibernate/cliente.hbm.xml</value>
   				<value>hibernate/movimiento.hbm.xml</value>
-  				<value>hibernate/peluquero.hbm.xml</value>
+  				<value>hibernate/persona.hbm.xml</value>
   				<value>hibernate/producto.hbm.xml</value>
-				<value>hibernate/trabajo.hbm.xml</value>  				
+				<value>hibernate/trabajo.hbm.xml</value>
+				<value>hibernate/servicio.hbm.xml</value>
+				  				
   				<value>hibernate/turno.hbm.xml</value>
 				<value>hibernate/venta.hbm.xml</value>
 				<value>hibernate/item.hbm.xml</value>
@@ -172,6 +173,37 @@
 	
 	
 	
+	
+	<!-- PELUQUEROS !-->
+	<bean id="PeluquerosServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="PeluquerosService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="PeluquerosService" class="com.figaro.service.PeluquerosService">
+		<property name="repository">
+			<ref bean="PeluquerosRepository" />
+		</property>
+	</bean>
+
+	<bean id="PeluquerosRepository"	class="com.figaro.repository.PeluquerosRepository">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+	
+	
 	<!-- CONFIGURACION !-->
 	<bean id="ConfiguracionServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager">
@@ -258,6 +290,43 @@
 	</bean>
 
 	<bean id="TurnosRepository"	class="com.figaro.repository.TurnosRepository">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<!-- ESTADISTICAS !-->
+	<bean id="EstadisticasServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="EstadisticasService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="EstadisticasService" class="com.figaro.service.EstadisticasService">
+		<property name="repository">
+			<ref bean="EstadisticasRepository" />
+		</property>
+		<property name="clientesService">
+			<ref bean="ClientesServiceTransactional" />
+		</property>
+		<property name="movimientosService">
+			<ref bean="MovimientosServiceTransactional" />
+		</property>
+		<property name="turnosService">
+			<ref bean="TurnosServiceTransactional" />
+		</property>
+	</bean>
+	
+
+	<bean id="EstadisticasRepository"	class="com.figaro.repository.EstadisticasRepository">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

@@ -19,19 +19,19 @@
           <th>TRABAJOS</th>
           <th>PRECIO</th>
           <th>PELUQUERO</th>
-          <th>REALIZADO</th>
+          <th>COBRADO</th>
           <th></th>
       </tr>
     </thead>
     <tbody>
     <tr  ng-cloak class=data-row ng-repeat="turno in turnos  track by turno.id"  >
-      <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{turno.desde.split(' ')[1]}} - {{turno.hasta.split(' ')[1]}}</td>
-      <td id={{turno.id}} data-id={{turno.id}} ><a class=cliente-link ng-href="/turnos/cliente/{{turno.cliente.id}}"> {{turno.cliente.nombre}} {{turno.cliente.apellido}} </a></td>
-      <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)"><span ng-repeat="trabajo in turno.trabajos"> {{trabajo.descripcion}} </span></td>
-      <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{getTotalTurno(turno.trabajos) | currency}}</td>
-      <td id={{turno.id}} data-id={{turno.id}} data-ng-click="detailTurno($event)">{{turno.peluquero}}</td>
-      <td><input ng-checked="turno.cobrado" ng-click="setCobrado(turno.id)" type="checkbox"></td>
-      <td id={{turno.id}} data-id={{turno.id}} data-ng-click="confirmDelete(turno.id)" class="tachotd" ><i class="material-icons tachoi">clear</i></td>
+      <td data-id={{turno.id}} data-ng-click="detailTurno($event)">{{turno.desde.split(' ')[1]}} - {{turno.hasta.split(' ')[1]}}</td>
+      <td data-id={{turno.id}} ><a class=link ng-href="/turnos/cliente/{{turno.cliente.id}}"><div class=td-link> {{turno.cliente.nombre}} {{turno.cliente.apellido}}</div> </a></td>
+      <td data-id={{turno.id}} data-ng-click="detailTurno($event)"><span ng-repeat="trabajo in turno.trabajos"> {{trabajo.servicio.descripcion}} </span></td>
+      <td data-id={{turno.id}} data-ng-click="detailTurno($event)">{{getTotalTurno(turno.trabajos) | currency}}</td>
+      <td data-id={{turno.id}} ><a class=link ng-href="/turnos/peluquero/{{turno.peluquero.id}}"><div class=td-link> {{turno.peluquero.nombre}} {{turno.peluquero.apellido}}</div></a></td>
+      <td><input ng-model="turno.cobrado" ng-click="setCobrado(turno)" type="checkbox"></td>
+      <td data-id={{turno.id}} data-ng-click="confirmDelete(turno.id)" class="tachotd" ><i class="material-icons tachoi">clear</i></td>
     </tr>
     </tbody>
 
@@ -43,13 +43,15 @@
   <#include "/html/turnos/turnos-modal.html">
   
   <div ng-cloak ng-if="turnos.length < 1" class="message">
-    <div class="message-content">No existen turnos para este d&iacute;a.</div>
+    <div class="message-content">No hay turnos para este d&iacute;a.</div>
   </div>
 
   <div ng-controller=clientesController >
   <#include "/html/clientes/clientes-modal.html">
   </div>
 
+  <#include "/html/turnos/cobrar.html">
+  <#include "/html/turnos/deshacer-cobrado-pagado.html">
   <#include "/html/common/javascript.html">
   <#include "/html/common/confirm.html">
   <script src="/js/turnosController.js" ></script>

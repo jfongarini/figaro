@@ -11,9 +11,19 @@ public class TurnosController {
 		return "html/turnos/turnos";
 	}
 
-	@RequestMapping("/turnos/cliente/{clienteID}")
+	@RequestMapping("/turnos/cliente/{clienteId}")
 	public String turnosDeCliente() {
 		return "html/turnos/turnos-cliente";
+	}
+
+	@RequestMapping("/turnos/peluquero/{peluqueroId}")
+	public String turnosDePeluquero() {
+		return "html/turnos/turnos-peluquero";
+	}
+
+	@RequestMapping("/turnos/peluquero/{peluqueroId}/sinpagar")
+	public String turnosDePeluqueroSinPagar() {
+		return "html/turnos/turnos-peluquero";
 	}
 
 	

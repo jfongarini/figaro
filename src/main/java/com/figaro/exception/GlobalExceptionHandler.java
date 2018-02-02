@@ -16,8 +16,9 @@ public class GlobalExceptionHandler {
 	final static Logger LOGGER = Logger.getLogger(GlobalExceptionHandler.class);
 	
     private static final String MSG_DUPLICADO = "Ya existe un elemento con estos datos";
-    private static final String MSG_TURNO_DUPLICADO = "Ya existe un turno en esa franja horaria para ese peluquero";
+    private static final String MSG_TURNO_DUPLICADO = "Turno ocupado para ese cliente o peluquero";
     private static final String MSG_HORARIO_INVALIDO = "El horario seleccionado es invalido";
+    private static final String MSG_DESCUENTO_INVALIDO = "El descuento no puede ser mayor al monto total";
 
 	@ExceptionHandler(value = ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)  
@@ -42,5 +43,12 @@ public class GlobalExceptionHandler {
     }
 	
   
-  
+	@ExceptionHandler(value = DescuentoInvalidoException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)  
+    public ApiError descuentoInvalido(Exception e){
+		LOGGER.error(MSG_DESCUENTO_INVALIDO + e.getMessage());
+    	return new ApiError(HttpStatus.BAD_REQUEST, MSG_DESCUENTO_INVALIDO);
+    }
+	
+	
 }  

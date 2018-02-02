@@ -31,8 +31,17 @@ function stringToDate(date){
 	return new Date(date + " 00:00:00");
 }
 
+function stringToDateEnd(date){
+	return new Date(date + " 23:59:00");
+}
+
 function getDateFormated(){
 	return stringToDate(getToday());
+}
+
+function getDateFormatedEnd(date){
+	fecha = getStringDate(date);
+	return stringToDateEnd(fecha);
 }
 
 function getSemana(date){
