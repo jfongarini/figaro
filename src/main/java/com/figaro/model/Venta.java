@@ -43,5 +43,10 @@ public class Venta {
 	public void setItems(List<Item> items) {
 		this.items = items;
 	}
-	
+
+	public void update(Venta venta) {
+		this.precio = venta.getPrecio();
+		this.fecha 	= venta.getFecha();
+		this.items	= venta.getItems();
+	}
 }

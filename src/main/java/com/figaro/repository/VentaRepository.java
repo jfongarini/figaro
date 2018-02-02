@@ -2,8 +2,10 @@ package com.figaro.repository;
 
 import java.util.List;
 
+
 import com.figaro.model.Item;
 import com.figaro.model.Venta;
+
 
 
 public class VentaRepository extends AbstractRepository {
@@ -32,6 +34,5 @@ public class VentaRepository extends AbstractRepository {
 	public List<Venta> getAll() {
 		return getCurrentSession().createQuery("from Venta").list();		
 	}
-	
-	
+
 }

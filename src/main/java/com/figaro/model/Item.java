@@ -54,5 +54,4 @@ public class Item{
 		this.setPrecioTotal(new BigDecimal (0.00));
 	}
 	
-	
 }

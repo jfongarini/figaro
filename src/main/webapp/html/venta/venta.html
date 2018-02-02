@@ -49,14 +49,18 @@
           <table id=tableCarrito>
             <tbody>
               <tr>
-                <td>Producto </td>
-                <td>Unidades </td>
-                <td>Precio </td>
+                <th>Producto</th>
+                <th>Unidades</th>
+                <th>Precio</th>
+                <th></th>
               </tr>
               <tr ng-cloak class=data-row  ng-repeat="prodCarrito in ngCarrito" >
                 <td>{{prodCarrito.nombreProducto}} ({{prodCarrito.descripcionProducto}}) {{prodCarrito.precioUnitario | currency}}</td>
                 <td>{{prodCarrito.cantidad}}</td>
                 <td>{{prodCarrito.precioTotal | currency}}</td>
+                <td id={{podCarrito}} data-id={{prodCarrito}} data-ng-click="quitarItem($index)" class="tachotd">
+                  <lavel><i class="material-icons tachoi">clear</i></lavel>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -72,19 +76,20 @@
 
 <!--Prueba -->
 <div class="card venta">
-
-    <div class=card-title><i class="material-icons">local_grocery_store</i><label>Ventas creadas</label></div>
+  <form>
+    <div class=card-title><i class="material-icons">local_grocery_store</i><label>Ventas lis</label></div>
     <table id=tableVenta>
       <tbody>
         <tr>
           <td>Venta </td>
         </tr>
         <tr ng-cloak class=data-row  ng-repeat="venta in ngVentasCreadas" >
-          <td>{{venta.id}} ({{venta.fecha}}) {{venta.precio | currency}}</td>
+          <td> ({{venta.fecha}}) {{venta.precio | currency}}</td>
         </tr>
       </tbody>
     </table>
     <p>
+  </form>
 </div>
 
 <!--Fin Prueba -->

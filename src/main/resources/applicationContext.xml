@@ -153,16 +153,24 @@
 	</bean>
 
 	<bean id="VentaService" class="com.figaro.service.VentaService">
+		
 		<property name="repository">
 			<ref bean="VentaRepository" />
 		</property>
+		
+		<property name="productosService">
+			<ref bean="ProductosServiceTransactional" />
+		</property>
+		
 	</bean>
 
 	<bean id="VentaRepository"	class="com.figaro.repository.VentaRepository">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
-	</bean>	
+	</bean>
+	
+	
 	
 	<!-- CONFIGURACION !-->
 	<bean id="ConfiguracionServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">

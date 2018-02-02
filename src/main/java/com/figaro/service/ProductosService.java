@@ -55,10 +55,7 @@ public class ProductosService {
 	public List<Producto> buscarFaltante() {
 		LOGGER.debug("Obteniendo todos los productos faltantes");
 		return repository.buscarFaltante();
-		//return repository.getAll();
-	}	
-	
-	
+	}
 	
 	public ProductosRepository getRepository() {
 		return repository;
@@ -71,7 +68,10 @@ public class ProductosService {
 		return repository.buscar(search);
 	}
 	
-
+	public Producto buscarDesdeVenta(String nombre, String descripcion) {
+		LOGGER.info("Ingresa a ProductoService");
+		return repository.buscarProductoDesdeVenta(nombre, descripcion);
+	}
 	
 	
 }

@@ -36,13 +36,18 @@ public class ProductosRepository extends AbstractRepository {
 
 	@SuppressWarnings("unchecked")
 	public List<Producto> buscarFaltante() {
-		//Query<Producto> query = getCurrentSession().createQuery("FROM Producto p WHERE p.cantidad < p.cantidadMinima");
-		//query.setParameter(1,4);
-		//return query.getResultList();
 		return getCurrentSession().createQuery("FROM Producto p WHERE p.cantidad < p.cantidadMinima").list();
+	}
 	
-	
-	}	
+	@SuppressWarnings("unchecked")
+	public Producto buscarProductoDesdeVenta(String nombreProducto, String descripcionProducto) {
+		
+		Query<Producto> query = (Query<Producto>) getCurrentSession().createQuery("FROM Producto p WHERE p.nombre LIKE CONCAT('%',?1,'%') AND p.descripcion LIKE CONCAT ('%',?2,'%')")
+			.setParameter(1, nombreProducto)
+			.setParameter(2, descripcionProducto);
+		
+		return (Producto) query.uniqueResult();
+		}
 	
 	
 }
