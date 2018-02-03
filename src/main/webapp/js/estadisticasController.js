@@ -1,6 +1,8 @@
 var app = angular.module('figaro', ['chart.js']);
 app.controller('estadisticasController', function ($scope, $http) {
 		
+	$scope.activeEstadisticas = true;
+
 		//OBTENER LISTA DE CIUDADES
 		    $scope.getClientesCiudad = function() {
 		        $http.get("/rest/estadisticas/clientesCiudad").then(function (response) {
@@ -170,6 +172,7 @@ app.controller('estadisticasController', function ($scope, $http) {
 	    $scope.searchTo = getDateFormated();
 		$scope.getClientesCiudad();
 		$scope.getClientesSexo();
+
 
 
 });

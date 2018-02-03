@@ -19,6 +19,8 @@ import com.figaro.repository.EstadisticasRepository;
 
 public class EstadisticasService {
 	
+	private static final String SIN_CIUDAD = "Sin Ciudad";
+
 	final static Logger LOGGER = Logger.getLogger(EstadisticasService.class);
 	
 	private EstadisticasRepository repository;
@@ -31,6 +33,8 @@ public class EstadisticasService {
 		Map<String, Integer> mapClientes = new HashMap<String, Integer>();
 		for (Cliente cliente : allClientes) {
 			String ciudad = cliente.getDirCiudad();
+			if (null == ciudad)
+				ciudad = SIN_CIUDAD;
 			Integer cantidadHabitantes = mapClientes.get(ciudad);
 			if (cantidadHabitantes == null) {
 				mapClientes.put(ciudad, 1);
@@ -39,6 +43,9 @@ public class EstadisticasService {
 				mapClientes.put(ciudad, cantidadHabitantes);
 			}
 		}
+
+		
+		
 		return mapClientes;
 	}
 	

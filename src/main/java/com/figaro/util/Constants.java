@@ -7,6 +7,7 @@ public class Constants{
 	
 	public static final String CATEGORIA_TURNOS = "Turnos";
 	public static final String CATEGORIA_PELUQUERO = "Peluqueros";
+	public static final String CATEGORIA_VENTAS = "Ventas";
 
 	public static final String TIPO_PAGO_DEBITO  ="debito";
 	public static final String TIPO_PAGO_CREDITO ="credito";

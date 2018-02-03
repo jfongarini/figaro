@@ -18,6 +18,9 @@
       <label class=banner-label ><i class=material-icons >more_vert</i></label>
       <label class=banner-label ><i class=material-icons >search</i>CATEGOR&Iacute;A</label>
       <select  class=search-categoria ng-model="searchC" ng-change="searchCategoria()" ng-click="limpiarSelect()" ng-cloak>
+            <option value = "Turnos">Turnos</option>
+            <option value = "Peluqueros">Peluqueros</option>
+            <option value = "Ventas">Ventas</option>
             <option value="{{categoria.nombre}}" ng-repeat="categoria in categorias">{{categoria.nombre}}</option>
       </select>
       <label class=banner-label ng-click="limpiaCategoria()"><i class=material-icons >clear</i></label>
