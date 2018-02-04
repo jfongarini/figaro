@@ -64,7 +64,7 @@ public class EstadisticasControllerREST {
     public ResponseEntity<TreeMap<String, Integer>> buscarTurnoMasSolicitado(@RequestParam  @DateTimeFormat(pattern=DATE_FORMAT) Date from, @RequestParam @DateTimeFormat(pattern=DATE_FORMAT) Date to) throws ParseException {		
         return new ResponseEntity<TreeMap<String, Integer>>(service.buscarTurnoMasSolicitado(from,to), HttpStatus.OK);
     }
-	
+
 	public EstadisticasService getService() {
 		return service;
 	}
