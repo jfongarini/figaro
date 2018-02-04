@@ -7,7 +7,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.query.Query;
 
+import com.figaro.model.Item;
 import com.figaro.model.Movimiento;
+import com.figaro.model.Venta;
 import com.figaro.service.MovimientosService;
 
 @SuppressWarnings({ "unchecked" })
@@ -51,5 +53,23 @@ public class MovimientosRepository extends AbstractRepository{
 	    query.setParameter(3, category);
 	    return query.getResultList();
 	}	
+	
+	public Item getItemId(Integer id) {		
+		
+		String querySql = "from Item t WHERE (t.id = ?1)";	
+		Query<Item> query = getCurrentSession().createQuery(querySql);
+	    query.setParameter(1, id);	  
+	    return query.getSingleResult();
+		
+	}
+	
+	public Venta getVentaId(Integer id) {		
+		
+		String querySql = "from Venta t WHERE (t.id = ?1)";	
+		Query<Venta> query = getCurrentSession().createQuery(querySql);
+	    query.setParameter(1, id);	  
+	    return query.getSingleResult();
+		
+	}
 
 }	

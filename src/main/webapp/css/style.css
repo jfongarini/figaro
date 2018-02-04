@@ -316,6 +316,10 @@ li a:hover {
     width: 360px;
 }
 
+#cv {
+    width: 600px;
+}
+
 .modal-double{
     width: 700px;
 }
