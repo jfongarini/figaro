@@ -26,16 +26,15 @@ app.controller('peluquerosController', function ($scope, $http) {
     }
 
     //CLICK FILA PELUQUERO
-    $scope.detailPeluquero = function(event){
+    $scope.detailPeluquero = function(idPeluquero){
         $scope.message='';
         $scope.allChecked = false;
         $scope.update = true;
-        $scope.peluqueroId = event.currentTarget.getAttribute("data-id");
+        $scope.peluqueroId = idPeluquero;
         $http.get('/rest/peluqueros/'+$scope.peluqueroId).then(function (response) {
             $scope.ngPeluquero = response.data;
             $scope.servicios.forEach(function(trabajo) {
                 trabajo.selected = $scope.isInPeluquero(trabajo);
-
             });
             openModal("modal-peluqueros");
 	    });

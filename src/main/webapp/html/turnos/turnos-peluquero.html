@@ -4,11 +4,11 @@
   <title>TURNOS</title>
   <#include "/html/common/head.html">
 </head>
-<body ng-app=figaro ng-controller=turnosController  data-ng-init="getTurnosDePeluquero()" >
+<body ng-app=figaro ng-controller=turnosController ng-cloak  data-ng-init="getTurnosDePeluquero()" >
   <#include "/html/common/menu.html">
   <div ng-if="turnos.length > 0" id=content class=content>
     <div class=banner>
-        <label ng-cloak class="banner-title" >{{peluquero}}</label>
+        <label class="banner-title" >{{peluquero}}</label>
     </div>
     <table  id=table class="main-table banner">
         <thead>

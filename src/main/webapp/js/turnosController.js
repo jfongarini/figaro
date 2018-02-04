@@ -121,11 +121,37 @@ app.controller('turnosController', function ($scope, $http) {
 
     //OBTENER TURNOS
     $scope.getTurnos = function() {
+        if ($scope.ngDateTurno== null)
+             $scope.getTurnosHoy();
         $http.get('/rest/turnos',{params:{fecha: getStringDate($scope.ngDateTurno)}})
         .then(function successCallback(response) {
             $scope.turnos = response.data;
             $scope.getTotalDiario($scope.turnos);
         });
+    };
+
+
+    //OBTENER TURNOS DIA ANTERIOR
+    $scope.getTurnosDiaAnterior = function() {
+        var date = new Date($scope.ngDateTurno.getTime());
+        date.setDate(date.getDate()-1);
+        $scope.ngDateTurno = date;
+        $scope.getTurnos();
+    };
+
+    //OBTENER TURNOS DIA SIGUIENTE
+    $scope.getTurnosDiaSiguiente = function() {
+        var date = new Date($scope.ngDateTurno.getTime());
+        date.setDate(date.getDate()+1);
+        $scope.ngDateTurno = date;
+        $scope.getTurnos();
+    };
+
+   
+    //OBTENER TURNOS Hoy
+    $scope.getTurnosHoy = function() {
+        $scope.ngDateTurno = new Date();
+        $scope.getTurnos();
     };
 
     //OBTENER TOTAL DE TURNO
@@ -381,9 +407,12 @@ app.controller('turnosController', function ($scope, $http) {
 
     //APRETAR ESCAPE
     document.addEventListener('keyup', function(e) {
-        if (e.keyCode == 27) {
+        if (e.keyCode == 27) 
             $scope.discardTurno();
-        }
+        if (e.keyCode == 39 || e.keyCode == 38)
+            $scope.getTurnosDiaSiguiente();
+        if (e.keyCode == 37 || e.keyCode == 40)
+            $scope.getTurnosDiaAnterior();
     });
     
 });
