@@ -83,7 +83,7 @@
 
         <td data-id={{movimiento.id}} data-ng-click="detailMovimiento($event)" ng-if="movimiento.categoria != 'Turnos' && movimiento.categoria != 'Peluqueros' && movimiento.categoria != 'Ventas'">{{movimiento.detalle}}</td>
         <td data-id={{movimiento.id}} ng-if="movimiento.categoria == 'Turnos' || movimiento.categoria == 'Peluqueros'">{{movimiento.detalle}}</td>
-        <td data-id={{movimiento.id}} data-ng-click="detailMovimientoVenta($event)" ng-if="movimiento.categoria == 'Ventas'">Ver Detalle</td>
+        <td class=link data-id={{movimiento.id}} data-ng-click="detailMovimientoVenta($event)" ng-if="movimiento.categoria == 'Ventas'">Ver Detalle</td>
                   
         <td class="tachotd" id={{movimiento.id}} data-id={{movimiento.id}} data-ng-click="confirmDelete(movimiento.id)" ng-if="movimiento.categoria != 'Turnos' && movimiento.categoria != 'Peluqueros' && movimiento.categoria != 'Ventas'"><label><i class="material-icons tachoi" >clear</i></label></td>
         <td class="tachotd" ng-if="movimiento.categoria == 'Turnos' || movimiento.categoria == 'Peluqueros' || movimiento.categoria == 'Ventas'"></td>
