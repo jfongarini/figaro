@@ -8,7 +8,7 @@
   <#include "/html/common/menu.html">
   <div ng-if="turnos.length > 0" id=content class=content>
     <div class=banner>
-        <label ng-cloak class="banner-title" >{{cliente}}</label>
+        <label ng-cloak class="banner-title" >Cliente: {{cliente}}</label>
     </div>
     <table  id=table class="main-table banner">
         <thead>
@@ -31,7 +31,7 @@
         </tbody>
       </table>
       <div ng-cloak class=banner>
-          <label class=banner-label >{{getTotalDiario(turnos) | currency}}</label>
+          <label ><i class=material-icons >account_balance_wallet</i>{{getTotalDiario(turnos) | currency}}</label>
       </div>
   </div>
 

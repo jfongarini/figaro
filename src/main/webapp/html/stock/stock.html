@@ -8,21 +8,14 @@
   <#include "/html/common/menu.html">
   <div id=content class=content>
     <div class="banner">
-        <label class="banner-label add boton-stock" ng-click="newProducto()"><i class=material-icons>playlist_add</i>Nuevo</label>
-        
-        <label class=banner-label ><i class=material-icons>more_vert</i></label> 
-        
-        <label class="banner-label boton-stock" ng-click="getAll()"> <i class="material-icons" >reorder</i>Ver todos</label>
-        
-        <label class=banner-label ><i class=material-icons>more_vert</i></label> 
-        
-        <label class="banner-label boton-stock" ng-click="searchProductoFaltante()"> <i class="material-icons">filter_list</i>Ver faltantes </label>
-        
-        <label class=banner-label> <i class=material-icons>more_vert</i></label> 
-        
-        <label class=banner-label> <i class=material-icons>search</i></label>
+        <label class="banner-button add boton-stock" ng-click="newProducto()"><i class=material-icons>playlist_add</i>Nuevo</label>
+        <div class="separator"></div>
+        <label class="banner-button boton-stock" ng-click="getAll()"> <i class="material-icons" >reorder</i>Ver todos</label>
+        <div class="separator"></div>
+        <label class="banner-button boton-stock" ng-click="searchProductoFaltante()"> <i class="material-icons">filter_list</i>Ver faltantes </label>
+        <div class="separator"></div>
+        <i class=material-icons>search</i>
         <input class=input-banner type="text" placeholder="Buscar producto" ng-model="search" ng-keyup="searchProducto()">
-    
     </div>
     
     <table id=table class=main-table>
@@ -55,4 +48,4 @@
   <#include "/html/common/javascript.html">
   <script src="js/stockController.js" ></script>
 </body>
-</html>
+</html><div class="separator"></div>

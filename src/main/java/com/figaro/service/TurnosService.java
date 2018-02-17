@@ -31,7 +31,7 @@ public class TurnosService {
 	public Turno saveTurno(Turno turno) {
 		LOGGER.info("Guardando un nuevo turno: " + turno.toString());
 		validateTurno(turno);
-		int newID = getRepository().saveTurno(turno);
+		int newID = repository.saveTurno(turno);
 		turno.setId(newID);
 		return turno ;  
 	}
@@ -170,6 +170,41 @@ public class TurnosService {
 			throw new TurnoOcupadoException(nuevoTurno);
 	}
 
+	
+	private boolean mismoPeluquero(Turno nuevoTurno, Turno turno) {
+		return turno.getPeluquero().equals(nuevoTurno.getPeluquero());
+	}
+	
+	private boolean mismoCliente(Turno nuevoTurno, Turno turno) {
+		return turno.getCliente().equals(nuevoTurno.getCliente());
+	}
+	
+	private boolean horarioOcupado(Turno nuevoTurno, Turno turno) {
+		return horarioInicioOcupado(nuevoTurno, turno) || 
+			   horarioFinOcupado(nuevoTurno, turno) || 
+			   mismoHorario(nuevoTurno, turno);
+	}
+	
+	private boolean horarioInicioOcupado(Turno nuevoTurno, Turno turno) {
+		return turno.getDesde().after(nuevoTurno.getDesde()) &&
+			   turno.getDesde().before(nuevoTurno.getHasta());
+	}
+	
+	private boolean horarioFinOcupado(Turno nuevoTurno, Turno turno) {
+		return turno.getHasta().after(nuevoTurno.getDesde()) && 
+			   turno.getHasta().before(nuevoTurno.getHasta());
+	}
+
+	private boolean mismoHorario(Turno nuevoTurno, Turno turno) {
+		return (turno.getDesde().compareTo(nuevoTurno.getDesde()) == 0) && 
+			   (turno.getHasta().compareTo(nuevoTurno.getHasta()) == 0);
+	}
+	
+	private boolean horarioInvalido(Turno nuevoTurno) {
+		return nuevoTurno.getDesde().compareTo(nuevoTurno.getHasta()) >= 0;
+	}
+	
+	
 	public Turno getTurno(int turnoId) {
 		LOGGER.debug("Obteniendo el turno con ID: " + turnoId);
 		return repository.getTurno(turnoId);
@@ -197,38 +232,6 @@ public class TurnosService {
 
 	public List<Turno> searchTurno(Date desde) {
 		return repository.searchTurno(desde);
-	}
-	
-	private boolean mismoPeluquero(Turno nuevoTurno, Turno turno) {
-		return turno.getPeluquero().equals(nuevoTurno.getPeluquero());
-	}
-	
-	private boolean mismoCliente(Turno nuevoTurno, Turno turno) {
-		return turno.getCliente().equals(nuevoTurno.getCliente());
-	}
-	
-	private boolean horarioOcupado(Turno nuevoTurno, Turno turno) {
-		return horarioInicioOcupado(nuevoTurno, turno) || horarioFinOcupado(nuevoTurno, turno) || mismoHorario(nuevoTurno, turno);
-	}
-	
-	private boolean horarioInicioOcupado(Turno nuevoTurno, Turno turno) {
-		return turno.getDesde().after(nuevoTurno.getDesde()) && turno.getDesde().before(nuevoTurno.getHasta());
-	}
-	
-	private boolean horarioFinOcupado(Turno nuevoTurno, Turno turno) {
-		return turno.getHasta().after(nuevoTurno.getDesde()) && turno.getHasta().before(nuevoTurno.getHasta());
-	}
-
-	private boolean mismoHorario(Turno nuevoTurno, Turno turno) {
-		return (turno.getDesde().compareTo(nuevoTurno.getDesde()) == 0) && (turno.getHasta().compareTo(nuevoTurno.getHasta()) == 0);
-	}
-	
-	private boolean horarioInvalido(Turno nuevoTurno) {
-		return nuevoTurno.getDesde().compareTo(nuevoTurno.getHasta()) >= 0;
-	}
-
-	public TurnosRepository getRepository() {
-		return repository;
 	}
 
 	public void setRepository(TurnosRepository repository) {
