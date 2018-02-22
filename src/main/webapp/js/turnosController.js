@@ -168,6 +168,7 @@ app.controller('turnosController', function ($scope, $http) {
         for(var i = 0; i < turnos.length; i++)
         for(var j = 0; j < turnos[i].trabajos.length; j++)
             total += turnos[i].trabajos[j].servicio.precio;
+        $scope.totalDiario = total;
     return total;
     };
 
@@ -347,20 +348,7 @@ app.controller('turnosController', function ($scope, $http) {
         });
     };
 
-    //INIT TURNOS DE CLIENTE
-    $scope.getTurnosDeCliente = function(){
-        $scope.activeTurnos = true;
-        var clienteId = window.location.href.split("/").pop();
-        $http.get('/rest/turnos/cliente/'+clienteId)
-        .then(function successCallback(response) {
-            $scope.turnos = response.data;
-            if ( $scope.turnos.length > 0){
-                $scope.cliente = ($scope.turnos[0].cliente.nombre +' '+ $scope.turnos[0].cliente.apellido) 
-                $scope.getTotalDiario($scope.turnos);
-            }
-        });
-    }
-
+  
 
     //DESCARTAR FORMULARIO
     $scope.discardTurno = function(event){

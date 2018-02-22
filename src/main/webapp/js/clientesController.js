@@ -10,6 +10,20 @@ app.controller('clientesController', function ($scope, $http) {
         $scope.getAll();
     }
 
+    //INIT TURNOS DE CLIENTE
+    $scope.getTurnosDeCliente = function(){
+        $scope.activeTurnos = true;
+        var clienteId = window.location.href.split("/").pop();
+        $http.get('/rest/turnos/cliente/'+clienteId)
+        .then(function successCallback(response) {
+            $scope.turnos = response.data;
+            if ( $scope.turnos.length > 0){
+                $scope.cliente = ($scope.turnos[0].cliente.nombre +' '+ $scope.turnos[0].cliente.apellido) 
+            }
+        });
+    }
+
+
     //OBTENER LISTA DE CLIENTES
     $scope.getAll = function() {
         $http.get("/rest/clientes").then(function (response) {
