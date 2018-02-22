@@ -404,11 +404,21 @@ li a:hover {
     border-left-width: 0px
 }
 
-.link {
+.link,.ver-mas {
     color: #292961;
     font-weight: 800;
     text-decoration: none;
 }
+
+.ver-mas {
+    text-align: center;
+    width: 100%;
+}
+
+.ver-mas label{
+    cursor: pointer;
+}
+
 
 .peluquero-fields{
     float: left;

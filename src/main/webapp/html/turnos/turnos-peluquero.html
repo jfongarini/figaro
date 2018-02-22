@@ -4,7 +4,7 @@
   <title>TURNOS</title>
   <#include "/html/common/head.html">
 </head>
-<body ng-app=figaro ng-controller=turnosController ng-cloak  data-ng-init="getTurnosDePeluquero()" >
+<body ng-app=figaro ng-controller=peluquerosController ng-cloak  data-ng-init="initTurnosPeluquero()" >
   <#include "/html/common/menu.html">
   <div ng-if="turnos.length > 0" id=content class=content>
     <div class=banner>
@@ -29,16 +29,19 @@
           <td data-id={{turno.id}} ><a class=link ng-href="/turnos/cliente/{{turno.cliente.id}}"><div class=td-link> {{turno.cliente.nombre}} {{turno.cliente.apellido}}</div> </a></td>
           <td id={{turno.id}} data-id={{turno.id}}><span ng-repeat="trabajo in turno.trabajos"> {{trabajo.servicio.descripcion}} </span></td>
           <td id={{turno.id}} data-id={{turno.id}}>{{getTotalTurno(turno.trabajos) | currency}}</td>
-          <td id={{turno.id}} data-id={{turno.id}}>{{ (getPago(turno.trabajos)*100) / getTotalTurno(turno.trabajos) | number:0 }}%</td>
-          <td id={{turno.id}} data-id={{turno.id}}>{{getPago(turno.trabajos) | currency}}</td>
+          <td id={{turno.id}} data-id={{turno.id}} ng-controller=turnosController >{{ (getPago(turno.trabajos)*100) / getTotalTurno(turno.trabajos) | number:0 }}%</td>
+          <td id={{turno.id}} data-id={{turno.id}} ng-controller=turnosController >{{getPago(turno.trabajos) | currency}}</td>
           <td><input ng-checked="turno.cobrado"  type="checkbox" disabled></td>
           <td><input ng-model="turno.pagado"  ng-click="setPagado(turno)"  type="checkbox"></td>
         </tr>
         </tbody>
       </table>
       <div  class=banner>
-           <label  ><i class=material-icons >account_balance_wallet</i>{{getTotalPago(turnos) | currency}}</label>
+           <label  ><i class=material-icons >account_balance_wallet</i>{{getTotalTurnosPeluquero(turnos) | currency}}</label>
       </div>
+      <div class=ver-mas ng-hide = "turnos.length >= cantidadTurnosPeluquero">
+      <label  ng-click=verMas() > Ver m&aacute;s</label>
+    </div>
   </div>
 
   <div ng-cloak ng-if="turnos.length < 1" class="message">
@@ -47,7 +50,7 @@
 
   <#include "/html/turnos/deshacer-cobrado-pagado.html">
   <#include "/html/common/javascript.html">
+  <script src="/js/peluquerosController.js" ></script>
   <script src="/js/turnosController.js" ></script>
-  <script src="/js/clientesController.js" ></script>
 </body>
 </html>
