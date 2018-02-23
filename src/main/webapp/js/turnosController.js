@@ -121,11 +121,37 @@ app.controller('turnosController', function ($scope, $http) {
 
     //OBTENER TURNOS
     $scope.getTurnos = function() {
+        if ($scope.ngDateTurno== null)
+             $scope.getTurnosHoy();
         $http.get('/rest/turnos',{params:{fecha: getStringDate($scope.ngDateTurno)}})
         .then(function successCallback(response) {
             $scope.turnos = response.data;
             $scope.getTotalDiario($scope.turnos);
         });
+    };
+
+
+    //OBTENER TURNOS DIA ANTERIOR
+    $scope.getTurnosDiaAnterior = function() {
+        var date = new Date($scope.ngDateTurno.getTime());
+        date.setDate(date.getDate()-1);
+        $scope.ngDateTurno = date;
+        $scope.getTurnos();
+    };
+
+    //OBTENER TURNOS DIA SIGUIENTE
+    $scope.getTurnosDiaSiguiente = function() {
+        var date = new Date($scope.ngDateTurno.getTime());
+        date.setDate(date.getDate()+1);
+        $scope.ngDateTurno = date;
+        $scope.getTurnos();
+    };
+
+   
+    //OBTENER TURNOS Hoy
+    $scope.getTurnosHoy = function() {
+        $scope.ngDateTurno = new Date();
+        $scope.getTurnos();
     };
 
     //OBTENER TOTAL DE TURNO
@@ -142,6 +168,7 @@ app.controller('turnosController', function ($scope, $http) {
         for(var i = 0; i < turnos.length; i++)
         for(var j = 0; j < turnos[i].trabajos.length; j++)
             total += turnos[i].trabajos[j].servicio.precio;
+        $scope.totalDiario = total;
     return total;
     };
 
@@ -321,44 +348,7 @@ app.controller('turnosController', function ($scope, $http) {
         });
     };
 
-    //INIT TURNOS DE CLIENTE
-    $scope.getTurnosDeCliente = function(){
-        $scope.activeTurnos = true;
-        var clienteId = window.location.href.split("/").pop();
-        $http.get('/rest/turnos/cliente/'+clienteId)
-        .then(function successCallback(response) {
-            $scope.turnos = response.data;
-            if ( $scope.turnos.length > 0){
-                $scope.cliente = ($scope.turnos[0].cliente.nombre +' '+ $scope.turnos[0].cliente.apellido) 
-                $scope.getTotalDiario($scope.turnos);
-            }
-        });
-    }
-
-    //INIT TURNOS DE CLIENTE
-    $scope.getTurnosDePeluquero = function(){
-        $scope.activeTurnos = true;
-        url = '/rest/turnos/peluquero/';
-        path = window.location.href.split("/").pop();
-        if (path == 'sinpagar'){
-            isSinPagar = true;
-            $scope.message = 'No existen turnos para pagar a este peluquero.';
-            peluqueroId = window.location.href.split("/")[5];
-            url = url + peluqueroId + '/sinpagar';
-        }else{
-            isSinPagar = false;
-            $scope.message = 'No existen turnos para este peluquero.';
-            url = url + path;
-        }
-        $http.get(url)
-        .then(function successCallback(response) {
-            $scope.turnos = response.data;
-            if ( $scope.turnos.length > 0){
-                $scope.peluquero = ($scope.turnos[0].peluquero.nombre +' '+ $scope.turnos[0].peluquero.apellido) 
-                $scope.getTotalDiario($scope.turnos);
-            }
-        });
-    }
+  
 
     //DESCARTAR FORMULARIO
     $scope.discardTurno = function(event){
@@ -381,9 +371,12 @@ app.controller('turnosController', function ($scope, $http) {
 
     //APRETAR ESCAPE
     document.addEventListener('keyup', function(e) {
-        if (e.keyCode == 27) {
+        if (e.keyCode == 27) 
             $scope.discardTurno();
-        }
+        if (e.keyCode == 39 || e.keyCode == 38)
+            $scope.getTurnosDiaSiguiente();
+        if (e.keyCode == 37 || e.keyCode == 40)
+            $scope.getTurnosDiaAnterior();
     });
     
 });

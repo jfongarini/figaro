@@ -8,22 +8,20 @@
 <#include "/html/common/menu.html">
 <div id=content class=content>
   <div class=banner>
-      <label class="banner-label add"><i class="material-icons" ng-click="newMovimiento()">add_circle_outline</i></label>   
-      <label class=banner-label ><i class=material-icons>more_vert</i></label>      
-      <label class=banner-label ng-click="ShowHideDia()"><i class=material-icons>search</i> D&Iacute;A </label>    
-      <label class=banner-label ><i class=material-icons >more_vert</i></label>
-      <label class=banner-label ng-click="ShowHideEntreDia()"><i class=material-icons >search</i> SEMANA </label>
-      <label class=banner-label ><i class=material-icons >more_vert</i></label>
-      <label class=banner-label ng-click="ShowHideMes()"><i class=material-icons >search</i> MES </label>
-      <label class=banner-label ><i class=material-icons >more_vert</i></label>
-      <label class=banner-label ><i class=material-icons >search</i>CATEGOR&Iacute;A</label>
-      <select  class=search-categoria ng-model="searchC" ng-change="searchCategoria()" ng-click="limpiarSelect()" ng-cloak>
+      <label class="banner-button add" ng-click="newMovimiento()"><i class="material-icons" >add_circle_outline</i> Nuevo</label>   
+      <div class="separator"></div>
+      <label class=banner-button ng-click="ShowHideDia()"><i class=material-icons>search</i> D&Iacute;A </label>    
+      <label class=banner-button ng-click="ShowHideEntreDia()"><i class=material-icons >search</i> SEMANA </label>
+      <label class=banner-button ng-click="ShowHideMes()"><i class=material-icons >search</i> MES </label>
+      <div class="separator"></div>
+      <i class=material-icons >search</i>CATEGOR&Iacute;A: 
+      <select   class="input-banner" ng-model="searchC" ng-change="searchCategoria()" ng-click="limpiarSelect()" ng-cloak>
             <option value = "Turnos">Turnos</option>
             <option value = "Peluqueros">Peluqueros</option>
             <option value = "Ventas">Ventas</option>
             <option value="{{categoria.nombre}}" ng-repeat="categoria in categorias">{{categoria.nombre}}</option>
       </select>
-      <label class=banner-label ng-click="limpiaCategoria()"><i class=material-icons >clear</i></label>
+      <i class=material-icons ng-click="limpiaCategoria()" >clear</i></label>
   </div>
 
   
@@ -91,10 +89,10 @@
     </tbody>
   </table>
   <div class=banner ng-cloak ng-if="movimientos.length > 0">
-      <label class=banner-label ><i class=material-icons >account_balance_wallet</i> Total: <font ng-cloak ng-class='{green : calculaTotal() >= 0, red: calculaTotal() < 0}'>{{ calculaTotal() | currency }}</font></label>
+      <label  ><i class=material-icons >account_balance_wallet</i> Total: <font ng-cloak ng-class='{green : calculaTotal() >= 0, red: calculaTotal() < 0}'>{{ calculaTotal() | currency }}</font></label>
       
       <label class=banner-label-right ><i class=material-icons >account_balance_wallet</i> Total Tarjeta: <font ng-cloak ng-class='{green : calculaTotalTarjeta() >= 0, red: calculaTotalTarjeta() < 0}'>{{ calculaTotalTarjeta() | currency }}</font></label>
-      <label class=banner-label-right ><i class=material-icons >more_vert</i></label>
+      
       <label class=banner-label-right ><i class=material-icons >account_balance_wallet</i> Total Efectivo: <font ng-cloak ng-class='{green : calculaTotalEfectivo() >= 0, red: calculaTotalEfectivo() < 0}'>{{ calculaTotalEfectivo() | currency }}</font></label>
   </div>
 

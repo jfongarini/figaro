@@ -1,7 +1,6 @@
 package com.figaro.service;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -68,7 +67,7 @@ public class EstadisticasService {
 		return mapClientes;
 	}
 	
-	public Map<String, Integer> buscarProductoMasVendido(Date from, Date to) throws ParseException{
+	public Map<String, Integer> buscarProductoMasVendido(Date from, Date to) {
 		
 		List<Venta> searchVenta = repository.getAllDate(from, to);
 		Map<String, Integer> mapVenta = new HashMap<String, Integer>();
@@ -88,7 +87,7 @@ public class EstadisticasService {
 		return mapVenta;
 	}
 	
-	public Map<String, BigDecimal> buscarTotalesDeCaja(Date from, Date to) throws ParseException{
+	public Map<String, BigDecimal> buscarTotalesDeCaja(Date from, Date to) {
 
 		String category = "";
 		
@@ -115,7 +114,7 @@ public class EstadisticasService {
 		return mapMovimientos;
 	}
 	
-	public Map<String, BigDecimal> buscarTurnosPorPeluqueroIngreso(Date from, Date to) throws ParseException{
+	public Map<String, BigDecimal> buscarTurnosPorPeluqueroIngreso(Date from, Date to) {
 		
 		List<Turno> searchTurnos = repository.searchBetween (from,to);
 		Map<String, BigDecimal> mapTurnos = new HashMap<String, BigDecimal>();
@@ -138,7 +137,7 @@ public class EstadisticasService {
 		return mapTurnos;
 	}
 	
-	public Map<String, Integer> buscarTurnosPorPeluqueroCant(Date from, Date to) throws ParseException{
+	public Map<String, Integer> buscarTurnosPorPeluqueroCant(Date from, Date to) {
 		
 		List<Turno> searchTurnos = repository.searchBetween (from,to);
 		Map<String, Integer> mapTurnos = new HashMap<String, Integer>();		
@@ -156,7 +155,7 @@ public class EstadisticasService {
 		return mapTurnos;
 	}	
 	
-	public TreeMap<String, Integer> buscarTurnoMasSolicitado(Date from, Date to) throws ParseException{
+	public TreeMap<String, Integer> buscarTurnoMasSolicitado(Date from, Date to) {
 		
 		List<Turno> searchTurnos = repository.searchBetween (from,to);
 		Map<String, Integer> mapTurnos = new HashMap<String, Integer>();		

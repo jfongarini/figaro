@@ -8,9 +8,9 @@
   <#include "/html/common/menu.html">
   <div id=content class=content>
     <div class="banner">
-        <label class="banner-label add"><i class=material-icons ng-click="newClient()" >person_add</i></label>
-        <label class=banner-label ><i class=material-icons >more_vert</i></label>
-        <label class=banner-label ><i class=material-icons >search</i></label>
+        <label class="banner-button add" ng-click="newClient()"><i class=material-icons  >person_add</i> Nuevo</label>
+        <div class="separator"></div>
+        <i class="material-icons search-input-icon ">search</i>
         <input class=input-banner type="text" placeholder="Buscar..." ng-model="search" ng-keyup="searchCliente()">
     </div>
     <table id=table class=main-table>

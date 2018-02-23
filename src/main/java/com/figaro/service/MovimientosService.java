@@ -1,17 +1,10 @@
 package com.figaro.service;
 
-
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.figaro.model.Cliente;
 import com.figaro.model.Item;
 import com.figaro.model.Movimiento;
 import com.figaro.model.Venta;
@@ -55,21 +48,10 @@ public class MovimientosService {
 		return (category.isEmpty()) ? repository.searchBetween (from,to) : repository.searchBetweenWithCategory (from,to,category); 
 	}
 	
-	//public List<String> getItemId(Integer id){
+
 	public List<Item> getItemId(Integer id){
-	//	List<String> listItem = new ArrayList<String>();
 		Venta laVenta = repository.getVentaId(id);
-		List<Item> idItem = laVenta.getItems();		
-	/*	for (Item item : idItem) {
-			String nom = "Nombre: " + item.getNombreProducto() + ' ' + item.getDescripcionProducto();
-			String precioU = "* Precio Unitario: " + item.getPrecioUnitario(); 
-			String cant = "* Cantidad: " + item.getCantidad();
-			String precioT = "* Precio Total: " + item.getPrecioTotal();
-			String texto = nom + precioU + cant + precioT;
-			listItem.add(texto);
-		} 
-	*/
-		
+		List<Item> idItem = laVenta.getItems();			
 		return idItem;
 	}
 	
@@ -77,6 +59,7 @@ public class MovimientosService {
 	public MovimientosRepository getRepository() {
 		return repository;
 	}
+	
 	public void setRepository(MovimientosRepository repository) {
 		this.repository = repository;
 	}

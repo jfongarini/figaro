@@ -47,13 +47,18 @@ public class TurnosControllerREST {
     }
 	
 	@RequestMapping(value = "turnos/peluquero/{peluqueroId}",method=RequestMethod.GET,produces="application/json")
-    public ResponseEntity<List<Turno>> getTurnosPeluquero( @PathVariable int peluqueroId) {
-		return new ResponseEntity<List<Turno>>(service.getTurnosPeluquero(peluqueroId), HttpStatus.OK);
+    public ResponseEntity<List<Turno>> getTurnosPeluquero( @PathVariable int peluqueroId, @RequestParam int index) {
+		return new ResponseEntity<List<Turno>>(service.getTurnosPeluquero(peluqueroId, index), HttpStatus.OK);
     }
 	
 	@RequestMapping(value = "turnos/peluquero/{peluqueroId}/sinpagar",method=RequestMethod.GET,produces="application/json")
     public ResponseEntity<List<Turno>> getTurnosPeluqueroSinPagar( @PathVariable int peluqueroId) {
 		return new ResponseEntity<List<Turno>>(service.getTurnosPeluqueroSinPagar(peluqueroId), HttpStatus.OK);
+    }
+	
+	@RequestMapping(value = "turnos/peluquero/{peluqueroId}/cantidad",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity <Integer> getCantidadTurnosPeluquero( @PathVariable int peluqueroId) {
+		return new ResponseEntity<Integer>(service.getCantidadTurnosPeluquero(peluqueroId), HttpStatus.OK);
     }
 	
 	@RequestMapping(value = "turnos/actualizar/{turnoId}",method=RequestMethod.PUT)

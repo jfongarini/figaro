@@ -1,11 +1,11 @@
 package com.figaro.controllerREST;
 
+import static com.figaro.util.Constants.DATE_FORMAT;
+
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
-import java.util.TreeMap;
 
-import static com.figaro.util.Constants.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
