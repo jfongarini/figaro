@@ -17,11 +17,11 @@ app.controller('peluquerosController', function ($scope, $http) {
         path = window.location.href.split("/").pop();
         $scope.peluqueroId = window.location.href.split("/")[5];
         if (path == 'sinpagar'){
-            isSinPagar = true;
+            $scope.sinPagar = true;
             $scope.message = 'No existen turnos para pagar a este peluquero.';
             $scope.getTurnosSinPagar();
         }else{
-            isSinPagar = false;
+            $scope.sinPagar = false;
             $scope.message = 'No existen turnos para este peluquero.';
             $scope.getCantidadTurnos();
             $scope.getTurnosPeluquero();
@@ -34,7 +34,6 @@ app.controller('peluquerosController', function ($scope, $http) {
         $scope.getTurnosPeluquero();
         
     }
-
 
     //GET TURNOS PELUQUEROS PAGINADO
     $scope.getTurnosPeluquero = function(){

@@ -39,7 +39,7 @@
       <div  class=banner>
            <label  ><i class=material-icons >account_balance_wallet</i>{{getTotalTurnosPeluquero(turnos) | currency}}</label>
       </div>
-      <div class=ver-mas ng-hide = "turnos.length >= cantidadTurnosPeluquero">
+      <div class=ver-mas ng-hide = "(turnos.length >= cantidadTurnosPeluquero) || sinPagar">
       <label  ng-click=verMas() > Ver m&aacute;s</label>
     </div>
   </div>
