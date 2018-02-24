@@ -63,46 +63,38 @@ body{
 }
 
 .banner-title{
-    float: left;
     text-align: right;
     margin-top: 12px;
     margin-right: 5px;
-    margin-left: 20px;    
-    font-size: 16px;
 }
 
 .banner-label{
-    float: left;
     text-align: right;
     margin-top: 12px;
     margin-right: 5px;
-    margin-left: 20px;    
-    font-size: 13px;
 }
 
 .banner-label-right{
     float: right;
     text-align: right;
-    margin-top: 12px;
     margin-right: 30px;
-    margin-left: 20px;    
-    font-size: 13px;
 }
 
  .confirm-message{
    width: 100%
 }
 
+
 .input-banner {
     font-family: 'Roboto', sans-serif;
     font-size: 13px;
     border: 0;
-    margin-top: 10px
+    background-color: transparent
 }
 
 .input-banner:focus {
     outline: none !important;
-    border-bottom: 2px solid #292961
+
 }
 
 .input-banner, .input-banner:focus { 
@@ -120,39 +112,51 @@ body{
 }
 
 
-.card, .banner, .banner-busqueda, .main-card{
+.card, .banner-busqueda{
     margin-top: 30px;
     background-color: #FFF;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
 }
 
+
+.separator {
+    border-left: 1px solid #c2c1c1;
+    width: 1px;
+    height: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    vertical-align: bottom;
+    display: inline-block;
+}
+
+
 .banner{
-    height: 45px;
-    margin-bottom: 20px
+    width: 95%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: -5px;
+    user-select: none;
+    font-size: 12px;
 }
 
 .banner-busqueda{
 	height: 45px;    
     margin-bottom: 20px;   
-    margin-top: 12px;           
-    font-size: 13px;
+    margin-top: 12px; 
     width: 95%;
-    margin-bottom: 20px
+    margin-bottom: 20px;
+    font-size: 12px;
 }
 
 .banner-label-busqueda{    
     text-align: right;
     margin-top: 12px;
     margin-right: 5px;
-    margin-left: 20px;    
-    font-size: 13px;
+    margin-left: 20px;   
 }
 
-table, .banner{
-    width: 95%
-}
 
-table, .banner .banner-busqueda{
+table,  .banner-busqueda{
     width: 95%
 }
 
@@ -316,6 +320,10 @@ li a:hover {
     width: 360px;
 }
 
+#cv {
+    width: 600px;
+}
+
 .modal-double{
     width: 700px;
 }
@@ -399,11 +407,22 @@ li a:hover {
     border-left-width: 0px
 }
 
-.link {
+.link,.ver-mas {
     color: #292961;
     font-weight: 800;
     text-decoration: none;
 }
+
+.ver-mas {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.ver-mas label{
+    cursor: pointer;
+}
+
 
 .peluquero-fields{
     float: left;
@@ -416,7 +435,7 @@ li a:hover {
     display: inline-block
 }
 
-.card input:focus, select:focus {
+.card input:focus {
     outline: none !important;
     border-bottom: 2px solid #292961
 }
@@ -528,9 +547,17 @@ li a:hover {
     box-shadow: 0 1px 4px rgba(0, 0, 0, .6)
 }
 
-.banner-button {
-    margin-top: 30px
+.banner-button  {
+    cursor: pointer;
+    margin: 5px;
+    padding: 5px;
 }
+
+.banner-button:hover  {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .6);
+}
+
+
 
 .trabajo-precio{
     text-align: center;

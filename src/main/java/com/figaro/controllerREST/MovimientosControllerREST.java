@@ -1,9 +1,11 @@
 package com.figaro.controllerREST;
 
+import static com.figaro.util.Constants.DATE_FORMAT;
+
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-import static com.figaro.util.Constants.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.figaro.model.Item;
 import com.figaro.model.Movimiento;
 import com.figaro.service.MovimientosService;
 
@@ -53,6 +56,11 @@ public class MovimientosControllerREST {
     public ResponseEntity<Movimiento> getAllMovimiento(@PathVariable int movimientoID) {
 		return new ResponseEntity<>(service.deleteMovimiento(movimientoID), HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "movimientos/listaDeItems",method=RequestMethod.GET,produces="application/json")
+    public ResponseEntity<List<Item>> getItemId(@RequestParam Integer id) throws ParseException {		
+        return new ResponseEntity<List<Item>>(service.getItemId(id), HttpStatus.OK);
+    }
 	
 	public MovimientosService getService() {
 		return service;

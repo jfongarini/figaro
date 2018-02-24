@@ -29,6 +29,36 @@ app.controller('movimientosController', function ($scope, $http) {
 		    });
 	    };
 
+	    //CLICK DETALLE VENTA
+	    $scope.detailMovimientoVenta = function(event){
+	        $scope.message='';
+	        $scope.isNuevoMovimiento = false
+	        $scope.movimientoID = event.currentTarget.getAttribute("data-id");
+	        $http.get('/rest/movimientos/'+$scope.movimientoID).then(function (response) {
+	            $scope.ngMovimiento = response.data;
+	            $scope.ngMovimiento.fecha = new Date($scope.ngMovimiento.fecha);
+	            $scope.ngDetalle = $scope.ngMovimiento.detalle;
+	            $http.get("/rest/movimientos/listaDeItems",{params: { id: $scope.ngDetalle}}).then(function (response) {
+	            	$scope.ngMovimientoVenta = response.data;
+	               	openModal("modal-caja-venta");
+	            });                    
+	            
+		    });
+	    };
+
+	    $scope.calculaTotalVenta = function(){
+	        var total = 0;
+	        angular.forEach($scope.ngMovimientoVenta, function(ngMovimiento){	          
+	        	total = total + (ngMovimiento.precioTotal);
+	        })
+	        return total;
+	    }
+	    
+	    $scope.discardMovimientoVenta = function(event){
+	        $scope.ngMovimiento = {};
+	        closeModal("modal-caja-venta");
+	    };
+
 	    //CLICK ACEPTAR FORMULARIO
 	    $scope.sendMovimiento = function() {	    	        
 	        if($scope.isNuevoMovimiento === true){
@@ -65,7 +95,9 @@ app.controller('movimientosController', function ($scope, $http) {
 	            $scope.discardMovimiento();
 	        }
 	    });
-	    
+
+
+
 	  //ELIMINTAR MOVIMIENTO
 	    $scope.deleteTarget = function(id) {	       
 	        //$scope.movimientoID = event.currentTarget.getAttribute("data-id");
@@ -95,6 +127,28 @@ app.controller('movimientosController', function ($scope, $http) {
 	          if (ngMovimiento.isGasto == true){
 	        	  total = total - (ngMovimiento.precio);
 	          } else {
+	        	  total = total + (ngMovimiento.precio);
+	          }	          
+	        })
+	        return total;
+	    }
+
+	    //CALCULAR EL TOTAL NEGATIVO
+	    $scope.calculaTotalNegativo = function(){
+	        var total = 0;
+	        angular.forEach($scope.movimientos, function(ngMovimiento){	          
+	          if (ngMovimiento.isGasto == true){
+	        	  total = total - (ngMovimiento.precio);
+	          }          
+	        })
+	        return total;
+	    }
+
+	    //CALCULAR EL TOTAL POSITIVO
+	    $scope.calculaTotalPositivo = function(){
+	        var total = 0;
+	        angular.forEach($scope.movimientos, function(ngMovimiento){	          
+	          if (ngMovimiento.isGasto != true){	        	 
 	        	  total = total + (ngMovimiento.precio);
 	          }	          
 	        })

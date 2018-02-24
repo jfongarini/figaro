@@ -6,11 +6,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.figaro.model.Trabajo;
 import com.figaro.model.Turno;
 
 @SuppressWarnings("unchecked")
 public class TurnosRepository extends AbstractRepository{
+	
+	@Value("${page.size}")
+	private Integer pageSize;
 
 	public Turno getTurno(int turnoId) {
 		return (Turno) getCurrentSession().get(Turno.class, turnoId);
@@ -48,9 +53,11 @@ public class TurnosRepository extends AbstractRepository{
 	}
 	
 	
-	public List<Turno> getTurnosPeluquero(int peluqueroId) {
+	public List<Turno> getTurnosPeluquero(int peluqueroId, int index ) {
 		return getCurrentSession().createQuery( "FROM Turno AS t WHERE t.peluquero.id = :peluqueroId ORDER BY t.desde DESC")
 				.setParameter("peluqueroId", peluqueroId)
+				.setFirstResult(index*pageSize)
+				.setMaxResults(pageSize)
 				.list();
 	}
 	
@@ -58,6 +65,11 @@ public class TurnosRepository extends AbstractRepository{
 		return getCurrentSession().createQuery( "FROM Turno AS t WHERE t.peluquero.id = :peluqueroId AND t.pagado = false ORDER BY t.desde DESC")
 				.setParameter("peluqueroId", peluqueroId)
 				.list();
+	}
+	
+	public Integer getCantidadTurnosPeluquero(int peluqueroId) {
+		return getCurrentSession().createQuery( "FROM Turno AS t WHERE t.peluquero.id = :peluqueroId ORDER BY t.desde DESC")
+				.setParameter("peluqueroId", peluqueroId).list().size();
 	}
 	
 	public List<Turno> searchTurno (Date desdeParam) {
@@ -73,10 +85,12 @@ public class TurnosRepository extends AbstractRepository{
 		.list();
 	}
 
+	
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
 
 	
-
-
 
 	
 }

@@ -12,17 +12,17 @@
 <!-- Barra de filtros -->
      
       <div class=banner>
-        <label class=banner-label title="Desplegar filtro por d&iacute;a" ng-click="ShowHideDia()"><i class=material-icons>search</i> D&Iacute;A </label>    
-        <label class=banner-label ><i class=material-icons >more_vert</i></label>
-        <label class=banner-label title="Desplegar filtro por semana" ng-click="ShowHideEntreDia()"><i class=material-icons >search</i> SEMANA </label>
-        <label class=banner-label ><i class=material-icons >more_vert</i></label>
-        <label class=banner-label title="Desplegar filtro por mes" ng-click="ShowHideMes()"><i class=material-icons >search</i> MES </label>
+        <label class=banner-button title="Desplegar filtro por d&iacute;a" ng-click="ShowHideDia()"><i class=material-icons>search</i> D&iacute;a </label>    
+        <div class="separator"></div>
+        <label class=banner-button title="Desplegar filtro por semana" ng-click="ShowHideEntreDia()"><i class=material-icons >search</i> Semana </label>
+        <div class="separator"></div>
+        <label class=banner-button title="Desplegar filtro por mes" ng-click="ShowHideMes()"><i class=material-icons >search</i> Mes </label>
       </div>
 
       <div class=banner-busqueda ng-hide = "IsHiddenDia" ng-cloak>
         <div>       
           <label class=banner-label-busqueda title="Ocultar filtro" ng-click="ShowHideDia()"><i class=material-icons >clear</i></label>
-          <label class=banner-label-busqueda> B&Uacute;SQUEDA POR D&Iacute;A: </label>    
+          <label class=banner-label-busqueda> B&uacute;squeda por D&iacute;a: </label>    
             <input class=banner-label-busqueda title="Seleccionar un d&iacute;a" type="date" ng-model="search" ng-change="searchVentaDia()"></input> 
         </div>
       </div>
@@ -30,7 +30,7 @@
       <div class=banner-busqueda ng-hide = "IsHiddenEntreDia" ng-cloak>
         <div>       
           <label class=banner-label-busqueda title="Ocultar filtro" ng-click="ShowHideEntreDia()"><i class=material-icons >clear</i></label>
-          <label class=banner-label-busqueda> BUSCAR SEMANA:</label>    
+          <label class=banner-label-busqueda> B&uacute;squeda por semana:</label>    
             <input class=banner-label-busqueda title="Seleccionar una semana" type="week" ng-model="search" ng-change="searchVentaSem()"></input>
         </div>
       </div>
@@ -38,7 +38,7 @@
       <div class=banner-busqueda ng-hide = "IsHiddenMes" ng-cloak>
         <div>       
           <label class=banner-label-busqueda title="Ocultar filtro" ng-click="ShowHideMes()"><i class=material-icons >clear</i></label>
-          <label class=banner-label-busqueda> B&Uacute;SQUEDA POR MES: </label>     
+          <label class=banner-label-busqueda> B&uacute;squeda por mes: </label>     
             <input class=banner-label-busqueda title="Seleccionar un mes" type="month" ng-model="search" ng-change="searchVentaMes()"></input>
         </div>  
       </div>

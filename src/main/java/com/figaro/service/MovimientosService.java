@@ -1,13 +1,13 @@
 package com.figaro.service;
 
-
-
 import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.figaro.model.Item;
 import com.figaro.model.Movimiento;
+import com.figaro.model.Venta;
 import com.figaro.repository.MovimientosRepository;
 
 public class MovimientosService {
@@ -48,9 +48,18 @@ public class MovimientosService {
 		return (category.isEmpty()) ? repository.searchBetween (from,to) : repository.searchBetweenWithCategory (from,to,category); 
 	}
 	
+
+	public List<Item> getItemId(Integer id){
+		Venta laVenta = repository.getVentaId(id);
+		List<Item> idItem = laVenta.getItems();			
+		return idItem;
+	}
+	
+	
 	public MovimientosRepository getRepository() {
 		return repository;
 	}
+	
 	public void setRepository(MovimientosRepository repository) {
 		this.repository = repository;
 	}

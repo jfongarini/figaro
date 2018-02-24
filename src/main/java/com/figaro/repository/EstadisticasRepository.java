@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.query.Query;
 
 import com.figaro.model.Turno;
+import com.figaro.model.Venta;
 
 @SuppressWarnings({ "unchecked" })
 public class EstadisticasRepository extends AbstractRepository{
@@ -18,5 +19,15 @@ public class EstadisticasRepository extends AbstractRepository{
 	    query.setParameter(1, from);
 	    query.setParameter(2, to);
 	    return query.getResultList();
+	}
+	
+	public List<Venta> getAllDate(Date from, Date to) {		
+		
+		String querySql = "from Venta t WHERE (t.fecha BETWEEN ?1 AND ?2)";	
+		Query<Venta> query = getCurrentSession().createQuery(querySql);
+	    query.setParameter(1, from);
+	    query.setParameter(2, to);
+	    return query.getResultList();
+		
 	}
 }

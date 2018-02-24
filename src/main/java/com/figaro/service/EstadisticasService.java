@@ -1,7 +1,6 @@
 package com.figaro.service;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,9 +11,11 @@ import java.util.TreeMap;
 import org.apache.log4j.Logger;
 
 import com.figaro.model.Cliente;
+import com.figaro.model.Item;
 import com.figaro.model.Movimiento;
 import com.figaro.model.Peluquero;
 import com.figaro.model.Turno;
+import com.figaro.model.Venta;
 import com.figaro.repository.EstadisticasRepository;
 
 public class EstadisticasService {
@@ -27,6 +28,7 @@ public class EstadisticasService {
 	private ClientesService clientesService;
 	private MovimientosService movimientosService;
 	private TurnosService turnosService;
+	private VentaService ventasService;
 	
 	public Map<String, Integer> buscarClienteCiudad(){
 		List<Cliente> allClientes = clientesService.getAllClientes();
@@ -65,26 +67,27 @@ public class EstadisticasService {
 		return mapClientes;
 	}
 	
-	public Map<String, Integer> buscarProductoMasVendido(Date from, Date to) throws ParseException{
-
-		String category = "Ventas";
+	public Map<String, Integer> buscarProductoMasVendido(Date from, Date to) {
 		
-		List<Movimiento> searchMovimientos = movimientosService.searchMovimientos(from, to, category);
-		Map<String, Integer> mapMovimientos = new HashMap<String, Integer>();
-		for (Movimiento movimiento : searchMovimientos) {
-			String producto = movimiento.getDetalle();
-			Integer cantidadVentas = mapMovimientos.get(producto);
-			if (cantidadVentas == null) {
-				mapMovimientos.put(producto, 1);
-			} else {
-				cantidadVentas ++;
-				mapMovimientos.put(producto, cantidadVentas);
-			}
+		List<Venta> searchVenta = repository.getAllDate(from, to);
+		Map<String, Integer> mapVenta = new HashMap<String, Integer>();
+		for (Venta venta : searchVenta) {
+			List<Item> searchItem = venta.getItems();
+			for (Item item : searchItem) {
+				String producto = item.getNombreProducto() + '(' + item.getDescripcionProducto() + ')';
+				Integer cantidadVentas = mapVenta.get(producto);
+				if (cantidadVentas == null) {
+					mapVenta.put(producto, item.getCantidad());
+				} else {
+					cantidadVentas = cantidadVentas + item.getCantidad();
+					mapVenta.put(producto, cantidadVentas);
+				}
+			}		
 		}
-		return mapMovimientos;
+		return mapVenta;
 	}
 	
-	public Map<String, BigDecimal> buscarTotalesDeCaja(Date from, Date to) throws ParseException{
+	public Map<String, BigDecimal> buscarTotalesDeCaja(Date from, Date to) {
 
 		String category = "";
 		
@@ -111,7 +114,7 @@ public class EstadisticasService {
 		return mapMovimientos;
 	}
 	
-	public Map<String, BigDecimal> buscarTurnosPorPeluqueroIngreso(Date from, Date to) throws ParseException{
+	public Map<String, BigDecimal> buscarTurnosPorPeluqueroIngreso(Date from, Date to) {
 		
 		List<Turno> searchTurnos = repository.searchBetween (from,to);
 		Map<String, BigDecimal> mapTurnos = new HashMap<String, BigDecimal>();
@@ -134,7 +137,7 @@ public class EstadisticasService {
 		return mapTurnos;
 	}
 	
-	public Map<String, Integer> buscarTurnosPorPeluqueroCant(Date from, Date to) throws ParseException{
+	public Map<String, Integer> buscarTurnosPorPeluqueroCant(Date from, Date to) {
 		
 		List<Turno> searchTurnos = repository.searchBetween (from,to);
 		Map<String, Integer> mapTurnos = new HashMap<String, Integer>();		
@@ -152,7 +155,7 @@ public class EstadisticasService {
 		return mapTurnos;
 	}	
 	
-	public TreeMap<String, Integer> buscarTurnoMasSolicitado(Date from, Date to) throws ParseException{
+	public TreeMap<String, Integer> buscarTurnoMasSolicitado(Date from, Date to) {
 		
 		List<Turno> searchTurnos = repository.searchBetween (from,to);
 		Map<String, Integer> mapTurnos = new HashMap<String, Integer>();		
@@ -246,6 +249,14 @@ public class EstadisticasService {
 
 	public void setTurnosService(TurnosService turnosService) {
 		this.turnosService = turnosService;
+	}
+
+	public VentaService getVentasService() {
+		return ventasService;
+	}
+
+	public void setVentasService(VentaService ventasService) {
+		this.ventasService = ventasService;
 	}
 	
 }
