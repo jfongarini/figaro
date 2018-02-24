@@ -21,7 +21,7 @@
         </tr>
       </thead>
         <tbody>
-          <tr data-id={{peluquero.id}} class=data-row ng-repeat="peluquero in peluqueros"  ng-cloak>
+          <tr data-id={{peluquero.id}} class=data-row ng-repeat="peluquero in peluqueros" ng-show="peluquero.habilitado"  ng-cloak>
             <td ng-click="detailPeluquero(peluquero.id)">{{peluquero.nombre}}</td>
             <td ng-click="detailPeluquero(peluquero.id)">{{peluquero.apellido}}</td>
             <td><a class=link ng-href="/turnos/peluquero/{{peluquero.id}}/sinpagar"><div class=td-link><i class="material-icons"> payment </i></div></a></td>
