@@ -310,6 +310,14 @@ app.controller('movimientosController', function ($scope, $http) {
             	$scope.getAll();
 	        }
         }
+
+
+         //TECLADO 
+    	document.addEventListener('keyup', function(e) {
+        if (e.keyCode == 27) 
+            $scope.discardMovimiento();
+        	$scope.discardMovimientoVenta();
+    	});
 	    
 	    //INIT
 	    $scope.activeCaja = true;
