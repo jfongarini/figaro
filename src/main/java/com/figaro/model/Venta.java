@@ -10,10 +10,16 @@ public class Venta {
 	private BigDecimal precio;
 	private Date fecha;
 	private List<Item> items;
+	private Movimiento cobroVenta;
 	
 	public int getId() {
 		return id;
 	}
+	
+	public String getIdToString() {
+		return String.valueOf(id);
+	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -48,5 +54,14 @@ public class Venta {
 		this.precio = venta.getPrecio();
 		this.fecha 	= venta.getFecha();
 		this.items	= venta.getItems();
+		this.cobroVenta = venta.getCobroVenta();
 	}
+	public Movimiento getCobroVenta() {
+		return cobroVenta;
+	}
+	public void setCobroVenta(Movimiento cobroVenta) {
+		this.cobroVenta = cobroVenta;
+	}
+	
+
 }

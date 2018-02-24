@@ -138,6 +138,8 @@
 		</property>
 	</bean>
 	
+	
+	
 	<!-- VENTA !-->
 	<bean id="VentaServiceTransactional" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager">
@@ -161,6 +163,10 @@
 		
 		<property name="productosService">
 			<ref bean="ProductosServiceTransactional" />
+		</property>
+		
+		<property name="movimientosRepository">
+			<ref bean="MovimientosRepository" />
 		</property>
 		
 	</bean>

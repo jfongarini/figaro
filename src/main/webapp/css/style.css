@@ -23,7 +23,7 @@ body{
     border: 0px;
     display: inline-block;
     margin-top: 5px;
-    margin-bottom: : 15px;
+    margin-bottom: 15px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
 }
 
@@ -325,6 +325,12 @@ li a:hover {
     color: red;
 
 }
+
+.form-message1{
+    font-size: 13px;
+    color: green;
+
+}
     
 .form-field{
     font-size: 13px;
@@ -472,13 +478,6 @@ li a:hover {
     width: 450px;
     padding: 20px
 }
-.venta{
-    display: inline-flex;
-    float: left;
-    margin-right: 30px;
-    width: 400px;
-    padding: 20px
-}
 
 .card label{
     width: auto;
@@ -489,30 +488,10 @@ li a:hover {
     margin-bottom: 20px;
 }
 
-.boton-stock{
-    cursor: pointer;
-}
-
-.card.venta button{
-    cursor: pointer;
-    font-weight: 800;
-    font-family: 'Roboto', sans-serif;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 10px;
-    width: auto;
-    border-width: 0;
-    outline: none;
-    border-radius: 2px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-    background-color: #292961;
-    color: white
-    
-}
 .card.servicios button{
     display: none;
 }
+
 .card table>tbody>tr:nth-child(odd) {
     background-color: white;
 }
@@ -562,8 +541,8 @@ li a:hover {
 }
 .red-background {
     background-color: rgba(255, 99, 132, .3);
-    backg
 }
+
 .green {
     color: green;
 }
@@ -597,27 +576,6 @@ div .bb {
 
 tr:hover i{
     visibility: visible;
-}
-
-
-/*STOCK - campo disponible editable */
-.disponibletr{
-border-width: 0px;
-background: transparent;
-width: 50px;
-}
-
-/*STOCK - campo numericos */
-.numericotr{
-    width: 120px;
-    text-align: center;
-}
-
-/*STOCK - campo numericos */
-tr:hover .disponibletr{
-    background-color: #292961;
-    color: white;
-    cursor: pointer
 }
 
 .cuotas{

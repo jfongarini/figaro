@@ -1,16 +1,17 @@
  <div id=modal-stock class=modal>
     <div class=modal-content>
       <form ng-submit="sendProducto()">
-        <div class=form-field><label>NOMBRE:</label>      <input id=modal-stock-focus type="text"   ng-model="ngProducto.nombre"maxlength="25" pattern="^[^\s].*([A-z0-9À-ž\s]){2,25}" ng-pattern-restrict required></input></div>
-        <div class=form-field><label>DESCRIPCION:</label> <input type="text"   ng-model="ngProducto.descripcion" id="ngProducto.descripcion" pattern="^[^\s][\w\s]{1,25}" ng-pattern-restrict required></input></div>
-        <div class=form-field><label>CANTIDAD:</label>    <input type="number" ng-model="ngProducto.cantidad" min="0"></input></div>
-        <div class=form-field><label>MINIMA:</label>      <input type="number" ng-model="ngProducto.cantidadMinima" min="0"></input></div>
-        <div class=form-field><label>PRECIO:</label>      <input type="number" ng-model="ngProducto.precio" step="0.01" min="0"></input></div>
-        
+        <div class=form-field><label>NOMBRE:</label>      <input title="Ingresar nombre" id=modal-stock-focus type="text"   ng-model="ngProducto.nombre" maxlength="25" pattern="^[^\s].*{2,25}" ng-pattern-restrict required></input></div>
+        <div class=form-field><label>DESCRIPCI&Oacute;N:</label> <input title="Ingresar descripci&oacute;n" type="text"   ng-model="ngProducto.descripcion" id="ngProducto.descripcion" maxlength="40" pattern="^[^\s].*{2,25}" ng-pattern-restrict required></input></div>
+        <div class=form-field><label>CANTIDAD:</label>    <input title="Ingresar cantidad disponible" type="number" ng-model="ngProducto.cantidad" min="0" max="9999"></input></div>
+        <div class=form-field><label>M&Iacute;NIMO:</label>      <input title="Ingresar cantidad m&iacute;nima" type="number" ng-model="ngProducto.cantidadMinima" min="0" max="9999"></input></div>
+        <div class=form-field><label>PRECIO:</label>      <input title="Ingresar precio" type="number" ng-model="ngProducto.precio" step="0.01" min="0" max="999999999"></input></div>
+
         <div class="buttons">
           <button class="button cancel" type="button" ng-click="discardProducto()">CANCELAR</button>
           <button class="button accept" type="submit">ACEPTAR</button>
         </div>
+        <label class=form-message>{{message}}</label>
       </form>
     </div>
   </div>

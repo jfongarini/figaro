@@ -11,4 +11,9 @@ public class VentaController {
 		return "html/venta/venta";
 	}
 
+	@RequestMapping("/venta/historial-venta")
+	public String historialVenta() {
+		return "html/venta/historial-venta";
+	}
+
 }

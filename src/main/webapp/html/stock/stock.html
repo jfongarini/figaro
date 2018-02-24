@@ -1,27 +1,28 @@
 <!Doctype html>
 <html>
 <head> 
-	<title>Stock</title>
+	<title>STOCK</title>
   <#include "/html/common/head.html"> 
+  <link rel="stylesheet" type="text/css" href="/css/venta.css">
 </head>
 <body ng-app=figaro ng-controller=stockController ng-cloak >
   <#include "/html/common/menu.html">
   <div id=content class=content>
     <div class="banner">
-        <label class="banner-label add boton-stock" ng-click="newProducto()"><i class=material-icons>playlist_add</i>Nuevo</label>
+        <label class="banner-label add boton-stock" title="" ng-click="newProducto()"><i class=material-icons>playlist_add</i>Nuevo</label>
         
         <label class=banner-label ><i class=material-icons>more_vert</i></label> 
         
-        <label class="banner-label boton-stock" ng-click="getAll()"> <i class="material-icons" >reorder</i>Ver todos</label>
+        <label class="banner-label boton-stock" title="" ng-click="getAll()"> <i class="material-icons" >reorder</i>Ver todos</label>
         
         <label class=banner-label ><i class=material-icons>more_vert</i></label> 
         
-        <label class="banner-label boton-stock" ng-click="searchProductoFaltante()"> <i class="material-icons">filter_list</i>Ver faltantes </label>
+        <label class="banner-label boton-stock" title="" ng-click="searchProductoFaltante()"> <i class="material-icons">filter_list</i>Ver faltantes </label>
         
         <label class=banner-label> <i class=material-icons>more_vert</i></label> 
         
         <label class=banner-label> <i class=material-icons>search</i></label>
-        <input class=input-banner type="text" placeholder="Buscar producto" ng-model="search" ng-keyup="searchProducto()">
+        <input class=input-banner type="text" title="Buscar por nombre/descripci&oacute;n" placeholder="Buscar producto" ng-model="search" ng-keyup="searchProducto()">
     
     </div>
     
@@ -29,9 +30,9 @@
       <thead>
         <tr>
             <th>NOMBRE</th>
-            <th>DESCRIPCION</th>
+            <th>DESCRIPCI&Oacute;N</th>
             <th class="numericotr">DISPONIBLES</th>
-            <th class="numericotr">MINIMO</th>
+            <th class="numericotr">M&Iacute;NIMO</th>
             <th class="numericotr">PRECIO VENTA</th>
             <th></th>
         </tr>

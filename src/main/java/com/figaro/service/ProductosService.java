@@ -2,8 +2,10 @@ package com.figaro.service;
 
 import java.util.List;
 import org.apache.log4j.Logger;
+import com.figaro.exception.DatoDuplicadoException;
 import com.figaro.model.Producto;
 import com.figaro.repository.ProductosRepository;
+import static com.figaro.util.Constants.MSG_DUPLICADO;
 
 public class ProductosService {
 
@@ -19,12 +21,22 @@ public class ProductosService {
 	
 	public Producto saveProducto (Producto producto) {
 		LOGGER.info("Guardando el Producto: " + producto.toString());
+		validateProducto(producto);
 		int id = repository.saveProducto(producto);
 		producto.setId(id);
 		return producto;
 	}	
 		
+	public void validateProducto(Producto producto) {
+		LOGGER.debug("Validando el Producto: " + producto.toString());	
+		Boolean existeProducto = repository.existeProducto(producto.getNombre(), producto.getDescripcion());
+		if (existeProducto) {
+			throw new DatoDuplicadoException(MSG_DUPLICADO);
+		}
+	}
+	
 	public Producto updateProducto(Producto producto) {
+		validateProducto(producto);
 		Producto updated = getProducto(producto.getId());
 		LOGGER.info("Actualizando el Producto: " + producto.toString());
 		updated.update(producto);
@@ -42,7 +54,7 @@ public class ProductosService {
 	
 	public Producto deleteProducto(int productoId) {
 		Producto producto = getProducto(productoId);
-		LOGGER.info("Guardando el Producto: " + producto.toString());
+		LOGGER.info("Eliminando el Producto: " + producto.toString());
 		repository.deleteProducto(producto);
 		return producto;
 	}

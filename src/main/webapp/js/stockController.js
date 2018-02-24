@@ -26,7 +26,7 @@ app.controller('stockController', function ($scope, $http) {
     //CONFIRMA ELIMINTAR PRODUCTO
     $scope.confirmDelete = function(id) {
         $scope.idTarget = id;
-        openModal("modal-confirmarDelete");    
+        openModal("modal-confirmarDelete");
     };
 
     //DESCARTAR PRODUCTO
@@ -54,24 +54,33 @@ app.controller('stockController', function ($scope, $http) {
 
     //CLICK ACEPTAR FORMULARIO
     $scope.sendProducto = function() {
+        $scope.message='';
         if($scope.isNuevoProducto === true){
-            $http.post('/rest/stock/alta', $scope.ngProducto).then(function (response) {
+            $http.post('/rest/stock/alta', $scope.ngProducto)
+            .then(function successCallback(response) {
                 $scope.productos.push(response.data);
+                discardProducto();
+                $scope.ngProducto={};
+            }, function errorCallback(response){
+                $scope.message=response.data.message;
             });
-            $scope.ngProducto={};
         }
-        else{ 
-            $http.put('/rest/stock/actualizar/'+ $scope.productoId, $scope.ngProducto).then(
-                function (response) {
+        else{
+            $http.put('/rest/stock/actualizar/'+ $scope.productoId, $scope.ngProducto)
+            .then(function successCallback(response) {
                     $scope.getAll();
+                    discardProducto();
+                    $scope.ngProducto={};
+                }, function errorCallback(response){
+                $scope.message=response.data.message;
             });
         }
-        closeModal("modal-stock");
     };
 
     //DESCARTAR FORMULARIO
     $scope.discardProducto = function(event){
         $scope.ngProducto = {};
+        $scope.message='';
         closeModal("modal-stock");
     };
     

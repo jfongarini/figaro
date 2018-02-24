@@ -71,7 +71,7 @@ app.controller('movimientosController', function ($scope, $http) {
 	        //$scope.movimientoID = event.currentTarget.getAttribute("data-id");
 	        $http.delete('/rest/movimientos/eliminar/'+ id).then(function (response) {	           
 	        	closeModal("modal-confirmarDelete");
-	        	$scope.getAll();	            
+				$scope.getAll();
 	        });
 	    };
 	    

@@ -29,6 +29,12 @@ public class ProductosRepository extends AbstractRepository {
 		return getCurrentSession().createQuery("from Producto").list();		
 	}
 
+	public Boolean existeProducto(String nombre, String descripcion) {
+		return !getCurrentSession().createQuery("FROM Producto p WHERE p.nombre LIKE (?1) AND p.descripcion LIKE (?2)")
+				.setParameter(1, nombre)
+				.setParameter(2, descripcion).list().isEmpty();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Producto> buscar(String search) {
 		Query<Producto> query = getCurrentSession().createQuery("FROM Producto p WHERE p.nombre LIKE CONCAT('%',?1,'%') OR p.descripcion LIKE CONCAT ('%',?1,'%')");

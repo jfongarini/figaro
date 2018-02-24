@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import static com.figaro.util.Constants.MSG_DUPLICADO;
+import static com.figaro.util.Constants.MSG_TURNO_DUPLICADO;
+import static com.figaro.util.Constants.MSG_HORARIO_INVALIDO;
+import static com.figaro.util.Constants.MSG_DESCUENTO_INVALIDO;
 
 
 @ControllerAdvice  
@@ -15,10 +19,7 @@ public class GlobalExceptionHandler {
   
 	final static Logger LOGGER = Logger.getLogger(GlobalExceptionHandler.class);
 	
-    private static final String MSG_DUPLICADO = "Ya existe un elemento con estos datos";
-    private static final String MSG_TURNO_DUPLICADO = "Turno ocupado para ese cliente o peluquero";
-    private static final String MSG_HORARIO_INVALIDO = "El horario seleccionado es invalido";
-    private static final String MSG_DESCUENTO_INVALIDO = "El descuento no puede ser mayor al monto total";
+    
 
 	@ExceptionHandler(value = ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)  
