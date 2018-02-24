@@ -1,7 +1,7 @@
 <!Doctype html>
 <html>
 <head> 
-  <title>TURNOS</title>
+  <title>Turnos</title>
   <#include "/html/common/head.html">
 </head>
 <body ng-app=figaro ng-controller=peluquerosController ng-cloak  data-ng-init="initTurnosPeluquero()" >
@@ -37,7 +37,9 @@
         </tbody>
       </table>
       <div  class=banner>
-           <label  ><i class=material-icons >account_balance_wallet</i>{{getTotalTurnosPeluquero(turnos) | currency}}</label>
+           <label  ><i class=material-icons >account_balance_wallet</i>Total: {{getTotalTurnosPeluquero(turnos) | currency}}</label>
+           <div class="separator"></div>
+           <label  ><i class=material-icons >date_range</i>Turnos: {{cantidadTurnosPeluquero}}</label>
       </div>
       <div class=ver-mas ng-hide = "(turnos.length >= cantidadTurnosPeluquero) || sinPagar">
       <label  ng-click=verMas() > Ver m&aacute;s</label>

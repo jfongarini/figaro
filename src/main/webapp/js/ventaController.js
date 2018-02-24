@@ -135,7 +135,7 @@ app.controller('ventaController', function ($scope, $http) {
         $http.post('/rest/venta/alta', $scope.ngVentaDTO).then(
             function successCallback(response){
                 closeModal("modal-cobrar");
-                $scope.message="Se creo correctamente la venta";
+                $scope.message="La venta se realizó correctamente";
                 $scope.messageError=false;
                 $scope.getAllVentas();
         },  function errorCallback(response) {

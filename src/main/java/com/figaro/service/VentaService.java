@@ -41,14 +41,9 @@ public class VentaService {
 
 	public void actualizarStock(List<Item> items) {
 		LOGGER.info("Actualizando stock...");
-		int newCantidad;
-		Producto p;
-		
-		for(int i = 0; i < items.size(); i++) {
-	        p = productosService.buscarDesdeVenta(items.get(i).getNombreProducto(), items.get(i).getDescripcionProducto());
-	        LOGGER.info("Se va a actualizar stock del Producto: " + p.toString());
-	        newCantidad = (p.getCantidad()-items.get(i).getCantidad());
-	        p = productosService.updateCantidad(p.getId(), newCantidad);
+		for(Item item : items) {
+	        Producto p = productosService.buscarDesdeVenta(item.getNombreProducto(), item.getDescripcionProducto());
+	        productosService.updateCantidad(p.getId(), p.getCantidad()-item.getCantidad());
 		}	
 	}
 
