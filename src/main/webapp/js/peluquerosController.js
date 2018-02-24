@@ -3,6 +3,7 @@ app.controller('peluquerosController', function ($scope, $http) {
     //INIT PELUQUEROS
     $scope.init = function(){
         $scope.activePeluqueros = true;
+        $scope.loaded = false;
         $scope.ngPeluquero = {"trabajos" :[]};
         $scope.getAll();
         $scope.getAllCiudades();
@@ -40,6 +41,7 @@ app.controller('peluquerosController', function ($scope, $http) {
         url = '/rest/turnos/peluquero/'+ $scope.peluqueroId;
         $http.get(url,{params: {index: $scope.index}})
         .then(function successCallback(response) {
+            $scope.loaded = true;
             turnos = response.data;
             Array.prototype.push.apply($scope.turnos, turnos);
             if ($scope.turnos.length > 0){

@@ -44,7 +44,7 @@
     </div>
   </div>
 
-  <div ng-cloak ng-if="turnos.length < 1" class="message">
+  <div  ng-if="turnos.length < 1 && loaded" class="message ng-cloak">
     <div class="message-content">{{message}}</div>
   </div>
 
