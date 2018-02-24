@@ -93,9 +93,11 @@ app.controller('movimientosController', function ($scope, $http) {
 	    document.addEventListener('keyup', function(e) {
 	        if (e.keyCode == 27) {
 	            $scope.discardMovimiento();
+	            $scope.discardMovimientoVenta();
 	        }
 	    });
 
+	    
 
 
 	  //ELIMINTAR MOVIMIENTO
@@ -312,13 +314,7 @@ app.controller('movimientosController', function ($scope, $http) {
         }
 
 
-         //TECLADO 
-    	document.addEventListener('keyup', function(e) {
-        if (e.keyCode == 27) 
-            $scope.discardMovimiento();
-        	$scope.discardMovimientoVenta();
-    	});
-	    
+       
 	    //INIT
 	    $scope.activeCaja = true;
 	    $scope.search = '';
