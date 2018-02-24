@@ -81,7 +81,6 @@ public class ProductosService {
 	}
 	
 	public Producto buscarDesdeVenta(String nombre, String descripcion) {
-		LOGGER.info("Ingresa a ProductoService");
 		return repository.buscarProductoDesdeVenta(nombre, descripcion);
 	}
 	

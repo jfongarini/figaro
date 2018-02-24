@@ -348,8 +348,6 @@ app.controller('turnosController', function ($scope, $http) {
         });
     };
 
-  
-
     //DESCARTAR FORMULARIO
     $scope.discardTurno = function(event){
         if ($scope.peluquero !=null && !$scope.peluquero.habilitado){
@@ -369,13 +367,13 @@ app.controller('turnosController', function ($scope, $http) {
         closeModal("modal-turnos");
     };
 
-    //APRETAR ESCAPE
+    //TECLADO 
     document.addEventListener('keyup', function(e) {
         if (e.keyCode == 27) 
             $scope.discardTurno();
-        if (e.keyCode == 39 || e.keyCode == 38)
+        if ((e.keyCode == 39 || e.keyCode == 38) && !$scope.focus)
             $scope.getTurnosDiaSiguiente();
-        if (e.keyCode == 37 || e.keyCode == 40)
+        if ((e.keyCode == 37 || e.keyCode == 40) && !$scope.focus)
             $scope.getTurnosDiaAnterior();
     });
     

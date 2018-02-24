@@ -62,7 +62,6 @@ public class VentaService {
 	}	
 	
 	public List<Venta> searchVentas(Date from, Date to) {		
-		LOGGER.info("Ingresa a ProductoService");
 		return repository.searchBetween(from,to); 
 	}
 	

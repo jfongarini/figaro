@@ -49,7 +49,7 @@
         <table  class=main-table  class=data-row>
           <thead bgcolor="">
             <tr>
-              <th colspan="5">Fecha: {{venta.fecha}}</th>
+              <th colspan="5">Fecha: {{venta.fecha | date}}</th>
               <th title="Eliminar venta" id={{venta.id}} data-id={{venta.id}} data-ng-click="confirmDelete(venta.id)" class="tachotd">
                 <lavel><i class="material-icons tachoi">clear</i></lavel></th>
             </tr>

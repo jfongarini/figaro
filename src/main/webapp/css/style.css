@@ -423,6 +423,14 @@ li a:hover {
     cursor: pointer;
 }
 
+.button-link{
+    text-decoration: none;
+}
+
+.banner-button a, .banner-button a:visited, .banner-button a:hover, .banner-button a:active {
+  color: inherit;
+}
+
 
 .peluquero-fields{
     float: left;
