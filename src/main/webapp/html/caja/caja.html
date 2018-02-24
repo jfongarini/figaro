@@ -14,13 +14,14 @@
       <label class=banner-button ng-click="ShowHideEntreDia()"><i class=material-icons >search</i> Semana </label>
       <label class=banner-button ng-click="ShowHideMes()"><i class=material-icons >search</i> Mes </label>
       <div class="separator"></div>
-      <i class=material-icons >search</i>Categor&Iacute;a: 
+      <label class=banner-button><i class=material-icons >search</i>Categor&Iacute;a: 
       <select   class="input-banner" ng-model="searchC" ng-change="searchCategoria()" ng-click="limpiarSelect()" ng-cloak>
             <option value = "Turnos">Turnos</option>
             <option value = "Peluqueros">Peluqueros</option>
             <option value = "Ventas">Ventas</option>
             <option value="{{categoria.nombre}}" ng-repeat="categoria in categorias">{{categoria.nombre}}</option>
       </select>
+      </label>
       <i class=material-icons ng-click="limpiaCategoria()" >clear</i></label>
   </div>
 
