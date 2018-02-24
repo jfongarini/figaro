@@ -429,6 +429,7 @@ li a:hover {
 
 .banner-button a, .banner-button a:visited, .banner-button a:hover, .banner-button a:active {
   color: inherit;
+      font-size: 12px;
 }
 
 
