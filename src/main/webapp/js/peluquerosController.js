@@ -107,7 +107,7 @@ app.controller('peluquerosController', function ($scope, $http) {
 
     //OBTENER LISTA DE PELUQUEROS
     $scope.getAll = function() {
-        $http.get("/rest/peluqueros").then(function (response) {
+        $http.get("/rest/peluqueros/habilitados").then(function (response) {
             $scope.peluqueros = response.data;
         });
     };

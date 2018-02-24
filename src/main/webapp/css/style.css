@@ -432,6 +432,9 @@ li a:hover {
       font-size: 12px;
 }
 
+.banner-button select{
+    cursor: pointer;
+}
 
 .peluquero-fields{
     float: left;
