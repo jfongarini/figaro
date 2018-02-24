@@ -133,6 +133,28 @@ app.controller('movimientosController', function ($scope, $http) {
 	        return total;
 	    }
 
+	    //CALCULAR EL TOTAL NEGATIVO
+	    $scope.calculaTotalNegativo = function(){
+	        var total = 0;
+	        angular.forEach($scope.movimientos, function(ngMovimiento){	          
+	          if (ngMovimiento.isGasto == true){
+	        	  total = total - (ngMovimiento.precio);
+	          }          
+	        })
+	        return total;
+	    }
+
+	    //CALCULAR EL TOTAL POSITIVO
+	    $scope.calculaTotalPositivo = function(){
+	        var total = 0;
+	        angular.forEach($scope.movimientos, function(ngMovimiento){	          
+	          if (ngMovimiento.isGasto != true){	        	 
+	        	  total = total + (ngMovimiento.precio);
+	          }	          
+	        })
+	        return total;
+	    }
+
 	    //CALCULAR EL TOTAL DE CAJA
 	    $scope.calculaTotalEfectivo = function(){
 	        var total = 0;

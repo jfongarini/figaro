@@ -89,8 +89,13 @@
     </tbody>
   </table>
   <div class=banner ng-cloak ng-if="movimientos.length > 0">
-      <label  ><i class=material-icons >account_balance_wallet</i> Total: <font ng-cloak ng-class='{green : calculaTotal() >= 0, red: calculaTotal() < 0}'>{{ calculaTotal() | currency }}</font></label>
+      <label class=banner-label ><i class=material-icons >account_balance_wallet</i> Total: <font ng-cloak ng-class='{green : calculaTotal() >= 0, red: calculaTotal() < 0}'>{{ calculaTotal() | currency }}</font></label>
       
+      <div class="separator"></div>
+      <label class=banner-label >Egreso: <font ng-cloak ng-class='{red: calculaTotalNegativo() <= 0}'>{{ calculaTotalNegativo() | currency }}</font></label>
+      <div class="separator"></div>
+      <label class=banner-label >Ingreso: <font ng-cloak ng-class='{green : calculaTotalPositivo() >= 0}'>{{ calculaTotalPositivo() | currency }}</font></label>
+
       <label class=banner-label-right ><i class=material-icons >account_balance_wallet</i> Total Tarjeta: <font ng-cloak ng-class='{green : calculaTotalTarjeta() >= 0, red: calculaTotalTarjeta() < 0}'>{{ calculaTotalTarjeta() | currency }}</font></label>
       
       <label class=banner-label-right ><i class=material-icons >account_balance_wallet</i> Total Efectivo: <font ng-cloak ng-class='{green : calculaTotalEfectivo() >= 0, red: calculaTotalEfectivo() < 0}'>{{ calculaTotalEfectivo() | currency }}</font></label>
