@@ -58,6 +58,7 @@ app.controller('peluquerosController', function ($scope, $http) {
     $http.get(url)
         .then(function successCallback(response) {
             turnos = response.data;
+            $scope.loaded = true;
             Array.prototype.push.apply($scope.turnos, turnos);
             if ( $scope.turnos.length > 0){
                 $scope.peluquero = ($scope.turnos[0].peluquero.nombre +' '+ $scope.turnos[0].peluquero.apellido) 
