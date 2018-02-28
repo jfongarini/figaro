@@ -19,11 +19,11 @@ app.controller('peluquerosController', function ($scope, $http) {
         $scope.peluqueroId = window.location.href.split("/")[5];
         if (path == 'sinpagar'){
             $scope.sinPagar = true;
-            $scope.message = 'No existen turnos para pagar a este peluquero.';
+            $scope.emptyMessage = 'No existen turnos para pagar a este peluquero.';
             $scope.getTurnosSinPagar();
         }else{
             $scope.sinPagar = false;
-            $scope.message = 'No existen turnos para este peluquero.';
+            $scope.emptyMessage = 'No existen turnos para este peluquero.';
             $scope.getCantidadTurnos();
             $scope.getTurnosPeluquero();
         }

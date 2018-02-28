@@ -32,8 +32,8 @@
           <td id={{turno.id}} data-id={{turno.id}}>{{getTotalTurno(turno.trabajos) | currency}}</td>
           <td id={{turno.id}} data-id={{turno.id}}  >{{ (getPago(turno.trabajos)*100) / getTotalTurno(turno.trabajos) | number:0 }}%</td>
           <td id={{turno.id}} data-id={{turno.id}}  >{{getPago(turno.trabajos) | currency}}</td>
-          <td><input ng-checked="turno.cobrado"  type="checkbox" disabled></td>
-          <td><input ng-model="turno.pagado"  ng-click="setPagado(turno)"  type="checkbox"></td>
+          <td><input ng-model="turno.cobrado"   ng-click="setCobrado(turno)" type="checkbox" ></td>
+          <td><input ng-model="turno.pagado"    ng-click="setPagado(turno)"  type="checkbox"></td>
         </tr>
         </tbody>
       </table>
@@ -47,11 +47,12 @@
     </div>
     
   </div>
+  <#include "/html/turnos/cobrar.html">
   <#include "/html/turnos/deshacer-cobrado-pagado.html">
 </div>
 
   <div  ng-if="turnos.length < 1 && loaded" class="message ng-cloak">
-    <div class="message-content">{{message}}</div>
+    <div class="message-content">{{emptyMessage}}</div>
   </div>
 
   
