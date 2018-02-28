@@ -3,7 +3,7 @@ body{
     margin-left: 0px;
     margin-top: 0px;
     font-family: 'Roboto', sans-serif;
-    font-size: 14px
+    font-size: 12px
 }
 
 .login-body{
@@ -167,6 +167,7 @@ table {
 .main-table{
     text-align: left;
     background-color: white;
+    font-size: 12px;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12)
 }
 
@@ -329,19 +330,21 @@ li a:hover {
 }
 
 .form-message{
-    font-size: 13px;
+    margin-top: 5px;
+    font-size: 12px;
     color: red;
 
 }
 
-.form-message1{
-    font-size: 13px;
+.form-message-ok{
+    margin-top: 5px;
+    font-size: 12px;
     color: green;
 
 }
     
 .form-field{
-    font-size: 13px;
+    font-size: 12px;
     margin-bottom: 17px
 }
 
