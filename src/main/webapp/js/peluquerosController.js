@@ -105,6 +105,16 @@ app.controller('peluquerosController', function ($scope, $http) {
         return total;
     };
 
+    //OBTENER PAGO A PELUQUERO POR TURNO
+    $scope.getTotalPagoTurnosPeluquero = function (turnos) {
+        var total = 0;
+        for(var i = 0; i < turnos.length; i++)
+            total += $scope.getPago(turnos[i].trabajos)
+        return total;
+    };
+
+    
+
 
     //OBTENER LISTA DE PELUQUEROS
     $scope.getAll = function() {
